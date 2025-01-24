@@ -1,0 +1,102 @@
+.MainSlider {
+  width: 100%;
+  max-width: 1520px;
+  height: 86vh;
+
+  --swiper-navigation-color: var(--swiper-navigation-color-accent);
+  --swiper-navigation-top-offset: 85%;
+  --swiper-navigation-sides-offset: 80px;
+  --swiper-navigation-size: 16px;
+  --swiper-navigation-addictive-font-offset: 94px;
+  --swiper-pagination-bottom: 20px;
+  --swiper-pagination-bullet-width: 48px;
+  --swiper-pagination-bullet-height: 5px;
+  --swiper-pagination-bullet-border-radius: 38px;
+  --swiper-pagination-bullet-inactive-color: #9B9B9B;
+  --swiper-pagination-color: var(--swiper-navigation-color-accent);
+  --swiper-pagination-bullet-horizontal-gap: 8px;
+
+  &.swiper {
+    overflow: visible;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--swiper-navigation-color);
+  }
+
+  .swiper-button-next {
+    .swiper-button-title {
+      top: 16px;
+      right: var(--swiper-navigation-addictive-font-offset);
+      left: auto;
+    }
+  }
+
+  .swiper-button-prev {
+    .swiper-button-title {
+      top: 16px;
+      right: auto;
+      left: var(--swiper-navigation-addictive-font-offset);
+    }
+  }
+
+  .swiper-button-title {
+    max-width: 116px;
+    position: absolute;
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: 400;
+  }
+}
+
+.MainSlider__wr {
+  display: grid;
+}
+
+.MainSlider__slide {
+  height: 100%;
+  background-size: cover;
+  background-position: 20%;
+  border-radius: 16px;
+}
+
+.MainSlider__content {
+  height: 100%;
+  width: 45%;
+  margin: 0 auto;
+  backdrop-filter: blur(3);
+}
+
+.MainSlider__title {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 6.25rem;
+  color: var(--color-title-accent);
+  padding-top: 20%;
+  line-height: .9;
+
+  & span {
+    position: relative;
+    right: -16%;
+    text-shadow: 0px 0px 1px var(--color-title-accent);
+    color: transparent;
+    /* Текст становится прозрачным */
+    //-webkit-text-stroke: 1px var(--color-title-accent);
+    //-webkit-font-smoothing: antialiased;
+    //text-rendering: optimizeLegibility;
+  }
+}
+
+.MainSlider__description {
+  color: var(--color-title-accent);
+  margin-top: 52px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 50%;
+  position: relative;
+  right: -16%;
+}

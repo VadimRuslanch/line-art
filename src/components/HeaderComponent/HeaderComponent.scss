@@ -1,0 +1,9 @@
+.HeaderComponent {
+  padding: 16px 0 30px;
+  display: grid;
+  grid-template-areas: 'logo nav' 'button .';
+}
+
+.HeaderComponent__link {
+  grid-area: logo;
+}
