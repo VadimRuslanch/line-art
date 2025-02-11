@@ -1,4 +1,4 @@
-@use '../assets/styles/vars';
+@use '../shared/assets/styles/vars';
 //@import 'normalize.css';
 
 @tailwind base;
@@ -9,7 +9,7 @@
 html {
   background-color: var(--main-color-background);
   color: var(--main-text-color);
-  font-family: Inter, Helvetica, sans-serif;
+  font-family: Montserrat, Helvetica, sans-serif;
   font-size: 16px;
 }
 
@@ -37,7 +37,26 @@ p {
   font-family: var(--font-inter-sans);
 }
 
-.HomePage{
+button, input, a {
+  outline: none;
+}
+
+.HomePage {
   display: grid;
   gap: 80px;
+}
+
+.slide-container {
+  height: 100%;
+  background-size: cover;
+}
+
+.text-shadow {
+  position: relative;
+  left: 156px;
+  color: #f9f9fc;
+  text-shadow: -1px -1px 0 #223342,
+  1px -1px 0 #223342,
+  -1px 1px 0 #223342,
+  1px 1px 0 #223342;
 }

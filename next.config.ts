@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     turbo: {
+      loaders: {
+        '*.css': ['postcss-loader'],
+        '*.scss': ['sass-loader'],
+      },
       rules: {
         '*.svg': {
           loaders: ['@svgr/webpack'],

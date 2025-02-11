@@ -1,17 +1,24 @@
 import './HeaderComponent.scss';
 import Link from 'next/link';
-import ButtonLogo from '@/components/UI/ButtonLogo/ButtonLogo';
-import HeaderComponentNavigation from '@/components/HeaderComponent/HeaderComponentNavigation/HeaderComponentNavigation';
-import ButtonMenuCatalog from '@/components/UI/ButtonMenuCatalog/ButtonMenuCatalog';
+import ButtonLogo from '@/shared/ui/ButtonLogo/ButtonLogo';
+import HeaderNavigation from '@/components/HeaderComponent/components/HeaderNavigation';
+import HeaderMenuCatalog from '@/components/HeaderComponent/components/HeaderMenuCatalog';
+import HeaderSearch from '@/components/HeaderComponent/components/HeaderSearch';
+import HeaderUserBar from '@/components/HeaderComponent/components/HeaderUserBar';
+import HeaderContacts from '@/components/HeaderComponent/components/HeaderContacts';
 
 export default async function HeaderComponent() {
   return (
-    <header className="HeaderComponent">
-      <Link className={'HeaderComponent__link'} href="/">
+    <header className="header grid gap-y-4 gap-x-5 z-10 pt-4 pb-7">
+      <Link className="max-w-fit header-grid-aria-link" href="/">
         <ButtonLogo />
       </Link>
-      <ButtonMenuCatalog />
-      <HeaderComponentNavigation />
+
+      <HeaderNavigation />
+      <HeaderContacts />
+      <HeaderMenuCatalog />
+      <HeaderSearch />
+      <HeaderUserBar />
     </header>
   );
 }

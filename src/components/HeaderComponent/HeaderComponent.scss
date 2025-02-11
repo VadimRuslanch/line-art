@@ -1,9 +1,32 @@
-.HeaderComponent {
-  padding: 16px 0 30px;
-  display: grid;
-  grid-template-areas: 'logo nav' 'button .';
+.header {
+  height: min-content;
+  grid-template-areas: 'logo nav contacts' 'button search user';
+  grid-auto-columns: auto 1fr auto;
+  grid-auto-rows: min-content;
+  align-items: center;
 }
 
-.HeaderComponent__link {
+.header-grid-aria-link {
   grid-area: logo;
+}
+
+.header-grid-aria-nav {
+  grid-area: nav;
+}
+
+.header-grid-aria-contacts {
+  grid-area: contacts;
+}
+
+.header-grid-aria-button {
+  width: fit-content;
+  grid-area: button;
+}
+
+.header-grid-aria-search {
+  grid-area: search;
+}
+
+.header-grid-aria-user {
+  grid-area: user;
 }

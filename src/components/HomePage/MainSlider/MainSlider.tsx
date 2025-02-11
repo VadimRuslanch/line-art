@@ -6,59 +6,23 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { splitTitle } from '@/app/utils/stringUtils';
 import SlideNextButton from '@/components/HomePage/MainSlider/components/SlideNextButton';
 import SlidePrevButton from '@/components/HomePage/MainSlider/components/SlidePrevButton';
-import { useState } from 'react';
-import MainSliderDecorationItems from '@/components/HomePage/MainSlider/components/MainSliderDecorationItems/MainSliderDecorationItems';
-
-const swiperArray = [
-  {
-    id: 1,
-    title: 'Теневой плинтус',
-    description: 'Современные, стильные решения для ценителей минимализма',
-    image: '/images/MainSlider/first.jpg',
-    alt: 'Image',
-  },
-  {
-    id: 2,
-    title: 'Декоративные панели',
-    description: 'Элегантное решение для современного интерьера',
-    image: '/images/MainSlider/second.jpg',
-    alt: 'Image 2',
-  },
-  {
-    id: 23,
-    title: 'Декоративные панели',
-    description: 'Элегантное решение для современного интерьера',
-    image: '/images/MainSlider/second.jpg',
-    alt: 'Image 2',
-  },
-  {
-    id: 42,
-    title: 'Декоративные панели',
-    description: 'Элегантное решение для современного интерьера',
-    image: '/images/MainSlider/second.jpg',
-    alt: 'Image 2',
-  },
-  {
-    id: 12,
-    title: 'Декоративные панели',
-    description: 'Элегантное решение для современного интерьера',
-    image: '/images/MainSlider/second.jpg',
-    alt: 'Image 2',
-  },
-  {
-    id: 3,
-    title: 'Декоративные панели',
-    description: 'Элегантное решение для современного интерьера',
-    image: '/images/MainSlider/second.jpg',
-    alt: 'Image 2',
-  },
-];
+import { useEffect, useState } from 'react';
+import { fetchPageSlider } from '@/app/utils/API/wooCommerceApi';
+import { Slider } from '@/shared/types/api';
 
 export default function MainSlider() {
+  const [sliderData, setSliderData] = useState<Slider[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const prevIndex =
-    (currentIndex - 1 + swiperArray.length) % swiperArray.length;
-  const nextIndex = (currentIndex + 1) % swiperArray.length;
+
+  useEffect(() => {
+    fetchPageSlider()
+      .then((data) => setSliderData(data))
+      .catch((error) => console.error('Ошибка при загрузке slider:', error));
+  }, []);
+
+  const prevIndex = (currentIndex - 1 + sliderData.length) % sliderData.length;
+  const nextIndex = (currentIndex + 1) % sliderData.length;
+
   return (
     <Swiper
       modules={[Navigation, Pagination]}
@@ -69,7 +33,7 @@ export default function MainSlider() {
       pagination={{ clickable: true }}
       onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
     >
-      {swiperArray.map((item) => {
+      {sliderData.map((item) => {
         const { firstWord, secondPart } = splitTitle(item.title);
 
         return (
@@ -77,7 +41,7 @@ export default function MainSlider() {
             <div
               className="MainSlider__slide"
               style={{
-                backgroundImage: `url(${item.image})`,
+                backgroundImage: `url(${item.image.node.sourceUrl})`,
               }}
             >
               <div className="MainSlider__content">
@@ -90,8 +54,12 @@ export default function MainSlider() {
           </SwiperSlide>
         );
       })}
-      <SlidePrevButton title={swiperArray[prevIndex].title} />
-      <SlideNextButton title={swiperArray[nextIndex].title} />
+      {sliderData.length > 0 && (
+        <>
+          <SlidePrevButton title={sliderData[prevIndex]?.title} />
+          <SlideNextButton title={sliderData[nextIndex]?.title} />
+        </>
+      )}
     </Swiper>
   );
 }

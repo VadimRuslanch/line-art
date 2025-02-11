@@ -1,7 +1,7 @@
 .MainSlider {
   width: 100%;
   max-width: 1520px;
-  height: 86vh;
+  height: calc(100vh - 176px);
 
   --swiper-navigation-color: var(--swiper-navigation-color-accent);
   --swiper-navigation-top-offset: 85%;
@@ -81,12 +81,12 @@
   & span {
     position: relative;
     right: -16%;
-    text-shadow: 0px 0px 1px var(--color-title-accent);
+    //text-shadow: 0px 0px 1px var(--color-title-accent);
     color: transparent;
     /* Текст становится прозрачным */
-    //-webkit-text-stroke: 1px var(--color-title-accent);
-    //-webkit-font-smoothing: antialiased;
-    //text-rendering: optimizeLegibility;
+    -webkit-text-stroke: 1px var(--color-title-accent);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }
 
