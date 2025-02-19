@@ -1,7 +1,11 @@
 import { GraphQLClient } from 'graphql-request';
-import { CatalogData, MainSliderData } from '@/shared/types/api';
+import {
+  CatalogData,
+  MainSliderData,
+  PromotionalLinkData,
+} from '@/shared/types/api';
 
-const endpoint = 'http://line-art.ru/api/graphql';
+const endpoint = 'https://wp-admin.lineart-alumo.ru/api/graphql';
 
 const client = new GraphQLClient(endpoint, {
   headers: {
@@ -52,28 +56,64 @@ export async function fetchWooCommerceProductsCategories() {
 
 export async function fetchPageSlider() {
   const query = `
-query GetMainSlider {
-    page(id: "cG9zdDo3NA==") {
-      homeMainSlider {
-        main_slider {
-          description
-          title
-          id
-          image {
-            node {
-              sourceUrl
+    query GetMainSlider {
+      page(id: "cG9zdDo3NA==") {
+        homeMainSlider {
+          main_slider {
+            description
+            title
+            id
+            image {
+              node {
+                sourceUrl
+              }
             }
           }
         }
       }
     }
-  }
   `;
 
   try {
     const response: MainSliderData = await client.request(query);
-    console.log(response);
     return response.page.homeMainSlider.main_slider;
+  } catch (error) {
+    console.error('Error fetching page slider via GraphQL:', error);
+    throw new Error('Failed to fetch page slider');
+  }
+}
+
+export async function fetchHomeSliderPromotional() {
+  const query = `
+    query GetHomeSliderPromotional {
+      page(id: "cG9zdDo3NA==") {
+        promotionalBlock {
+          promotion {
+            alt
+            link
+            image {
+              node {
+                sourceUrl
+              }
+            }
+          }
+          novelty {
+            alt
+            link
+            image {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response: PromotionalLinkData = await client.request(query);
+    return response.page.promotionalBlock;
   } catch (error) {
     console.error('Error fetching page slider via GraphQL:', error);
     throw new Error('Failed to fetch page slider');

@@ -14,37 +14,37 @@ export default function HomePopularProducts() {
   const array: Slide[] = [
     {
       id: 1,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },
     {
       id: 12,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },
     {
       id: 13,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },
     {
       id: 14,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },
     {
       id: 15,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },
     {
       id: 16,
-      image: '/images/MainSlider/first.jpg',
+      image: '/images/components/first.jpg',
       title: 'Теневой профиль',
       link: '#',
     },

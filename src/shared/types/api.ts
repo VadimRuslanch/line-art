@@ -32,3 +32,22 @@ export interface Slider {
     };
   };
 }
+
+export interface PromotionalLinkData {
+  page: {
+    promotionalBlock: {
+      promotion: PromotionalLink[];
+      novelty: PromotionalLink[];
+    };
+  };
+}
+
+export interface PromotionalLink {
+  alt: string;
+  link: string;
+  image: {
+    node: {
+      sourceUrl: string;
+    };
+  };
+}

@@ -3,6 +3,7 @@ import { Montserrat, Inter } from 'next/font/google';
 import './globals.scss';
 import HeaderComponent from '@/components/HeaderComponent/HeaderComponent';
 import React from 'react';
+import FooterComponent from '@/components/FooterComponent/FooterComponent';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <HeaderComponent />
         <main>{children}</main>
+        <FooterComponent />
       </body>
     </html>
   );

@@ -1,26 +1,26 @@
-import './MainSliderDecorationItems.scss';
+import '../../style/MainSliderDecorationItems.scss';
 import Image from 'next/image';
 
 const itemsList = [
   {
     id: 1,
     title: 'Широкий ассортимент',
-    image: '/svg/MainSlider/cart-tick.svg',
+    image: '/svg/components/cart-tick.svg',
   },
   {
     id: 12,
     title: 'Высокое качество',
-    image: '/svg/MainSlider/chart-up.svg',
+    image: '/svg/components/chart-up.svg',
   },
   {
     id: 13,
     title: 'Цена от производителя',
-    image: '/svg/MainSlider/tag-ruble.svg',
+    image: '/svg/components/tag-ruble.svg',
   },
   {
     id: 14,
     title: 'Собственный склад',
-    image: '/svg/MainSlider/home.svg',
+    image: '/svg/components/home.svg',
   },
 ];
 

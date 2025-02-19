@@ -1,16 +1,16 @@
 'use client';
 
-import './MainSlider.scss';
+import './style/MainSlider.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { splitTitle } from '@/app/utils/stringUtils';
-import SlideNextButton from '@/components/HomePage/MainSlider/components/SlideNextButton';
-import SlidePrevButton from '@/components/HomePage/MainSlider/components/SlidePrevButton';
+import SlideNextButton from '@/components/HomePage/components/SlideNextButton';
+import SlidePrevButton from '@/components/HomePage/components/SlidePrevButton';
 import { useEffect, useState } from 'react';
 import { fetchPageSlider } from '@/app/utils/API/wooCommerceApi';
 import { Slider } from '@/shared/types/api';
 
-export default function MainSlider() {
+export default function HomeMainSlider() {
   const [sliderData, setSliderData] = useState<Slider[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
