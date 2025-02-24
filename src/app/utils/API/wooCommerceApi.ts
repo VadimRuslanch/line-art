@@ -16,8 +16,7 @@ const client = new GraphQLClient(endpoint, {
 });
 
 export async function fetchWooCommerceProductsCategories() {
-  const query = `
-    query GetProductCategoriesWithChildren {
+  const query = `query GetProductCategoriesWithChildren {
       productCategories(where: { hideEmpty: false, parent: null }) {
         nodes {
           id
@@ -42,8 +41,7 @@ export async function fetchWooCommerceProductsCategories() {
           }
         }
       }
-    }
-  `;
+    }`;
 
   try {
     const response: CatalogData = await client.request(query);
@@ -55,24 +53,21 @@ export async function fetchWooCommerceProductsCategories() {
 }
 
 export async function fetchPageSlider() {
-  const query = `
-    query GetMainSlider {
-      page(id: "cG9zdDo3NA==") {
-        homeMainSlider {
-          main_slider {
-            description
-            title
-            id
-            image {
-              node {
-                sourceUrl
-              }
+  const query = `query GetMainSlider { 
+    page(id: "cG9zdDo3NA==") {
+      homeMainSlider {
+        main_slider {
+          description
+          title
+          id
+          image {
+            node {
+              sourceUrl
             }
           }
         }
       }
-    }
-  `;
+    }}`;
 
   try {
     const response: MainSliderData = await client.request(query);
@@ -84,32 +79,29 @@ export async function fetchPageSlider() {
 }
 
 export async function fetchHomeSliderPromotional() {
-  const query = `
-    query GetHomeSliderPromotional {
-      page(id: "cG9zdDo3NA==") {
-        promotionalBlock {
-          promotion {
-            alt
-            link
-            image {
-              node {
-                sourceUrl
-              }
+  const query = `query GetHomeSliderPromotional {
+    page(id: "cG9zdDo3NA==") {
+      promotionalBlock {
+        promotion {
+          alt
+          link
+          image {
+            node {
+              sourceUrl
             }
           }
-          novelty {
-            alt
-            link
-            image {
-              node {
-                sourceUrl
-              }
+        }
+        novelty {
+          alt
+          link
+          image {
+            node {
+              sourceUrl
             }
           }
         }
       }
-    }
-  `;
+    }}`;
 
   try {
     const response: PromotionalLinkData = await client.request(query);
