@@ -5,14 +5,10 @@
   --font-inter-sans: var(--font-inter-sans);
 
   /* --------- Global --------- */
-  --main-color-background: #f9f9fc;
-  --main-accent-color: #364d60;
-  --main-text-color: #223342;
+  --app-color-background: #29292D;
+  --app-text-color: #FFFFFF;
 
   /* main-accent-color */
-  --main-accent-color-10: #364D601A;
-
-  --color-title-accent: #FFFFFF;
 
   /* --------- UI unit elements --------- */
   --color-ui-unit-element: #223342;
@@ -25,87 +21,6 @@
   --swiper-navigation-color-accent: #FFFFFF;
 
   ///* --------- Global Modal --------- */
-  //--transition-properties: 1.25s cubic-bezier(0.62, 0.05, 0.01, 0.99);
-  //--transition-clip-path-modal: clip-path var(--transition-properties);
-  //
-
-  //--swiper-pagination-bullet-horizontal-gap: 2.5px;
-  //--swiper-pagination-bullet-width: 12px;
-  //--swiper-pagination-bullet-height: 12px;
-  //--swiper-pagination-bullet-inactive-color: #F4F4F8;
-  //--swiper-pagination-bullet-inactive-opacity: 1;
-  //--swiper-pagination-color: var(--color-accent);
-  //
-  //--swiper-navigation-color: #1E1E1E;
-  //
-  //
-  ///* --------- Scrollbar --------- */
-  //--color-scrollbar: #E6E6E6;
-  //--color-scrollbar-thumb: #BEBEBE;
-  //--scrollbar-raius: 21px;
-  //
-  //
-  ///* --------- Heading --------- */
-  //--app-headings-font: 'Gotham Pro', sans-serif;
-  //--font-size-heading: 3rem;
-  //
-  //
-  ///* --------- Text --------- */
-  //--app-text-font: 'Gotham Pro', sans-serif;
-  //--app-text-font-bold: 'Gotham Pro', sans-serif;
-  //--bs-body-font-family: var(--app-text-font-bold);
-  //
-  //--color-text-primary: #1E1E1E;
-  //--color-text-secondary: #1E1E1E;
-  //
-  //
-  ///* --------- UI unit elements --------- */
-  //--color-ui-element: #1E1E1E;
-  //--color-ui-element-line: #D6D6D6;
-  //
-  //
-  ///* --------- Page Project Detail --------- */
-  //--page-project-color-background: #1E1E1E;
-  //--page-project-ui-slider-tooltip-background: #DFDFE3;
-  //--page-project-ui-slider-tooltip-border: #00000012;
-  //--page-project-ui-link-background: #DBDBDB;
-  //--page-project-ui-link-tooltip-background: #FFFFFF;
-  //--page-project-ui-link-background-active: #3B3B3B;
-  //
-  //
-  ///* --------- Page Project Detail UI elements --------- */
-  //--page-project-ui-element-color-background: #F1F1F4;
-  //--page-project-ui-element-color-layout-first: #1E1E1E;
-  //
-  //
-  ///* --------- // UI all elements --------- */
-  //--color-ui-element-background: #1E1E1E;
-  //--color-ui-element-background-hover: #E6E6EF;
-  //--color-ui-element-layer-first: #FFFFFF;
-  //--color-ui-element-layer-second: #1E1E1E;
-  //
-  ///* --------- // UI modal elements --------- */
-  //--ui-modal-element-color-background: #F1F1F5;
-  //--ui-modal-element-color-background-layout-first: #00000012;
-  //
-  //
-  ///* --------- // UI accent elements --------- */
-  //--color-ui-element-accent-background: #1E1E1E;
-  //--color-ui-element-accent-layer-first: #FFFFFF;
-  //
-  //
-  ///* --------- //// UI Components --------- */
-  //--color-ui-component-background: #F4F4F8;
-  //--color-ui-component-layer-first: #FFFFFF;
-  //--color-ui-component-layer-second: #1E1E1E;
-  //
-  //
-  ///* --------- //// UI Components Additional --------- */
-  //--color-ui-component-additional-background: #FFFFFF;
-  //
-  //
-  ///* --------- ////// UI Components AppReviews --------- */
-  //--color-text-reviews-card: #E6E6E6;
 }
 
 @media (prefers-color-scheme: dark) {

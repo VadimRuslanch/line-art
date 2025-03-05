@@ -1,31 +1,29 @@
 @use '../shared/assets/styles/vars';
-//@import 'normalize.css';
+@import "normalize.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+* {
+  box-sizing: border-box;
+}
 
 html {
-  background-color: var(--main-color-background);
-  color: var(--main-text-color);
+  background-color: var(--app-color-background);
+  color: var(--app-text-color);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 16px;
 }
 
 body {
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
-
 }
 
 main {
-  max-width: 1560px;
+  flex-grow: 1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,26 +35,28 @@ p {
   font-family: var(--font-inter-sans);
 }
 
-button, input, a {
+button, input {
   outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul, button, input {
+  padding: 0;
+  margin: 0;
+}
+
+li, ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .HomePage {
   display: grid;
   gap: 80px;
-}
-
-.slide-container {
-  height: 100%;
-  background-size: cover;
-}
-
-.text-shadow {
-  position: relative;
-  left: 156px;
-  color: #f9f9fc;
-  text-shadow: -1px -1px 0 #223342,
-  1px -1px 0 #223342,
-  -1px 1px 0 #223342,
-  1px 1px 0 #223342;
 }

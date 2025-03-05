@@ -1,24 +1,36 @@
-import './HeaderComponent.scss';
+import styles from './HeaderComponent.module.scss';
 import Link from 'next/link';
-import ButtonLogo from '@/shared/ui/ButtonLogo/ButtonLogo';
-import HeaderNavigation from '@/components/HeaderComponent/components/HeaderNavigation';
-import HeaderMenuCatalog from '@/components/HeaderComponent/components/HeaderMenuCatalog';
-import HeaderSearch from '@/components/HeaderComponent/components/HeaderSearch';
-import HeaderUserBar from '@/components/HeaderComponent/components/HeaderUserBar';
-import HeaderContacts from '@/components/HeaderComponent/components/HeaderContacts';
+import ButtonBurger from '@/shared/ui/ButtonBurger/ButtonBurger';
+import IconLogo from '@/shared/assets/svg/logo.svg';
+import IconTelegram from '@/shared/assets/svg/icon-telegram.svg';
+import IconWhatsapp from '@/shared/assets/svg/icon-whatsapp.svg';
 
 export default async function HeaderComponent() {
   return (
-    <header className="header grid gap-y-4 gap-x-5 z-10 pt-4 pb-7">
-      <Link className="max-w-fit header-grid-aria-link" href="/">
-        <ButtonLogo />
+    <header className={styles.header}>
+      <Link href="/">
+        <IconLogo className={styles.header__logo} />
       </Link>
 
-      <HeaderNavigation />
-      <HeaderContacts />
-      <HeaderMenuCatalog />
-      <HeaderSearch />
-      <HeaderUserBar />
+      <div className={styles.header__links}>
+        <Link
+          className={styles.header__link}
+          target="_blank"
+          href="tel:+74957909455"
+        >
+          +7 (495) 790-94-55
+        </Link>
+
+        <Link className={styles.header__link} href="">
+          <IconTelegram />
+        </Link>
+
+        <Link className={styles.header__link} href="">
+          <IconWhatsapp />
+        </Link>
+      </div>
+
+      <ButtonBurger />
     </header>
   );
 }

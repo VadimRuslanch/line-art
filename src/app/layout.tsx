@@ -4,11 +4,13 @@ import './globals.scss';
 import HeaderComponent from '@/components/HeaderComponent/HeaderComponent';
 import React from 'react';
 import FooterComponent from '@/components/FooterComponent/FooterComponent';
+import NavigationBar from '@/components/NavigationBar/NavigationBar';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
   subsets: ['cyrillic'],
   style: ['normal', 'italic'],
+  weight: ['500'],
 });
 
 const fontInter = Inter({
@@ -35,6 +37,7 @@ export default function RootLayout({
         <HeaderComponent />
         <main>{children}</main>
         <FooterComponent />
+        <NavigationBar />
       </body>
     </html>
   );

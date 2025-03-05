@@ -1,9 +1,10 @@
-import IconLogo from './logo.svg';
+import styles from './ButtonLogo.module.scss';
+import IconLogo from '@/shared/assets/svg/logo.svg';
 
 const ButtonLogo = () => {
   return (
-    <button>
-      <IconLogo />
+    <button className={styles.button}>
+      <IconLogo className={styles.logo} />
     </button>
   );
 };
