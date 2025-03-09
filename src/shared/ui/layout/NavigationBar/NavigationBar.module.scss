@@ -1,0 +1,29 @@
+.navigation {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 0 4px;
+  width: 100%;
+  background-color: var(--app-color-background);
+
+  @media screen and (min-width: 961px) {
+    display: none;
+  }
+}
+
+.link {
+  display: grid;
+  gap: 4px 0;
+  padding: 18px 0;
+  flex-grow: 1;
+  font-size: .75rem;
+  text-align: center;
+}
+
+.link__icon {
+  margin: 0 auto;
+  fill: #FFFFFF;
+  fill-opacity: .5;
+}

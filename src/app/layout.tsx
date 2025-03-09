@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
 import { Montserrat, Inter } from 'next/font/google';
 import './globals.scss';
-import HeaderComponent from '@/components/HeaderComponent/HeaderComponent';
+import HeaderComponent from '@/shared/ui/layout/HeaderComponent/HeaderComponent';
 import React from 'react';
-import FooterComponent from '@/components/FooterComponent/FooterComponent';
-import NavigationBar from '@/components/NavigationBar/NavigationBar';
+import FooterComponent from '@/shared/ui/layout/FooterComponent/FooterComponent';
+import NavigationBar from '@/shared/ui/layout/NavigationBar/NavigationBar';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
   subsets: ['cyrillic'],
-  style: ['normal', 'italic'],
-  weight: ['500'],
+  style: ['normal'],
 });
 
 const fontInter = Inter({
@@ -18,6 +17,23 @@ const fontInter = Inter({
   subsets: ['cyrillic'],
   weight: ['400'],
 });
+
+// const centuryGothic = localFont({
+//   src: [
+//     {
+//       path: '../../public/fonts/CenturyGothic/CenturyGothic_Regular.woff',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//     {
+//       path: '../../public/fonts/CenturyGothic/CenturyGothic_Regular.woff2',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-century-gothic',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',

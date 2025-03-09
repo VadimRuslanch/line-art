@@ -1,10 +1,20 @@
 .burger {
   background-color: #FFFFFF;
   width: 48px;
-  aspect-ratio: 1/1;
+  height: 48px;
+
+  @media (width >= 768px) {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .burger__icon {
   width: 26px;
   height: 20px;
+
+  @media (width >= 768px) {
+    width: 32px;
+    height: 26px;
+  }
 }

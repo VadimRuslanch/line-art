@@ -1,0 +1,34 @@
+.slider {
+  --swiper-scrollbar-bg-color: #3e3e42;
+  --swiper-scrollbar-drag-bg-color: #FFFFFF;
+  --swiper-scrollbar-size: 24px;
+  --swiper-scrollbar-border-radius: 0;
+  --swiper-scrollbar-sides-offset: 0%;
+  --swiper-scrollbar-bottom: 0;
+  width: 100vw;
+  height: clamp(24.25rem, 8.147rem + 71.57vw, 42.5rem);
+  padding-bottom: 24px;
+}
+
+.slide {
+  height: 100%;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 67px;
+}
+
+.link {
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}

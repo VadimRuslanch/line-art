@@ -1,0 +1,30 @@
+.container {
+  padding-top: 80px;
+  background-color: #FFFFFF;
+}
+
+.slider {
+  max-width: 100vw;
+  width: 100%;
+}
+
+.slide{
+  border: 1px solid #29292D14;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.content{
+  width: 100%;
+}
+
+.title {
+  color: #29292D;
+}
+
+.image {
+  width: 100%;
+  height: 356px;
+  object-fit: cover;
+  border-radius: 4px;
+}
