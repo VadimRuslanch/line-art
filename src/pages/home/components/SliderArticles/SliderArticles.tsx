@@ -1,16 +1,14 @@
 'use client';
-import 'swiper/css';
-
 import styles from './SliderArticles.module.scss';
-import 'swiper/css/navigation';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
 export default function SliderArticles() {
   return (
-    <section className={`${styles.container} block-limiter`}>
+    <section className={`${styles.container}`}>
       <header>
-        <h2 className={`heading ${styles.title}`}>Полезная информация</h2>
+        <h2 className={`${styles.title}`}>Полезная информация</h2>
       </header>
       <Swiper
         modules={[Navigation]}
@@ -18,8 +16,9 @@ export default function SliderArticles() {
         spaceBetween="20"
         breakpoints={{
           0: { slidesPerView: 1 },
-          1100: { slidesPerView: 2 },
-          1600: { slidesPerView: 3 },
+          768: { slidesPerView: 2 },
+          1200: { slidesPerView: 3 },
+          1600: { slidesPerView: 4 },
         }}
       >
         <SwiperSlide className={styles.slide}>

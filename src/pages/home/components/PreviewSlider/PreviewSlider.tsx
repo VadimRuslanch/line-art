@@ -1,7 +1,4 @@
 'use client';
-
-import 'swiper/scss';
-import 'swiper/scss/scrollbar';
 import styles from './PreviewSlider.module.scss';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,6 +18,28 @@ export default function PreviewSlider() {
         1600: { slidesPerView: 3 },
       }}
     >
+      <SwiperSlide
+        style={{ backgroundImage: 'url(/images/MainSlider/first.jpg)' }}
+        className={styles.slide}
+      >
+        <div className={styles.content}>
+          <span className={styles.text}>Теневой профиль</span>
+          <Link href={'/'} className={styles.link}>
+            <IconArrow />
+          </Link>
+        </div>
+      </SwiperSlide>{' '}
+      <SwiperSlide
+        style={{ backgroundImage: 'url(/images/MainSlider/first.jpg)' }}
+        className={styles.slide}
+      >
+        <div className={styles.content}>
+          <span className={styles.text}>Теневой профиль</span>
+          <Link href={'/'} className={styles.link}>
+            <IconArrow />
+          </Link>
+        </div>
+      </SwiperSlide>{' '}
       <SwiperSlide
         style={{ backgroundImage: 'url(/images/MainSlider/first.jpg)' }}
         className={styles.slide}

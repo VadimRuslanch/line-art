@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: grid;
   gap: 40px;
 
@@ -15,6 +16,8 @@
   margin-bottom: 40px;
   @media (width >=768px) {
     white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -26,6 +29,10 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+  
+  @media (width >= 1200px) {
+    width: 70%
   }
 }
 
@@ -43,9 +50,16 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 40px 20px;
   }
+  
+  @media (width >= 1600px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 .link {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.625;
   justify-self: end;
   width: fit-content;
   display: inline-block;
@@ -54,4 +68,10 @@
   padding: 10px 16px;
   background-color: #FFFFFF;
   color: #29292D;
+
+  @media (width >= 1200px) {
+    position: absolute;
+    top: 150px;
+    right: 20px;
+  }
 }

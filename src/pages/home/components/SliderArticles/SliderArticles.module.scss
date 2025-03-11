@@ -1,14 +1,14 @@
 .container {
   overflow: hidden;
-  padding: 80px 20px 0;
+  padding: 80px 0 0;
   background-color: #FFFFFF;
 }
 
 .slider {
   --swiper-navigation-top-offset: -24px;
   overflow: visible;
-  max-width: calc(100vw - 40px);
-  width: 100%;
+  width: calc(100vw - 40px);
+  max-width: 1740px;
 }
 
 .sliderControl {
@@ -28,6 +28,12 @@
 .title {
   color: #29292D;
   padding-bottom: 112px;
+  font-size: 2.5rem;
+  font-weight: 400;
+
+  @media (width >= 768px) {
+    font-size: 3rem;
+  }
 }
 
 .image {

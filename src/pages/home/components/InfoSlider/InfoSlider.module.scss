@@ -1,6 +1,6 @@
 .container {
   overflow: hidden;
-  padding: 80px 20px 0;
+  padding: 80px 0;
   background-color: #FFFFFF;
   color: #222226;
 }
@@ -8,10 +8,15 @@
 .slider {
   --swiper-navigation-top-offset: -24px;
   overflow: visible;
-  max-width: calc(100vw - 40px);
-  width: 100%;
-  display: flex;
-  flex-direction: column-reverse;
+  width: calc(100vw - 40px);
+  max-width: 1740px;
+}
+
+.content {
+  @media (width >= 1200px) {
+    display: flex;
+    column-gap: 20px;
+  }
 }
 
 .image {
@@ -20,11 +25,24 @@
   object-fit: cover;
   border-radius: 4px;
   margin-bottom: 20px;
+
+  @media (width >= 1200px) {
+    width: calc(50% - 10px);
+    margin-bottom: 0;
+  }
+
+  @media (width >= 1600px) {
+    height: 433px;
+  }
 }
 
 .info {
   padding: 40px 20px;
   border: 1px solid #22222614;
+
+  @media (width >= 1200px) {
+    width: calc(50% - 10px);
+  }
 }
 
 .name {
