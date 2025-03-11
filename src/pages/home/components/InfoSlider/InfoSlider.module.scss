@@ -1,0 +1,55 @@
+.container {
+  overflow: hidden;
+  padding: 80px 20px 0;
+  background-color: #FFFFFF;
+  color: #222226;
+}
+
+.slider {
+  --swiper-navigation-top-offset: -24px;
+  overflow: visible;
+  max-width: calc(100vw - 40px);
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.info {
+  padding: 40px 20px;
+  border: 1px solid #22222614;
+}
+
+.name {
+  display: inline-block;
+  margin-bottom: 45px;
+  line-height: 1;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.text {
+  max-height: 378px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.link {
+  font-weight: 700;
+  line-height: 1.5;
+  font-size: 1rem;
+}

@@ -78,7 +78,7 @@ a {
 
 .heading {
   //font-family: var(--font-century-sans);
-  font-size: 3rem;
+  font-size: clamp(3rem, 1.676rem + 5.88vw, 4.5rem);
   font-weight: 400;
   line-height: 1;
 }

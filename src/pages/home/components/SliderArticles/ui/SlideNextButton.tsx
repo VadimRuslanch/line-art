@@ -1,11 +1,26 @@
+import { forwardRef, ReactNode } from 'react';
+import styles from './SlideButton.module.scss';
 import { useSwiper } from 'swiper/react';
+import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 
-export default function SlideNextButton() {
+interface Props {
+  children?: ReactNode;
+  type: 'submit' | 'button';
+}
+
+const SlideNextButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   const swiper = useSwiper();
 
   return (
-    <button className="swiper-button-next" onClick={() => swiper.slideNext()}>
-      Slide to the next slide
+    <button
+      ref={ref}
+      className={styles.button}
+      onClick={() => swiper.slideNext()} // Исправлено: slideNext
+      {...props}
+    >
+      <IconArrow />
     </button>
   );
-}
+});
+
+export default SlideNextButton;

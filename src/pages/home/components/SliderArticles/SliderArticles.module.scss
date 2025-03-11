@@ -1,25 +1,33 @@
 .container {
-  padding-top: 80px;
+  overflow: hidden;
+  padding: 80px 20px 0;
   background-color: #FFFFFF;
 }
 
 .slider {
-  max-width: 100vw;
+  --swiper-navigation-top-offset: -24px;
+  overflow: visible;
+  max-width: calc(100vw - 40px);
   width: 100%;
 }
 
-.slide{
+.sliderControl {
+  position: relative;
+}
+
+.slide {
   border: 1px solid #29292D14;
   padding: 16px;
   border-radius: 4px;
 }
 
-.content{
+.content {
   width: 100%;
 }
 
 .title {
   color: #29292D;
+  padding-bottom: 112px;
 }
 
 .image {
@@ -27,4 +35,18 @@
   height: 356px;
   object-fit: cover;
   border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.text {
+  display: inline-block;
+  color: #29292DB2;
+  font-size: .75rem;
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.name {
+  color: #29292D;
+  font-weight: 700;
 }
