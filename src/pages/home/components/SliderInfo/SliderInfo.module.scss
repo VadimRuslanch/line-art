@@ -6,7 +6,6 @@
 }
 
 .slider {
-  --swiper-navigation-top-offset: -24px;
   --swiper-navigation-size: 0;
   overflow: visible;
   width: calc(100vw - 40px);
@@ -29,6 +28,7 @@
 
   @media (width >= 1200px) {
     width: calc(50% - 10px);
+    height: auto;
     margin-bottom: 0;
   }
 
@@ -38,7 +38,7 @@
 }
 
 .info {
-  padding: 40px 20px;
+  padding: 40px 20px 134px;
   border: 1px solid #22222614;
 
   @media (width >= 1200px) {
@@ -75,9 +75,14 @@
 
 .sliderControl {
   position: absolute;
-  bottom: 40px;
-  right: calc(50% - 128px);
   height: 48px;
   width: fit-content;
   display: flex;
+  gap: 8px;
+  bottom: 40px;
+  left: 20px;
+  @media (width >= 1200px) {
+    left: auto;
+    right: calc(50% - 128px);
+  }
 }
