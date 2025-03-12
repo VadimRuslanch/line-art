@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import PreviewSlider from '@/pages/home/components/PreviewSlider/PreviewSlider';
 import PopularProducts from '@/pages/home/components/PopularProducts/PopularProducts';
 import SliderArticles from '@/pages/home/components/SliderArticles/SliderArticles';
-import InfoSlider from '@/pages/home/components/InfoSlider/InfoSlider';
+import SliderInfo from '@/pages/home/components/SliderInfo/SliderInfo';
 
 export default function HomePage() {
   return (
@@ -15,7 +15,7 @@ export default function HomePage() {
       <div className="info">
         <div className="info__container">
           <SliderArticles />
-          <InfoSlider />
+          <SliderInfo />
         </div>
       </div>
     </div>

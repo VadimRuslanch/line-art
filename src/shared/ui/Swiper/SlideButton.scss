@@ -1,0 +1,29 @@
+.button {
+  position: static;
+  padding: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #29292d;
+  stroke: #ffffff;
+
+  &::after {
+    content: none;
+  }
+
+  & svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.iconPrev {
+  transform: rotateZ(180deg);
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 1;
+  background-color: #e7e7e7;
+  stroke: black;
+}
