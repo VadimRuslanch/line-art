@@ -1,7 +1,9 @@
 import styles from './PopularProducts.module.scss';
+
+import Link from 'next/link';
+
 import Chip from '@/shared/ui/Chip/Chip';
 import ProductCard from '@/shared/ui/ProductCard/ProductCard';
-import Link from 'next/link';
 
 export default function PopularProducts() {
   return (
@@ -30,7 +32,7 @@ export default function PopularProducts() {
         <ProductCard />
       </div>
 
-      <Link className={styles.link} href={'#/'}>
+      <Link className={styles.link} href="/#">
         Смотреть все товары
       </Link>
     </section>

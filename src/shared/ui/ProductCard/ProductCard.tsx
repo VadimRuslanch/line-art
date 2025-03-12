@@ -2,11 +2,14 @@ import styles from './ProductCard.module.scss';
 import IconChart from '@/shared/assets/svg/chart.svg';
 import IconHeart from '@/shared/assets/svg/heart.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
+import Image from 'next/image';
 
 export default function ProductCard() {
   return (
     <article className={styles.card}>
-      <img
+      <Image
+        width={388}
+        height={372}
         src="/images/product.png"
         className={styles.image}
         alt="Название товара"

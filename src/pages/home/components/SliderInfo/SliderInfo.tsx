@@ -8,6 +8,7 @@ import styles from './SliderInfo.module.scss';
 
 import SwiperNavButtonNext from '@/shared/ui/Swiper/SwiperNavButtonNext';
 import SwiperNavButtonPrev from '@/shared/ui/Swiper/SwiperNavButtonPrev';
+import Image from 'next/image';
 
 export default function SliderInfo() {
   type ButtonRef = HTMLButtonElement | null;
@@ -42,7 +43,14 @@ export default function SliderInfo() {
       >
         <SwiperSlide>
           <article className={styles.content}>
-            <img className={styles.image} src="/images/info.jpg" alt="art" />
+            <Image
+              loading="lazy"
+              className={styles.image}
+              width={860}
+              height={433}
+              src="/images/info.jpg"
+              alt="art"
+            />
             <div className={styles.info}>
               <h3 className={styles.name}>Что такое теневой плинтус?</h3>
               <p className={styles.text}>
@@ -61,7 +69,14 @@ export default function SliderInfo() {
         </SwiperSlide>
         <SwiperSlide>
           <article className={styles.content}>
-            <img className={styles.image} src="/images/info.jpg" alt="art" />
+            <Image
+              loading="lazy"
+              className={styles.image}
+              width={860}
+              height={433}
+              src="/images/info.jpg"
+              alt="art"
+            />
             <div className={styles.info}>
               <h3 className={styles.name}>Что такое теневой плинтус?</h3>
               <p className={styles.text}>
@@ -78,6 +93,59 @@ export default function SliderInfo() {
             </div>
           </article>
         </SwiperSlide>
+        <SwiperSlide>
+          <article className={styles.content}>
+            <Image
+              loading="lazy"
+              className={styles.image}
+              width={860}
+              height={433}
+              src="/images/info.jpg"
+              alt="art"
+            />
+            <div className={styles.info}>
+              <h3 className={styles.name}>Что такое теневой плинтус?</h3>
+              <p className={styles.text}>
+                Скрытый теневой плинтус, в отличие от классического скрытого, не
+                требует дополнительных элементов в виде вставок (часто
+                изготовленных из МДФ), безопасен для здоровья, 100% влагостоек.
+                В настоящее время теневой профиль и плинтус активно применяются
+                в современных ремонтах как квартир и частных домов, так и
+                коммерческих помещений. В чем же заключен такой успех?
+              </p>
+              <Link className={styles.link} href="/#">
+                Показать полностью
+              </Link>
+            </div>
+          </article>
+        </SwiperSlide>
+        <SwiperSlide>
+          <article className={styles.content}>
+            <Image
+              loading="lazy"
+              className={styles.image}
+              width={860}
+              height={433}
+              src="/images/info.jpg"
+              alt="art"
+            />
+            <div className={styles.info}>
+              <h3 className={styles.name}>Что такое теневой плинтус?</h3>
+              <p className={styles.text}>
+                Скрытый теневой плинтус, в отличие от классического скрытого, не
+                требует дополнительных элементов в виде вставок (часто
+                изготовленных из МДФ), безопасен для здоровья, 100% влагостоек.
+                В настоящее время теневой профиль и плинтус активно применяются
+                в современных ремонтах как квартир и частных домов, так и
+                коммерческих помещений. В чем же заключен такой успех?
+              </p>
+              <Link className={styles.link} href="/#">
+                Показать полностью
+              </Link>
+            </div>
+          </article>
+        </SwiperSlide>
+
         <div className={styles.sliderControl}>
           <SwiperNavButtonPrev ref={prevRef} />
           <SwiperNavButtonNext ref={nextRef} />

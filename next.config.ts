@@ -1,23 +1,25 @@
 import type { NextConfig } from 'next';
+import type { RuleSetRule } from 'webpack';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    turbo: {
-      loaders: {
-        '*.css': ['postcss-loader'],
-        '*.scss': ['sass-loader'],
-      },
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+  webpack(config) {
+    const fileLoaderRule = config.module.rules.find(
+      (rule: RuleSetRule) =>
+        rule.test && rule.test instanceof RegExp && rule.test.test('.svg'),
+    );
+    if (fileLoaderRule) {
+      fileLoaderRule.exclude = /\.svg$/;
+    }
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
   },
   eslint: {
-    dirs: ['src'], // Проверьте только каталог src
+    dirs: ['src'],
   },
 };
 

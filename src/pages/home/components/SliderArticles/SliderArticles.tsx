@@ -6,6 +6,7 @@ import { Navigation } from 'swiper/modules';
 import SwiperNavButtonPrev from '@/shared/ui/Swiper/SwiperNavButtonPrev';
 import SwiperNavButtonNext from '@/shared/ui/Swiper/SwiperNavButtonNext';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function SliderArticles() {
   type ButtonRef = HTMLButtonElement | null;
@@ -48,55 +49,90 @@ export default function SliderArticles() {
       >
         <SwiperSlide className={styles.slide}>
           <article className={styles.content}>
-            <img className={styles.image} src="/images/product.png" alt="art" />
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
 
-            <div>
-              <span className={styles.text}>Статьи / . 14 Июн 2024</span>
-            </div>
-
-            <p className={styles.name}>Алюминий в современном интерьере</p>
-          </article>
-        </SwiperSlide>
-        <SwiperSlide className={styles.slide}>
-          <article className={styles.content}>
-            <img className={styles.image} src="/images/product.png" alt="art" />
-
-            <div>
-              <span className={styles.text}>Статьи / . 14 Июн 2024</span>
-            </div>
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
 
             <p className={styles.name}>Алюминий в современном интерьере</p>
           </article>
         </SwiperSlide>
         <SwiperSlide className={styles.slide}>
           <article className={styles.content}>
-            <img className={styles.image} src="/images/product.png" alt="art" />
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
 
-            <div>
-              <span className={styles.text}>Статьи / . 14 Июн 2024</span>
-            </div>
-
-            <p className={styles.name}>Алюминий в современном интерьере</p>
-          </article>
-        </SwiperSlide>
-        <SwiperSlide className={styles.slide}>
-          <article className={styles.content}>
-            <img className={styles.image} src="/images/product.png" alt="art" />
-
-            <div>
-              <span className={styles.text}>Статьи / . 14 Июн 2024</span>
-            </div>
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
 
             <p className={styles.name}>Алюминий в современном интерьере</p>
           </article>
         </SwiperSlide>
         <SwiperSlide className={styles.slide}>
           <article className={styles.content}>
-            <img className={styles.image} src="/images/product.png" alt="art" />
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
 
-            <div>
-              <span className={styles.text}>Статьи / . 14 Июн 2024</span>
-            </div>
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
+
+            <p className={styles.name}>Алюминий в современном интерьере</p>
+          </article>
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <article className={styles.content}>
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
+
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
+
+            <p className={styles.name}>Алюминий в современном интерьере</p>
+          </article>
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <article className={styles.content}>
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
+
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
+
+            <p className={styles.name}>Алюминий в современном интерьере</p>
+          </article>
+        </SwiperSlide>
+        <SwiperSlide className={styles.slide}>
+          <article className={styles.content}>
+            <Image
+              className={styles.image}
+              width={388}
+              height={356}
+              src="/images/product.png"
+              alt="art"
+            />
+
+            <span className={styles.text}>Статьи / . 14 Июн 2024</span>
 
             <p className={styles.name}>Алюминий в современном интерьере</p>
           </article>
