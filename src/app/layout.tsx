@@ -1,11 +1,15 @@
-import type { Metadata } from 'next';
-import { Montserrat, Inter } from 'next/font/google';
-import localFont from 'next/font/local';
 import './globals.scss';
-import HeaderComponent from '@/shared/ui/layout/HeaderComponent/HeaderComponent';
 import React from 'react';
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import { Montserrat, Inter } from 'next/font/google';
+
+import HeaderComponent from '@/shared/ui/layout/HeaderComponent/HeaderComponent';
 import FooterComponent from '@/shared/ui/layout/FooterComponent/FooterComponent';
 import NavigationBar from '@/shared/ui/layout/NavigationBar/NavigationBar';
+import { ApolloWrapper } from '@/lib/apolloWrapper';
+import { MenuProvider } from '@/context/MenuContext';
+import SideMenuComponent from '@/shared/ui/layout/SideMenuComponent/SideMenuComponent';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
@@ -47,14 +51,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body
-        className={`${fontMontserrat.variable} ${fontInter.variable} ${centuryGothic.variable} antialiased`}
+        className={`${fontMontserrat.variable} ${fontInter.variable} ${centuryGothic.variable}`}
       >
-        <HeaderComponent />
-        <main>{children}</main>
-        <FooterComponent />
-        <NavigationBar />
+        <ApolloWrapper>
+          <MenuProvider>
+            <HeaderComponent />
+            <SideMenuComponent />
+            <main>{children}</main>
+            <FooterComponent />
+            <NavigationBar />
+          </MenuProvider>
+        </ApolloWrapper>
       </body>
     </html>
   );

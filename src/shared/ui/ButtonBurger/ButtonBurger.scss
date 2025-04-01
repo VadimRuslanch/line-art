@@ -1,0 +1,44 @@
+.burger {
+	background-color: #FFFFFF;
+	width: 48px;
+	height: 48px;
+
+	@media (width >= 768px) {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+
+.burger_svg__burger__icon {
+	width: 26px;
+	height: 20px;
+
+	@media (width >= 768px) {
+		width: 32px;
+		height: 26px;
+	}
+}
+
+
+.burger_svg__burger__icon-line {
+	transition: transform 0.4s ease-out, opacity 0.4s linear, width 0.4s linear;
+	transform-origin: center;
+}
+
+
+.burger[data-state='close'] {
+	.burger_svg__burger__icon-line-top {
+		transform: translateY(8px) translateX(-7px) rotateZ(45deg);
+	}
+
+	.burger_svg__burger__icon-line-center {
+		opacity: 0;
+	}
+
+	.burger_svg__burger__icon-line-bottom {
+		transform: translateY(-9px) translateX(-8px) rotateZ(-45deg);
+		width: 31px;
+	}
+}
+

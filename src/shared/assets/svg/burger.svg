@@ -1,6 +1,7 @@
 <svg viewBox="0 0 32 26" xmlns="http://www.w3.org/2000/svg"
-     preserveAspectRatio="xMidYMid meet">
-    <rect class="burger__icon-line"
+     preserveAspectRatio="xMidYMid meet"
+     class="burger__icon">
+    <rect class="burger__icon-line burger__icon-line-top"
           id="ButtonBurgerLine-top"
           x="0"
           y="0"
@@ -10,7 +11,7 @@
           height="2"
           fill="#29292D"
     />
-    <rect class="burger__icon-line"
+    <rect class="burger__icon-line burger__icon-line-center"
           id="ButtonBurgerLine-center"
           x="0"
           y="12"
@@ -20,7 +21,7 @@
           height="2"
           fill="#29292D"
     />
-    <rect class="burger__icon-line"
+    <rect class="burger__icon-line burger__icon-line-bottom"
           id="ButtonBurgerLine-bottom"
           x="0"
           y="24"

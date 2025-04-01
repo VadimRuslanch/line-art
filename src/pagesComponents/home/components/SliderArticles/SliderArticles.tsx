@@ -24,12 +24,12 @@ export default function SliderArticles() {
   });
 
   useEffect(() => {
-    // Когда кнопки смонтированы, обновляем конфигурацию навигации
     setNavigationConfig({
       prevEl: prevRef.current,
       nextEl: nextRef.current,
     });
   }, []);
+
   return (
     <section className={`${styles.container}`}>
       <header>

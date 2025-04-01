@@ -1,10 +1,20 @@
+'use client';
+
 import BurgerIcon from '@/shared/assets/svg/burger.svg';
-import styles from './ButtonBurger.module.scss';
+import './ButtonBurger.scss';
+import { useMenu } from '@/context/MenuContext';
 
 export default function ButtonBurger() {
+  const { isMenuOpen, toggleMenu } = useMenu();
+
   return (
-    <button className={styles.burger} type="button">
-      <BurgerIcon className={styles.burger__icon} />
+    <button
+      className={'burger'}
+      data-state={isMenuOpen ? 'close' : ''}
+      type="button"
+      onClick={toggleMenu}
+    >
+      <BurgerIcon />
     </button>
   );
 }

@@ -24,7 +24,7 @@ export default function PreviewSlider() {
       >
         <div className={styles.content}>
           <span className={styles.text}>Теневой профиль</span>
-          <Link href={'/'} className={styles.link}>
+          <Link href={'/public'} className={styles.link}>
             <IconArrow />
           </Link>
         </div>
@@ -35,7 +35,7 @@ export default function PreviewSlider() {
       >
         <div className={styles.content}>
           <span className={styles.text}>Теневой профиль</span>
-          <Link href={'/'} className={styles.link}>
+          <Link href={'/public'} className={styles.link}>
             <IconArrow />
           </Link>
         </div>
@@ -46,7 +46,7 @@ export default function PreviewSlider() {
       >
         <div className={styles.content}>
           <span className={styles.text}>Теневой профиль</span>
-          <Link href={'/'} className={styles.link}>
+          <Link href={'/public'} className={styles.link}>
             <IconArrow />
           </Link>
         </div>
@@ -57,7 +57,7 @@ export default function PreviewSlider() {
       >
         <div className={styles.content}>
           <span className={styles.text}>Теневой профиль</span>
-          <Link href={'/'} className={styles.link}>
+          <Link href={'/public'} className={styles.link}>
             <IconArrow />
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default function PreviewSlider() {
       >
         <div className={styles.content}>
           <span className={styles.text}>Теневой профиль</span>
-          <Link href={'/'} className={styles.link}>
+          <Link href={'/public'} className={styles.link}>
             <IconArrow />
           </Link>
         </div>

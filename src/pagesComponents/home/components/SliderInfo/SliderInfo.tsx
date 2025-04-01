@@ -61,7 +61,7 @@ export default function SliderInfo() {
                 в современных ремонтах как квартир и частных домов, так и
                 коммерческих помещений. В чем же заключен такой успех?
               </p>
-              <Link className={styles.link} href="/#">
+              <Link className={styles.link} href="/public#">
                 Показать полностью
               </Link>
             </div>
@@ -87,7 +87,7 @@ export default function SliderInfo() {
                 в современных ремонтах как квартир и частных домов, так и
                 коммерческих помещений. В чем же заключен такой успех?
               </p>
-              <Link className={styles.link} href="/#">
+              <Link className={styles.link} href="/public#">
                 Показать полностью
               </Link>
             </div>
@@ -113,7 +113,7 @@ export default function SliderInfo() {
                 в современных ремонтах как квартир и частных домов, так и
                 коммерческих помещений. В чем же заключен такой успех?
               </p>
-              <Link className={styles.link} href="/#">
+              <Link className={styles.link} href="/public#">
                 Показать полностью
               </Link>
             </div>
@@ -139,7 +139,7 @@ export default function SliderInfo() {
                 в современных ремонтах как квартир и частных домов, так и
                 коммерческих помещений. В чем же заключен такой успех?
               </p>
-              <Link className={styles.link} href="/#">
+              <Link className={styles.link} href="/public#">
                 Показать полностью
               </Link>
             </div>

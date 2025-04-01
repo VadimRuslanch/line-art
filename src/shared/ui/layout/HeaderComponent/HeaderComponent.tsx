@@ -9,7 +9,7 @@ import IconHeart from '@/shared/assets/svg/heart.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
 import IconUser from '@/shared/assets/svg/user.svg';
 
-export default async function HeaderComponent() {
+export default function HeaderComponent() {
   return (
     <header className={styles.header}>
       <Link href="/">
