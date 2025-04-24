@@ -1,0 +1,17 @@
+#query GetCatalog {
+#    productCategories(where: {parent: null}) {
+#        nodes {
+#            ...CategoryCore
+#            children {
+#                nodes {
+#                    ...CategoryCore
+#                    contentNodes {
+#                        nodes {
+#                            ...ProductCore
+#                        }
+#                    }
+#                }
+#            }
+#        }
+#    }
+#}

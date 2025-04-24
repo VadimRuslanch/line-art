@@ -7,7 +7,7 @@ import { Montserrat, Inter } from 'next/font/google';
 import HeaderComponent from '@/shared/ui/layout/HeaderComponent/HeaderComponent';
 import FooterComponent from '@/shared/ui/layout/FooterComponent/FooterComponent';
 import NavigationBar from '@/shared/ui/layout/NavigationBar/NavigationBar';
-import { ApolloWrapper } from '@/lib/apolloWrapper';
+import { ApolloProvider } from '@/app/lib/apollo/provider';
 import { MenuProvider } from '@/context/MenuContext';
 import SideMenuComponent from '@/shared/ui/layout/SideMenuComponent/SideMenuComponent';
 
@@ -55,7 +55,7 @@ export default function RootLayout({
       <body
         className={`${fontMontserrat.variable} ${fontInter.variable} ${centuryGothic.variable}`}
       >
-        <ApolloWrapper>
+        <ApolloProvider>
           <MenuProvider>
             <HeaderComponent />
             <SideMenuComponent />
@@ -63,7 +63,7 @@ export default function RootLayout({
             <FooterComponent />
             <NavigationBar />
           </MenuProvider>
-        </ApolloWrapper>
+        </ApolloProvider>
       </body>
     </html>
   );

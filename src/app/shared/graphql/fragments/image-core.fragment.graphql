@@ -1,0 +1,6 @@
+fragment ImageCore on MediaItem {
+    databaseId
+    id
+    sourceUrl
+    altText
+}

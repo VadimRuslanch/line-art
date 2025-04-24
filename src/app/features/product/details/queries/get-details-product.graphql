@@ -1,0 +1,21 @@
+query GetDetailsProduct(
+    $id: ID!
+    $idType: ProductIdTypeEnum!
+) {
+    product(id: $id, idType: $idType) {
+        ...ProductCore
+        ... on SimpleProduct {
+            description
+            galleryImages{
+                nodes {
+                    ...ImageCore
+                }
+            }
+            productCategories{
+                nodes {
+                    ...CategoryCore
+                }
+            }
+        }
+    }
+}

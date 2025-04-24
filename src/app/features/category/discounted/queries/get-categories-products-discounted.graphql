@@ -1,0 +1,12 @@
+query GetCategoriesProductsDiscounted {
+    products(where: {onSale: true}, first: 20) {
+        nodes {
+            ...ProductCore
+            productCategories {
+                nodes {
+                    ...CategoryCore
+                }
+            }
+        }
+    }
+}

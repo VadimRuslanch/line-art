@@ -1,0 +1,11 @@
+fragment ProductCore on SimpleProduct {
+    databaseId
+    id
+    name
+    price
+    regularPrice
+    salePrice
+    onSale
+    uri
+    image { ...ImageCore}
+}

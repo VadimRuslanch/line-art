@@ -1,0 +1,12 @@
+query GetCategoriesProductsPopular {
+    products(where: {tagIn: "popular"}) {
+        nodes {
+            ...ProductCore
+            productCategories{
+                nodes {
+                    ...CategoryCore
+                }
+            }
+        }
+    }
+}

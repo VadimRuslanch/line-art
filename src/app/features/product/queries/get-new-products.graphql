@@ -1,0 +1,21 @@
+#query GetNewProducts {
+#    products (
+#        where: {
+#            dateQuery: {column: DATE,
+#                after: {year: 2025, month: 4, day: 7},
+#                before: {year: 2025, month: 4, day: 19},
+#                inclusive: true
+#            }
+#        }
+#    )
+#    {
+#        nodes {
+#            ...ProductCore
+#            productCategories{
+#                nodes {
+#                    ...CategoryCore
+#                }
+#            }
+#        }
+#    }
+#}
