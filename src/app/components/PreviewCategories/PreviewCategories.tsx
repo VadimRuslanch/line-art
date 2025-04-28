@@ -12,24 +12,22 @@ export default function PreviewCategories() {
 
   if (!categories) return null;
 
-  const categoriesElements = categories.map((category) => {
-    return (
-      <SwiperSlide
-        key={category.databaseId}
-        style={{
-          backgroundImage: `url(${category.image ? category.image.sourceUrl : 'https://foni.papik.pro/uploads/posts/2024-10/thumbs/foni-papik-pro-9p7y-p-kartinki-serii-kotik-na-prozrachnom-fone-1.png'})`,
-        }}
-        className={styles.slide}
-      >
-        <div className={styles.content}>
-          <span className={styles.text}>{category.name}</span>
-          <Link href={`/categories/${category.slug}`} className={styles.link}>
-            <IconArrow />
-          </Link>
-        </div>
-      </SwiperSlide>
-    );
-  });
+  const categoriesElements = categories.map((category) => (
+    <SwiperSlide
+      key={category.databaseId}
+      style={{
+        backgroundImage: `url(${category.image ? category.image.sourceUrl : 'https://foni.papik.pro/uploads/posts/2024-10/thumbs/foni-papik-pro-9p7y-p-kartinki-serii-kotik-na-prozrachnom-fone-1.png'})`,
+      }}
+      className={styles.slide}
+    >
+      <div className={styles.content}>
+        <span className={styles.text}>{category.name}</span>
+        <Link href={`/categories/${category.slug}`} className={styles.link}>
+          <IconArrow />
+        </Link>
+      </div>
+    </SwiperSlide>
+  ));
 
   return (
     <Swiper

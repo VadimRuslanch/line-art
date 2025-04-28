@@ -1,5 +1,5 @@
 import PreviewCategories from '@/app/components/PreviewCategories/PreviewCategories';
-import PopularProducts from '@/app/features/product/popular/ui/PopularProducts/PopularProducts';
+import PopularProducts from '@/shared/ui/PopularProducts/PopularProducts';
 import SliderArticles from '@/app/components/SliderArticles/SliderArticles';
 import SliderInfo from '@/app/components/SliderInfo/SliderInfo';
 import 'swiper/scss';

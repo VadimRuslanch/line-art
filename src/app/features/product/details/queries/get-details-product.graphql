@@ -3,8 +3,9 @@ query GetDetailsProduct(
     $idType: ProductIdTypeEnum!
 ) {
     product(id: $id, idType: $idType) {
-        ...ProductCore
         ... on SimpleProduct {
+            ...ProductCore
+            __typename
             description
             galleryImages{
                 nodes {

@@ -4,7 +4,8 @@
 	left: 0;
 	z-index: 10;
 	width: 100vw;
-	height: 100vh;
+	height: calc(100vh - 80px);
+	overflow: hidden;
 	display: flex;
 	background-color: var(--sidebar-color-background);
 }
@@ -14,11 +15,15 @@
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr max(602px);
+	grid-template-rows: 1fr;
 	height: 100%;
+	overflow: hidden;
 }
 
 
 .menuItem {
+	height: 100%;
+	overflow-y: auto;
 	display: grid;
 	align-content: start;
 	gap: 4px;

@@ -1,61 +1,58 @@
 .card {
-  position: relative;
-  padding: 16px 16px 24px;
-  border: 1px solid #FFFFFF3D;
-  border-radius: 4px;
-  display: grid;
-  gap: 16px;
+	position: relative;
+	padding: 16px 16px 24px;
+	border: 1px solid #FFFFFF3D;
+	border-radius: 4px;
+	display: grid;
+	gap: 16px;
 
-  &:hover{
-    background-color: #FFFFFF0A;
-  }
+	&:hover {
+		background-color: #FFFFFF0A;
+	}
 }
+
 
 .image {
-  width: 100%;
-  height: 322px;
-  border-radius: 4px;
-  object-fit: cover;
+	width: 100%;
+	height: 322px;
+	border-radius: 4px;
+	object-fit: cover;
 }
+
 
 .productActions {
-  position: absolute;
-  padding: 10px;
-  top: 32px;
-  right: 32px;
-  display: grid;
-  grid-auto-rows: 32px;
-  background-color: #e8e8e8;
-  border: 1px solid #FFFFFF;
-  border-radius: 4px;
+	position: absolute;
+	padding: 10px;
+	top: 32px;
+	right: 32px;
+	display: grid;
+	grid-auto-rows: 32px;
+	background-color: #e8e8e8;
+	border: 1px solid #FFFFFF;
+	border-radius: 4px;
 }
+
 
 .productButton {
-  width: 32px;
-  height: 32px;
-  padding: 4px;
+	width: 32px;
+	height: 32px;
+	padding: 4px;
 }
+
 
 .productIcon {
-  fill: #29292D;
+	fill: #29292D;
 }
+
 
 .productInfo {
-  display: grid;
-  gap: 16px;
+	display: grid;
+	gap: 16px;
 }
+
 
 .productTitle {
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.productPrice {
-  text-decoration: line-through;
-}
-
-.productPriceSale{
-  display: flex;
-  gap: 32px;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.5;
 }

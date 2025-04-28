@@ -1,0 +1,38 @@
+.qty {
+	width: 100%;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	border-radius: 33px;
+	border: 1px solid white;
+
+	& button {
+		flex-grow: 1;
+
+		& svg {
+			margin: 0 auto;
+			width: 18px;
+		}
+	}
+
+	& input {
+		flex-grow: 1;
+		height: 100%;
+		text-align: center;
+		border: none;
+		outline: none;
+		font: inherit;
+		appearance: none;
+		-moz-appearance: textfield;
+
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
+	@media (min-width: 550px) {
+		width: 138px;
+	}
+}

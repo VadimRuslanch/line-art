@@ -1,0 +1,16 @@
+.button {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	display: none;
+	align-items: center;
+	gap: 16px;
+
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5;
+
+	@media (min-width: 1780px) {
+		display: flex;
+	}
+}

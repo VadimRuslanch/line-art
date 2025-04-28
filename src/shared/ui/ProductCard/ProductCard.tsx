@@ -6,15 +6,13 @@ import Image from 'next/image';
 import { ProductWithCategoriesFragment } from '@/generated/graphql';
 import Link from 'next/link';
 
+import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
+
 export default function ProductCard({
   product,
 }: {
   product: ProductWithCategoriesFragment;
 }) {
-  const replacePrice = (price: string): string => {
-    return price.replace(/&nbsp;/g, ' ');
-  };
-
   return (
     <article>
       <Link href={product.uri!} className={styles.card}>
@@ -40,28 +38,11 @@ export default function ProductCard({
         <div className={styles.productInfo}>
           <h3 className={styles.productTitle}>{product.name}</h3>
 
-          {!product.onSale && (
-            <div>
-              <p>
-                <span>{replacePrice(product.regularPrice!)}</span> /{' '}
-                <span>метр</span>
-              </p>
-            </div>
-          )}
-
-          {product.onSale && (
-            <div className={styles.productPriceSale}>
-              <p>
-                <span>{replacePrice(product.salePrice!)}</span> /{' '}
-                <span>метр</span>
-              </p>
-
-              <p className={styles.productPrice}>
-                <span>{replacePrice(product.regularPrice!)}</span> /{' '}
-                <span>метр</span>
-              </p>
-            </div>
-          )}
+          <ProductPrice
+            regularPrice={product.regularPrice!}
+            salePrice={product.salePrice}
+            onSale={product.onSale!}
+          />
         </div>
       </Link>
     </article>

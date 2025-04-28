@@ -38,3 +38,7 @@ export function groupProductsByCategory(
     (a.name ?? '').localeCompare(b.name ?? ''),
   );
 }
+
+export function replacePrice(price: string) {
+  return price.replace(/&nbsp;/g, ' ');
+}

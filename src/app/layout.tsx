@@ -10,6 +10,7 @@ import NavigationBar from '@/shared/ui/layout/NavigationBar/NavigationBar';
 import { ApolloProvider } from '@/app/lib/apollo/provider';
 import { MenuProvider } from '@/context/MenuContext';
 import SideMenuComponent from '@/shared/ui/layout/SideMenuComponent/SideMenuComponent';
+import HeroProviders from '@/shared/ui/layout/HeroProviders/HeroProviders';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',

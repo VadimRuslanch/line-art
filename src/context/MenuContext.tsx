@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
 interface MenuContextProps {
   isMenuOpen: boolean;
@@ -11,6 +12,7 @@ const MenuContext = createContext<MenuContextProps | undefined>(undefined);
 
 export const MenuProvider = ({ children }: { children: ReactNode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useLockBodyScroll(isMenuOpen);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);

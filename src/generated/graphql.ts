@@ -30656,7 +30656,7 @@ export type GetDetailsProductQuery = {
     | { __typename?: 'ExternalProduct' }
     | { __typename?: 'GroupProduct' }
     | {
-        __typename?: 'SimpleProduct';
+        __typename: 'SimpleProduct';
         description?: string | null;
         databaseId: number;
         id: string;
@@ -31355,8 +31355,9 @@ export type GetCategoryWithProductQueryResult = Apollo.QueryResult<
 export const GetDetailsProductDocument = gql`
   query GetDetailsProduct($id: ID!, $idType: ProductIdTypeEnum!) {
     product(id: $id, idType: $idType) {
-      ...ProductCore
       ... on SimpleProduct {
+        ...ProductCore
+        __typename
         description
         galleryImages {
           nodes {
