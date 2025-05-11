@@ -11,11 +11,12 @@ export default function ProductPrice({
   regularPrice,
   salePrice,
   onSale,
+  ...props
 }: ProductPriceProps) {
   if (!regularPrice) return null;
 
   return (
-    <div>
+    <div className="containerPrice" {...props}>
       {onSale ? (
         <div className={styles.productPriceSale}>
           <p>

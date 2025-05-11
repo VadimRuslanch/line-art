@@ -16,10 +16,20 @@
 	margin-bottom: 40px;
 	display: flex;
 	flex-wrap: wrap;
+	font-size: clamp(3rem, 1.676rem + 5.88vw, 4.5rem);
 
-	@media (width >=768px) {
+	@media (min-width: 768px) {
+		font-size: clamp(4.5rem, 0.938rem + 7.42vw, 6.875rem);
 		flex-wrap: nowrap;
 		justify-content: space-between;
+	}
+
+	@media (min-width: 1200px) {
+		font-size: 6.875rem;
+	}
+
+	@media (min-width: 1600px) {
+		font-size: 8.75rem;
 	}
 }
 
@@ -83,11 +93,11 @@
 
 	@media (min-width: 1200px) {
 		position: absolute;
-		top: 150px;
+		top: 172px;
 		right: 20px;
 	}
 
 	@media (min-width: 1600px) {
-		top: 180px;
+		top: 208px;
 	}
 }

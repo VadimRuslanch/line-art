@@ -1,0 +1,111 @@
+.container {
+	padding: 40px;
+
+	@media (min-width: 769px) {
+		background-color: #2F2F32;
+	}
+}
+
+
+.title {
+	font-family: var(--font-century-sans);
+	display: inline-block;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 40px;
+}
+
+
+.inputItems {
+	display: grid;
+	gap: 24px;
+}
+
+
+.inputItem {
+	display: grid;
+	gap: 12px;
+}
+
+
+.labelInput {
+	border-radius: 16px;
+	background-color: #242427;
+	padding: 12px;
+}
+
+
+.input {
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+
+.labelText {
+	display: block;
+	font-size: 1rem;
+	line-height: 1.5;
+	font-weight: 500;
+}
+
+
+.submitBlock {
+	margin-top: 40px;
+	display: grid;
+	gap: 24px;
+}
+
+
+.submitButton {
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+	padding: 15px 0;
+	border-radius: 33px;
+	background-color: #FFFFFF;
+	color: #29292D;
+}
+
+
+.submitSum {
+	font-family: var(--font-century-sans);
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+
+.checkboxLabel {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+
+.checkbox {
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 2.25px;
+	border: 1px solid #FFFFFF14;
+	background-color: #242427;
+
+	&:checked {
+		background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%2050%2050%22%3E%3Cpath%20d%3D%22M%2041.9375%208.625%20C%2041.273438%208.648438%2040.664063%209%2040.3125%209.5625%20L%2021.5%2038.34375%20L%209.3125%2027.8125%20C%208.789063%2027.269531%208.003906%2027.066406%207.28125%2027.292969%20C%206.5625%2027.515625%206.027344%2028.125%205.902344%2028.867188%20C%205.777344%2029.613281%206.078125%2030.363281%206.6875%2030.8125%20L%2020.625%2042.875%20C%2021.0625%2043.246094%2021.640625%2043.410156%2022.207031%2043.328125%20C%2022.777344%2043.242188%2023.28125%2042.917969%2023.59375%2042.4375%20L%2043.6875%2011.75%20C%2044.117188%2011.121094%2044.152344%2010.308594%2043.78125%209.644531%20C%2043.410156%208.984375%2042.695313%208.589844%2041.9375%208.625%20Z%22%3E%3C/path%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		background-color: #FFFFFF;
+	}
+}
+
+
+.checkboxText {
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5;
+
+	& a {
+		text-decoration: underline;
+	}
+}

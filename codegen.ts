@@ -1,11 +1,17 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'https://wp-admin.lineart-alumo.ru/graphql',
-  documents: [
-    './src/app/**/queries/**/*.graphql',
-    './src/app/shared/graphql/fragments/**/*.graphql',
+  schema: [
+    {
+      'https://wp-admin.lineart-alumo.ru/graphql': {
+        headers: {
+          'User-Agent': 'CodegenClient/1.0',
+          Referer: 'https://lineart-alumo.ru',
+        },
+      },
+    },
   ],
+  documents: ['./src/**/*.graphql'],
   ignoreNoDocuments: true,
   generates: {
     './src/generated/graphql.ts': {

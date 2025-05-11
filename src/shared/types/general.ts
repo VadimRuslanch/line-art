@@ -1,7 +1,6 @@
-import {
-  ImageCoreFragment,
-  ProductWithCategoriesFragment,
-} from '@/generated/graphql';
+import { ImageCoreFragment } from '@/generated/graphql';
+
+import { ProductProduct } from '@/shared/ui/ProductCard/ProductCard';
 
 export interface CategoryWithProducts {
   databaseId: number;
@@ -10,5 +9,5 @@ export interface CategoryWithProducts {
   slug?: string | null;
   uri?: string | null;
   image?: ImageCoreFragment | null;
-  products: ProductWithCategoriesFragment[];
+  products: ProductProduct[];
 }

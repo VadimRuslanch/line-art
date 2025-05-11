@@ -1,12 +1,15 @@
 query GetCategoriesProductsNew {
-    products(where: {dateQuery: {after: {day: 7, month: 4, year: 2025}}}, first: 20) {
+  products(
+    where: { dateQuery: { after: { day: 7, month: 4, year: 2025 } } }
+    first: 20
+  ) {
+    nodes {
+      ...ProductCore
+      productCategories {
         nodes {
-            ...ProductCore
-            productCategories {
-                nodes {
-                    ...CategoryCore
-                }
-            }
+          ...CategoryCore
         }
+      }
     }
+  }
 }

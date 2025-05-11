@@ -1,8 +1,8 @@
-fragment ProductWithCategories on SimpleProduct {    # полный
-    ...ProductCore
-    productCategories {
-        nodes {
-            ...CategoryCore
-        }
+fragment ProductWithCategories on SimpleProduct {
+  ...ProductCore
+  productCategories {
+    nodes {
+      ...CategoryCore
     }
+  }
 }

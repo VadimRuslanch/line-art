@@ -1,23 +1,12 @@
 'use client';
 
-import {
-  ApolloNextAppProvider,
-  ApolloClient,
-  InMemoryCache,
-} from '@apollo/client-integration-nextjs';
-import { makeLinks } from './links';
-import { makeCache } from './cache';
-
-function makeClient() {
-  return new ApolloClient({
-    cache: makeCache() as InMemoryCache,
-    link: makeLinks(false),
-  });
-}
+import React from 'react';
+import { ApolloNextAppProvider } from '@apollo/client-integration-nextjs';
+import { makeApolloClient } from '@/app/lib/apollo/client';
 
 export function ApolloProvider({ children }: React.PropsWithChildren) {
   return (
-    <ApolloNextAppProvider makeClient={makeClient}>
+    <ApolloNextAppProvider makeClient={() => makeApolloClient(false)}>
       {children}
     </ApolloNextAppProvider>
   );

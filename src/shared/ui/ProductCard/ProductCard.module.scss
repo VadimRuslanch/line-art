@@ -1,16 +1,23 @@
 .card {
+	display: block;
 	position: relative;
 	padding: 16px 16px 24px;
 	border: 1px solid #FFFFFF3D;
 	border-radius: 4px;
-	display: grid;
-	gap: 16px;
-
+	height: 100%;
 	&:hover {
 		background-color: #FFFFFF0A;
 	}
 }
 
+.cardContainer{
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-rows: min-content 1fr;
+	height: 100%;
+	gap: 16px;
+}
 
 .image {
 	width: 100%;
@@ -21,6 +28,7 @@
 
 
 .productActions {
+	z-index: 2;
 	position: absolute;
 	padding: 10px;
 	top: 32px;
@@ -44,6 +52,10 @@
 	fill: #29292D;
 }
 
+.inCartIcon{
+	fill: red;
+}
+
 
 .productInfo {
 	display: grid;
@@ -55,4 +67,8 @@
 	font-weight: 400;
 	font-size: 1rem;
 	line-height: 1.5;
+}
+
+.productPrice{
+	margin-top: auto;
 }

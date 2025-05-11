@@ -1,4 +1,4 @@
-import { ProductWithCategoriesFragment } from '@/generated/graphql';
+import { ProductProduct } from '@/shared/ui/ProductCard/ProductCard';
 
 import { CategoryWithProducts } from '@/shared/types/general';
 // Добавить Картинку заглушку в for
@@ -14,7 +14,7 @@ import { CategoryWithProducts } from '@/shared/types/general';
 // image: (cat.image ?? placeholderImage)
 
 export function groupProductsByCategory(
-  products: ProductWithCategoriesFragment[],
+  products: ProductProduct[],
 ): CategoryWithProducts[] {
   const map = new Map<string, CategoryWithProducts>();
 

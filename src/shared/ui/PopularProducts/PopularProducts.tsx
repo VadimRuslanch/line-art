@@ -39,6 +39,7 @@ export default function PopularProducts() {
       key={c.id}
       onClick={() => setActive(i)}
       data-active={i === active ? 'active' : 'inactive'}
+      data-type="dark"
     >
       {c.name}
     </Chip>

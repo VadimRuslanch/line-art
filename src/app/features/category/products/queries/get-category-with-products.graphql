@@ -1,12 +1,12 @@
 query GetCategoryWithProduct {
-    productCategories {
+  productCategories {
+    nodes {
+      ...CategoryCore
+      contentNodes {
         nodes {
-            ...CategoryCore
-            contentNodes {
-                nodes {
-                    ...ProductCore
-                }
-            }
+          ...ProductCore
         }
+      }
     }
+  }
 }

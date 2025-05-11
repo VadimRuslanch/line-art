@@ -1,41 +1,28 @@
 'use client';
 import './QuantitySelector.scss';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
 
 type Props = {
-  /** начальное значение (по умолчанию 1) */
-  initial?: number;
-  /** минимальное (по умолчанию 1) */
+  value?: number;
   min?: number;
-  /** максимальное (по умолчанию 100) */
   max?: number;
-  /** колбэк родителю */
   onChange?: (value: number) => void;
 };
 
 export default function QuantitySelector({
-  initial = 1,
-  min = 1,
-  max = 100,
+  value, // ← управляемое значение
   onChange,
+  min = 0,
+  max = 100,
 }: Props) {
   const clamp = (v: number) => Math.max(min, Math.min(max, v));
-  const [qty, setQty] = useState<number>(clamp(initial));
+  const qty = clamp(value ?? 1);
 
-  const update = (v: number) => {
-    const next = clamp(v);
-    setQty(next);
-    onChange?.(next);
-  };
+  const update = (v: number) => onChange?.(clamp(v));
 
   return (
     <div className="qty">
-      <button
-        type="button"
-        onClick={() => update(qty - 1)}
-        disabled={qty <= min}
-      >
+      <button onClick={() => update(qty - 1)} disabled={qty <= min}>
         <MinusIcon className="w-4 h-4" />
       </button>
       <input
@@ -47,13 +34,8 @@ export default function QuantitySelector({
           const v = Number(e.target.value);
           if (!Number.isNaN(v)) update(v);
         }}
-        onWheel={(e) => (e.target as HTMLInputElement).blur()} // отключаем скролломеню
       />
-      <button
-        type="button"
-        onClick={() => update(qty + 1)}
-        disabled={qty >= max}
-      >
+      <button onClick={() => update(qty + 1)} disabled={qty >= max}>
         <PlusIcon className="w-4 h-4" />
       </button>
     </div>

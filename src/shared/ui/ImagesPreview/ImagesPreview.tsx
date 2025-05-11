@@ -1,28 +1,38 @@
 import styles from './ImagesPreview.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
+import {
+  ImageCoreFragment,
+  ProductToMediaItemConnection,
+} from '@/generated/graphql';
 
-export default function ImagesPreview({ image, galleryImages }) {
+export default function ImagesPreview({
+  image,
+  galleryImages,
+}: {
+  image: ImageCoreFragment;
+  galleryImages?: Pick<ProductToMediaItemConnection, 'nodes'>;
+}) {
   const [previewImageSrc, setPreviewImageSrc] = useState<string>(
-    image.sourceUrl,
+    image.sourceUrl!,
   );
   return (
     <div className={styles.images}>
       <div className={styles.imagesList}>
-        <button onClick={() => setPreviewImageSrc(image.sourceUrl)}>
+        <button onClick={() => setPreviewImageSrc(image.sourceUrl!)}>
           <Image
             className={styles.image}
             width={125}
             height={125}
-            src={image.sourceUrl}
-            alt={image.altText}
+            src={image.sourceUrl!}
+            alt={image.altText!}
           />
         </button>
         {galleryImages?.nodes?.length
-          ? galleryImages.nodes.map((img) => (
+          ? galleryImages.nodes.map((img: ImageCoreFragment) => (
               <button
                 key={img?.id}
-                onClick={() => setPreviewImageSrc(img?.sourceUrl)}
+                onClick={() => setPreviewImageSrc(img.sourceUrl!)}
               >
                 <Image
                   className={styles.image}

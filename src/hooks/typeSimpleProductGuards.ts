@@ -1,9 +1,9 @@
-import { GetDetailsProductQuery } from '@/generated/graphql';
+import { GetProductDetailsQuery } from '@/generated/graphql';
 
 export function isSimpleProduct(
-  product: GetDetailsProductQuery['product'] | undefined | null,
+  product: GetProductDetailsQuery['product'] | undefined | null,
 ): product is Extract<
-  GetDetailsProductQuery['product'],
+  GetProductDetailsQuery['product'],
   { __typename: 'SimpleProduct' }
 > {
   return product?.__typename === 'SimpleProduct';

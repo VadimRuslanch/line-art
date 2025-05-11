@@ -1,7 +1,7 @@
-import PreviewCategories from '@/app/components/PreviewCategories/PreviewCategories';
+import PreviewCategories from '@/shared/ui/PreviewCategories/PreviewCategories';
 import PopularProducts from '@/shared/ui/PopularProducts/PopularProducts';
-import SliderArticles from '@/app/components/SliderArticles/SliderArticles';
-import SliderInfo from '@/app/components/SliderInfo/SliderInfo';
+import SliderArticles from '@/shared/ui/SliderArticles/SliderArticles';
+import SliderInfo from '@/shared/ui/SliderInfo/SliderInfo';
 import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 import 'swiper/css/navigation';

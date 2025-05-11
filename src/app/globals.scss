@@ -165,3 +165,17 @@ input[type='number']::-webkit-outer-spin-button {
 		padding: 0;
 	}
 }
+
+.LayoutProductDetails{
+	display: grid;
+
+	gap: 80px;
+
+	@media (min-width: 1024px) {
+		gap: 100px;
+	}
+}
+
+.containerPrice[data-font-size='big'] {
+	font-size: 1.5rem;
+}

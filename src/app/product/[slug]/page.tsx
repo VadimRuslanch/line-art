@@ -1,15 +1,17 @@
-import { Suspense } from 'react';
-import ProductDetails from '@/shared/ui/ProductDetails/ProductDetails';
-import ProductSkeleton from '@/shared/ui/ProductSkeleton/ProductSkeleton';
+import ProductDetailsPreview from '@/shared/ui/ProductDetailsPreview/ProductDetailsPreview';
 
 type Params = Promise<{ slug: string }>;
 
-export default async function ProductPage({ params }: { params: Params }) {
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Params;
+}) {
   const { slug } = await params;
 
   return (
-    <Suspense fallback={<ProductSkeleton />}>
-      <ProductDetails slug={slug} />
-    </Suspense>
+    <div className="block-limiter">
+      <ProductDetailsPreview slug={slug} />
+    </div>
   );
 }

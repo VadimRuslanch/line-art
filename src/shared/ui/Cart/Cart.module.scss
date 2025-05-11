@@ -1,0 +1,10 @@
+.container {
+	margin-top: 40px;
+	display: grid;
+	gap: 40px;
+
+	@media (min-width: 768px) {
+		margin-top: 32px;
+		gap: 24px;
+	}
+}

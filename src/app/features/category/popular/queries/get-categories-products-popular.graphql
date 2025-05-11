@@ -1,12 +1,12 @@
 query GetCategoriesProductsPopular {
-    products(where: {tagIn: "popular"}) {
+  products(where: { tagIn: "popular" }) {
+    nodes {
+      ...ProductCore
+      productCategories {
         nodes {
-            ...ProductCore
-            productCategories{
-                nodes {
-                    ...CategoryCore
-                }
-            }
+          ...CategoryCore
         }
+      }
     }
+  }
 }

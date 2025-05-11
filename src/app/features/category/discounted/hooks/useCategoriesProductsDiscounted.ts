@@ -1,10 +1,9 @@
 'use client';
 
-import {
-  ProductWithCategoriesFragment,
-  useGetCategoriesProductsDiscountedSuspenseQuery,
-} from '@/generated/graphql';
+import { useGetCategoriesProductsDiscountedSuspenseQuery } from '@/generated/graphql';
 import { groupProductsByCategory } from '@/shared/utils/ustils';
+
+import { ProductProduct } from '@/shared/ui/ProductCard/ProductCard';
 
 export const useCategoriesProductsDiscounted = () => {
   const { data } = useGetCategoriesProductsDiscountedSuspenseQuery({
@@ -15,9 +14,8 @@ export const useCategoriesProductsDiscounted = () => {
 
   const rawAll = data.products.nodes;
 
-  const raw: ProductWithCategoriesFragment[] = rawAll.filter(
-    (p): p is ProductWithCategoriesFragment =>
-      p?.__typename === 'SimpleProduct',
+  const raw: ProductProduct[] = rawAll.filter(
+    (p): p is ProductProduct => p?.__typename === 'SimpleProduct',
   );
 
   const categories = groupProductsByCategory(raw);

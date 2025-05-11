@@ -1,14 +1,8 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  registerApolloClient,
-} from '@apollo/client-integration-nextjs';
-import { makeLinks } from './links';
-import { makeCache } from './cache';
+import { registerApolloClient } from '@apollo/client-integration-nextjs';
+import { makeApolloClient } from './client';
 
 export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
-  return new ApolloClient({
-    cache: makeCache() as InMemoryCache,
-    link: makeLinks(true),
-  });
+  const isServer = typeof window === 'undefined';
+
+  return makeApolloClient(isServer);
 });

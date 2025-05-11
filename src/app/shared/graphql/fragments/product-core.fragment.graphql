@@ -1,11 +1,14 @@
 fragment ProductCore on SimpleProduct {
-    databaseId
-    id
-    name
-    price
-    regularPrice
-    salePrice
-    onSale
-    uri
-    image { ...ImageCore}
+  databaseId
+  id
+  name
+  price
+  regularPrice
+  salePrice
+  onSale
+  uri
+  description
+  image {
+    ...ImageCore
+  }
 }
