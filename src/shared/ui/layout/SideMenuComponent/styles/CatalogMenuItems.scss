@@ -1,0 +1,166 @@
+.container {
+	position: fixed;
+	top: 48px;
+	left: 0;
+	z-index: 10;
+	width: 100vw;
+	height: calc(100vh - 120px);
+	overflow: hidden;
+	display: flex;
+	background-color: var(--sidebar-color-background);
+
+	@media (min-width: 768px) {
+		top: 80px;
+		height: calc(100vh - 80px);
+	}
+}
+
+
+.menuItems {
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: 1fr;
+	height: 100%;
+	overflow: hidden;
+
+
+	@media (min-width: 1024px) {
+		grid-template-columns: .7fr 1fr;
+	}
+
+	@media (min-width: 1200px) {
+		grid-template-columns: .7fr .7fr 1fr;
+	}
+
+	@media (min-width: 1600px) {
+		grid-template-columns: 1fr 1fr 1fr max(602px);
+	}
+
+	@media (min-width: 768px) {
+
+	}
+}
+
+
+.menuItem {
+	height: 100%;
+	overflow-y: auto;
+	display: grid;
+	align-content: start;
+	gap: 4px;
+	padding: 24px 20px 0;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+	@media (min-width: 1280px) {
+		padding: 24px 40px 0;
+	}
+
+	@media (max-width: 1023px) {
+		&[data-type="catalog"] {
+			&[data-active="false"] {
+				display: none;
+			}
+		}
+
+		&[data-type="category"] {
+			&[data-active="false"] {
+				display: none;
+			}
+
+			.titleContainer {
+				padding-left: 12px;
+
+				&::before {
+					position: absolute;
+					left: 0;
+					top: 0;
+					content: '';
+					width: 1px;
+					height: 100%;
+					background-color: #FFFFFF;
+					opacity: .2;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1199px) {
+		&[data-type="product"] {
+			display: none;
+		}
+	}
+}
+
+
+.catalog__header {
+	padding: 12px 0;
+	display: flex;
+}
+
+
+.catalog__button {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1;
+	margin-right: 12px;
+
+	@media (min-width: 1024px) {
+		display: none;
+	}
+
+	& svg {
+		transform: rotate(180deg);
+	}
+}
+
+
+.titleContainer {
+	position: relative;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-family: var(--font-montserrat-sans);
+	font-weight: 700;
+	font-size: 1rem;
+	line-height: 1;
+}
+
+
+.titleNumber {
+	opacity: .2;
+}
+
+
+.catalogItem {
+	display: flex;
+	gap: 0 12px;
+	padding: 12px 0 12px 12px;
+	cursor: pointer;
+	font-family: var(--font-montserrat-sans);
+	font-weight: 500;
+	font-size: .875rem;
+	line-height: 1.5;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+	&:hover {
+		background-color: #2F2F32;
+	}
+
+	&.active {
+		background-color: #2F2F32;
+	}
+}
+
+
+.catalogItem_svg {
+	margin-left: auto;
+
+	@media (min-width: 1200px) {
+		display: none;
+	}
+}

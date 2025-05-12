@@ -6,7 +6,8 @@
   display: flex;
   gap: 0 4px;
   width: 100%;
-  background-color: var(--app-color-background);
+  background-color: var(--header-color-background);
+  height: 80px;
 
   @media screen and (min-width: 961px) {
     display: none;

@@ -6,13 +6,22 @@ type ExtendedCategoryCoreFragment = CategoryCoreFragment & {
   children?: { nodes: CategoryCoreFragment[] } | null;
 };
 
-export default function CategoriesCatalog() {
+export default function CategoriesCatalog({
+  title,
+  toggleCatalog,
+  ...props
+}: {
+  title: string;
+  toggleCatalog: () => void;
+}) {
   const { categories } = useCategoriesCatalog();
 
   return (
     <CatalogMenu<ExtendedCategoryCoreFragment>
-      title="Каталог товаров"
+      title={title}
+      toggleCatalog={toggleCatalog}
       categories={categories}
+      {...props}
     />
   );
 }

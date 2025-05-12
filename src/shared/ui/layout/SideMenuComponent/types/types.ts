@@ -15,7 +15,7 @@ interface MenuItem {
   type: TTypeMenu;
   label: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  Component: React.FC;
+  Component: React.FC<{ title: string; toggleCatalog: () => void }>;
 }
 
 export const MENU_ITEMS: MenuItem[] = [

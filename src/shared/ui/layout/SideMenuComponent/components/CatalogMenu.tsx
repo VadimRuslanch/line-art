@@ -15,11 +15,12 @@ type ExtendedCategoryCoreFragment = CategoryCoreFragment & {
 interface CatalogMenuProps<T> {
   title: string;
   categories: T[];
+  toggleCatalog: () => void;
 }
 
 export default function CatalogMenu<
   T extends CategoryWithProducts | ExtendedCategoryCoreFragment,
->({ title, categories }: CatalogMenuProps<T>) {
+>({ title, toggleCatalog, categories, ...props }: CatalogMenuProps<T>) {
   const {
     activeCategory,
     activeCategoryItem,
@@ -47,9 +48,12 @@ export default function CatalogMenu<
     <>
       <CatalogMenuItems<ExtendedCategoryCoreFragment>
         title={title}
+        toggleCatalog={toggleCatalog}
         titleNumber="02"
         categoriesItems={categories ?? []}
         handleCategoryChange={handleCategoryChange}
+        data-type="category"
+        {...props}
       />
 
       <CatalogMenuItems<CategoryCoreFragment | ProductWithCategoriesFragment>
@@ -57,6 +61,7 @@ export default function CatalogMenu<
         titleNumber="03"
         categoriesItems={categoryItem}
         handleCategoryChange={handleCategoryItemChange}
+        data-type="product"
       />
 
       <CategoryPreview image={categoryImage} />

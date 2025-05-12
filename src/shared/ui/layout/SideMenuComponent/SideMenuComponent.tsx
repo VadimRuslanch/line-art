@@ -1,8 +1,10 @@
 'use client';
 
 import styles from './SideMenuComponent.module.scss';
+import './styles/CatalogMenuItems.scss';
 
 import { useMenu } from '@/context/MenuContext';
+import IconArrow from '@/shared/assets/svg/arrow-small.svg';
 import {
   MENU_ITEMS,
   TTypeMenu,
@@ -15,6 +17,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function SideMenuComponent() {
   const { isMenuOpen } = useMenu();
   const [active, setActive] = useState<TTypeMenu>('POPULAR');
+  const [isActiveMenuCategory, setIsActiveMenuCategory] = useState(true);
 
   const menuVariants = {
     hidden: { clipPath: 'inset(0 100% 0 0)' },
@@ -28,34 +31,52 @@ export default function SideMenuComponent() {
     },
   };
 
+  const toggleCatalog = () => {
+    setIsActiveMenuCategory(!isActiveMenuCategory);
+  };
+
+  const toggleAndSetType = (type: TTypeMenu) => {
+    setActive(type);
+    toggleCatalog();
+  };
+
   return (
     <AnimatePresence>
       {isMenuOpen && (
         <motion.div
-          className={styles.container}
+          className="container"
           variants={menuVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
-          <div className={styles.menuItems}>
-            <nav className={styles.menuItem}>
-              <div className={styles.titleContainer}>
-                <span className={styles.title}>Меню</span>
-                <span className={styles.titleNumber}>01</span>
+          <div className="menuItems">
+            <nav
+              className="menuItem"
+              data-type="catalog"
+              data-active={isActiveMenuCategory}
+            >
+              <div className="catalog__header">
+                <div className="titleContainer">
+                  <span>Меню</span>
+                  <span className="titleNumber">01</span>
+                </div>
               </div>
               <ul>
                 {MENU_ITEMS.map(({ type, label, Icon }) => (
-                  <li
-                    key={type}
-                    className={cx(styles.catalogItem, {
-                      [styles.active]: active === type,
-                    })}
-                    onClick={() => setActive(type)}
-                  >
-                    <Icon />
-                    {label}
-                  </li>
+                  <>
+                    <li
+                      key={type}
+                      className={cx('catalogItem', {
+                        [styles.active]: active === type,
+                      })}
+                      onClick={() => toggleAndSetType(type)}
+                    >
+                      <Icon />
+                      {label}
+                      <IconArrow className="catalogItem_svg" />
+                    </li>
+                  </>
                 ))}
               </ul>
               <button className={styles.button}></button>
@@ -64,7 +85,13 @@ export default function SideMenuComponent() {
             {(() => {
               const item = MENU_ITEMS.find((i) => i.type === active)!;
               const ActiveComponent = item.Component;
-              return <ActiveComponent />;
+              return (
+                <ActiveComponent
+                  title={item.label}
+                  toggleCatalog={toggleCatalog}
+                  data-active={!isActiveMenuCategory}
+                />
+              );
             })()}
           </div>
         </motion.div>

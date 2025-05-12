@@ -1,5 +1,5 @@
-import styles from '@/shared/ui/layout/SideMenuComponent/SideMenuComponent.module.scss';
 import Link from 'next/link';
+import IconArrow from '@/shared/assets/svg/arrow-small.svg';
 
 interface CategoryWithUriAndName {
   uri?: string | null;
@@ -11,23 +11,34 @@ export default function CatalogMenuItems<T extends CategoryWithUriAndName>({
   titleNumber,
   categoriesItems,
   handleCategoryChange,
+  toggleCatalog,
+  ...props
 }: {
   title: string;
   titleNumber: string;
   categoriesItems: T[];
   handleCategoryChange: (index: number) => void;
+  toggleCatalog?: () => void;
 }) {
   return (
-    <nav className={styles.menuItem}>
-      <div className={styles.titleContainer}>
-        <span className={styles.title}>{title}</span>
-        <span className={styles.titleNumber}>{titleNumber}</span>
+    <nav className="menuItem" {...props}>
+      <div className="catalog__header">
+        {toggleCatalog && (
+          <button onClick={toggleCatalog} className="catalog__button">
+            <IconArrow />
+            Назад
+          </button>
+        )}
+        <div className="titleContainer">
+          <span>{title}</span>
+          <span className="titleNumber">{titleNumber}</span>
+        </div>
       </div>
       <ul>
         {categoriesItems.map((category, index) => (
           <li key={index} onMouseEnter={() => handleCategoryChange(index)}>
             {category.uri ? (
-              <Link className={styles.catalogItem} href={category.uri}>
+              <Link className="catalogItem" href={category.uri}>
                 {category.name}
               </Link>
             ) : (
