@@ -59,7 +59,7 @@ export default function PopularProducts() {
     <section className={`${styles.container} block-limiter`}>
       <header className={styles.header}>
         <h2 className={styles.title}>
-          <span className="heading">Популярные</span>
+          <span className="heading">Популярные&nbsp;</span>
           <span className="heading">товары</span>
         </h2>
 
@@ -80,7 +80,7 @@ export default function PopularProducts() {
 
       <div className={styles.list}>{cards}</div>
 
-      <Link className={styles.link} href="/catalog?tag=popular">
+      <Link className={styles.link} href="/catalog">
         Смотреть все товары
       </Link>
     </section>

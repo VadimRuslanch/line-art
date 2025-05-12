@@ -79,19 +79,26 @@
 
 
 .link {
+	margin-top: 40px;
+	margin-left: auto;
 	font-size: 1rem;
 	font-weight: 500;
 	line-height: 1.625;
 	justify-self: end;
 	width: fit-content;
-	display: inline-block;
+	display: block;
 	border: 1px solid #ffffff;
 	border-radius: 33px;
 	padding: 10px 16px;
 	background-color: #ffffff;
 	color: #29292d;
 
+	@media (min-width: 768px) {
+		margin-top: 64px;
+	}
+
 	@media (min-width: 1200px) {
+		margin: 0;
 		position: absolute;
 		top: 172px;
 		right: 20px;
