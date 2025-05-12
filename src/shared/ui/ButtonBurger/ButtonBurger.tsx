@@ -2,15 +2,15 @@
 
 import BurgerIcon from '@/shared/assets/svg/burger.svg';
 import './ButtonBurger.scss';
-import { useMenu } from '@/context/MenuContext';
+import { useUI } from '@/context/UIContext';
 
 export default function ButtonBurger() {
-  const { isMenuOpen, toggleMenu } = useMenu();
-
+  const { drawerType, toggleMenu } = useUI();
+  console.log(drawerType);
   return (
     <button
       className={'burger'}
-      data-state={isMenuOpen ? 'close' : ''}
+      data-state={drawerType === 'MENU' ? 'close' : 'open'}
       type="button"
       onClick={toggleMenu}
     >

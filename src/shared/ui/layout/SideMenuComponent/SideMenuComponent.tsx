@@ -3,7 +3,6 @@
 import styles from './SideMenuComponent.module.scss';
 import './styles/CatalogMenuItems.scss';
 
-import { useMenu } from '@/context/MenuContext';
 import IconArrow from '@/shared/assets/svg/arrow-small.svg';
 import {
   MENU_ITEMS,
@@ -13,9 +12,10 @@ import {
 import { useState } from 'react';
 import cx from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useUI } from '@/context/UIContext';
 
 export default function SideMenuComponent() {
-  const { isMenuOpen } = useMenu();
+  const { drawerType } = useUI();
   const [active, setActive] = useState<TTypeMenu>('POPULAR');
   const [isActiveMenuCategory, setIsActiveMenuCategory] = useState(true);
 
@@ -42,7 +42,7 @@ export default function SideMenuComponent() {
 
   return (
     <AnimatePresence>
-      {isMenuOpen && (
+      {drawerType === 'MENU' && (
         <motion.div
           className="container"
           variants={menuVariants}

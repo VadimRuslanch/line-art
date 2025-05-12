@@ -3,10 +3,10 @@
 import styles from './NavigationBar.module.scss';
 import IconHeart from '@/shared/assets/svg/heart.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
-import { useDrawer } from '@/context/DrawerContext';
+import { useUI } from '@/context/UIContext';
 
 export default function NavigationBar() {
-  const { toggleFavorites, toggleCart } = useDrawer();
+  const { toggleFavorites, toggleCart } = useUI();
   return (
     <nav className={styles.navigation}>
       {/*<Link href={'/public#'} className={styles.link}>*/}

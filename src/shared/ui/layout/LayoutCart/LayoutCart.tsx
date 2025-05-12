@@ -3,29 +3,42 @@
 import Cart from '@/shared/ui/Cart/Cart';
 import styles from './LayoutCart.module.scss';
 import IconClose from '@/shared/assets/svg/icon-close.svg';
-import { useDrawer } from '@/context/DrawerContext';
+import { useUI } from '@/context/UIContext';
 
 export default function LayoutCart() {
-  const { drawerType, closeCart, closeFavorites } = useDrawer();
+  const { drawerType, closeAll } = useUI();
 
   if (!drawerType) return null;
 
-  const isCart = drawerType === 'CART';
-  const title = isCart ? 'Корзина' : 'Избранное';
-  const onClose = isCart ? closeCart : closeFavorites;
-
-  return (
-    <div className={styles.layout}>
-      <div className={styles.container}>
-        <div className={styles.containerTop}>
-          <span className={styles.title}>{title}</span>
-          <button onClick={onClose} className={styles.button}>
-            <IconClose />
-            Закрыть
-          </button>
+  if (drawerType === 'CART')
+    return (
+      <div className={styles.layout}>
+        <div className={styles.container}>
+          <div className={styles.containerTop}>
+            <span className={styles.title}>Корзина</span>
+            <button onClick={closeAll} className={styles.button}>
+              <IconClose />
+              Закрыть
+            </button>
+          </div>
+          <Cart />
         </div>
-        <Cart />
       </div>
-    </div>
-  );
+    );
+
+  if (drawerType === 'FAVORITES')
+    return (
+      <div className={styles.layout}>
+        <div className={styles.container}>
+          <div className={styles.containerTop}>
+            <span className={styles.title}>Избранное</span>
+            <button onClick={closeAll} className={styles.button}>
+              <IconClose />
+              Закрыть
+            </button>
+          </div>
+          <Cart />
+        </div>
+      </div>
+    );
 }
