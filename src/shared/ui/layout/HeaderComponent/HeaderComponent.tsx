@@ -41,10 +41,10 @@ export default function HeaderComponent() {
           </div>
 
           <div className={styles.headerLinksRight}>
-            {/*<Link href="/compare" className={styles.link}>*/}
-            {/*  <IconChart className={styles.link__icon} />*/}
-            {/*  Сравнить*/}
-            {/*</Link>*/}
+            <Link href="/" className={styles.link}>
+              <IconChart className={styles.link__icon} />
+              Сравнить
+            </Link>
 
             <button className={styles.link} onClick={toggleFavorites}>
               <IconHeart className={styles.link__icon} />
@@ -56,10 +56,10 @@ export default function HeaderComponent() {
               Корзина
             </button>
 
-            {/*<Link href={'/public#'} className={styles.link}>*/}
-            {/*  <IconUser className={styles.link__icon} />*/}
-            {/*  Войти*/}
-            {/*</Link>*/}
+            <Link href={'/'} className={styles.link}>
+              <IconUser className={styles.link__icon} />
+              Войти
+            </Link>
           </div>
 
           <ButtonBurger />
