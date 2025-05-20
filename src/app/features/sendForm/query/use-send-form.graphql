@@ -1,0 +1,19 @@
+mutation SendForm(
+  $name: String!
+  $phone: String!
+  $email: String!
+  $cartItems: [CartItemInput!]!
+  $cartTotal: String!
+) {
+  sendContactForm(
+    input: {
+      name: $name
+      phone: $phone
+      email: $email
+      cartItems: $cartItems
+      cartTotal: $cartTotal
+    }
+  ) {
+    success
+  }
+}

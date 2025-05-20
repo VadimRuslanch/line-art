@@ -24,7 +24,6 @@ export default function CartProductCard({
 }: CartProductCardProps) {
   const { remove } = useCart();
 
-  console.log(quantity);
   const [qty, setQty] = useState<number>(quantity);
 
   const handleQtyChange = (newQty: number) => {

@@ -491,18 +491,16 @@ export type CartItemError = CartError & {
   variationId?: Maybe<Scalars['Int']['output']>;
 };
 
-/** Cart item quantity */
+/** Элемент корзины */
 export type CartItemInput = {
-  /** JSON string representation of extra cart item data */
-  extraData?: InputMaybe<Scalars['String']['input']>;
-  /** Cart item product database ID or global ID */
-  productId: Scalars['Int']['input'];
-  /** Cart item quantity */
-  quantity?: InputMaybe<Scalars['Int']['input']>;
-  /** Cart item product variation attributes */
-  variation?: InputMaybe<Array<InputMaybe<ProductAttributeInput>>>;
-  /** Cart item product variation database ID or global ID */
-  variationId?: InputMaybe<Scalars['Int']['input']>;
+  /** Количество */
+  quantity: Scalars['Int']['input'];
+  /** Название товара */
+  title: Scalars['String']['input'];
+  /** Общая стоимость данного товара */
+  totalPrice: Scalars['String']['input'];
+  /** Ссылка на страницу товара */
+  url: Scalars['String']['input'];
 };
 
 /** Cart item quantity */
@@ -21234,6 +21232,8 @@ export type RootMutation = {
   restoreComment?: Maybe<RestoreCommentPayload>;
   /** The restoreReview mutation */
   restoreReview?: Maybe<RestoreReviewPayload>;
+  /** The sendContactForm mutation */
+  sendContactForm?: Maybe<SendContactFormPayload>;
   /** Send password reset email to user */
   sendPasswordResetEmail?: Maybe<SendPasswordResetEmailPayload>;
   /** The setDefaultPaymentMethod mutation */
@@ -21657,6 +21657,11 @@ export type RootMutationRestoreCommentArgs = {
 /** The root mutation */
 export type RootMutationRestoreReviewArgs = {
   input: RestoreReviewInput;
+};
+
+/** The root mutation */
+export type RootMutationSendContactFormArgs = {
+  input: SendContactFormInput;
 };
 
 /** The root mutation */
@@ -25398,6 +25403,31 @@ export enum ScriptLoadingStrategyEnum {
   /** Download script in parallel but defer execution until page is fully parsed */
   DEFER = 'DEFER',
 }
+
+/** Input for the sendContactForm mutation. */
+export type SendContactFormInput = {
+  /** Список товаров в корзине */
+  cartItems: Array<InputMaybe<CartItemInput>>;
+  /** Общая стоимость корзины */
+  cartTotal: Scalars['String']['input'];
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Email отправителя */
+  email: Scalars['String']['input'];
+  /** Имя отправителя */
+  name: Scalars['String']['input'];
+  /** Телефон отправителя */
+  phone: Scalars['String']['input'];
+};
+
+/** The payload for the sendContactForm mutation. */
+export type SendContactFormPayload = {
+  __typename?: 'SendContactFormPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Статус отправки письма */
+  success?: Maybe<Scalars['Boolean']['output']>;
+};
 
 /** Input for the sendPasswordResetEmail mutation. */
 export type SendPasswordResetEmailInput = {
@@ -31358,6 +31388,7 @@ export type CartCoreFragment = {
       __typename?: 'SimpleCartItem';
       key: string;
       quantity?: number | null;
+      total?: string | null;
       product?: {
         __typename?: 'CartItemToProductConnectionEdge';
         node:
@@ -31404,6 +31435,7 @@ export type GetCartQuery = {
         __typename?: 'SimpleCartItem';
         key: string;
         quantity?: number | null;
+        total?: string | null;
         product?: {
           __typename?: 'CartItemToProductConnectionEdge';
           node:
@@ -31456,6 +31488,7 @@ export type AddToCartMutation = {
           __typename?: 'SimpleCartItem';
           key: string;
           quantity?: number | null;
+          total?: string | null;
           product?: {
             __typename?: 'CartItemToProductConnectionEdge';
             node:
@@ -31509,6 +31542,7 @@ export type RemoveFromCartMutation = {
           __typename?: 'SimpleCartItem';
           key: string;
           quantity?: number | null;
+          total?: string | null;
           product?: {
             __typename?: 'CartItemToProductConnectionEdge';
             node:
@@ -32233,6 +32267,22 @@ export type GetProductsRecommendedQuery = {
   } | null;
 };
 
+export type SendFormMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  phone: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  cartItems: Array<CartItemInput> | CartItemInput;
+  cartTotal: Scalars['String']['input'];
+}>;
+
+export type SendFormMutation = {
+  __typename?: 'RootMutation';
+  sendContactForm?: {
+    __typename?: 'SendContactFormPayload';
+    success?: boolean | null;
+  } | null;
+};
+
 export type CategoryCoreFragment = {
   __typename?: 'ProductCategory';
   databaseId: number;
@@ -32369,6 +32419,7 @@ export const CartCoreFragmentDoc = gql`
       nodes {
         key
         quantity
+        total
         product {
           node {
             ...ProductCore
@@ -33395,4 +33446,69 @@ export type GetProductsRecommendedSuspenseQueryHookResult = ReturnType<
 export type GetProductsRecommendedQueryResult = Apollo.QueryResult<
   GetProductsRecommendedQuery,
   GetProductsRecommendedQueryVariables
+>;
+export const SendFormDocument = gql`
+  mutation SendForm(
+    $name: String!
+    $phone: String!
+    $email: String!
+    $cartItems: [CartItemInput!]!
+    $cartTotal: String!
+  ) {
+    sendContactForm(
+      input: {
+        name: $name
+        phone: $phone
+        email: $email
+        cartItems: $cartItems
+        cartTotal: $cartTotal
+      }
+    ) {
+      success
+    }
+  }
+`;
+export type SendFormMutationFn = Apollo.MutationFunction<
+  SendFormMutation,
+  SendFormMutationVariables
+>;
+
+/**
+ * __useSendFormMutation__
+ *
+ * To run a mutation, you first call `useSendFormMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendFormMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendFormMutation, { data, loading, error }] = useSendFormMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      phone: // value for 'phone'
+ *      email: // value for 'email'
+ *      cartItems: // value for 'cartItems'
+ *      cartTotal: // value for 'cartTotal'
+ *   },
+ * });
+ */
+export function useSendFormMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SendFormMutation,
+    SendFormMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<SendFormMutation, SendFormMutationVariables>(
+    SendFormDocument,
+    options,
+  );
+}
+export type SendFormMutationHookResult = ReturnType<typeof useSendFormMutation>;
+export type SendFormMutationResult = Apollo.MutationResult<SendFormMutation>;
+export type SendFormMutationOptions = Apollo.BaseMutationOptions<
+  SendFormMutation,
+  SendFormMutationVariables
 >;

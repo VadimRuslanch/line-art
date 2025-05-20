@@ -6,6 +6,7 @@ fragment CartCore on Cart {
     nodes {
       key
       quantity
+      total
       product {
         node {
           ...ProductCore

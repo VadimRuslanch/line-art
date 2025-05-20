@@ -888,33 +888,28 @@ type CartItemError implements CartError {
 }
 
 """
-Cart item quantity
+Элемент корзины
 """
 input CartItemInput {
   """
-  JSON string representation of extra cart item data
+  Количество
   """
-  extraData: String
+  quantity: Int!
 
   """
-  Cart item product database ID or global ID
+  Название товара
   """
-  productId: Int!
+  title: String!
 
   """
-  Cart item quantity
+  Общая стоимость данного товара
   """
-  quantity: Int
+  totalPrice: String!
 
   """
-  Cart item product variation attributes
+  Ссылка на страницу товара
   """
-  variation: [ProductAttributeInput]
-
-  """
-  Cart item product variation database ID or global ID
-  """
-  variationId: Int
+  url: String!
 }
 
 """
@@ -46210,6 +46205,16 @@ type RootMutation {
   ): RestoreReviewPayload
 
   """
+  The sendContactForm mutation
+  """
+  sendContactForm(
+    """
+    Input for the sendContactForm mutation
+    """
+    input: SendContactFormInput!
+  ): SendContactFormPayload
+
+  """
   Send password reset email to user
   """
   sendPasswordResetEmail(
@@ -53744,6 +53749,56 @@ enum ScriptLoadingStrategyEnum {
   Download script in parallel but defer execution until page is fully parsed
   """
   DEFER
+}
+
+"""
+Input for the sendContactForm mutation.
+"""
+input SendContactFormInput {
+  """
+  Список товаров в корзине
+  """
+  cartItems: [CartItemInput]!
+
+  """
+  Общая стоимость корзины
+  """
+  cartTotal: String!
+
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Email отправителя
+  """
+  email: String!
+
+  """
+  Имя отправителя
+  """
+  name: String!
+
+  """
+  Телефон отправителя
+  """
+  phone: String!
+}
+
+"""
+The payload for the sendContactForm mutation.
+"""
+type SendContactFormPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Статус отправки письма
+  """
+  success: Boolean
 }
 
 """

@@ -6,7 +6,6 @@ import { useUI } from '@/context/UIContext';
 
 export default function ButtonBurger() {
   const { drawerType, toggleMenu } = useUI();
-  console.log(drawerType);
   return (
     <button
       className={'burger'}

@@ -64,19 +64,17 @@ export default function SideMenuComponent() {
               </div>
               <ul>
                 {MENU_ITEMS.map(({ type, label, Icon }) => (
-                  <>
-                    <li
-                      key={type}
-                      className={cx('catalogItem', {
-                        [styles.active]: active === type,
-                      })}
-                      onClick={() => toggleAndSetType(type)}
-                    >
-                      <Icon />
-                      {label}
-                      <IconArrow className="catalogItem_svg" />
-                    </li>
-                  </>
+                  <li
+                    key={type}
+                    className={cx('catalogItem', {
+                      [styles.active]: active === type,
+                    })}
+                    onClick={() => toggleAndSetType(type)}
+                  >
+                    <Icon />
+                    {label}
+                    <IconArrow className="catalogItem_svg" />
+                  </li>
                 ))}
               </ul>
               <button className={styles.button}></button>
