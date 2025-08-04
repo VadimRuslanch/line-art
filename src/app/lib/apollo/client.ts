@@ -14,10 +14,6 @@ function createHttpLink() {
     uri: GRAPHQL_URL,
     useGETForQueries: true,
     credentials: 'omit',
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (compatible; LocalDev/1.0)',
-      Referer: 'https://wp-admin.lineart-alumo.ru/',
-    },
   });
 }
 
