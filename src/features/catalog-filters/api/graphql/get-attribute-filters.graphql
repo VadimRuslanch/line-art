@@ -1,0 +1,42 @@
+query GetAttributesFilters  {
+    allPaBacklights {
+        nodes {
+            name
+            slug
+            id
+            count
+        }
+    }
+    allPaColor {
+        nodes {
+            name
+            slug
+            id
+            count
+        }
+    }
+    allPaGlubina {
+        nodes {
+            name
+            count
+            id
+            slug
+        }
+    }
+    allPaShadowGap {
+        nodes {
+            name
+            count
+            id
+            slug
+        }
+    }
+    allPaWidth {
+        nodes {
+            name
+            count
+            id
+            slug
+        }
+    }
+}

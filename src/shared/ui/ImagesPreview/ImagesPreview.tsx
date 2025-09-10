@@ -1,17 +1,14 @@
 import styles from './ImagesPreview.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
-import {
-  ImageCoreFragment,
-  ProductToMediaItemConnection,
-} from '@/generated/graphql';
+import { ImageCoreFragment, MediaItem } from '@/shared/api/gql/graphql';
 
 export default function ImagesPreview({
   image,
   galleryImages,
 }: {
   image: ImageCoreFragment;
-  galleryImages?: Pick<ProductToMediaItemConnection, 'nodes'>;
+  galleryImages?: MediaItem[];
 }) {
   const [previewImageSrc, setPreviewImageSrc] = useState<string>(
     image.sourceUrl!,
@@ -28,8 +25,8 @@ export default function ImagesPreview({
             alt={image.altText!}
           />
         </button>
-        {galleryImages?.nodes?.length
-          ? galleryImages.nodes.map((img: ImageCoreFragment) => (
+        {galleryImages?.length
+          ? galleryImages.map((img: ImageCoreFragment) => (
               <button
                 key={img?.id}
                 onClick={() => setPreviewImageSrc(img.sourceUrl!)}
@@ -50,8 +47,8 @@ export default function ImagesPreview({
           className={styles.previewImage}
           src={previewImageSrc}
           alt=""
-          width={714}
-          height={560}
+          width={522}
+          height={570}
         />
       </div>
     </div>

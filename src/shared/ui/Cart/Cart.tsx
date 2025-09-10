@@ -3,7 +3,7 @@ import styles from './Cart.module.scss';
 
 import CallbackForm from '@/shared/ui/CallbackForm/CallbackForm';
 import CartProductCard from '@/shared/ui/CartProductCard/CartProductCard';
-import { useCart } from '@/app/features/cart/hooks/useCart';
+import { useCart } from '@/entities/cart/model/useCart';
 
 export default function Cart() {
   const { simpleProducts } = useCart();

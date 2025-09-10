@@ -1,0 +1,20 @@
+.CatalogFiltersSidebar {
+	width: 100%;
+	height: fit-content;
+	max-height: 80dvh;
+	background-color: var(--background-surface-1);
+	padding: 40px 12px;
+	display: flex;
+	gap: 24px;
+	flex-direction: column;
+	border-radius: 16px;
+
+	overflow: auto;
+	scrollbar-width: none;
+}
+
+
+.FilterGroup {
+	display: grid;
+	gap: 16px;
+}

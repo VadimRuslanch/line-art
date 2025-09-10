@@ -1,0 +1,14 @@
+query GetCategoriesForFilters($first: Int = 100) {
+    productCategories(first: $first) {
+        nodes {
+            ...CategoryOption
+        }
+    }
+}
+
+fragment CategoryOption on ProductCategory {
+    id
+    databaseId
+    name
+    slug
+}

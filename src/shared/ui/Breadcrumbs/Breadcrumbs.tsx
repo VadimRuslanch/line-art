@@ -2,7 +2,11 @@ import Link from 'next/link';
 import './Breadcrumbs.scss';
 import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 
-export default function Breadcrumbs({ nameProduct }: { nameProduct: string }) {
+type Props = {
+  nameProduct?: string;
+};
+
+export default function Breadcrumbs({ nameProduct }: Props) {
   return (
     <div className="Breadcrumbs">
       <Link className="Breadcrumbs__item" href="/">
@@ -12,8 +16,12 @@ export default function Breadcrumbs({ nameProduct }: { nameProduct: string }) {
       <Link className="Breadcrumbs__item" href="/categories">
         Каталог
       </Link>
-      <IconArrow />
-      <span className="Breadcrumbs__item">{nameProduct}</span>
+      {nameProduct && (
+        <>
+          <IconArrow />
+          <span className="Breadcrumbs__item">{nameProduct}</span>
+        </>
+      )}
     </div>
   );
 }

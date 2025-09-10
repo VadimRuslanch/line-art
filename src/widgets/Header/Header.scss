@@ -1,0 +1,154 @@
+.header {
+	background-color: var(--background-background);
+	border-radius: 8px;
+	z-index: 15;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 16px;
+	position: fixed;
+	width: calc(100% - 32px);
+	max-width: 1280px;
+	display: grid;
+	grid-template-columns: 1fr 32px;
+	grid-template-areas: 'left right' 'center actions';
+	gap: 12px 0;
+
+	@media (min-width: 500px) {
+		grid-template-columns: auto 1fr 32px;
+
+		grid-template-areas: 'left actions right' 'center center center';
+	}
+
+	@media (min-width: 768px) {
+		background-color: var(--background-surface-1);
+		grid-template-areas: 'left center right';
+		grid-template-columns: auto 1fr 32px;
+		padding: 12px;
+		width: calc(100% - 40px);
+	}
+}
+
+
+.header__left {
+	grid-area: left;
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	@media (min-width: 768px) {
+		margin-right: 24px;
+	}
+}
+
+
+.header__center {
+	grid-area: center;
+	display: flex;
+}
+
+
+.header__tel {
+	display: flex;
+	flex-direction: column;
+	margin-top: auto;
+
+	.captionC1 {
+		color: var(--brand-brand-secondary);
+	}
+}
+
+
+.header__actions {
+	grid-area: actions;
+	display: flex;
+}
+
+
+.header__tel-link {
+
+}
+
+
+.header__search-label {
+	background-color: var(--background-surface-2);
+	border-radius: 333px;
+	padding: 16px;
+
+	@media (min-width: 768px) {
+		margin-right: 24px;
+	}
+}
+
+
+.header__search {
+	width: 150px;
+}
+
+
+.headerLogo {
+	width: 77px;
+	height: 30px;
+
+	@media (min-width: 768px) {
+		width: 90px;
+		height: 45px;
+	}
+}
+
+
+.headerLinks {
+	display: none;
+	gap: 4px;
+
+	@media screen and (min-width: 768px) {
+		display: flex;
+		margin-left: auto;
+	}
+}
+
+
+.headerLinksRight {
+	display: none;
+
+	@media screen and (min-width: 1200px) {
+		display: flex;
+		gap: 0 4px;
+		margin: 0 0 0 11%;
+	}
+}
+
+
+.header__link {
+	//padding: 0 4px;
+	display: grid;
+	gap: 4px 0;
+	flex-grow: 1;
+	font-size: .75rem;
+
+	&:first-of-type {
+		margin-right: 8px;
+	}
+
+	@media (min-width: 768px) {
+		&:first-of-type {
+			margin-right: 16px;
+		}
+		margin-right: 16px;
+	}
+}
+
+
+.header__link-icon {
+	margin: 0 auto;
+	fill: #FFFFFF;
+}
+
+
+.headerLink {
+	display: flex;
+	align-items: center;
+	background-color: #FFFFFF0D;
+	padding: 20px 25px;
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1;
+}

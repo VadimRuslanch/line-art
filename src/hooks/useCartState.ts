@@ -1,6 +1,6 @@
 'use client';
 
-import { useCart } from '@/app/features/cart/hooks/useCart';
+import { useCart } from '@/entities/cart/model/useCart';
 
 interface IdentifiableProduct {
   __typename?: string;

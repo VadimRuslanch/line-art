@@ -1,6 +1,6 @@
-import { ImageCoreFragment } from '@/generated/graphql';
+import { ImageCoreFragment } from '@/shared/api/gql/graphql';
 
-import { ProductProduct } from '@/shared/ui/ProductCard/ProductCard';
+import { ProductProduct } from '@/entities/product/ui/ProductCard/ProductCard';
 
 export interface CategoryWithProducts {
   databaseId: number;

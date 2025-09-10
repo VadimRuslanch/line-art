@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import styles from './CartProductCard.module.scss';
-import { ProductWithCategoriesFragment } from '@/generated/graphql';
+import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 import IconClose from '@/shared/assets/svg/icon-close.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
-import { useCart } from '@/app/features/cart/hooks/useCart';
+import { useCart } from '@/entities/cart/model/useCart';
 
 export type CartProductCardProps = {
   product: ProductWithCategoriesFragment;
@@ -88,7 +88,7 @@ export default function CartProductCard({
               min={1}
               max={100}
               value={qty}
-              onChange={handleQtyChange}
+              onChangeAction={handleQtyChange}
             />
           </div>
         </div>

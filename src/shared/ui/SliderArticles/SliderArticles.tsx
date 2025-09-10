@@ -1,6 +1,5 @@
 'use client';
 import styles from './SliderArticles.module.scss';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import SwiperNavButtonPrev from '@/shared/ui/Swiper/SwiperNavButtonPrev';

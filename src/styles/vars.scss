@@ -1,0 +1,109 @@
+:root {
+  color-scheme: light dark;
+
+  --font-montserrat-sans: var(--font-montserrat-sans);
+  --font-inter-sans: var(--font-inter-sans);
+  --font-century-sans: CenturyGothic;
+
+  /* --------- Global --------- */
+  --app-color-background: #29292D;
+  --header-color-background: #242427;
+  --app-text-color: #FFFFFF;
+  --sidebar-color-background: #28282B;
+
+  /* main-accent-color */
+
+  /* --------- UI unit elements --------- */
+  --color-ui-unit-element: #223342;
+
+  /* --------- // UI all elements --------- */
+  --color-ui-element-background: #223342;
+
+
+  /* --------- Swiper --------- */
+  --swiper-navigation-color-accent: #FFFFFF;
+
+  --swiper-scrollbar-bg-color: #3e3e42;
+  --swiper-scrollbar-drag-bg-color: #ffffff;
+  --swiper-scrollbar-size: 24px;
+  --swiper-scrollbar-border-radius: 0;
+
+  ///* --------- Global Modal --------- */
+
+
+
+  ///* --------- NEW --------- */
+
+
+	/* Primary */
+	--primary-primary-container-disabled: rgba(118, 75, 48, 0.50);
+	--primary-primary-container: rgba(118, 75, 48, 1.00);
+	--primary-on-primary: rgba(26, 26, 29, 1.00);
+	--primary-primary-container-hover: rgba(118, 75, 48, 0.70);
+	--primary-primary-disabled: rgba(255, 255, 255, 0.50);
+	--primary-on-primary-hover: rgba(26, 26, 29, 0.70);
+	--primary-on-primary-container: rgba(255, 255, 255, 1.00);
+	--primary-primary-hover: rgba(255, 255, 255, 0.70);
+	--primary-on-primary-disabled: rgba(26, 26, 29, 0.50);
+	--primary-on-primary-container-disabled: rgba(255, 255, 255, 0.50);
+	--primary-on-primary-container-hover: rgba(255, 255, 255, 0.70);
+	--primary-primary: rgba(255, 255, 255, 1.00);
+
+	/* Border */
+	--border-outline: rgba(255, 255, 255, 0.20);
+	--border-outline-2: rgba(255, 255, 255, 0.08);
+
+	/* Background */
+	--background-on-surface-2: rgba(255, 255, 255, 1.00);
+	--background-surface-2: rgba(38, 38, 43, 1.00);
+	--background-on-background: rgba(255, 255, 255, 1.00);
+	--background-on-surface-1: rgba(255, 255, 255, 1.00);
+	--background-background: rgba(26, 26, 29, 1.00);
+	--background-surface-1: rgba(32, 32, 36, 1.00);
+
+	/* Error */
+	--error-on-error-container: rgba(255, 255, 255, 1.00);
+	--error-error: rgba(212, 59, 62, 1.00);
+	--error-on-error: rgba(255, 255, 255, 1.00);
+	--error-error-container: rgba(212, 59, 62, 1.00);
+
+	/* Tertiary */
+	--tertiary-on-tertiary-container: rgba(255, 255, 255, 1.00);
+	--tertiary-on-tertiary: rgba(255, 255, 255, 1.00);
+	--tertiary-tertiary: rgba(109, 109, 111, 1.00);
+	--tertiary-tertiary-container: rgba(109, 109, 111, 1.00);
+
+	/* Secondary */
+	--secondary-on-secondary-container-disabled: rgba(255, 255, 255, 0.50);
+	--secondary-on-secondary-container-hover: rgba(255, 255, 255, 0.70);
+	--secondary-on-secondary-container: rgba(255, 255, 255, 1.00);
+	--secondary-secondary-container: rgba(49, 49, 54, 1.00);
+	--secondary-secondary-hover: rgba(163, 163, 165, 0.70);
+	--secondary-on-secondary-hover: rgba(26, 26, 29, 0.70);
+	--secondary-on-secondary-disabled: rgba(26, 26, 29, 0.50);
+	--secondary-secondary-container-hover: rgba(49, 49, 54, 0.70);
+	--secondary-secondary-disabled: rgba(163, 163, 165, 0.50);
+	--secondary-secondary: rgba(163, 163, 165, 1.00);
+	--secondary-on-secondary: rgba(26, 26, 29, 1.00);
+
+	/* Brand */
+	--brand-brand-primary: rgba(118, 75, 48, 1.00);
+	--brand-brand-primary-hover: rgba(118, 75, 48, 0.70);
+	--brand-brand-primary-disabled: rgba(118, 75, 48, 0.50);
+	--brand-on-brand-primary: rgba(255, 255, 255, 1.00);
+	--brand-on-brand-primary-hover: rgba(255, 255, 255, 0.70);
+	--brand-on-brand-primary-disabled: rgba(255, 255, 255, 0.50);
+	--brand-on-brand-secondary-hover: rgba(26, 26, 29, 0.70);
+	--brand-on-brand-secondary: rgba(26, 26, 29, 1.00);
+	--brand-brand-secondary-hover: rgba(221, 165, 129, 0.70);
+	--brand-brand-secondary-disabled: rgba(221, 165, 129, 0.70);
+	--brand-on-brand-secondary-disabled: rgba(26, 26, 29, 0.50);
+	--brand-brand-secondary: rgba(221, 165, 129, 1.00);
+
+	/* Divider */
+	--dediver-devider: rgba(255, 255, 255, 0.16);
+
+}
+
+@media (prefers-color-scheme: dark) {
+}

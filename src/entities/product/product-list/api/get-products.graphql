@@ -1,0 +1,34 @@
+query GetProductsPage(
+    $where: RootQueryToProductUnionConnectionWhereArgs
+    $first: Int! = 24
+    $after: String
+) {
+    products(where: $where, first: $first, after: $after) {
+        pageInfo {
+            hasNextPage
+            endCursor
+            startCursor
+        }
+        #        edges {
+        #            cursor
+        #            node {
+        #                __typename
+        #                ... on SimpleProduct {
+        #                    ...ProductCore
+        #                    galleryImages {
+        #                        ...galleryImages
+        #                    }
+        #                }
+        #            }
+        #        }
+        nodes {
+            __typename
+            ... on SimpleProduct {
+                ...ProductCore
+                galleryImages {
+                    ...galleryImages
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,0 @@
-fragment ProductWithCategories on SimpleProduct {
-  ...ProductCore
-  productCategories {
-    nodes {
-      ...CategoryCore
-    }
-  }
-}

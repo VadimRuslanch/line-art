@@ -12,10 +12,13 @@ import {
   FieldProps,
 } from 'formik';
 import { IMaskInput } from 'react-imask';
-import { useCart } from '@/app/features/cart/hooks/useCart';
+import { useCart } from '@/entities/cart/model/useCart';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import { useSendForm } from '@/app/features/sendForm/hook/useSendForm';
-import { CartItemInput, SendFormMutationVariables } from '@/generated/graphql';
+import {
+  CartItemInput,
+  SendFormMutationVariables,
+} from '@/shared/api/gql/graphql';
 
 export interface FormValues {
   name: string;

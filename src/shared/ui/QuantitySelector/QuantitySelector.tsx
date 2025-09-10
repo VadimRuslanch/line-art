@@ -6,19 +6,19 @@ type Props = {
   value?: number;
   min?: number;
   max?: number;
-  onChange?: (value: number) => void;
+  onChangeAction?: (value: number) => void;
 };
 
 export default function QuantitySelector({
   value, // ← управляемое значение
-  onChange,
+  onChangeAction,
   min = 0,
   max = 100,
 }: Props) {
   const clamp = (v: number) => Math.max(min, Math.min(max, v));
   const qty = clamp(value ?? 1);
 
-  const update = (v: number) => onChange?.(clamp(v));
+  const update = (v: number) => onChangeAction?.(clamp(v));
 
   return (
     <div className="qty">

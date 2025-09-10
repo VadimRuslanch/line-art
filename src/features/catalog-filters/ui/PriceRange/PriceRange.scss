@@ -1,0 +1,83 @@
+.price-range {
+	width: 100%;
+}
+
+
+.price-range__label {
+	color: #e5e7eb;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+
+.price-range__slider {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 24px;
+	user-select: none;
+}
+
+
+.price-range__track {
+	position: relative;
+	flex: 1;
+	height: 6px;
+	border-radius: 333px;
+	background: var(--background-surface-2); /* базовый трек */
+}
+
+
+.price-range__range {
+	position: absolute;
+	height: 100%;
+	border-radius: 6px;
+	background: var(--brand-brand-primary); /* активный участок (как на макете) */
+}
+
+
+.price-range__thumb {
+	/* НИЧЕГО не задавай своим transform! */
+	display: block;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: #FFFFFF;
+	border: 5px solid var(--brand-brand-primary);
+	transition: transform .12s ease;
+}
+
+
+/* активное состояние: добавь scale, не стирая позиционирование */
+.price-range__thumb[data-state="active"] {
+	transform: var(--radix-slider-thumb-transform) scale(1.1);
+}
+
+.price-range__inputs {
+	margin-top: 12px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+
+.price-range__input {
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 10px;
+	background: #1f1f23;
+	color: #d1d5db;
+	border: 1px solid transparent;
+	outline: none;
+	font-size: 14px;
+}
+
+
+.price-range__input:focus {
+	border-color: #3f3f46;
+}
+
+
+.price-range__input--right {
+	text-align: right;
+}

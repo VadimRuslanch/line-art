@@ -1,0 +1,16 @@
+#import "@shared/graphql/fragments/ImageCore.graphql"
+
+query GetCategoryParents {
+  productCategories(where: { parent: null }) {
+    nodes {
+      databaseId
+      id
+      name
+      slug
+      uri
+      image {
+        ...ImageCore
+      }
+    }
+  }
+}

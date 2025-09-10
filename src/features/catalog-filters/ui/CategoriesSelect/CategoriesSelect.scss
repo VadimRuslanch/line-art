@@ -1,0 +1,88 @@
+.cs-root {
+	position: relative;
+	width: 168px;
+	font: inherit;
+	color: inherit;
+}
+
+
+.cs-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 12px 20px;
+	border-radius: 33px;
+	background: var(--background-surface-1);
+	cursor: pointer;
+	outline: none;
+
+	svg {
+		min-width: 24px;
+	}
+}
+
+
+.cs-button:focus-visible {
+	box-shadow: 0 0 0 3px color-mix(in oklab, #3b82f6 30%, transparent);
+}
+
+
+.cs-button__label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+.cs-button__icon {
+	flex: none;
+	transition: transform .3s ease;
+
+	&[data-state="true"] {
+		transform: rotate(180deg);
+	}
+}
+
+
+.cs-list {
+	position: absolute;
+	z-index: 10;
+	top: calc(100% + 6px);
+	left: 0;
+	right: 0;
+	max-height: 280px;
+	overflow: auto;
+	margin: 0;
+	padding: 6px;
+	list-style: none;
+	border-radius: 12px;
+	border: 1px solid var(--border, rgba(0, 0, 0, .15));
+	background: var(--background-surface-1, #fff);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+	scrollbar-width: none;
+}
+
+
+.cs-option {
+	padding: 8px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+
+.cs-option.is-active {
+	background: color-mix(in oklab, currentColor 8%, transparent);
+}
+
+
+.cs-option.is-selected {
+	font-weight: 600;
+}
+
+
+.cs-empty {
+	padding: 8px 10px;
+	color: rgba(0, 0, 0, .6);
+}

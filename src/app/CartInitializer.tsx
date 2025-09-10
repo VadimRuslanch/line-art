@@ -1,5 +1,5 @@
 'use client';
-import { useCart } from '@/app/features/cart/hooks/useCart';
+import { useCart } from '@/entities/cart/model/useCart';
 
 export default function CartInitializer() {
   useCart();

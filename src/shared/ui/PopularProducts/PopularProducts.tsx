@@ -4,10 +4,10 @@ import styles from './PopularProducts.module.scss';
 
 import Link from 'next/link';
 import Chip from '@/shared/ui/Chip/Chip';
-import ProductCard from '@/shared/ui/ProductCard/ProductCard';
+import ProductCard from '@/entities/product/ui/ProductCard/ProductCard';
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useCategoriesProductsPopular } from '@/app/features/category/popular/hooks/useCategoriesProductsPopular';
+import { useCategoriesProductsPopular } from '@/entities/category/model/useCategoriesProductsPopular';
 
 export default function PopularProducts() {
   const { categories } = useCategoriesProductsPopular();
@@ -59,8 +59,7 @@ export default function PopularProducts() {
     <section className={`${styles.container} block-limiter`}>
       <header className={styles.header}>
         <h2 className={styles.title}>
-          <span className="heading">Популярные&nbsp;</span>
-          <span className="heading">товары</span>
+          <span className="HeadlineH2">Каталог</span>
         </h2>
 
         <div className={styles.chipsCarousel} ref={carouselRef}>
@@ -80,7 +79,7 @@ export default function PopularProducts() {
 
       <div className={styles.list}>{cards}</div>
 
-      <Link className={styles.link} href="/catalog">
+      <Link className={styles.link} href="/categories">
         Смотреть все товары
       </Link>
     </section>

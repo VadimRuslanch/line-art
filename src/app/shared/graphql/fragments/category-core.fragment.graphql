@@ -1,9 +1,0 @@
-fragment CategoryCore on ProductCategory {
-  databaseId
-  id
-  name
-  uri
-  image {
-    ...ImageCore
-  }
-}

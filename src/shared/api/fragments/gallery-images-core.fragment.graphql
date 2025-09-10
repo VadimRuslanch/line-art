@@ -1,0 +1,22 @@
+#import "./ImageCore.graphql"
+
+fragment galleryImages on ProductToMediaItemConnection {
+  nodes {
+    ...ImageCore
+    contentTypeName
+    isComment
+    isContentNode
+    isFrontPage
+    isPostsPage
+    isTermNode
+    mediaItemId
+  }
+  edges {
+    node {
+      databaseId
+    }
+  }
+  pageInfo {
+    __typename
+  }
+}

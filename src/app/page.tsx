@@ -11,12 +11,8 @@ export default async function Home() {
     <div className="HomePage">
       <PreviewCategories />
       <PopularProducts />
-      <div className="info">
-        <div className="info__container">
-          <SliderArticles />
-          <SliderInfo />
-        </div>
-      </div>
+      <SliderArticles />
+      <SliderInfo />
     </div>
   );
 }

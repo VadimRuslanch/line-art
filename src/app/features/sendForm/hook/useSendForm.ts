@@ -1,19 +1,18 @@
+import { useMutation } from '@apollo/client/react';
 import {
-  useSendFormMutation,
-  SendFormMutationVariables,
-} from '@/generated/graphql';
+  SendFormDocument,
+  type SendFormMutation,
+  type SendFormMutationVariables,
+} from '@/shared/api/gql/graphql';
 
 export const useSendForm = () => {
-  const [sendContactForm, { data, loading, error }] = useSendFormMutation();
+  const [mutate, { data, loading, error }] = useMutation<
+    SendFormMutation,
+    SendFormMutationVariables
+  >(SendFormDocument);
 
-  // Принимаем точно те переменные, что ожидает GraphQL
   const sendForm = (variables: SendFormMutationVariables) =>
-    sendContactForm({ variables });
+    mutate({ variables });
 
-  return {
-    sendForm,
-    data,
-    loading,
-    error,
-  };
+  return { sendForm, data, loading, error };
 };

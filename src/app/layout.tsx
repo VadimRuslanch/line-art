@@ -1,15 +1,14 @@
-import './globals.scss';
+import '@/styles/globals.scss';
 import React from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Montserrat, Inter } from 'next/font/google';
 
-import HeaderComponent from '@/shared/ui/layout/HeaderComponent/HeaderComponent';
-import FooterComponent from '@/shared/ui/layout/FooterComponent/FooterComponent';
-import NavigationBar from '@/shared/ui/layout/NavigationBar/NavigationBar';
-import SideMenuComponent from '@/shared/ui/layout/SideMenuComponent/SideMenuComponent';
-import LayoutCart from '@/shared/ui/layout/LayoutCart/LayoutCart';
 import { Providers } from '@/app/Providers';
+// import LayoutCart from '@/widgets/LayoutCart/LayoutCart';
+import Header from '@/widgets/Header/Header';
+// import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
+// import SideMenuComponent from '@/widgets/SideMenuComponent/SideMenuComponent';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
@@ -56,12 +55,11 @@ export default function RootLayout({
         className={`${fontMontserrat.variable} ${fontInter.variable} ${centuryGothic.variable}`}
       >
         <Providers>
-          <HeaderComponent />
+          <Header />
           <main>{children}</main>
-          <FooterComponent />
-          <NavigationBar />
-          <SideMenuComponent />
-          <LayoutCart />
+          {/*<FooterComponent />*/}
+          {/*<SideMenuComponent />*/}
+          {/*<LayoutCart />*/}
         </Providers>
       </body>
     </html>

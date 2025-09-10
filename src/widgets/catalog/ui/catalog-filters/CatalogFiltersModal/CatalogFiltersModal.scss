@@ -1,0 +1,20 @@
+.CatalogFiltersModal {
+	background-color: var(--background-background);
+	position: fixed;
+	z-index: 20;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 40px 16px 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 40px 0;
+}
+
+
+.CatalogFiltersModal__button {
+	display: flex;
+	gap: 0 24px;
+	width: fit-content;
+}

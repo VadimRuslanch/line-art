@@ -1,0 +1,16 @@
+#import "./ImageCore.graphql"
+
+fragment ProductCore on SimpleProduct {
+    databaseId
+    id
+    name
+    price
+    regularPrice
+    salePrice
+    onSale
+    uri
+    description
+    image {
+        ...ImageCore
+    }
+}

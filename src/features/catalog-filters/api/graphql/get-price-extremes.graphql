@@ -1,0 +1,20 @@
+query GetPriceExtremes {
+    min: products(first: 1, where: { orderby: { field: PRICE, order: ASC } }) {
+        nodes {
+            __typename
+            id
+            databaseId
+            ... on SimpleProduct { price }
+            ... on VariableProduct { price }
+        }
+    }
+    max: products(first: 1, where: { orderby: { field: PRICE, order: DESC } }) {
+        nodes {
+            __typename
+            id
+            databaseId
+            ... on SimpleProduct { price }
+            ... on VariableProduct { price }
+        }
+    }
+}

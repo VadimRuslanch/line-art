@@ -1,0 +1,61 @@
+.ImageHoverSlider {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 3px rgba(0, 140, 255, 0.35);
+		border-radius: 8px;
+	}
+}
+
+.ImageHoverSlider__stack {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.ImageHoverSlider__item {
+	position: absolute;
+	inset: 0;
+
+	&.is-active {
+		z-index: 2;
+	}
+}
+
+.ImageHoverSlider__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.ImageHoverSlider__dots {
+	position: absolute;
+	left: 50%;
+	bottom: 8px;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 6px;
+	padding: 4px 6px;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, 0.25);
+	pointer-events: none;
+}
+
+.ImageHoverSlider__dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+
+	&.is-active {
+		background: rgba(255, 255, 255, 0.95);
+		transform: scale(1.2);
+	}
+}

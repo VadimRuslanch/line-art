@@ -1,15 +1,18 @@
 .container {
-	overflow: hidden;
 	padding: 80px 0 0;
 	background-color: #ffffff;
+	max-width: 1280px;
+	margin: 0 !important;
 }
 
 
 .slider {
 	--swiper-navigation-size: 0;
-	overflow: visible;
-	width: calc(100vw - 40px);
-	max-width: 1740px;
+	//overflow: visible;
+	min-width: 0;
+
+	//width: calc(100vw - 40px);
+	//max-width: 1740px;
 }
 
 

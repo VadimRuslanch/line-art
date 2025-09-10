@@ -1,7 +1,0 @@
-query GetProductsRecommended {
-  products(where: { tagIn: "Recommended" }) {
-    nodes {
-      ...ProductCore
-    }
-  }
-}

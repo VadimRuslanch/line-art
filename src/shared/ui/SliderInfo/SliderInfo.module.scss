@@ -1,89 +1,95 @@
 .container {
-  overflow: hidden;
-  padding: 80px 0;
-  background-color: #ffffff;
-  color: #222226;
+	overflow: hidden;
+	padding: 80px 0;
+	background-color: #ffffff;
+	color: #222226;
+	max-width: 1280px;
 }
+
 
 .slider {
-  --swiper-navigation-size: 0;
-  overflow: visible;
-  width: calc(100vw - 40px);
-  max-width: 1740px;
+	--swiper-navigation-size: 0;
 }
+
 
 .content {
-  @media (width >= 1200px) {
-    display: flex;
-    column-gap: 20px;
-  }
+	@media (width >= 1200px) {
+		display: flex;
+		column-gap: 20px;
+	}
 }
+
 
 .image {
-  user-select: none;
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 20px;
+	user-select: none;
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	border-radius: 4px;
+	margin-bottom: 20px;
 
-  @media (width >= 1200px) {
-    width: calc(50% - 10px);
-    height: auto;
-    margin-bottom: 0;
-  }
+	@media (width >= 1200px) {
+		width: calc(50% - 10px);
+		height: auto;
+		margin-bottom: 0;
+	}
 
-  @media (width >= 1600px) {
-    height: 433px;
-  }
+	@media (width >= 1600px) {
+		height: 433px;
+	}
 }
+
 
 .info {
-  padding: 40px 20px 134px;
-  border: 1px solid #22222614;
+	padding: 40px 20px 134px;
+	border: 1px solid #22222614;
 
-  @media (width >= 1200px) {
-    width: calc(50% - 10px);
-  }
+	@media (width >= 1200px) {
+		width: calc(50% - 10px);
+	}
 }
+
 
 .name {
-  display: inline-block;
-  margin-bottom: 45px;
-  line-height: 1;
-  font-size: 1.75rem;
-  font-weight: 400;
+	display: inline-block;
+	margin-bottom: 45px;
+	line-height: 1;
+	font-size: 1.75rem;
+	font-weight: 400;
 }
+
 
 .text {
-  max-height: 378px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 7;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 24px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.7;
+	max-height: 378px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 7;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 24px;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.7;
 }
+
 
 .link {
-  font-weight: 700;
-  line-height: 1.5;
-  font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.5;
+	font-size: 1rem;
 }
 
+
 .sliderControl {
-  position: absolute;
-  height: 48px;
-  width: fit-content;
-  display: flex;
-  gap: 8px;
-  bottom: 40px;
-  left: 20px;
-  @media (width >= 1200px) {
-    left: auto;
-    right: calc(50% - 128px);
-  }
+	position: absolute;
+	height: 48px;
+	width: fit-content;
+	display: flex;
+	gap: 8px;
+	bottom: 40px;
+	left: 20px;
+	@media (width >= 1200px) {
+		left: auto;
+		right: calc(50% - 128px);
+	}
 }

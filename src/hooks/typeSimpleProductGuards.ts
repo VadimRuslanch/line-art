@@ -1,10 +1,12 @@
-import { GetProductDetailsQuery } from '@/generated/graphql';
+import { GetProductDetailsQuery } from '@/shared/api/gql/graphql';
+
+type MaybeDeep<T> = T | null | undefined | { __typename?: string };
 
 export function isSimpleProduct(
-  product: GetProductDetailsQuery['product'] | undefined | null,
+  product: MaybeDeep<GetProductDetailsQuery['product']>,
 ): product is Extract<
-  GetProductDetailsQuery['product'],
+  NonNullable<GetProductDetailsQuery['product']>,
   { __typename: 'SimpleProduct' }
 > {
-  return product?.__typename === 'SimpleProduct';
+  return !!product && product.__typename === 'SimpleProduct';
 }
