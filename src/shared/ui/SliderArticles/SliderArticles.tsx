@@ -32,7 +32,7 @@ export default function SliderArticles() {
   return (
     <section className={`${styles.container}`}>
       <header>
-        <h2 className={`${styles.title}`}>Полезная информация</h2>
+        <h2 className="SliderArticles HeadlineH2">Полезная информация</h2>
       </header>
       <Swiper
         modules={[Navigation]}

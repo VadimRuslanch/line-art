@@ -10,6 +10,17 @@ fragment ProductCore on SimpleProduct {
     onSale
     uri
     description
+    sku
+    attributes {
+        nodes {
+            name
+            label
+            options
+            variation
+            id
+        }
+    }
+    title
     image {
         ...ImageCore
     }

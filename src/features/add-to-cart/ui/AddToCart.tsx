@@ -1,17 +1,17 @@
 import './AddToCart.scss';
-import { useCart } from '@/entities/cart/model/useCart';
-import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { useState, useMemo, useEffect } from 'react';
 import UIButton from '@/shared/ui/UIButton/UIButton';
+import { useCart } from '@/entities/cart/model/useCart';
 import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
+import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 
 type Props = {
   product: ProductWithCategoriesFragment;
   initialQty?: number;
 };
 
-export default function AddToCart({ product, initialQty = 1 }: Props) {
-  const { simpleProducts, add, remove, loading } = useCart();
+export default function AddToCart({ product, initialQty = 0 }: Props) {
+  const { simpleProducts, add, remove } = useCart();
 
   const line = useMemo(
     () =>
@@ -41,7 +41,7 @@ export default function AddToCart({ product, initialQty = 1 }: Props) {
 
   return (
     <div className="AddToCart">
-      <UIButton handleAdd={handleAdd} state={loading}>
+      <UIButton handleAdd={handleAdd}>
         <span className="ButtonBut2-bold">
           {inCart ? 'Удалить' : 'В корзину'}
         </span>

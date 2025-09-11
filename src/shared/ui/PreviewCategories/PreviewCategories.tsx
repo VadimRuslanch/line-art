@@ -10,7 +10,7 @@ export default function PreviewCategories() {
   if (!categories) return null;
   return (
     <section className={styles.container}>
-      <span className="HeadlineH2">Популярные категории</span>
+      <h2 className="HeadlineH2">Популярные категории</h2>
       <Swiper
         className={styles.slider}
         breakpoints={{

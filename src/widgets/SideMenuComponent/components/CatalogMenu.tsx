@@ -33,6 +33,13 @@ export default function CatalogMenu<
   let categoryItem: ProductWithCategoriesFragment[] | CategoryCoreFragment[] =
     [];
 
+  if (categories.length === 0)
+    return (
+      <span className="CatalogMenu__error-item HeadlineH2">
+        Нет товаров со скидкой
+      </span>
+    );
+
   if ('products' in currentCategory) {
     categoryItem = currentCategory.products ?? [];
   } else if ('children' in currentCategory) {

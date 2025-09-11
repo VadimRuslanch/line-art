@@ -2,15 +2,22 @@
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
+	padding-bottom: 24px;
+
 	@media (min-width: 768px) {
 		flex-direction: row;
 		gap: 80px;
 	}
-
 }
 
 
-.ProductDetailsPreview__info {
+.ProductDetailsPreview__sku {
+	margin-bottom: 16px;
+}
+
+
+.ProductDetailsPreview__name {
+	margin-bottom: 32px;
 }
 
 
@@ -52,7 +59,7 @@
 
 
 .cartContainer {
-	display: grid;
+	display: flex;
 	gap: 16px;
 
 	@media (min-width: 550px) {
@@ -71,19 +78,15 @@
 
 
 .cartAddButton {
+	width: 100%;
+	white-space: nowrap;
 	display: flex;
 	gap: 10px;
 	align-items: center;
 	justify-content: center;
 	padding: 14px 24px;
-	background-color: #FFFFFF;
-	border: 1px solid #FFFFFF;
+	background-color: var(--brand-brand-primary);
 	border-radius: 33px;
-	color: #29292D;
-	fill: #29292D;
-	font-size: 1rem;
-	font-weight: 600;
-	line-height: 1.5;
 }
 
 

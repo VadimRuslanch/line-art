@@ -1,10 +1,7 @@
 'use client';
 
 import './ProductDetailsPreview.scss';
-// import IconChart from '@/shared/assets/svg/chart.svg';
-import IconCart from '@/shared/assets/svg/cart.svg';
-// import IconHeart from '@/shared/assets/svg/heart.svg';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useProductDetails } from '@/entities/product/product-details/model/useProductDetails';
@@ -16,14 +13,10 @@ import { useCart } from '@/entities/cart/model/useCart';
 
 export default function ProductDetailsPreview({ slug }: { slug: string }) {
   const { product } = useProductDetails(slug);
-  const { add, loading, error } = useCart();
+  const { add, cartLoading, mutating, error } = useCart();
   const quantityInCart = product?.quantity ?? 0;
-
-  useEffect(() => {
-    if (quantityInCart >= 0) setQty(quantityInCart);
-  }, [quantityInCart]);
   const [qty, setQty] = useState<number>(quantityInCart);
-  console.log(product);
+
   if (!product) return <p>Товар не найден</p>;
 
   const handleAddToCart = () => {
@@ -39,7 +32,6 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
   return (
     <div className="ProductDetailsPreview">
       <Breadcrumbs nameProduct={product.name!} />
-
       <div className="ProductDetailsPreview__content">
         <ImagesPreview
           image={product.image!}
@@ -48,9 +40,13 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
 
         <div className="ProductDetailsPreview__info">
           <div className="product">
-            <div className="">
-              <p>{product.sku}</p>
-              <h1 className="title">{product.name}</h1>
+            <div>
+              <p className="ProductDetailsPreview__sku Body/B2">
+                {product.sku}
+              </p>
+              <h1 className="ProductDetailsPreview__name HeadlineH3">
+                {product.name}
+              </h1>
               {product.description && (
                 <div
                   dangerouslySetInnerHTML={{ __html: product.description }}
@@ -68,22 +64,21 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
               </div>
 
               <div className="cartContainer">
+                <button
+                  className="cartAddButton ButtonBut2-bold"
+                  onClick={handleAddToCart}
+                  aria-label="Добавить в корзину"
+                  disabled={cartLoading || mutating}
+                >
+                  {mutating ? 'Добавляем…' : 'В корзину'}
+                </button>
+
                 <QuantitySelector
                   min={0}
                   max={100}
                   value={qty}
                   onChangeAction={setQty}
                 />
-
-                <button
-                  className="cartAddButton"
-                  onClick={handleAddToCart}
-                  disabled={loading}
-                  aria-label="Добавить в корзину"
-                >
-                  <IconCart />
-                  {loading ? 'Добавляем…' : 'Добавить в корзину'}
-                </button>
               </div>
 
               {error && <p className="error">Не удалось добавить товар</p>}

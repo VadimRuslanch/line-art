@@ -9,7 +9,7 @@ import { useProducts } from '@/entities/product/product-list/model/useProducts';
 import ProductCard from '@/entities/product/ui/ProductCard/ProductCard';
 
 const GAP = 20;
-const ITEM_HEIGHT = 420;
+const ITEM_HEIGHT = 520;
 
 const getCols = (w: number) => {
   switch (true) {

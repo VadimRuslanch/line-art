@@ -32583,6 +32583,29 @@ export type CartCoreFragment = {
               onSale?: boolean | null;
               uri?: string | null;
               description?: string | null;
+              sku?: string | null;
+              title?: string | null;
+              attributes?: {
+                __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                nodes: Array<
+                  | {
+                      __typename?: 'GlobalProductAttribute';
+                      name?: string | null;
+                      label?: string | null;
+                      options?: Array<string | null> | null;
+                      variation?: boolean | null;
+                      id: string;
+                    }
+                  | {
+                      __typename?: 'LocalProductAttribute';
+                      name?: string | null;
+                      label?: string | null;
+                      options?: Array<string | null> | null;
+                      variation?: boolean | null;
+                      id: string;
+                    }
+                >;
+              } | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -32631,6 +32654,29 @@ export type GetCartQuery = {
                 onSale?: boolean | null;
                 uri?: string | null;
                 description?: string | null;
+                sku?: string | null;
+                title?: string | null;
+                attributes?: {
+                  __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                  nodes: Array<
+                    | {
+                        __typename?: 'GlobalProductAttribute';
+                        name?: string | null;
+                        label?: string | null;
+                        options?: Array<string | null> | null;
+                        variation?: boolean | null;
+                        id: string;
+                      }
+                    | {
+                        __typename?: 'LocalProductAttribute';
+                        name?: string | null;
+                        label?: string | null;
+                        options?: Array<string | null> | null;
+                        variation?: boolean | null;
+                        id: string;
+                      }
+                  >;
+                } | null;
                 image?: {
                   __typename?: 'MediaItem';
                   databaseId: number;
@@ -32685,6 +32731,29 @@ export type AddToCartMutation = {
                   onSale?: boolean | null;
                   uri?: string | null;
                   description?: string | null;
+                  sku?: string | null;
+                  title?: string | null;
+                  attributes?: {
+                    __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                    nodes: Array<
+                      | {
+                          __typename?: 'GlobalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                      | {
+                          __typename?: 'LocalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                    >;
+                  } | null;
                   image?: {
                     __typename?: 'MediaItem';
                     databaseId: number;
@@ -32740,6 +32809,29 @@ export type RemoveFromCartMutation = {
                   onSale?: boolean | null;
                   uri?: string | null;
                   description?: string | null;
+                  sku?: string | null;
+                  title?: string | null;
+                  attributes?: {
+                    __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                    nodes: Array<
+                      | {
+                          __typename?: 'GlobalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                      | {
+                          __typename?: 'LocalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                    >;
+                  } | null;
                   image?: {
                     __typename?: 'MediaItem';
                     databaseId: number;
@@ -32797,6 +32889,29 @@ export type GetCatalogQuery = {
                   onSale?: boolean | null;
                   uri?: string | null;
                   description?: string | null;
+                  sku?: string | null;
+                  title?: string | null;
+                  attributes?: {
+                    __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                    nodes: Array<
+                      | {
+                          __typename?: 'GlobalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                      | {
+                          __typename?: 'LocalProductAttribute';
+                          name?: string | null;
+                          label?: string | null;
+                          options?: Array<string | null> | null;
+                          variation?: boolean | null;
+                          id: string;
+                        }
+                    >;
+                  } | null;
                   image?: {
                     __typename?: 'MediaItem';
                     databaseId: number;
@@ -32956,6 +33071,8 @@ export type GetCategoriesProductsDiscountedQuery = {
           onSale?: boolean | null;
           uri?: string | null;
           description?: string | null;
+          sku?: string | null;
+          title?: string | null;
           productCategories?: {
             __typename?: 'ProductToProductCategoryConnection';
             nodes: Array<{
@@ -32972,6 +33089,27 @@ export type GetCategoriesProductsDiscountedQuery = {
                 altText?: string | null;
               } | null;
             }>;
+          } | null;
+          attributes?: {
+            __typename?: 'ProductWithAttributesToProductAttributeConnection';
+            nodes: Array<
+              | {
+                  __typename?: 'GlobalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+              | {
+                  __typename?: 'LocalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+            >;
           } | null;
           image?: {
             __typename?: 'MediaItem';
@@ -33105,6 +33243,8 @@ export type GetCategoriesProductsNewQuery = {
           onSale?: boolean | null;
           uri?: string | null;
           description?: string | null;
+          sku?: string | null;
+          title?: string | null;
           productCategories?: {
             __typename?: 'ProductToProductCategoryConnection';
             nodes: Array<{
@@ -33121,6 +33261,27 @@ export type GetCategoriesProductsNewQuery = {
                 altText?: string | null;
               } | null;
             }>;
+          } | null;
+          attributes?: {
+            __typename?: 'ProductWithAttributesToProductAttributeConnection';
+            nodes: Array<
+              | {
+                  __typename?: 'GlobalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+              | {
+                  __typename?: 'LocalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+            >;
           } | null;
           image?: {
             __typename?: 'MediaItem';
@@ -33254,6 +33415,8 @@ export type GetCategoriesProductsPopularQuery = {
           onSale?: boolean | null;
           uri?: string | null;
           description?: string | null;
+          sku?: string | null;
+          title?: string | null;
           productCategories?: {
             __typename?: 'ProductToProductCategoryConnection';
             nodes: Array<{
@@ -33270,6 +33433,27 @@ export type GetCategoriesProductsPopularQuery = {
                 altText?: string | null;
               } | null;
             }>;
+          } | null;
+          attributes?: {
+            __typename?: 'ProductWithAttributesToProductAttributeConnection';
+            nodes: Array<
+              | {
+                  __typename?: 'GlobalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+              | {
+                  __typename?: 'LocalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+            >;
           } | null;
           image?: {
             __typename?: 'MediaItem';
@@ -33376,6 +33560,29 @@ export type GetCategoryWithProductQuery = {
               onSale?: boolean | null;
               uri?: string | null;
               description?: string | null;
+              sku?: string | null;
+              title?: string | null;
+              attributes?: {
+                __typename?: 'ProductWithAttributesToProductAttributeConnection';
+                nodes: Array<
+                  | {
+                      __typename?: 'GlobalProductAttribute';
+                      name?: string | null;
+                      label?: string | null;
+                      options?: Array<string | null> | null;
+                      variation?: boolean | null;
+                      id: string;
+                    }
+                  | {
+                      __typename?: 'LocalProductAttribute';
+                      name?: string | null;
+                      label?: string | null;
+                      options?: Array<string | null> | null;
+                      variation?: boolean | null;
+                      id: string;
+                    }
+                >;
+              } | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33422,6 +33629,7 @@ export type GetProductDetailsQuery = {
         salePrice?: string | null;
         onSale?: boolean | null;
         uri?: string | null;
+        title?: string | null;
         galleryImages?: {
           __typename?: 'ProductToMediaItemConnection';
           nodes: Array<{
@@ -33460,6 +33668,27 @@ export type GetProductDetailsQuery = {
               altText?: string | null;
             } | null;
           }>;
+        } | null;
+        attributes?: {
+          __typename?: 'ProductWithAttributesToProductAttributeConnection';
+          nodes: Array<
+            | {
+                __typename?: 'GlobalProductAttribute';
+                name?: string | null;
+                label?: string | null;
+                options?: Array<string | null> | null;
+                variation?: boolean | null;
+                id: string;
+              }
+            | {
+                __typename?: 'LocalProductAttribute';
+                name?: string | null;
+                label?: string | null;
+                options?: Array<string | null> | null;
+                variation?: boolean | null;
+                id: string;
+              }
+          >;
         } | null;
         image?: {
           __typename?: 'MediaItem';
@@ -33505,6 +33734,8 @@ export type GetProductsPageQuery = {
           onSale?: boolean | null;
           uri?: string | null;
           description?: string | null;
+          sku?: string | null;
+          title?: string | null;
           galleryImages?: {
             __typename?: 'ProductToMediaItemConnection';
             nodes: Array<{
@@ -33526,6 +33757,27 @@ export type GetProductsPageQuery = {
               node: { __typename?: 'MediaItem'; databaseId: number };
             }>;
             pageInfo: { __typename: 'ProductToMediaItemConnectionPageInfo' };
+          } | null;
+          attributes?: {
+            __typename?: 'ProductWithAttributesToProductAttributeConnection';
+            nodes: Array<
+              | {
+                  __typename?: 'GlobalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+              | {
+                  __typename?: 'LocalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+            >;
           } | null;
           image?: {
             __typename?: 'MediaItem';
@@ -33564,6 +33816,29 @@ export type GetProductsRecommendedQuery = {
           onSale?: boolean | null;
           uri?: string | null;
           description?: string | null;
+          sku?: string | null;
+          title?: string | null;
+          attributes?: {
+            __typename?: 'ProductWithAttributesToProductAttributeConnection';
+            nodes: Array<
+              | {
+                  __typename?: 'GlobalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+              | {
+                  __typename?: 'LocalProductAttribute';
+                  name?: string | null;
+                  label?: string | null;
+                  options?: Array<string | null> | null;
+                  variation?: boolean | null;
+                  id: string;
+                }
+            >;
+          } | null;
           image?: {
             __typename?: 'MediaItem';
             databaseId: number;
@@ -33768,6 +34043,29 @@ export type ProductCoreFragment = {
   onSale?: boolean | null;
   uri?: string | null;
   description?: string | null;
+  sku?: string | null;
+  title?: string | null;
+  attributes?: {
+    __typename?: 'ProductWithAttributesToProductAttributeConnection';
+    nodes: Array<
+      | {
+          __typename?: 'GlobalProductAttribute';
+          name?: string | null;
+          label?: string | null;
+          options?: Array<string | null> | null;
+          variation?: boolean | null;
+          id: string;
+        }
+      | {
+          __typename?: 'LocalProductAttribute';
+          name?: string | null;
+          label?: string | null;
+          options?: Array<string | null> | null;
+          variation?: boolean | null;
+          id: string;
+        }
+    >;
+  } | null;
   image?: {
     __typename?: 'MediaItem';
     databaseId: number;
@@ -33788,6 +34086,8 @@ export type ProductWithCategoriesFragment = {
   onSale?: boolean | null;
   uri?: string | null;
   description?: string | null;
+  sku?: string | null;
+  title?: string | null;
   galleryImages?: {
     __typename?: 'ProductToMediaItemConnection';
     nodes: Array<{
@@ -33826,6 +34126,27 @@ export type ProductWithCategoriesFragment = {
         altText?: string | null;
       } | null;
     }>;
+  } | null;
+  attributes?: {
+    __typename?: 'ProductWithAttributesToProductAttributeConnection';
+    nodes: Array<
+      | {
+          __typename?: 'GlobalProductAttribute';
+          name?: string | null;
+          label?: string | null;
+          options?: Array<string | null> | null;
+          variation?: boolean | null;
+          id: string;
+        }
+      | {
+          __typename?: 'LocalProductAttribute';
+          name?: string | null;
+          label?: string | null;
+          options?: Array<string | null> | null;
+          variation?: boolean | null;
+          id: string;
+        }
+    >;
   } | null;
   image?: {
     __typename?: 'MediaItem';
@@ -33880,6 +34201,37 @@ export const ProductCoreFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -34019,6 +34371,37 @@ export const CartCoreFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -34295,6 +34678,37 @@ export const ProductWithCategoriesFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -34627,6 +35041,37 @@ export const GetCartDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -34832,6 +35277,37 @@ export const AddToCartDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -35037,6 +35513,37 @@ export const RemoveFromCartDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -35296,6 +35803,37 @@ export const GetCatalogDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -35649,6 +36187,37 @@ export const GetCategoriesProductsDiscountedDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -35845,6 +36414,37 @@ export const GetCategoriesProductsNewDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36012,6 +36612,37 @@ export const GetCategoriesProductsPopularDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36189,6 +36820,37 @@ export const GetCategoryWithProductDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36373,6 +37035,37 @@ export const GetProductDetailsDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36681,6 +37374,37 @@ export const GetProductsPageDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36864,6 +37588,37 @@ export const GetProductsRecommendedDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'onSale' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sku' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'attributes' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'label' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'options' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },

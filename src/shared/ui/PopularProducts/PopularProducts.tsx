@@ -56,32 +56,29 @@ export default function PopularProducts() {
   ));
 
   return (
-    <section className={`${styles.container} block-limiter`}>
+    <section className={`${styles.container}`}>
       <header className={styles.header}>
-        <h2 className={styles.title}>
-          <span className="HeadlineH2">Каталог</span>
-        </h2>
-
-        <div className={styles.chipsCarousel} ref={carouselRef}>
-          <motion.div
-            className={styles.chipsTrack}
-            ref={innerRef}
-            drag="x"
-            dragConstraints={{ right: 0, left: -width }}
-            dragElastic={0.1}
-            dragTransition={{ bounceStiffness: 100, bounceDamping: 15 }}
-            whileTap={{ cursor: 'grabbing' }}
-          >
-            {chips}
-          </motion.div>
-        </div>
+        <h3 className="HeadlineH2">Каталог</h3>
+        <Link className={styles.link} href="/categories">
+          Смотреть все товары
+        </Link>
       </header>
 
-      <div className={styles.list}>{cards}</div>
+      <div className={styles.chipsCarousel} ref={carouselRef}>
+        <motion.div
+          className={styles.chipsTrack}
+          ref={innerRef}
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          dragElastic={0.1}
+          dragTransition={{ bounceStiffness: 100, bounceDamping: 15 }}
+          whileTap={{ cursor: 'grabbing' }}
+        >
+          {chips}
+        </motion.div>
+      </div>
 
-      <Link className={styles.link} href="/categories">
-        Смотреть все товары
-      </Link>
+      <div className={styles.list}>{cards}</div>
     </section>
   );
 }

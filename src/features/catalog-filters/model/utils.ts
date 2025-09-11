@@ -34,7 +34,7 @@ export const pickExtremes = (minNodes?: MinNodes, maxNodes?: MaxNodes) => {
   return { min, max };
 };
 
-function parseMoney(input: unknown): number {
+export function parseMoney(input: unknown): number {
   if (typeof input === 'number' && Number.isFinite(input)) return input;
   if (typeof input !== 'string') return 0;
 

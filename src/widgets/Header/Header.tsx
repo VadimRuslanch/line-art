@@ -4,8 +4,8 @@ import './Header.scss';
 import Link from 'next/link';
 import ButtonBurger from '@/shared/ui/ButtonBurger/ButtonBurger';
 import IconLogo from '@/shared/assets/svg/logo.svg';
-// import IconHeart from '@/shared/assets/svg/heart.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
+import IconSearch from '@/shared/assets/svg/search.svg';
 import { useUI } from '@/context/UIContext';
 
 export default function Header() {
@@ -28,6 +28,7 @@ export default function Header() {
       <div className="header__center">
         {/*Вынести в компонент*/}
         <label className="header__search-label" htmlFor="search">
+          <IconSearch />
           <input
             id="search"
             className="header__search"

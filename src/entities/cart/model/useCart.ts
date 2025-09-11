@@ -42,7 +42,9 @@ export function useCart() {
     GetCartQuery,
     GetCartQueryVariables
   >(GetCartDocument, {
+    ssr: true,
     fetchPolicy: 'cache-first',
+    nextFetchPolicy: 'cache-and-network',
   });
 
   const cart = data?.cart ?? null;
@@ -94,14 +96,17 @@ export function useCart() {
     await rmExec({ variables: { keys: [], all: true } });
   }, [rmExec]);
 
-  const loading = loadingCart || adding || removing;
+  const mutating = adding || removing;
+  const cartLoading = loadingCart;
+
   const error: ApolloError | undefined = addErr || rmErr;
 
   return useMemo<
     Readonly<{
       cart: Cart | null;
       simpleProducts: typeof simpleProducts;
-      loading: boolean;
+      mutating: boolean;
+      cartLoading: boolean;
       error: ApolloError | undefined;
       add: (id: number, qty?: number) => Promise<void>;
       remove: (key: string) => Promise<void>;
@@ -111,12 +116,13 @@ export function useCart() {
     () => ({
       cart,
       simpleProducts,
-      loading,
+      mutating,
+      cartLoading,
       error,
       add,
       remove,
       clear,
     }),
-    [cart, simpleProducts, loading, error, add, remove, clear],
+    [cart, simpleProducts, mutating, cartLoading, error, add, remove, clear],
   );
 }

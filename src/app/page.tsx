@@ -2,6 +2,7 @@ import PreviewCategories from '@/shared/ui/PreviewCategories/PreviewCategories';
 import PopularProducts from '@/shared/ui/PopularProducts/PopularProducts';
 import SliderArticles from '@/shared/ui/SliderArticles/SliderArticles';
 import SliderInfo from '@/shared/ui/SliderInfo/SliderInfo';
+import './index.scss';
 import 'swiper/scss';
 import 'swiper/scss/scrollbar';
 import 'swiper/css/navigation';

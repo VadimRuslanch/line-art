@@ -1,42 +1,47 @@
 'use client';
 import './QuantitySelector.scss';
-import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import IconPlus from '@/shared/assets/svg/plus.svg';
+import IconMinus from '@/shared/assets/svg/minus.svg';
 
 type Props = {
   value?: number;
   min?: number;
   max?: number;
-  onChangeAction?: (value: number) => void;
+  onChangeAction: (value: number) => void;
 };
 
 export default function QuantitySelector({
-  value, // ← управляемое значение
+  value,
   onChangeAction,
   min = 0,
   max = 100,
 }: Props) {
-  const clamp = (v: number) => Math.max(min, Math.min(max, v));
-  const qty = clamp(value ?? 1);
+  const qty = value ?? 1;
 
-  const update = (v: number) => onChangeAction?.(clamp(v));
+  const update = (v: number) => onChangeAction(v);
 
   return (
     <div className="qty">
       <button onClick={() => update(qty - 1)} disabled={qty <= min}>
-        <MinusIcon className="w-4 h-4" />
+        <IconMinus className="w-4 h-4" />
       </button>
-      <input
-        type="number"
-        value={qty}
-        min={min}
-        max={max}
-        onChange={(e) => {
-          const v = Number(e.target.value);
-          if (!Number.isNaN(v)) update(v);
-        }}
-      />
+
+      <label className="ButtonBut2">
+        {qty}
+        {/*<input*/}
+        {/*  type="number"*/}
+        {/*  value={qty}*/}
+        {/*  min={min}*/}
+        {/*  max={max}*/}
+        {/*  onChange={(e) => {*/}
+        {/*    const v = Number(e.target.value);*/}
+        {/*    if (!Number.isNaN(v)) update(v);*/}
+        {/*  }}*/}
+        {/*/>*/}
+      </label>
+
       <button onClick={() => update(qty + 1)} disabled={qty >= max}>
-        <PlusIcon className="w-4 h-4" />
+        <IconPlus className="w-4 h-4" />
       </button>
     </div>
   );

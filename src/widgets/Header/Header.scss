@@ -74,6 +74,8 @@
 	padding: 16px;
 	width: 100%;
 	margin-right: 12px;
+	display: flex;
+	gap: 16px;
 
 	@media (min-width: 768px) {
 		margin: 0 24px;
@@ -86,7 +88,7 @@
 
 
 .header__search {
-	width: 150px;
+	width: 100%;
 }
 
 

@@ -4,11 +4,10 @@
 
 
 .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin-bottom: 40px;
-
-	@media (min-width: 768px) {
-		margin-bottom: 64px;
-	}
 }
 
 
@@ -38,9 +37,10 @@
 	overflow: hidden;
 	position: relative;
 	max-width: calc(100vw - 40px);
+	margin-bottom: 24px;
 
 	@media (min-width: 1200px) {
-		max-width: 70vw;
+		max-width: 1280px;
 	}
 }
 
@@ -79,8 +79,8 @@
 
 
 .link {
-	margin-top: 40px;
-	margin-left: auto;
+	//margin-top: 40px;
+	//margin-left: auto;
 	font-size: 1rem;
 	font-weight: 500;
 	line-height: 1.625;
@@ -94,12 +94,12 @@
 	color: #29292d;
 
 	@media (min-width: 768px) {
-		margin-top: 64px;
+		//margin-top: 64px;
 	}
 
 	@media (min-width: 1200px) {
 		margin: 0;
-		position: absolute;
+		//position: absolute;
 		top: 172px;
 		right: 20px;
 	}

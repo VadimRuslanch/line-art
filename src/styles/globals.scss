@@ -88,19 +88,6 @@ a {
 }
 
 
-//.h1 {
-//	font-family: Gilroy, sans-serif;
-//	font-weight: 600;
-//	font-size: 48px;
-//	line-height: 1;
-//
-//	@media (min-width: 768px) {
-//		font-size: 56px;
-//
-//	}
-//}
-
-
 .HeadlineH1 {
 	font-family: 'Gilroy', sans-serif;
 	font-weight: 600;
@@ -185,27 +172,28 @@ a {
 }
 
 
-//heading {
-//	font-size: clamp(3rem, 1.676rem + 5.88vw, 4.5rem);
-//	font-weight: 400;
-//	line-height: 1;
-//
-//	@media (min-width: 768px) {
-//		font-size: clamp(4.5rem, 0.278rem + 8.8vw, 6.875rem);
-//	}
-//
-//	@media (min-width: 1600px) {
-//		font-size: 8.75rem;
-//	}
-//}
+.BodyB2 {
+	font-family: Gilroy, sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	color: var(--secondary-secondary);
+}
+
+
+.CatalogMenu__error-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 16px;
+}
 
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
 	appearance: textfield;
-	-moz-appearance: textfield;
 	-webkit-appearance: none;
-	margin: 0; /* убираем «толкатель» внутрь поля */
+	margin: 0;
 }
 
 
@@ -232,20 +220,7 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 
-//.block-limiter {
-//	width: 100%;
-//	max-width: 1740px;
-//	margin: 0 auto;
-//	padding: 0 20px;
-//	@media (width >= 1780px) {
-//		padding: 0;
-//	}
-//}
-
-
 .LayoutProductDetails {
-	//display: grid;
-
 	gap: 80px;
 
 	@media (min-width: 1024px) {

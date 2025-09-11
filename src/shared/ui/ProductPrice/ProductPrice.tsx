@@ -1,8 +1,8 @@
 import styles from './ProductPrice.module.scss';
-import { replacePrice } from '@/shared/utils/ustils';
+import { parseMoney } from '@/features/catalog-filters/model/utils';
 
 interface ProductPriceProps {
-  regularPrice: string;
+  regularPrice?: string;
   salePrice?: string | null;
   onSale?: boolean;
 }
@@ -14,22 +14,23 @@ export default function ProductPrice({
   ...props
 }: ProductPriceProps) {
   if (!regularPrice) return null;
-
   return (
     <div className="containerPrice" {...props}>
       {onSale ? (
         <div className={styles.productPriceSale}>
-          <p>
-            <span>{replacePrice(salePrice!)}</span> / <span>метр</span>
-          </p>
+          {salePrice && (
+            <p>
+              <span>{parseMoney(salePrice)}</span> ₽ / <span>метр</span>
+            </p>
+          )}
           <p className={styles.productPrice}>
-            <span>{replacePrice(regularPrice)}</span> / <span>метр</span>
+            <span>{parseMoney(regularPrice)}</span> ₽ / <span>метр</span>
           </p>
         </div>
       ) : (
         <div>
           <p>
-            <span>{replacePrice(regularPrice)}</span> / <span>метр</span>
+            <span>{parseMoney(regularPrice)}</span> ₽ / <span>метр</span>
           </p>
         </div>
       )}

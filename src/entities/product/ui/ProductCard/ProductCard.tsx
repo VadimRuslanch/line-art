@@ -3,7 +3,6 @@
 import './ProductCard.scss';
 import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 
-// import Image from 'next/image';
 import Link from 'next/link';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
 import ImageHoverSlider from '@/shared/ui/ImageHoverSlider/ImageHoverSlider';
@@ -54,7 +53,10 @@ export default function ProductCard({
       </Link>
 
       <div className="ProductCard__bottom">
-        <h3 className="subtitle-S3">{product.name}</h3>
+        <span className="ProductCard__bottom-art BodyB2">{product.sku}</span>
+        <h3 className="ProductCard__bottom-subtitle subtitle-S3">
+          {product.name}
+        </h3>
 
         <div className="productPrice">
           <ProductPrice

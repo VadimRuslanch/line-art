@@ -3,20 +3,14 @@ import React from 'react';
 
 export default function UIButton({
   handleAdd,
-  state,
   children,
 }: {
   handleAdd: () => void;
-  state: boolean;
+  state?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={handleAdd}
-      disabled={state}
-      className="UIButton"
-    >
+    <button type="button" onClick={handleAdd} className="UIButton">
       {children}
     </button>
   );

@@ -38,9 +38,19 @@
 }
 
 
-.ProductCard__bottom {
-	display: grid;
-	gap: 32px;
+.ProductCard__bottom-art {
+	display: inline-block;
+	margin-bottom: 12px;
+}
+
+
+.ProductCard__bottom-subtitle {
+	margin-bottom: 32px;
+}
+
+
+.productPrice {
+	margin-bottom: 32px;
 }
 
 
