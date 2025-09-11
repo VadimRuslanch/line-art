@@ -49,6 +49,7 @@ export default function ImagesPreview({
           alt=""
           width={522}
           height={570}
+          sizes="(max-width: 768px) 100vw, 522px"
         />
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function CatalogLayout({
     <>
       <Breadcrumbs />
       <div className="categories-top">
-        <h1 className="h1">Каталог</h1>
+        <h1 className="HeadlineH1">Каталог</h1>
         <div className="categories-buttons">
           <CategoriesSelect />
           <ButtonFilter />

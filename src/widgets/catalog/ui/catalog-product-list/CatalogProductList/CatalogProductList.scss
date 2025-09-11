@@ -1,5 +1,9 @@
 .CatalogProductList {
-	height: calc(100dvh - 332px);
+	height: calc(100svh - 332px);
+
+	@media (min-width: 768px) {
+		height: calc(100svh - 304px);
+	}
 }
 
 

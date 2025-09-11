@@ -5,10 +5,11 @@ import localFont from 'next/font/local';
 import { Montserrat, Inter } from 'next/font/google';
 
 import { Providers } from '@/app/Providers';
-// import LayoutCart from '@/widgets/LayoutCart/LayoutCart';
+import LayoutCart from '@/widgets/LayoutCart/LayoutCart';
 import Header from '@/widgets/Header/Header';
-// import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
-// import SideMenuComponent from '@/widgets/SideMenuComponent/SideMenuComponent';
+import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
+import SideMenuComponent from '@/widgets/SideMenuComponent/SideMenuComponent';
+import CartInitializer from '@/app/CartInitializer';
 
 const fontMontserrat = Montserrat({
   variable: '--font-montserrat-sans',
@@ -57,9 +58,10 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main>{children}</main>
-          {/*<FooterComponent />*/}
-          {/*<SideMenuComponent />*/}
-          {/*<LayoutCart />*/}
+          <FooterComponent />
+          <SideMenuComponent />
+          <LayoutCart />
+          <CartInitializer />
         </Providers>
       </body>
     </html>

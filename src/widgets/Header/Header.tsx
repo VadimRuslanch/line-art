@@ -4,16 +4,12 @@ import './Header.scss';
 import Link from 'next/link';
 import ButtonBurger from '@/shared/ui/ButtonBurger/ButtonBurger';
 import IconLogo from '@/shared/assets/svg/logo.svg';
-// import IconTelegram from '@/shared/assets/svg/icon-telegram.svg';
-// import IconWhatsapp from '@/shared/assets/svg/icon-whatsapp.svg';
-// import IconChart from '@/shared/assets/svg/chart.svg';
-// import IconUser from '@/shared/assets/svg/user.svg';
-import IconHeart from '@/shared/assets/svg/heart.svg';
+// import IconHeart from '@/shared/assets/svg/heart.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
 import { useUI } from '@/context/UIContext';
 
 export default function Header() {
-  const { toggleFavorites, toggleCart } = useUI();
+  const { toggleCart } = useUI();
   return (
     <header className="header">
       <div className="header__left">
@@ -30,6 +26,7 @@ export default function Header() {
       </div>
 
       <div className="header__center">
+        {/*Вынести в компонент*/}
         <label className="header__search-label" htmlFor="search">
           <input
             id="search"
@@ -39,22 +36,16 @@ export default function Header() {
           />
         </label>
 
-        {/*<Link href={'/'} className="link">*/}
-        {/*  <IconUser className="link__icon" />*/}
-        {/*  Войти*/}
-        {/*</Link>*/}
-      </div>
-
-      <div className="header__actions">
-        <button className="header__link" onClick={toggleFavorites}>
-          <IconHeart className="header__link-icon" />
-          <span className="captionC1">Избранное</span>
-        </button>
-
-        <button className="header__link" onClick={toggleCart}>
-          <IconCart className="header__link-icon" />
-          <span className="captionC1">Корзина</span>
-        </button>
+        <div className="header__actions">
+          {/*<button className="header__link" onClick={toggleFavorites}>*/}
+          {/*  <IconHeart className="header__link-icon" />*/}
+          {/*  <span className="captionC1">Избранное</span>*/}
+          {/*</button>*/}
+          <button className="header__link" onClick={toggleCart}>
+            <IconCart className="header__link-icon" />
+            <span className="captionC1">Корзина</span>
+          </button>
+        </div>
       </div>
 
       <ButtonBurger />

@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductDetailsPreview from '@/shared/ui/ProductDetailsPreview/ProductDetailsPreview';
-// import ProductDetailsInfo from '@/shared/ui/ProductDetailsInfo/ProductDetailsInfo';
+import ProductDetailsInfo from '@/shared/ui/ProductDetailsInfo/ProductDetailsInfo';
+import ProductsRecommended from '@/shared/ui/ProductsRecommended/ProductsRecommended';
+
 type Params = Promise<{ slug: string }>;
 
 export default async function ProductDetailsPage({
@@ -13,7 +15,8 @@ export default async function ProductDetailsPage({
   return (
     <>
       <ProductDetailsPreview slug={slug} />
-      {/*<ProductDetailsInfo />*/}
+      <ProductDetailsInfo />
+      <ProductsRecommended />
     </>
   );
 }

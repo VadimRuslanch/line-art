@@ -6,4 +6,8 @@
 	align-items: center;
 	gap: 10px;
 	flex-wrap: nowrap;
+
+	@media (min-width: 1280px) {
+		display: none;
+	}
 }

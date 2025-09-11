@@ -1,5 +1,12 @@
-.ProductDetailsPreview__content{
+.ProductDetailsPreview__content {
 	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	@media (min-width: 768px) {
+		flex-direction: row;
+		gap: 80px;
+	}
+
 }
 
 
@@ -17,8 +24,8 @@
 .product {
 	width: fit-content;
 	//max-width: 714px;
-	//display: flex;
-	//flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	//gap: 40px;
 
 	@media (min-width: 1024px) {

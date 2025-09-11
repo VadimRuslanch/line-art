@@ -15,7 +15,7 @@ const getCols = (w: number) => {
   switch (true) {
     case w < 768:
       return 1;
-    case w < 1280:
+    case w < 1000:
       return 2;
     default:
       return 3;

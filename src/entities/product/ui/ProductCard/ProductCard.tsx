@@ -7,7 +7,7 @@ import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 import Link from 'next/link';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
 import ImageHoverSlider from '@/shared/ui/ImageHoverSlider/ImageHoverSlider';
-// import AddToCart from '@/features/add-to-cart/ui/AddToCart';
+import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 // import UIFavorite from '@/shared/ui/UIFavorite/UIFavorite';
 
 export interface ProductProduct extends ProductWithCategoriesFragment {
@@ -64,7 +64,7 @@ export default function ProductCard({
           />
         </div>
 
-        {/*<AddToCart product={product} />*/}
+        <AddToCart product={product} />
       </div>
     </article>
   );

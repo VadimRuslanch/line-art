@@ -1,8 +1,98 @@
 @font-face {
-  font-family: 'Century Gothic';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/CenturyGothic/CenturyGothic_Regular.woff2') format('woff2'),
-  url('/fonts/CenturyGothic/CenturyGothic_Regular.woff') format('woff');
+	font-family: 'Gilroy';
+	src: local('Gilroy Regular'), local('Gilroy-Regular'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Regular.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Bold'), local('Gilroy-Bold'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Black'), local('Gilroy-Black'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Black.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Black.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Light'), local('Gilroy-Light'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Light.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Light.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Semibold.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Semibold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Medium'), local('Gilroy-Medium'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy UltraLight'), local('Gilroy-UltraLight'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-UltraLight.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-UltraLight.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Extrabold'), local('Gilroy-Extrabold'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Extrabold.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Extrabold.woff') format('woff');
+	font-weight: 800;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Heavy'), local('Gilroy-Heavy'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Heavy.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Heavy.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Gilroy';
+	src: local('Gilroy Thin'), local('Gilroy-Thin'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Thin.woff2') format('woff2'),
+	url('../shared/assets/fonts/Gilroy/Gilroy-Thin.woff') format('woff');
+	font-weight: 100;
+	font-style: normal;
 }
