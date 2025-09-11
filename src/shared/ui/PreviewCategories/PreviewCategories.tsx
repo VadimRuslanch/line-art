@@ -29,12 +29,12 @@ export default function PreviewCategories() {
             >
               <div className={styles.content}>
                 <span className="HeadlineH5">{category.name}</span>
-                <Link
-                  href={`/categories/${category.slug}`}
-                  className={styles.link}
-                >
-                  <IconArrow />
-                </Link>
+                {/*<Link*/}
+                {/*  href={`/categories/${category.slug}`}*/}
+                {/*  className={styles.link}*/}
+                {/*>*/}
+                {/*  <IconArrow />*/}
+                {/*</Link>*/}
               </div>
             </div>
           </SwiperSlide>
