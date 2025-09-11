@@ -1,8 +1,8 @@
 'use client';
 import styles from './PreviewCategories.module.scss';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import IconArrow from '@/shared/assets/svg/arrow-button.svg';
+// import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 import { useCategoriesParents } from '@/entities/category/model/useCategoriesParents';
 
 export default function PreviewCategories() {
