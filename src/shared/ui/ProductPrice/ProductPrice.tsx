@@ -2,9 +2,9 @@ import styles from './ProductPrice.module.scss';
 import { parseMoney } from '@/features/catalog-filters/model/utils';
 
 interface ProductPriceProps {
-  regularPrice?: string;
+  regularPrice?: string | null;
   salePrice?: string | null;
-  onSale?: boolean;
+  onSale?: boolean | null;
 }
 
 export default function ProductPrice({

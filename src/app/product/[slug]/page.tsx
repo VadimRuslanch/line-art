@@ -1,6 +1,6 @@
-import React from 'react';
-import ProductDetailsPreview from '@/shared/ui/ProductDetailsPreview/ProductDetailsPreview';
+import ProductDetailsPreview from '@/shared/ui/ProductDetails/ProductDetailsPreview/ProductDetailsPreview';
 import ProductDetailsInfo from '@/shared/ui/ProductDetailsInfo/ProductDetailsInfo';
+import ProductDetailsAbout from '@/shared/ui/ProductDetails/ProductDetailsAbout/ProductDetailsAbout';
 
 type Params = Promise<{ slug: string }>;
 
@@ -15,6 +15,7 @@ export default async function ProductDetailsPage({
     <>
       <ProductDetailsPreview slug={slug} />
       <ProductDetailsInfo />
+      <ProductDetailsAbout slug={slug} />
     </>
   );
 }

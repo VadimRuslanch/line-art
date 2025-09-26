@@ -4,11 +4,11 @@ import Breadcrumbs from '@/shared/ui/Breadcrumbs/Breadcrumbs';
 import { CategoriesSelect } from '@/features/catalog-filters/ui/CategoriesSelect/CategoriesSelect';
 import ButtonFilter from '@/shared/ui/ButtonFilter/ButtonFilter';
 
-export default function CatalogLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
+};
+
+export default function CategoriesLayout({ children }: Props) {
   return (
     <>
       <Breadcrumbs />

@@ -4,231 +4,248 @@
 
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
 html {
-	background-color: var(--background-background);
-	//color: var(--app-text-color);
-	font-family: Montserrat, Helvetica, sans-serif;
-	font-size: 16px;
+  background-color: var(--background-background);
+  //color: var(--app-text-color);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+
 }
 
 
 body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	min-width: 320px;
-	max-width: 1280px;
-	margin: 0 auto;
-	min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 100vh;
 }
 
 
 main {
-	flex-grow: 1;
-	padding: 180px 16px 0;
-	width: 100%;
-	max-width: 1280px;
+  flex-grow: 1;
+  padding: 180px 16px 0;
+  width: 100%;
+  max-width: 1280px;
 
-	@media (min-width: 768px) {
-		padding: 160px 20px 0;
-	}
+  @media (min-width: 768px) {
+    padding: 160px 20px 0;
+  }
 
-	@media (min-width: 1320px) {
-		padding: 136px 0 0;
-	}
+  @media (min-width: 1320px) {
+    padding: 136px 0 0;
+  }
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: var(--font-century-gothic-sans), serif;
-	font-weight: 400;
-	line-height: 1.2;
-	margin: 0;
+  font-family: var(--font-century-gothic-sans), serif;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
 }
 
 
 p {
-	font-family: var(--font-montserrat-sans), serif;
-	margin: 0;
-	font-weight: 500;
+  font-family: var(--font-montserrat-sans), serif;
+  margin: 0;
+  font-weight: 500;
 }
 
 
 button, input {
-	outline: none;
-	background: none;
-	border: none;
-	cursor: pointer;
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 
 ul, button, input {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 
 figure {
-	margin: 0;
+  margin: 0;
 }
 
 
 li, ol {
-	list-style-type: none;
+  list-style-type: none;
 }
 
 
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 
 .HeadlineH1 {
-	font-family: 'Gilroy', sans-serif;
-	font-weight: 600;
-	font-size: 48px;
-	line-height: 1;
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1;
 
-	@media (min-width: 768px) {
-		font-size: 56px;
-	}
+  @media (min-width: 768px) {
+    font-size: 56px;
+  }
 }
 
 
 .HeadlineH2 {
-	font-family: 'Gilroy', sans-serif;
-	font-weight: 600;
-	line-height: 1;
-	font-size: 32px;
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  font-size: 32px;
 
-	@media (min-width: 768px) {
-		font-size: 48px;
-	}
+  @media (min-width: 768px) {
+    font-size: 48px;
+  }
 }
 
 
 .HeadlineH3 {
-	font-family: Gilroy, sans-serif;
-	font-weight: 600;
-	font-size: 32px;
-	line-height: 1;
+  font-family: Gilroy, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1;
 }
 
 
 .HeadlineH5 {
-	font-family: Gilroy, sans-serif;
-	font-weight: 600;
-	font-size: 24px;
-	line-height: 1;
+  font-family: Gilroy, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
 }
 
 
 .captionC1 {
-	font-family: Gilroy, sans-serif;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 16px;
-	color: #FFFFFF;
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
 }
 
 
 .SubtitleS1 {
-	font-family: Gilroy, sans-serif;
-	font-weight: 600;
-	font-size: 1.25rem;
-	line-height: 28px;
+  font-family: Gilroy, sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 28px;
+}
+
+.SubtitleS2 {
+  font-family: Gilroy, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
 }
 
 
-.subtitle-S3 {
-	font-family: Inter, sans-serif;
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 1.5;
-	color: #FFFFFF;
+.SubtitleS3 {
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #FFFFFF;
 }
 
 
 .ButtonBut2-medium {
-	font-family: Gilroy, sans-serif;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 1;
-	color: #FFFFFF;
+  font-family: Gilroy, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: #FFFFFF;
 }
 
 
 .ButtonBut2-bold {
-	font-family: Gilroy, sans-serif;
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 24px;
-	color: #FFFFFF;
+  font-family: Gilroy, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
 }
 
+.BodyB1 {
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary-primary);
+}
 
 .BodyB2 {
-	font-family: Gilroy, sans-serif;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 20px;
-	color: var(--secondary-secondary);
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--secondary-secondary);
 }
 
 
 .CatalogMenu__error-item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 16px;
 }
 
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-	appearance: textfield;
-	-webkit-appearance: none;
-	margin: 0;
+  appearance: textfield;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 
 .HomePage {
-	section {
-		margin-bottom: 80px;
-	}
+  section {
+    margin-bottom: 80px;
+  }
 }
 
 
 .info {
-	width: 100vw;
-	background-color: #ffffff;
+  width: 100vw;
+  background-color: #ffffff;
 }
 
 
 .info__container {
-	max-width: 1740px;
-	margin: 0 auto;
-	padding: 0 20px;
-	@media (min-width: 1780px) {
-		padding: 0;
-	}
+  max-width: 1740px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @media (min-width: 1780px) {
+    padding: 0;
+  }
 }
 
 
 .LayoutProductDetails {
-	gap: 80px;
+  gap: 80px;
 
-	@media (min-width: 1024px) {
-		gap: 100px;
-	}
+  @media (min-width: 1024px) {
+    gap: 100px;
+  }
 }
 
 
 .containerPrice[data-font-size='big'] {
-	font-size: 1.5rem;
+  font-size: 1.5rem;
 }

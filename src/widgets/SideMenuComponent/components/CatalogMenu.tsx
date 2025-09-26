@@ -4,8 +4,6 @@ import {
   ProductWithCategoriesFragment,
 } from '@/shared/api/gql/graphql';
 import CatalogMenuItems from '@/widgets/SideMenuComponent/components/CatalogMenuItems';
-import CategoryPreview from '@/widgets/SideMenuComponent/components/CategoryPreview';
-import { ImageCoreFragment } from '@/shared/api/gql/graphql';
 import { CategoryWithProducts } from '@/shared/types/general';
 
 type ExtendedCategoryCoreFragment = CategoryCoreFragment & {
@@ -21,12 +19,8 @@ interface CatalogMenuProps<T> {
 export default function CatalogMenu<
   T extends CategoryWithProducts | ExtendedCategoryCoreFragment,
 >({ title, toggleCatalog, categories, ...props }: CatalogMenuProps<T>) {
-  const {
-    activeCategory,
-    activeCategoryItem,
-    handleCategoryChange,
-    handleCategoryItemChange,
-  } = useCatalogNavigation();
+  const { activeCategory, handleCategoryChange, handleCategoryItemChange } =
+    useCatalogNavigation();
 
   const currentCategory = categories[activeCategory];
 
@@ -45,11 +39,6 @@ export default function CatalogMenu<
   } else if ('children' in currentCategory) {
     categoryItem = currentCategory.children?.nodes ?? [];
   }
-
-  const categoryImage: ImageCoreFragment | null =
-    categoryItem.length > 0
-      ? (categoryItem[activeCategoryItem].image ?? null)
-      : null;
 
   return (
     <>
@@ -70,8 +59,6 @@ export default function CatalogMenu<
         handleCategoryChange={handleCategoryItemChange}
         data-type="product"
       />
-
-      <CategoryPreview image={categoryImage} />
     </>
   );
 }

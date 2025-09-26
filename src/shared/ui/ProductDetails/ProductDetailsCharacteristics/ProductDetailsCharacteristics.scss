@@ -1,0 +1,25 @@
+.product-attribute {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 0;
+    align-items: start;
+  }
+}
+
+.attribute-label {
+  color: var(--secondary-secondary);
+}
+
+.attribute-link {
+  color: var(--brand-brand-secondary);
+}

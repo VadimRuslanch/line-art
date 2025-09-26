@@ -54,7 +54,7 @@ export default function ProductCard({
 
       <div className="ProductCard__bottom">
         <span className="ProductCard__bottom-art BodyB2">{product.sku}</span>
-        <h3 className="ProductCard__bottom-subtitle subtitle-S3">
+        <h3 className="ProductCard__bottom-subtitle SubtitleS3">
           {product.name}
         </h3>
 

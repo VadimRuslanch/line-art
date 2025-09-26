@@ -1,66 +1,25 @@
-'use client';
+import './ProductDetailsInfo.scss';
 
-import styles from './ProductDetailsInfo.module.scss';
-import {
-  PRODUCT_INFO_ITEMS,
-  TProductDetailsInfo,
-} from '@/shared/ui/ProductDetailsInfo/types/types';
-import Chip from '@/shared/ui/Chip/Chip';
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import ProductDetailsInfoDelivery from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsInfoDelivery';
+import ProductDetailsSelect from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsSelect/ProductDetailsSelect';
 
 export default function ProductDetailsInfo() {
-  const [active, setActive] = useState<TProductDetailsInfo>('DELIVERY');
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const observer = new ResizeObserver(() => {
-      if (carouselRef.current && innerRef.current) {
-        const carouselWidth = carouselRef.current.offsetWidth;
-        const innerWidth = innerRef.current.scrollWidth;
-        const scrollable = innerWidth - carouselWidth;
-        setWidth(scrollable > 0 ? scrollable : 0);
-      }
-    });
-
-    if (carouselRef.current) {
-      observer.observe(carouselRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-  const Chips = PRODUCT_INFO_ITEMS.map(({ type, label }) => (
-    <Chip
-      data-active={active === type}
-      data-type="light"
-      key={type}
-      onClick={() => setActive(type)}
-    >
-      {label}
-    </Chip>
-  ));
   return (
-    <section className={styles.container}>
-      <div className="block-limiter">
-        <div className={styles.top} ref={carouselRef}>
-          <motion.div
-            className={styles.chipsTrack}
-            ref={innerRef}
-            drag="x"
-            dragConstraints={{ right: 0, left: -width }}
-            dragElastic={0.1}
-            dragTransition={{ bounceStiffness: 100, bounceDamping: 15 }}
-            whileTap={{ cursor: 'grabbing' }}
-          >
-            {Chips}
-          </motion.div>
-        </div>
-
-        <div className={styles.bottom}>
-          <ProductDetailsInfoDelivery />
+    <section className="ProductDetailsInfo">
+      <h2 className="ProductDetailsInfo__title HeadlineH2">Информация</h2>
+      <ProductDetailsSelect />
+      <div className="ProductDetailsInfo__callback">
+        <div className="ProductDetailsInfo__callback-wr">
+          <h3 className="ProductDetailsInfo__callback-title HeadlineH3">
+            Не нашли ответ?
+          </h3>
+          <span className="ProductDetailsInfo__callback-subtitle SubtitleS2">
+            Наш менеджер бесплатно вас проконсультирует
+          </span>
+          <button className="ProductDetailsInfo__callback-button">
+            <span className="ProductDetailsInfo__callback-button-text ButtonBut2-bold">
+              Связаться с менеджером
+            </span>
+          </button>
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
 'use client';
 import styles from './PreviewCategories.module.scss';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import IconArrow from '@/shared/assets/svg/arrow-button.svg';
+import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 import { useCategoriesParents } from '@/entities/category/model/useCategoriesParents';
 
 export default function PreviewCategories() {
@@ -29,12 +29,9 @@ export default function PreviewCategories() {
             >
               <div className={styles.content}>
                 <span className="HeadlineH5">{category.name}</span>
-                {/*<Link*/}
-                {/*  href={`/categories/${category.slug}`}*/}
-                {/*  className={styles.link}*/}
-                {/*>*/}
-                {/*  <IconArrow />*/}
-                {/*</Link>*/}
+                <Link href={`/categories/`} className={styles.link}>
+                  <IconArrow />
+                </Link>
               </div>
             </div>
           </SwiperSlide>

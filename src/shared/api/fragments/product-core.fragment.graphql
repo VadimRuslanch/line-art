@@ -13,11 +13,18 @@ fragment ProductCore on SimpleProduct {
     sku
     attributes {
         nodes {
-            name
-            label
-            options
-            variation
-            id
+            ... on GlobalProductAttribute {
+                id
+                name
+                variation
+                visible
+                label
+                terms {
+                    nodes {
+                        name
+                    }
+                }
+            }
         }
     }
     title

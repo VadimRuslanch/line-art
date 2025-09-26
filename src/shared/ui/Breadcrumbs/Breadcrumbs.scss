@@ -1,33 +1,36 @@
 .Breadcrumbs {
-	max-width: calc(100vw - 40px);
-	display: flex;
-	flex-wrap: wrap;
-	gap: 4px;
-	margin-bottom: 40px;
+  max-width: calc(100vw - 40px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 40px;
 
+  .SubtitleS3 {
+    color: var(--secondary-secondary);
 
-	& a {
-		font-weight: 500;
-	}
+    &:last-child {
+      color: #FFFFFF;
+    }
+  }
 
-	& span {
-		font-weight: 600;
-	}
+  svg {
+    display: inline;
+    stroke: var(--secondary-secondary);
+    width: 24px;
+    min-width: 24px;
 
-	& svg {
-		display: inline;
-		stroke: white;
-		width: 24px;
-		min-width: 24px;
-	}
+    &:last-of-type {
+      stroke: #FFFFFF;
+    }
+  }
 
-	@media (max-width: 767px) {
-		display: none;
-	}
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 
 .Breadcrumbs__item {
-	line-height: 1.5;
-	font-size: clamp(0.875rem, 0.775rem + 0.5vw, 1rem);
+  line-height: 1.5;
+  font-size: clamp(0.875rem, 0.775rem + 0.5vw, 1rem);
 }

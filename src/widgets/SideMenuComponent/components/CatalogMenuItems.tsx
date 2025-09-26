@@ -6,6 +6,14 @@ interface CategoryWithUriAndName {
   name?: string | null;
 }
 
+type Props<T> = {
+  title: string;
+  titleNumber: string;
+  categoriesItems: T[];
+  handleCategoryChange: (index: number) => void;
+  toggleCatalog?: () => void;
+};
+
 export default function CatalogMenuItems<T extends CategoryWithUriAndName>({
   title,
   titleNumber,
@@ -13,32 +21,22 @@ export default function CatalogMenuItems<T extends CategoryWithUriAndName>({
   handleCategoryChange,
   toggleCatalog,
   ...props
-}: {
-  title: string;
-  titleNumber: string;
-  categoriesItems: T[];
-  handleCategoryChange: (index: number) => void;
-  toggleCatalog?: () => void;
-}) {
+}: Props<T>) {
   return (
     <nav className="menuItem" {...props}>
       <div className="catalog__header">
-        {toggleCatalog && (
-          <button onClick={toggleCatalog} className="catalog__button">
-            <IconArrow />
-            Назад
-          </button>
-        )}
-        <div className="titleContainer">
-          <span>{title}</span>
-          <span className="titleNumber">{titleNumber}</span>
-        </div>
+        <button onClick={toggleCatalog} className="catalog__button">
+          <IconArrow />
+          <span className="SubtitleS1">{title}</span>
+        </button>
+
+        <span className="SubtitleS1">{titleNumber}</span>
       </div>
       <ul>
         {categoriesItems.map((category, index) => (
           <li key={index} onMouseEnter={() => handleCategoryChange(index)}>
             {category.uri ? (
-              <Link className="catalogItem" href={category.uri}>
+              <Link className="BodyB1 catalogItem" href={category.uri}>
                 {category.name}
               </Link>
             ) : (

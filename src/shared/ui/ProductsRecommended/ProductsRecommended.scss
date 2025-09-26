@@ -1,0 +1,21 @@
+.ProductsRecommended__container {
+}
+
+
+.ProductsRecommended__slider {
+  margin-top: 40px;
+  --swiper-scrollbar-bottom: 0;
+  --swiper-scrollbar-sides-offset: 0%;
+}
+
+
+//.title {
+//  font-size: clamp(2rem, 1.118rem + 3.92vw, 3rem);
+//  font-weight: 700;
+//}
+
+.ProductsRecommended__container .swiper {
+  .swiper-slide {
+    width: 305px;
+  }
+}

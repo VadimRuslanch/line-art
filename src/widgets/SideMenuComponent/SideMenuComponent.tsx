@@ -17,13 +17,13 @@ export default function SideMenuComponent() {
   const [isActiveMenuCategory, setIsActiveMenuCategory] = useState(true);
 
   const menuVariants: Variants = {
-    hidden: { clipPath: 'inset(0 100% 0 0)' },
+    hidden: { clipPath: 'inset(0 0 100% 0)' },
     visible: {
       clipPath: 'inset(0% 0% 0% 0%)',
       transition: { duration: 0.4, ease: 'easeIn' },
     },
     exit: {
-      clipPath: 'inset( 0% 100% 0% 0% )',
+      clipPath: 'inset(0 0% 100% 0% )',
       transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
@@ -54,16 +54,14 @@ export default function SideMenuComponent() {
               data-active={isActiveMenuCategory}
             >
               <div className="catalog__header">
-                <div className="titleContainer">
-                  <span>Меню</span>
-                  <span className="titleNumber">01</span>
-                </div>
+                <span className="SubtitleS1">Меню</span>
+                <span className="SubtitleS1">01</span>
               </div>
               <ul>
                 {MENU_ITEMS.map(({ type, label, Icon }) => (
                   <li
                     key={type}
-                    className={cx('catalogItem', {
+                    className={cx('BodyB1 catalogItem', {
                       [styles.active]: active === type,
                     })}
                     onClick={() => toggleAndSetType(type)}

@@ -3,23 +3,23 @@ import './Breadcrumbs.scss';
 import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 
 type Props = {
-  nameProduct?: string;
+  nameProduct?: string | null;
 };
 
 export default function Breadcrumbs({ nameProduct }: Props) {
   return (
     <div className="Breadcrumbs">
-      <Link className="Breadcrumbs__item" href="/">
+      <Link className="SubtitleS3" href="/">
         Главная
       </Link>
       <IconArrow />
-      <Link className="Breadcrumbs__item" href="/categories">
+      <Link className="SubtitleS3" href="/categories">
         Каталог
       </Link>
       {nameProduct && (
         <>
           <IconArrow />
-          <span className="Breadcrumbs__item">{nameProduct}</span>
+          <span className="SubtitleS3">{nameProduct}</span>
         </>
       )}
     </div>

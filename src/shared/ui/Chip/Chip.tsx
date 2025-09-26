@@ -1,4 +1,4 @@
-import styles from './Chip.module.scss';
+import './Chip.scss';
 import React from 'react';
 
 interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,8 +7,8 @@ interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Chip: React.FC<ChipProps> = ({ children, ...props }) => {
   return (
-    <button className={styles.chip} {...props}>
-      <span className={styles.text}>{children}</span>
+    <button className="chip" {...props}>
+      <span className="ButtonBut2-medium">{children}</span>
     </button>
   );
 };

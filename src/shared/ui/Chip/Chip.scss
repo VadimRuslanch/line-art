@@ -1,0 +1,16 @@
+.chip {
+  transition: background-color 0.2s linear;
+  padding: 14px 20px;
+  border-radius: 33px;
+  display: flex;
+  height: 48px;
+
+  & {
+    background-color: var(--background-surface-2);
+    color: #FFFFFF;
+  }
+
+  &[data-active='true'] {
+    background-color: var(--brand-brand-primary);
+  }
+}

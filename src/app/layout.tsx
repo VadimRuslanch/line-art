@@ -1,7 +1,7 @@
 import '@/styles/globals.scss';
 import React from 'react';
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+// import localFont from 'next/font/local';
 import { Montserrat, Inter } from 'next/font/google';
 
 import { Providers } from '@/app/Providers';
@@ -23,22 +23,22 @@ const fontInter = Inter({
   weight: ['400'],
 });
 
-const centuryGothic = localFont({
-  src: [
-    {
-      path: '../shared/assets/fonts/CenturyGothic/CenturyGothic_Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../shared/assets/fonts/CenturyGothic/CenturyGothic_Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-century-gothic-sans',
-  display: 'swap',
-});
+// const centuryGothic = localFont({
+//   src: [
+//     {
+//       path: '../shared/assets/fonts/CenturyGothic/CenturyGothic_Regular.woff',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//     {
+//       path: '../shared/assets/fonts/CenturyGothic/CenturyGothic_Regular.woff2',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-century-gothic-sans',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -52,9 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body
-        className={`${fontMontserrat.variable} ${fontInter.variable} ${centuryGothic.variable}`}
-      >
+      <body className={`${fontMontserrat.variable} ${fontInter.variable}`}>
         <Providers>
           <Header />
           <main>{children}</main>
