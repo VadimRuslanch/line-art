@@ -2,7 +2,7 @@
 
 import './ButtonFilter.scss';
 import { useAppDispatch } from '@/shared/model/hooks';
-import { openModal } from '@/features/catalog-filters/model/slice';
+import { openModal } from '@/features/catalog/catalog-filters/model/slice';
 import Icon from './icon/mage_filter.svg';
 
 export default function ButtonFilter() {

@@ -3,12 +3,11 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
-type TDrawerType = 'CART' | 'FAVORITES' | 'MENU' | null;
+type TDrawerType = 'CART' | 'MENU' | null;
 
 interface UIContextProps {
   drawerType: TDrawerType;
   toggleCart: () => void;
-  toggleFavorites: () => void;
   toggleMenu: () => void;
   closeAll: () => void;
 }
@@ -23,9 +22,6 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
   const toggleCart = () =>
     setDrawerType((old) => (old === 'CART' ? null : 'CART'));
 
-  const toggleFavorites = () =>
-    setDrawerType((old) => (old === 'FAVORITES' ? null : 'FAVORITES'));
-
   const toggleMenu = () =>
     setDrawerType((old) => (old === 'MENU' ? null : 'MENU'));
 
@@ -33,7 +29,7 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <UIContext.Provider
-      value={{ drawerType, toggleCart, toggleFavorites, toggleMenu, closeAll }}
+      value={{ drawerType, toggleCart, toggleMenu, closeAll }}
     >
       {children}
     </UIContext.Provider>

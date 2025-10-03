@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import ProductSkeleton from '@/shared/ui/ProductSkeleton/ProductSkeleton';
 import ProductsRecommended from '@/shared/ui/ProductsRecommended/ProductsRecommended';
 import 'swiper/scss';
-import 'swiper/scss/scrollbar';
 import 'swiper/css/navigation';
 
 export default function ProductDetailsLayout({
@@ -11,11 +10,13 @@ export default function ProductDetailsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense fallback={<ProductSkeleton />}>
-      <div className="LayoutProductDetails">
-        {children}
-        <ProductsRecommended />
-      </div>
-    </Suspense>
+    <>
+      <Suspense fallback={<ProductSkeleton />}>
+        <div className="LayoutProductDetails">
+          {children}
+          <ProductsRecommended />
+        </div>
+      </Suspense>
+    </>
   );
 }

@@ -1,11 +1,12 @@
 #import "./ImageCore.graphql"
 
 fragment CategoryCore on ProductCategory {
-  databaseId
-  id
-  name
-  uri
-  image {
-    ...ImageCore
-  }
+    databaseId
+    id
+    name
+    uri
+    count
+    image {
+        ...ImageCore
+    }
 }

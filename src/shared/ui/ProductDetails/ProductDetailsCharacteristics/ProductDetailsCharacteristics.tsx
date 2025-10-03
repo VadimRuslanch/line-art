@@ -1,5 +1,5 @@
 import './ProductDetailsCharacteristics.scss';
-import type { GlobalProductAttributeUI } from '@/entities/product/product-details/model/useProductDetails';
+import type { GlobalProductAttributeUI } from '@/features/product/product-details/model/useProductDetails';
 
 type Props = { attribute: GlobalProductAttributeUI };
 

@@ -1,0 +1,56 @@
+.UIFAQItem {
+  background-color: var(--background-surface-1);
+  border-radius: 12px;
+  padding: 21px 16px;
+
+  @media (min-width: 768px) {
+    padding: 26px 32px;
+  }
+
+  details[open] ~ .UIFAQItem__article-wr {
+    grid-template-rows: 1fr;
+  }
+
+  .icon__minus {
+    display: none;
+  }
+
+  details[open] {
+    .icon__plus {
+      display: none;
+    }
+
+    .icon__minus {
+      display: block;
+    }
+  }
+}
+
+
+.UIFAQItem__summary {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background-color: var(--background-surface-2);
+    border-radius: 50%;
+  }
+}
+
+
+.UIFAQItem__article-wr {
+  display: grid;
+  grid-template-rows: 0;
+}
+
+
+.UIFAQItem__article {
+  overflow: hidden;
+  padding-top: 16px;
+}

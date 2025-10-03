@@ -5,12 +5,12 @@ import {
   IProductDetailsInfo,
   PRODUCT_INFO_ITEMS,
 } from '@/shared/ui/ProductDetailsInfo/types/types';
-import Chip from '@/shared/ui/Chip/Chip';
+import UIChip from '@/shared/ui/UIElements/UIChip/UIChip';
 import ProductDetailsInfoTech from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsInfoPlacing/ProductDetailsInfoPlacing';
 import ProductDetailsInfoContacts from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsInfoContacts/ProductDetailsInfoContacts';
 import ProductDetailsInfoPay from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsInfoPay/ProductDetailsInfoPay';
 import ProductDetailsInfoDelivery from '@/shared/ui/ProductDetailsInfo/components/ProductDetailsInfoDelivery/ProductDetailsInfoDelivery';
-import UISelect from '@/shared/ui/UISelect/UISelect';
+import UISelect from '@/shared/ui/UIElements/UISelect/UISelect';
 
 export default function ProductDetailsSelect() {
   const [active, setActive] = useState<IProductDetailsInfo>(
@@ -28,13 +28,14 @@ export default function ProductDetailsSelect() {
   const Chips = useMemo(
     () =>
       PRODUCT_INFO_ITEMS.map((item) => (
-        <Chip
-          data-active={active.type === item.type}
+        <UIChip
+          data-active={active.type === item.type ? 'active' : ''}
+          data-type={'product-details'}
           key={item.type}
           onClick={chipClickHandlers.get(item.type)!}
         >
           {item.label}
-        </Chip>
+        </UIChip>
       )),
     [active, chipClickHandlers],
   );

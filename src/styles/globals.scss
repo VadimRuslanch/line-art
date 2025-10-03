@@ -46,18 +46,8 @@ main {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-century-gothic-sans), serif;
-  font-weight: 400;
-  line-height: 1.2;
+h1, h2, h3, h4, h5, h6, p, figure {
   margin: 0;
-}
-
-
-p {
-  font-family: var(--font-montserrat-sans), serif;
-  margin: 0;
-  font-weight: 500;
 }
 
 
@@ -69,13 +59,14 @@ button, input {
 }
 
 
-ul, button, input {
-  padding: 0;
-  margin: 0;
+summary {
+  list-style: none;
+
 }
 
 
-figure {
+ul, button, input {
+  padding: 0;
   margin: 0;
 }
 
@@ -90,12 +81,17 @@ a {
   color: inherit;
 }
 
+.modal {
+  position: fixed;
+}
+
 
 .HeadlineH1 {
   font-family: 'Gilroy', sans-serif;
   font-weight: 600;
   font-size: 48px;
   line-height: 1;
+  color: var(--primary-primary);
 
   @media (min-width: 768px) {
     font-size: 56px;
@@ -108,6 +104,7 @@ a {
   font-weight: 600;
   line-height: 1;
   font-size: 32px;
+  color: var(--primary-primary);
 
   @media (min-width: 768px) {
     font-size: 48px;
@@ -120,6 +117,7 @@ a {
   font-weight: 600;
   font-size: 32px;
   line-height: 1;
+  color: var(--primary-primary);
 }
 
 
@@ -128,6 +126,7 @@ a {
   font-weight: 600;
   font-size: 24px;
   line-height: 1;
+  color: var(--primary-primary);
 }
 
 
@@ -136,7 +135,7 @@ a {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: #FFFFFF;
+  color: var(--primary-primary);
 }
 
 
@@ -145,6 +144,7 @@ a {
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 28px;
+  color: var(--primary-primary);
 }
 
 .SubtitleS2 {
@@ -152,6 +152,7 @@ a {
   font-weight: 600;
   font-size: 18px;
   line-height: 26px;
+  color: var(--primary-primary);
 }
 
 
@@ -160,7 +161,7 @@ a {
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5;
-  color: #FFFFFF;
+  color: var(--primary-primary);
 }
 
 
@@ -169,7 +170,7 @@ a {
   font-weight: 600;
   font-size: 16px;
   line-height: 1;
-  color: #FFFFFF;
+  color: var(--primary-primary);
 }
 
 
@@ -178,8 +179,9 @@ a {
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: var(--primary-primary);
 }
+
 
 .BodyB1 {
   font-family: Gilroy, sans-serif;
@@ -188,6 +190,7 @@ a {
   line-height: 24px;
   color: var(--primary-primary);
 }
+
 
 .BodyB2 {
   font-family: Gilroy, sans-serif;
@@ -198,12 +201,12 @@ a {
 }
 
 
-.CatalogMenu__error-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 16px;
-}
+//.CatalogMenu__error-item {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  padding-left: 16px;
+//}
 
 
 input[type='number']::-webkit-inner-spin-button,
@@ -214,38 +217,38 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 
-.HomePage {
-  section {
-    margin-bottom: 80px;
-  }
-}
+//.HomePage {
+//  section {
+//    margin-bottom: 80px;
+//  }
+//}
 
 
-.info {
-  width: 100vw;
-  background-color: #ffffff;
-}
+//.info {
+//  width: 100vw;
+//  background-color: #ffffff;
+//}
 
-
-.info__container {
-  max-width: 1740px;
-  margin: 0 auto;
-  padding: 0 20px;
-  @media (min-width: 1780px) {
-    padding: 0;
-  }
-}
-
-
-.LayoutProductDetails {
-  gap: 80px;
-
-  @media (min-width: 1024px) {
-    gap: 100px;
-  }
-}
-
-
-.containerPrice[data-font-size='big'] {
-  font-size: 1.5rem;
-}
+//
+//.info__container {
+//  max-width: 1740px;
+//  margin: 0 auto;
+//  padding: 0 20px;
+//  @media (min-width: 1780px) {
+//    padding: 0;
+//  }
+//}
+//
+//
+//.LayoutProductDetails {
+//  gap: 80px;
+//
+//  @media (min-width: 1024px) {
+//    gap: 100px;
+//  }
+//}
+//
+//
+//.containerPrice[data-font-size='big'] {
+//  font-size: 1.5rem;
+//}

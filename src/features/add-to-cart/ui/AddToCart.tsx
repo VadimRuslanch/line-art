@@ -1,6 +1,6 @@
 import './AddToCart.scss';
 import { useState, useMemo, useEffect } from 'react';
-import UIButton from '@/shared/ui/UIButton/UIButton';
+import UIButton from '@/shared/ui/UIElements/UIButton/UIButton';
 import { useCart } from '@/entities/cart/model/useCart';
 import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';

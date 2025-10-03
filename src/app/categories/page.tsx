@@ -5,7 +5,7 @@ import CatalogFiltersSidebar from '@/widgets/catalog/ui/catalog-filters/CatalogF
 import ClientPortal from '@/shared/ui/Portal/ClientPortal';
 import CatalogFiltersModal from '@/widgets/catalog/ui/catalog-filters/CatalogFiltersModal/CatalogFiltersModal';
 import { useSelector } from 'react-redux';
-import { selectIsFiltersModalOpen } from '@/features/catalog-filters';
+import { selectIsFiltersModalOpen } from '@/features/catalog/catalog-filters';
 
 export default function CatalogPage() {
   const isOpen = useSelector(selectIsFiltersModalOpen);

@@ -1,7 +1,7 @@
 'use client';
 
 import './ProductDetailsAbout.scss';
-import { useProductDetails } from '@/entities/product/product-details/model/useProductDetails';
+import { useProductDetails } from '@/features/product/product-details/model/useProductDetails';
 import React from 'react';
 import ProductDetailsCharacteristics from '@/shared/ui/ProductDetails/ProductDetailsCharacteristics/ProductDetailsCharacteristics';
 

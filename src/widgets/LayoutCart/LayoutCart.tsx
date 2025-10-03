@@ -26,19 +26,19 @@ export default function LayoutCart() {
       </div>
     );
 
-  if (drawerType === 'FAVORITES')
-    return (
-      <div className={styles.layout}>
-        <div className={styles.container}>
-          <div className={styles.containerTop}>
-            <span className={styles.title}>Избранное</span>
-            <button onClick={closeAll} className={styles.button}>
-              <IconClose />
-              Закрыть
-            </button>
-          </div>
-          <Cart />
-        </div>
-      </div>
-    );
+  // if (drawerType === 'FAVORITES')
+  //   return (
+  //     <div className={styles.layout}>
+  //       <div className={styles.container}>
+  //         <div className={styles.containerTop}>
+  //           <span className={styles.title}>Избранное</span>
+  //           <button onClick={closeAll} className={styles.button}>
+  //             <IconClose />
+  //             Закрыть
+  //           </button>
+  //         </div>
+  //         <Cart />
+  //       </div>
+  //     </div>
+  //   );
 }

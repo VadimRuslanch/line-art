@@ -1,19 +1,19 @@
-import PreviewCategories from '@/shared/ui/PreviewCategories/PreviewCategories';
-import PopularProducts from '@/shared/ui/PopularProducts/PopularProducts';
-import SliderArticles from '@/shared/ui/SliderArticles/SliderArticles';
-import SliderInfo from '@/shared/ui/SliderInfo/SliderInfo';
-import './index.scss';
-import 'swiper/scss';
-import 'swiper/scss/scrollbar';
-import 'swiper/css/navigation';
 
-export default async function Home() {
+
+import SliderCategoriesPopularCards from '@/widgets/Pages/HomePage/SliderCategoriesPopularCards';
+import PopularProducts from '@/widgets/Pages/HomePage/PopularProducts/PopularProducts';
+import PreviewHomePage from '@/widgets/Pages/HomePage/PreviewHomePage/PreviewHomePage';
+import SliderArticlesNewsCards from '@/widgets/Pages/HomePage/SliderArticlesNewsCards';
+import FAQHomePage from '@/widgets/Pages/HomePage/FAQHomePage/FAQHomePage';
+
+export default async function HomePage() {
   return (
     <div className="HomePage">
-      <PreviewCategories />
+      <PreviewHomePage />
+      <SliderCategoriesPopularCards />
       <PopularProducts />
-      <SliderArticles />
-      <SliderInfo />
+      <SliderArticlesNewsCards />
+      <FAQHomePage />
     </div>
   );
 }

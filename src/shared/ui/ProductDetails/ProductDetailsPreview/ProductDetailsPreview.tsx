@@ -5,11 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import ProductDetailsCharacteristics from '@/shared/ui/ProductDetails/ProductDetailsCharacteristics/ProductDetailsCharacteristics';
-import { useProductDetails } from '@/entities/product/product-details/model/useProductDetails';
+import { useProductDetails } from '@/features/product/product-details/model/useProductDetails';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import ImagesPreview from '@/shared/ui/ImagesPreview/ImagesPreview';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
-import Breadcrumbs from '@/shared/ui/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '@/widgets/Breadcrumbs/Breadcrumbs';
 import { useCart } from '@/entities/cart/model/useCart';
 
 export default function ProductDetailsPreview({ slug }: { slug: string }) {
@@ -51,9 +51,19 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
     }
   };
 
+  const ITEMS_BREADCRUMBS = [
+    {
+      title: 'Каталог',
+      href: '/catalog',
+    },
+    {
+      title: name ?? '',
+    },
+  ];
+
   return (
     <div className="ProductDetailsPreview">
-      <Breadcrumbs nameProduct={name} />
+      <Breadcrumbs items={ITEMS_BREADCRUMBS} />
 
       <div className="ProductDetailsPreview__content">
         <ImagesPreview

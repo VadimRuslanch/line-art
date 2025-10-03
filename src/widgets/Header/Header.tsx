@@ -2,7 +2,7 @@
 
 import './Header.scss';
 import Link from 'next/link';
-import ButtonBurger from '@/shared/ui/ButtonBurger/ButtonBurger';
+import UIButtonBurger from '@/shared/ui/UIElements/UIButtonBurger/UIButtonBurger';
 import IconLogo from '@/shared/assets/svg/logo.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
 import IconSearch from '@/shared/assets/svg/search.svg';
@@ -49,7 +49,7 @@ export default function Header() {
         </div>
       </div>
 
-      <ButtonBurger />
+      <UIButtonBurger />
     </header>
   );
 }

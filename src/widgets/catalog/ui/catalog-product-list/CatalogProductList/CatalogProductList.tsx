@@ -5,8 +5,8 @@ import { FixedSizeGrid as Grid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { useCallback, useState, useEffect } from 'react';
-import { useProducts } from '@/entities/product/product-list/model/useProducts';
-import ProductCard from '@/entities/product/ui/ProductCard/ProductCard';
+import { useProducts } from '@/features/product/product-list/model/useProducts';
+import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 
 const GAP = 20;
 const ITEM_HEIGHT = 520;

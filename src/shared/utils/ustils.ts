@@ -1,4 +1,4 @@
-import { ProductProduct } from '@/entities/product/ui/ProductCard/ProductCard';
+import { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
 
 import { CategoryWithProducts } from '@/shared/types/general';
 // Добавить Картинку заглушку в for

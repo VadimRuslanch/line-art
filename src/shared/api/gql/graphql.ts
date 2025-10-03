@@ -33002,6 +33002,7 @@ export type GetCatalogQuery = {
       id: string;
       name?: string | null;
       uri?: string | null;
+      count?: number | null;
       children?: {
         __typename?: 'ProductCategoryToProductCategoryConnection';
         nodes: Array<{
@@ -33010,6 +33011,7 @@ export type GetCatalogQuery = {
           id: string;
           name?: string | null;
           uri?: string | null;
+          count?: number | null;
           contentNodes?: {
             __typename?: 'ProductCategoryToContentNodeConnection';
             nodes: Array<
@@ -33126,48 +33128,6 @@ export type GetCatalogQuery = {
   } | null;
 };
 
-export type GetCategoriesCatalogQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetCategoriesCatalogQuery = {
-  __typename?: 'RootQuery';
-  productCategories?: {
-    __typename?: 'RootQueryToProductCategoryConnection';
-    nodes: Array<{
-      __typename?: 'ProductCategory';
-      databaseId: number;
-      id: string;
-      name?: string | null;
-      uri?: string | null;
-      children?: {
-        __typename?: 'ProductCategoryToProductCategoryConnection';
-        nodes: Array<{
-          __typename?: 'ProductCategory';
-          databaseId: number;
-          id: string;
-          name?: string | null;
-          uri?: string | null;
-          image?: {
-            __typename?: 'MediaItem';
-            databaseId: number;
-            id: string;
-            sourceUrl?: string | null;
-            altText?: string | null;
-          } | null;
-        }>;
-      } | null;
-      image?: {
-        __typename?: 'MediaItem';
-        databaseId: number;
-        id: string;
-        sourceUrl?: string | null;
-        altText?: string | null;
-      } | null;
-    }>;
-  } | null;
-};
-
 export type GetCategoryParentsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetCategoryParentsQuery = {
@@ -33211,6 +33171,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33231,6 +33192,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33262,6 +33224,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33321,6 +33284,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33341,6 +33305,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33361,6 +33326,7 @@ export type GetCategoriesProductsDiscountedQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33394,6 +33360,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33414,6 +33381,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33445,6 +33413,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33504,6 +33473,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33524,6 +33494,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33544,6 +33515,7 @@ export type GetCategoriesProductsNewQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33577,6 +33549,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33597,6 +33570,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33628,6 +33602,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33687,6 +33662,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33707,6 +33683,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33727,6 +33704,7 @@ export type GetCategoriesProductsPopularQuery = {
               id: string;
               name?: string | null;
               uri?: string | null;
+              count?: number | null;
               image?: {
                 __typename?: 'MediaItem';
                 databaseId: number;
@@ -33755,6 +33733,7 @@ export type GetCategoryWithProductQuery = {
       id: string;
       name?: string | null;
       uri?: string | null;
+      count?: number | null;
       contentNodes?: {
         __typename?: 'ProductCategoryToContentNodeConnection';
         nodes: Array<
@@ -33844,6 +33823,182 @@ export type GetCategoryWithProductQuery = {
   } | null;
 };
 
+export type GetCategoriesCatalogQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetCategoriesCatalogQuery = {
+  __typename?: 'RootQuery';
+  productCategories?: {
+    __typename?: 'RootQueryToProductCategoryConnection';
+    nodes: Array<{
+      __typename?: 'ProductCategory';
+      databaseId: number;
+      id: string;
+      name?: string | null;
+      uri?: string | null;
+      count?: number | null;
+      children?: {
+        __typename?: 'ProductCategoryToProductCategoryConnection';
+        nodes: Array<{
+          __typename?: 'ProductCategory';
+          databaseId: number;
+          id: string;
+          name?: string | null;
+          uri?: string | null;
+          count?: number | null;
+          image?: {
+            __typename?: 'MediaItem';
+            databaseId: number;
+            id: string;
+            sourceUrl?: string | null;
+            altText?: string | null;
+          } | null;
+        }>;
+      } | null;
+      image?: {
+        __typename?: 'MediaItem';
+        databaseId: number;
+        id: string;
+        sourceUrl?: string | null;
+        altText?: string | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type GetAttributesFiltersQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetAttributesFiltersQuery = {
+  __typename?: 'RootQuery';
+  allPaBacklights?: {
+    __typename?: 'RootQueryToPaBacklightsConnection';
+    nodes: Array<{
+      __typename?: 'PaBacklights';
+      name?: string | null;
+      slug?: string | null;
+      id: string;
+      count?: number | null;
+    }>;
+  } | null;
+  allPaColor?: {
+    __typename?: 'RootQueryToPaColorConnection';
+    nodes: Array<{
+      __typename?: 'PaColor';
+      name?: string | null;
+      slug?: string | null;
+      id: string;
+      count?: number | null;
+    }>;
+  } | null;
+  allPaGlubina?: {
+    __typename?: 'RootQueryToPaGlubinaConnection';
+    nodes: Array<{
+      __typename?: 'PaGlubina';
+      name?: string | null;
+      count?: number | null;
+      id: string;
+      slug?: string | null;
+    }>;
+  } | null;
+  allPaShadowGap?: {
+    __typename?: 'RootQueryToPaShadowGapConnection';
+    nodes: Array<{
+      __typename?: 'PaShadowGap';
+      name?: string | null;
+      count?: number | null;
+      id: string;
+      slug?: string | null;
+    }>;
+  } | null;
+  allPaWidth?: {
+    __typename?: 'RootQueryToPaWidthConnection';
+    nodes: Array<{
+      __typename?: 'PaWidth';
+      name?: string | null;
+      count?: number | null;
+      id: string;
+      slug?: string | null;
+    }>;
+  } | null;
+};
+
+export type GetCategoriesForFiltersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+export type GetCategoriesForFiltersQuery = {
+  __typename?: 'RootQuery';
+  productCategories?: {
+    __typename?: 'RootQueryToProductCategoryConnection';
+    nodes: Array<{
+      __typename?: 'ProductCategory';
+      id: string;
+      databaseId: number;
+      name?: string | null;
+      slug?: string | null;
+    }>;
+  } | null;
+};
+
+export type CategoryOptionFragment = {
+  __typename?: 'ProductCategory';
+  id: string;
+  databaseId: number;
+  name?: string | null;
+  slug?: string | null;
+};
+
+export type GetPriceExtremesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetPriceExtremesQuery = {
+  __typename?: 'RootQuery';
+  min?: {
+    __typename?: 'RootQueryToProductUnionConnection';
+    nodes: Array<
+      | { __typename: 'ExternalProduct'; id: string; databaseId: number }
+      | { __typename: 'GroupProduct'; id: string; databaseId: number }
+      | {
+          __typename: 'SimpleProduct';
+          price?: string | null;
+          id: string;
+          databaseId: number;
+        }
+      | { __typename: 'SimpleProductVariation'; id: string; databaseId: number }
+      | { __typename: 'UnsupportedProduct'; id: string; databaseId: number }
+      | {
+          __typename: 'VariableProduct';
+          price?: string | null;
+          id: string;
+          databaseId: number;
+        }
+    >;
+  } | null;
+  max?: {
+    __typename?: 'RootQueryToProductUnionConnection';
+    nodes: Array<
+      | { __typename: 'ExternalProduct'; id: string; databaseId: number }
+      | { __typename: 'GroupProduct'; id: string; databaseId: number }
+      | {
+          __typename: 'SimpleProduct';
+          price?: string | null;
+          id: string;
+          databaseId: number;
+        }
+      | { __typename: 'SimpleProductVariation'; id: string; databaseId: number }
+      | { __typename: 'UnsupportedProduct'; id: string; databaseId: number }
+      | {
+          __typename: 'VariableProduct';
+          price?: string | null;
+          id: string;
+          databaseId: number;
+        }
+    >;
+  } | null;
+};
+
 export type GetProductDetailsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
   idType: ProductIdTypeEnum;
@@ -33897,6 +34052,7 @@ export type GetProductDetailsQuery = {
             id: string;
             name?: string | null;
             uri?: string | null;
+            count?: number | null;
             image?: {
               __typename?: 'MediaItem';
               databaseId: number;
@@ -34124,138 +34280,6 @@ export type GetProductsRecommendedQuery = {
   } | null;
 };
 
-export type GetAttributesFiltersQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetAttributesFiltersQuery = {
-  __typename?: 'RootQuery';
-  allPaBacklights?: {
-    __typename?: 'RootQueryToPaBacklightsConnection';
-    nodes: Array<{
-      __typename?: 'PaBacklights';
-      name?: string | null;
-      slug?: string | null;
-      id: string;
-      count?: number | null;
-    }>;
-  } | null;
-  allPaColor?: {
-    __typename?: 'RootQueryToPaColorConnection';
-    nodes: Array<{
-      __typename?: 'PaColor';
-      name?: string | null;
-      slug?: string | null;
-      id: string;
-      count?: number | null;
-    }>;
-  } | null;
-  allPaGlubina?: {
-    __typename?: 'RootQueryToPaGlubinaConnection';
-    nodes: Array<{
-      __typename?: 'PaGlubina';
-      name?: string | null;
-      count?: number | null;
-      id: string;
-      slug?: string | null;
-    }>;
-  } | null;
-  allPaShadowGap?: {
-    __typename?: 'RootQueryToPaShadowGapConnection';
-    nodes: Array<{
-      __typename?: 'PaShadowGap';
-      name?: string | null;
-      count?: number | null;
-      id: string;
-      slug?: string | null;
-    }>;
-  } | null;
-  allPaWidth?: {
-    __typename?: 'RootQueryToPaWidthConnection';
-    nodes: Array<{
-      __typename?: 'PaWidth';
-      name?: string | null;
-      count?: number | null;
-      id: string;
-      slug?: string | null;
-    }>;
-  } | null;
-};
-
-export type GetCategoriesForFiltersQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-export type GetCategoriesForFiltersQuery = {
-  __typename?: 'RootQuery';
-  productCategories?: {
-    __typename?: 'RootQueryToProductCategoryConnection';
-    nodes: Array<{
-      __typename?: 'ProductCategory';
-      id: string;
-      databaseId: number;
-      name?: string | null;
-      slug?: string | null;
-    }>;
-  } | null;
-};
-
-export type CategoryOptionFragment = {
-  __typename?: 'ProductCategory';
-  id: string;
-  databaseId: number;
-  name?: string | null;
-  slug?: string | null;
-};
-
-export type GetPriceExtremesQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetPriceExtremesQuery = {
-  __typename?: 'RootQuery';
-  min?: {
-    __typename?: 'RootQueryToProductUnionConnection';
-    nodes: Array<
-      | { __typename: 'ExternalProduct'; id: string; databaseId: number }
-      | { __typename: 'GroupProduct'; id: string; databaseId: number }
-      | {
-          __typename: 'SimpleProduct';
-          price?: string | null;
-          id: string;
-          databaseId: number;
-        }
-      | { __typename: 'SimpleProductVariation'; id: string; databaseId: number }
-      | { __typename: 'UnsupportedProduct'; id: string; databaseId: number }
-      | {
-          __typename: 'VariableProduct';
-          price?: string | null;
-          id: string;
-          databaseId: number;
-        }
-    >;
-  } | null;
-  max?: {
-    __typename?: 'RootQueryToProductUnionConnection';
-    nodes: Array<
-      | { __typename: 'ExternalProduct'; id: string; databaseId: number }
-      | { __typename: 'GroupProduct'; id: string; databaseId: number }
-      | {
-          __typename: 'SimpleProduct';
-          price?: string | null;
-          id: string;
-          databaseId: number;
-        }
-      | { __typename: 'SimpleProductVariation'; id: string; databaseId: number }
-      | { __typename: 'UnsupportedProduct'; id: string; databaseId: number }
-      | {
-          __typename: 'VariableProduct';
-          price?: string | null;
-          id: string;
-          databaseId: number;
-        }
-    >;
-  } | null;
-};
-
 export type ImageCoreFragment = {
   __typename?: 'MediaItem';
   databaseId: number;
@@ -34270,6 +34294,7 @@ export type CategoryCoreFragment = {
   id: string;
   name?: string | null;
   uri?: string | null;
+  count?: number | null;
   image?: {
     __typename?: 'MediaItem';
     databaseId: number;
@@ -34399,6 +34424,7 @@ export type ProductWithCategoriesFragment = {
       id: string;
       name?: string | null;
       uri?: string | null;
+      count?: number | null;
       image?: {
         __typename?: 'MediaItem';
         databaseId: number;
@@ -34936,6 +34962,7 @@ export const CategoryCoreFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -35240,6 +35267,7 @@ export const ProductWithCategoriesFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36336,6 +36364,7 @@ export const GetCatalogDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -36466,134 +36495,6 @@ export const GetCatalogDocument = {
     },
   ],
 } as unknown as DocumentNode<GetCatalogQuery, GetCatalogQueryVariables>;
-export const GetCategoriesCatalogDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetCategoriesCatalog' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'productCategories' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'where' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'parent' },
-                      value: { kind: 'NullValue' },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'FragmentSpread',
-                        name: { kind: 'Name', value: 'CategoryCore' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'children' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'nodes' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'FragmentSpread',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'CategoryCore',
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'ImageCore' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'MediaItem' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'altText' } },
-        ],
-      },
-    },
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'CategoryCore' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'ProductCategory' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'image' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'ImageCore' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetCategoriesCatalogQuery,
-  GetCategoriesCatalogQueryVariables
->;
 export const GetCategoryParentsDocument = {
   kind: 'Document',
   definitions: [
@@ -36908,6 +36809,7 @@ export const GetCategoriesProductsDiscountedDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -37181,6 +37083,7 @@ export const GetCategoriesProductsNewDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -37425,6 +37328,7 @@ export const GetCategoriesProductsPopularDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -37459,6 +37363,13 @@ export const GetCategoryWithProductDocument = {
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'productCategories' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: { kind: 'IntValue', value: '100' },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
@@ -37475,6 +37386,13 @@ export const GetCategoryWithProductDocument = {
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'contentNodes' },
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: { kind: 'Name', value: 'first' },
+                            value: { kind: 'IntValue', value: '50' },
+                          },
+                        ],
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
@@ -37537,6 +37455,7 @@ export const GetCategoryWithProductDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -37669,6 +37588,549 @@ export const GetCategoryWithProductDocument = {
 } as unknown as DocumentNode<
   GetCategoryWithProductQuery,
   GetCategoryWithProductQueryVariables
+>;
+export const GetCategoriesCatalogDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetCategoriesCatalog' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'productCategories' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'parent' },
+                      value: { kind: 'NullValue' },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'CategoryCore' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'children' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'nodes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'CategoryCore',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ImageCore' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'MediaItem' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sourceUrl' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'altText' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'CategoryCore' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'ProductCategory' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'image' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'ImageCore' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetCategoriesCatalogQuery,
+  GetCategoriesCatalogQueryVariables
+>;
+export const GetAttributesFiltersDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetAttributesFilters' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPaBacklights' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPaColor' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPaGlubina' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPaShadowGap' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPaWidth' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetAttributesFiltersQuery,
+  GetAttributesFiltersQueryVariables
+>;
+export const GetCategoriesForFiltersDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetCategoriesForFilters' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'first' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          defaultValue: { kind: 'IntValue', value: '100' },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'productCategories' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'first' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'CategoryOption' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'CategoryOption' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'ProductCategory' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetCategoriesForFiltersQuery,
+  GetCategoriesForFiltersQueryVariables
+>;
+export const GetPriceExtremesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetPriceExtremes' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'min' },
+            name: { kind: 'Name', value: 'products' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: { kind: 'IntValue', value: '1' },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'orderby' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'field' },
+                            value: { kind: 'EnumValue', value: 'PRICE' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'order' },
+                            value: { kind: 'EnumValue', value: 'ASC' },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: '__typename' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'databaseId' },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'SimpleProduct' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'price' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'VariableProduct' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'price' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'max' },
+            name: { kind: 'Name', value: 'products' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'first' },
+                value: { kind: 'IntValue', value: '1' },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'orderby' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'field' },
+                            value: { kind: 'EnumValue', value: 'PRICE' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'order' },
+                            value: { kind: 'EnumValue', value: 'DESC' },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'nodes' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: '__typename' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'databaseId' },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'SimpleProduct' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'price' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'VariableProduct' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'price' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetPriceExtremesQuery,
+  GetPriceExtremesQueryVariables
 >;
 export const GetProductDetailsDocument = {
   kind: 'Document',
@@ -38011,6 +38473,7 @@ export const GetProductDetailsDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'uri' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'count' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'image' },
@@ -38575,418 +39038,4 @@ export const GetProductsRecommendedDocument = {
 } as unknown as DocumentNode<
   GetProductsRecommendedQuery,
   GetProductsRecommendedQueryVariables
->;
-export const GetAttributesFiltersDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetAttributesFilters' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allPaBacklights' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allPaColor' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allPaGlubina' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allPaShadowGap' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allPaWidth' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'count' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetAttributesFiltersQuery,
-  GetAttributesFiltersQueryVariables
->;
-export const GetCategoriesForFiltersDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetCategoriesForFilters' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'first' },
-          },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-          defaultValue: { kind: 'IntValue', value: '100' },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'productCategories' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'first' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'first' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'FragmentSpread',
-                        name: { kind: 'Name', value: 'CategoryOption' },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'CategoryOption' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'ProductCategory' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetCategoriesForFiltersQuery,
-  GetCategoriesForFiltersQueryVariables
->;
-export const GetPriceExtremesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetPriceExtremes' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            alias: { kind: 'Name', value: 'min' },
-            name: { kind: 'Name', value: 'products' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'first' },
-                value: { kind: 'IntValue', value: '1' },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'where' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'orderby' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'field' },
-                            value: { kind: 'EnumValue', value: 'PRICE' },
-                          },
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'order' },
-                            value: { kind: 'EnumValue', value: 'ASC' },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: '__typename' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'databaseId' },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'SimpleProduct' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'price' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'VariableProduct' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'price' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            alias: { kind: 'Name', value: 'max' },
-            name: { kind: 'Name', value: 'products' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'first' },
-                value: { kind: 'IntValue', value: '1' },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'where' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'orderby' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'field' },
-                            value: { kind: 'EnumValue', value: 'PRICE' },
-                          },
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'order' },
-                            value: { kind: 'EnumValue', value: 'DESC' },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'nodes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: '__typename' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'databaseId' },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'SimpleProduct' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'price' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'VariableProduct' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'price' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetPriceExtremesQuery,
-  GetPriceExtremesQueryVariables
 >;

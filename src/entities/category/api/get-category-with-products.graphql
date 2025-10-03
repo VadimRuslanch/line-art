@@ -1,12 +1,12 @@
 query GetCategoryWithProduct {
-  productCategories {
-    nodes {
-      ...CategoryCore
-      contentNodes {
+    productCategories(first: 100) {
         nodes {
-          ...ProductCore
+            ...CategoryCore
+            contentNodes(first: 50) {
+                nodes {
+                    ...ProductCore
+                }
+            }
         }
-      }
     }
-  }
 }

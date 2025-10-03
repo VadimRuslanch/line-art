@@ -1,9 +1,9 @@
 'use client';
 import './ProductsRecommended.scss';
 
-import { useProductsRecommended } from '@/entities/product/products-recommended/model/useProductsRecommended';
+import { useProductsRecommended } from '@/features/product/products-recommended/model/useProductsRecommended';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import ProductCard from '@/entities/product/ui/ProductCard/ProductCard';
+import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 
 export default function ProductsRecommended() {
   const { products } = useProductsRecommended();

@@ -1,11 +1,19 @@
-.SliderArticles.HeadlineH2 {
-	color: var(--background-background);
+.HomePage {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
+.NotFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+}
 
-
-
-
-h2 {
-	margin-bottom: 40px;
+.NotFound__link {
+  padding: 14px 20px;
+  border-radius: 24px;
+  background-color: var(--brand-brand-primary);
 }

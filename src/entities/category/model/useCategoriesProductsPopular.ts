@@ -9,7 +9,7 @@ import { groupProductsByCategory } from '@/shared/utils/ustils';
 import { useCartState } from '@/hooks/useCartState';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import type { WithCartFlag } from '@/hooks/useCartState';
-import type { ProductProduct } from '@/entities/product/ui/ProductCard/ProductCard';
+import type { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
 
 type NodeFromQuery = NonNullable<
   GetCategoriesProductsPopularQuery['products']
