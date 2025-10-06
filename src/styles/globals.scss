@@ -10,7 +10,7 @@
 
 html {
   background-color: var(--background-background);
-  //color: var(--app-text-color);
+  color: #ffffff;
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 16px;
   scroll-behavior: smooth;
@@ -46,12 +46,20 @@ main {
 }
 
 
-h1, h2, h3, h4, h5, h6, p, figure {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
   margin: 0;
 }
 
 
-button, input {
+button,
+input {
   outline: none;
   background: none;
   border: none;
@@ -65,13 +73,16 @@ summary {
 }
 
 
-ul, button, input {
+ul,
+button,
+input {
   padding: 0;
   margin: 0;
 }
 
 
-li, ol {
+li,
+ol {
   list-style-type: none;
 }
 

@@ -18,7 +18,7 @@ export default function Header() {
         </Link>
 
         <span className="header__tel">
-          <Link className="subtitle-S3" href="tel:+7 (999) 99-99-99">
+          <Link className="subtitleS3" href="tel:+7 (999) 99-99-99">
             +7 (999) 99-99-99
           </Link>
           <span className="captionC1">Обратный звонок</span>

@@ -8,7 +8,7 @@ import { useCategoriesParents } from '@/entities/category/model/useCategoriesPar
 export default function FooterComponent() {
   const { categories } = useCategoriesParents();
   return (
-    <footer className={'footer block-limiter'}>
+    <footer className={'footer'}>
       <div className={'footer__logo'}>
         <ButtonLogo />
       </div>

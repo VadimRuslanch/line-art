@@ -19,7 +19,7 @@ export default function ProductPrice({
       {onSale ? (
         <div className={styles.productPriceSale}>
           {salePrice && (
-            <p>
+            <p className='HeadlineH5'>
               <span>{parseMoney(salePrice)}</span> ₽ / <span>метр</span>
             </p>
           )}
@@ -29,7 +29,7 @@ export default function ProductPrice({
         </div>
       ) : (
         <div>
-          <p>
+          <p className='HeadlineH5'>
             <span>{parseMoney(regularPrice)}</span> ₽ / <span>метр</span>
           </p>
         </div>
