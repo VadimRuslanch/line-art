@@ -37,6 +37,7 @@ export default function SliderContainer<T extends WithDbId>({
       nav.nextEl = nextRef.current;
     }
   }
+
   return (
     <section className={'SliderContainer'}>
       <h2 className="SliderContainer__title HeadlineH2">{title}</h2>

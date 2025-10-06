@@ -1,20 +1,26 @@
 .modal-catalog__container {
-  top: 112px;
+  top: 145px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  width: 100%;
+  width: calc(100% - 32px);
   max-width: 1240px;
   height: 82dvh;
   overflow: hidden;
   display: flex;
   background-color: var(--background-surface-1);
   border-radius: 8px;
-  padding: 40px;
+  padding: 24px;
+  max-width: 1280px;
 
-  @media (min-width: 1320px) {
+  @media (min-width: 768px) {
+    top: 112px;
+  }
+
+  @media (min-width: 1200px) {
     margin: 0;
-    max-width: 1280px;
+
+    padding: 40px;
   }
 }
 
@@ -36,14 +42,20 @@
   gap: 4px;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   scrollbar-width: none;
-  padding: 0 45px;
 
-  &:first-child {
-    padding: 0 45px 0 0;
+  @media (min-width: 1200px) {
+    padding: 0 45px;
+
+    &:first-child {
+      padding: 0 45px 0 0;
+    }
+
+    &:last-child {
+      padding: 0 0 0 45px;
+    }
   }
 
   &:last-child {
-    padding: 0 0 0 45px;
     border-right: none;
   }
 }
@@ -96,6 +108,7 @@
 
 .catalogItem_svg {
   margin-left: auto;
+  min-width: 24px;
 
   @media (min-width: 1200px) {
     display: none;
