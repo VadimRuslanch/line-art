@@ -16,7 +16,6 @@ export default function ModalMenuCatalogSubcategoriesItems({ onBack }: Props) {
 
   const activeCategory = categories?.[activeCategoryIndex];
 
-  // Нормализуем children.nodes -> CategoryWithUriAndName[]
   const items: CategoryWithUriAndName[] = useMemo(() => {
     const nodes = activeCategory?.children?.nodes ?? [];
     return nodes
