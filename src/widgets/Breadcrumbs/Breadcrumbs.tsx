@@ -27,7 +27,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
 
   return (
     <div className="Breadcrumbs">
-      <Link className="SubtitleS3" href="/public">
+      <Link className="SubtitleS3" href="/">
         Главная
       </Link>
       {breadcrumbsItems}

@@ -1,150 +1,150 @@
 .header {
-	background-color: var(--background-background);
-	border-radius: 8px;
-	z-index: 15;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 16px;
-	position: fixed;
-	width: calc(100% - 32px);
-	max-width: 1280px;
-	display: grid;
-	grid-template-columns: 1fr 32px;
-	grid-template-areas: 'left right' 'center center';
-	gap: 12px 0;
+  background-color: var(--background-background);
+  border-radius: 8px;
+  z-index: 15;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 16px;
+  position: fixed;
+  width: calc(100% - 32px);
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: 1fr 32px;
+  grid-template-areas: 'left right' 'center center';
+  gap: 12px 0;
 
-	@media (min-width: 768px) {
-		background-color: var(--background-surface-1);
-		grid-template-areas: 'left center right';
-		grid-template-columns: auto 1fr 32px;
-		padding: 12px;
-		width: calc(100% - 40px);
-	}
+  @media (min-width: 768px) {
+    background-color: var(--background-surface-1);
+    grid-template-areas: 'left center right';
+    grid-template-columns: auto 1fr 32px;
+    padding: 12px;
+    width: calc(100% - 40px);
+  }
 }
 
 
 .header__left {
-	grid-area: left;
-	display: flex;
-	align-items: center;
-	gap: 40px;
+  grid-area: left;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 
 .header__center {
-	grid-area: center;
-	display: flex;
-	align-items: center;
+  grid-area: center;
+  display: flex;
+  align-items: center;
 
-	@media (min-width: 768px) {
-		margin-right: 16px;
-	}
+  @media (min-width: 768px) {
+    margin-right: 16px;
+  }
 
-	@media (min-width: 1280px) {
-		margin-right: 42px;
-	}
+  @media (min-width: 1280px) {
+    margin-right: 42px;
+  }
 }
 
 
 .header__tel {
-	display: flex;
-	flex-direction: column;
-	gap: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0;
 
-	.captionC1 {
-		color: var(--brand-brand-secondary);
-	}
+  .captionC1 {
+    color: var(--brand-brand-secondary);
+  }
 }
 
 
 .header__actions {
-	display: flex;
-	align-items: center;
-	gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-	@media (min-width: 768px) {
-		gap: 16px;
-	}
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
 }
 
 
 .header__search-label {
-	background-color: var(--background-surface-2);
-	border-radius: 333px;
-	padding: 16px;
-	width: 100%;
-	margin-right: 12px;
-	display: flex;
-	gap: 16px;
+  background-color: var(--background-surface-2);
+  border-radius: 333px;
+  padding: 16px;
+  width: 100%;
+  margin-right: 12px;
+  display: flex;
+  gap: 16px;
 
-	@media (min-width: 768px) {
-		margin: 0 24px;
-	}
+  @media (min-width: 768px) {
+    margin: 0 24px;
+  }
 
-	@media (min-width: 1280px) {
-		margin: 0 40px;
-	}
+  @media (min-width: 1280px) {
+    margin: 0 40px;
+  }
 }
 
 
 .header__search {
-	width: 100%;
+  width: 100%;
 }
 
 
 .headerLogo {
-	width: 77px;
-	height: 30px;
+  width: 77px;
+  height: 30px;
 
-	@media (min-width: 768px) {
-		width: 90px;
-		height: 45px;
-	}
+  @media (min-width: 768px) {
+    width: 90px;
+    height: 45px;
+  }
 }
 
 
 .headerLinks {
-	display: none;
-	gap: 4px;
+  display: none;
+  gap: 4px;
 
-	@media screen and (min-width: 768px) {
-		display: flex;
-		margin-left: auto;
-	}
+  @media screen and (min-width: 768px) {
+    display: flex;
+    margin-left: auto;
+  }
 }
 
 
 .headerLinksRight {
-	display: none;
+  display: none;
 
-	@media screen and (min-width: 1200px) {
-		display: flex;
-		gap: 0 4px;
-		margin: 0 0 0 11%;
-	}
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    gap: 0 4px;
+    margin: 0 0 0 11%;
+  }
 }
 
 
 .header__link {
-	display: grid;
-	gap: 4px 0;
-	flex-grow: 1;
-	font-size: .75rem;
+  display: grid;
+  gap: 4px 0;
+  flex-grow: 1;
+  font-size: .75rem;
 }
 
 
 .header__link-icon {
-	margin: 0 auto;
-	fill: #FFFFFF;
+  margin: 0 auto;
+  fill: #FFFFFF;
 }
 
 
 .headerLink {
-	display: flex;
-	align-items: center;
-	background-color: #FFFFFF0D;
-	padding: 20px 25px;
-	font-size: 1.125rem;
-	font-weight: 600;
-	line-height: 1;
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF0D;
+  padding: 20px 25px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1;
 }
