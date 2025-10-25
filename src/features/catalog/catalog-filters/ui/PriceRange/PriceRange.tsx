@@ -2,11 +2,12 @@
 
 import * as Slider from '@radix-ui/react-slider';
 import { IMaskInput } from 'react-imask';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './PriceRange.scss';
 import { useGetPriceCatalog } from '@/features/catalog/catalog-filters/api/useGetPriceCatalog';
-import { useAppDispatch } from '@/shared/model/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
 import { setPrice } from '@/features/catalog/catalog-filters/model/slice';
+import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
 
 type Props = {
   step?: number;
@@ -16,8 +17,21 @@ type Props = {
 export default function PriceRange({ step = 100, id = 'price-range' }: Props) {
   const price = useGetPriceCatalog();
   const dispatch = useAppDispatch();
+  const selectedFilters = useAppSelector(selectSelectedFilters);
   const { min, max } = price;
-  const [priceValue, setPriceValue] = useState<[number, number]>([min, max]);
+  const defaultRange = useMemo<[number, number]>(() => [min, max], [min, max]);
+  const appliedRange = selectedFilters.price;
+  const [priceValue, setPriceValue] = useState<[number, number]>(
+    appliedRange ?? defaultRange,
+  );
+
+  useEffect(() => {
+    if (appliedRange) {
+      setPriceValue(appliedRange);
+      return;
+    }
+    setPriceValue(defaultRange);
+  }, [appliedRange, defaultRange]);
 
   const clamp = (v: number, lo: number, hi: number) =>
     Math.min(Math.max(v, lo), hi);

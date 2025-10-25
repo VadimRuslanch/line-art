@@ -15,11 +15,12 @@ import { useCart } from '@/entities/cart/model/useCart';
 export default function ProductDetailsPreview({ slug }: { slug: string }) {
   const { product } = useProductDetails(slug);
   const { add, mutating, error } = useCart();
+  const quantity = product?.quantity ?? 0;
   const [qty, setQty] = useState<number>(0);
 
   useEffect(() => {
     setQty(quantity);
-  }, []);
+  }, [quantity]);
 
   if (product === null) return <p>Товар не найден</p>;
 
@@ -33,7 +34,6 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
     onSale,
     attributes,
     databaseId,
-    quantity = 0,
   } = product;
 
   const attributesNodes = attributes?.nodes ?? [];
@@ -123,3 +123,5 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
     </div>
   );
 }
+
+

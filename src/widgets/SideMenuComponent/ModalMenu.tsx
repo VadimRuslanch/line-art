@@ -1,7 +1,7 @@
 'use client';
 
 import './styles/CatalogMenuItems.scss';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useUI } from '@/context/UIContext';
@@ -10,12 +10,14 @@ import ModalMenuWrapper from '@/widgets/SideMenuComponent/ModalMenuWrapper/Modal
 export default function ModalMenu() {
   const { drawerType, closeAll } = useUI();
   const pathname = usePathname();
+  const lastPathnameRef = useRef(pathname);
 
   useEffect(() => {
-    if (drawerType === 'MENU') {
+    if (lastPathnameRef.current !== pathname && drawerType === 'MENU') {
       closeAll();
     }
-  }, [pathname]);
+    lastPathnameRef.current = pathname;
+  }, [pathname, drawerType, closeAll]);
 
   const menuVariants: Variants = {
     hidden: { clipPath: 'inset(0 0 100% 0)' },

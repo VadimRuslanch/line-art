@@ -18,8 +18,7 @@
 }
 
 .CatalogProductList__loader,
-.CatalogProductList__empty,
-.CatalogProductList__loading-hint {
+.CatalogProductList__empty {
   text-align: center;
   padding: 40px 0;
   color: var(--text-secondary, #777);
@@ -29,63 +28,34 @@
   color: var(--text-primary, #1a1a1a);
 }
 
-.CatalogProductList__pagination {
+.CatalogProductList__load-more {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
 }
 
-.CatalogProductList__pagination-pages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.CatalogProductList__pagination-button {
+.CatalogProductList__load-more-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border-neutral, #d0d0d0);
-  background-color: var(--background-surface-1, #ffffff);
-  color: var(--text-primary, #1a1a1a);
-  font-size: 0.875rem;
-  line-height: 1.2;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  cursor: pointer;
-}
-
-.CatalogProductList__pagination-button--control {
-  font-weight: 500;
-}
-
-.CatalogProductList__pagination-button:hover:not(:disabled) {
-  background-color: var(--background-surface-2, #f5f5f5);
-}
-
-.CatalogProductList__pagination-button--active {
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--text-primary, #1a1a1a);
   background-color: var(--text-primary, #1a1a1a);
   color: var(--background-surface-1, #ffffff);
-  border-color: var(--text-primary, #1a1a1a);
-  cursor: default;
-}
-
-.CatalogProductList__pagination-button--active:hover {
-  background-color: var(--text-primary, #1a1a1a);
-}
-
-.CatalogProductList__pagination-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.CatalogProductList__pagination-ellipsis {
-  padding: 8px 4px;
-  color: var(--text-secondary, #777);
-  font-size: 0.875rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  min-width: 220px;
+}
+
+.CatalogProductList__load-more-button:hover:not(:disabled) {
+  background-color: var(--text-primary-hover, #2a2a2a);
+  border-color: var(--text-primary-hover, #2a2a2a);
+}
+
+.CatalogProductList__load-more-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

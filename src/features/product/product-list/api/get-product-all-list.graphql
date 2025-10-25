@@ -1,0 +1,24 @@
+query GetProductAllList(
+    $n: Int!
+    $after: String
+    $where: RootQueryToProductUnionConnectionWhereArgs,
+) {
+    products(first: $n, after: $after, where: $where) {
+        pageInfo { endCursor hasNextPage }
+        nodes {
+            databaseId
+            id
+            name
+            onSale
+            uri
+            sku
+            title
+            ... on SimpleProduct {
+                price
+                regularPrice
+                salePrice
+            }
+            image { ...ImageCore }
+        }
+    }
+}

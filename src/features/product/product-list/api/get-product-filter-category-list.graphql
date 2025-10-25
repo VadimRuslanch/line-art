@@ -1,0 +1,12 @@
+query  getProductFilterCategoryList($slug: ID!, $first: Int!, $after: String, $where: ProductCategoryToProductConnectionWhereArgs ){
+    productCategory(id: $slug, idType: SLUG) {
+        products(
+            first: $first
+            after: $after
+            where: $where
+        ) {
+            pageInfo { endCursor hasNextPage }
+            nodes { id name slug }
+        }
+    }
+}

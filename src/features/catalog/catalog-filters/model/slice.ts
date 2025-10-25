@@ -45,13 +45,16 @@ const catalogFiltersSlice = createSlice({
       state[payload.key] = Array.from(list);
     },
     setCategory(state, { payload }: PayloadAction<string>) {
-      state.category.push(payload);
+      state.category = payload ? [payload] : [];
     },
     setPrice(state, { payload }: PayloadAction<PricePayload>) {
       state.price = payload;
     },
-    clearAll() {
-      return initialState;
+    clearAll(state) {
+      return {
+        ...initialState,
+        isOpenModal: state.isOpenModal,
+      };
     },
     openModal(state) {
       state.isOpenModal = true;

@@ -1,16 +1,18 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './CategoriesSelect.scss';
 import { useGetCategoriesCatalog } from '@/features/catalog/catalog-filters/api/useGetCategoriesCatalog';
-import { useAppDispatch } from '@/shared/model/hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
 import { setCategory } from '@/features/catalog/catalog-filters/model/slice';
 import Icon from './icon/iconamoon_arrow-down-2.svg';
+import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
 
-type categories = {
+type CategoryOption = {
   id: string;
   databaseId: number;
   name?: string | null;
+  slug?: string | null;
 };
 
 type Props = {
@@ -18,15 +20,18 @@ type Props = {
 };
 
 export const CategoriesSelect: React.FC<Props> = ({
-  placeholder = 'Категории',
+  placeholder = 'Выберите категорию',
 }) => {
   const { categories } = useGetCategoriesCatalog();
   const dispatch = useAppDispatch();
-  const options = categories ?? [];
+  const selectedFilters = useAppSelector(selectSelectedFilters);
+  const options = useMemo<CategoryOption[]>(
+    () => (categories ?? []) as CategoryOption[],
+    [categories],
+  );
 
   const [open, setOpen] = useState(false);
   const [highlight, setHighlight] = useState(0);
-  const [selected, setSelected] = useState<categories | null>(null);
   const [typeahead, setTypeahead] = useState('');
   const typeTimer = useRef<number | null>(null);
 
@@ -37,6 +42,21 @@ export const CategoriesSelect: React.FC<Props> = ({
   useEffect(() => {
     setHighlight(0);
   }, [options.length]);
+
+  const selectedSlug = selectedFilters.category?.[0] ?? null;
+  const selected = useMemo(() => {
+    if (!selectedSlug) return null;
+    return options.find((opt) => opt.slug === selectedSlug) ?? null;
+  }, [options, selectedSlug]);
+
+  useEffect(() => {
+    if (!selectedSlug) {
+      setHighlight(0);
+      return;
+    }
+    const idx = options.findIndex((opt) => opt.slug === selectedSlug);
+    if (idx >= 0) setHighlight(idx);
+  }, [options, selectedSlug]);
 
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
@@ -63,7 +83,6 @@ export const CategoriesSelect: React.FC<Props> = ({
     const opt = options[idx];
     if (!opt) return;
     if (!opt.slug) return;
-    setSelected(opt);
     setOpen(false);
     btnRef.current?.focus();
     dispatch(setCategory(opt.slug));
@@ -151,12 +170,6 @@ export const CategoriesSelect: React.FC<Props> = ({
 
   const selectedLabel = selected?.name ?? placeholder;
 
-  // console.log(
-  //   options.map((item) => {
-  //     return item.slug;
-  //   }),
-  // );
-
   return (
     <div className="cs-root">
       <button
@@ -173,9 +186,6 @@ export const CategoriesSelect: React.FC<Props> = ({
           {selectedLabel}
         </span>
         <Icon data-state={open} className="cs-button__icon" />
-        {/*<span className="cs-button__icon" aria-hidden>*/}
-        {/*  ▾*/}
-        {/*</span>*/}
       </button>
 
       {open && (
@@ -187,7 +197,7 @@ export const CategoriesSelect: React.FC<Props> = ({
           tabIndex={-1}
           onKeyDown={onKeyDown}
         >
-          {options.length === 0 && <li className="cs-empty">Нет категорий</li>}
+          {options.length === 0 && <li className="cs-empty">Нет вариантов</li>}
 
           {options.map((opt, i) => {
             const isSelected = selected?.id === opt.id;
@@ -205,7 +215,7 @@ export const CategoriesSelect: React.FC<Props> = ({
                   isSelected ? 'is-selected' : '',
                 ].join(' ')}
                 onMouseEnter={() => setHighlight(i)}
-                onMouseDown={(e) => e.preventDefault()}
+                onMouseDown={(evt) => evt.preventDefault()}
                 onClick={() => commit(i)}
               >
                 {opt.name}
@@ -215,7 +225,6 @@ export const CategoriesSelect: React.FC<Props> = ({
         </ul>
       )}
 
-      {/* Если нужна интеграция с формой — скрытое поле */}
       <input type="hidden" name="categoryId" value={selected?.id ?? ''} />
     </div>
   );
