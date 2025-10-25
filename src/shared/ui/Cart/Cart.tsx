@@ -15,6 +15,7 @@ export default function Cart() {
           product={product.product!.node!}
           productKey={product.key}
           quantity={product.quantity!}
+          lineTotal={product.total}
           key={product.key}
         />
       ))}

@@ -1,60 +1,159 @@
 import './AddToCart.scss';
-import { useState, useMemo, useEffect } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import UIButton from '@/shared/ui/UIElements/UIButton/UIButton';
 import { useCart } from '@/entities/cart/model/useCart';
 import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
+import { toast } from 'react-toastify';
+import { useAppSelector } from '@/shared/model/hooks';
+import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
 type Props = {
   product: ProductWithCategoriesFragment;
   initialQty?: number;
 };
 
+const MAX_QTY = 100;
+const DEBOUNCE_MS = 400;
+
 export default function AddToCart({ product, initialQty = 0 }: Props) {
-  const { simpleProducts, add, remove } = useCart();
-
-  const line = useMemo(
-    () =>
-      simpleProducts.find(
-        (i) => i.product.node.databaseId === product.databaseId,
-      ),
-    [simpleProducts, product.databaseId],
+  const productId = product.databaseId;
+  const selector = useMemo(
+    () => selectCartItemByProductId(productId),
+    [productId],
   );
+  const cartItem = useAppSelector(selector);
 
-  const inCart = !!line;
-  const key = line?.key ?? undefined;
-  const quantityInCart = line?.quantity ?? 0;
+  const { add, updateQuantity, remove, mutating } = useCart();
 
-  const [qty, setQty] = useState<number>(quantityInCart || initialQty);
+  const inCart = Boolean(cartItem);
+  const [qty, setQty] = useState<number>(
+    cartItem?.quantity ?? Math.max(initialQty, 0),
+  );
+  const [updatingQty, setUpdatingQty] = useState(false);
+  const [pendingAction, setPendingAction] = useState(false);
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (inCart) setQty(quantityInCart);
-  }, [inCart, quantityInCart]);
-
-  const handleAdd = async () => {
-    if (inCart && key) {
-      await remove(key);
+    if (inCart) {
+      setQty(cartItem?.quantity ?? 1);
+      setUpdatingQty(false);
     } else {
-      await add(product.databaseId, qty);
+      setUpdatingQty(false);
+      setQty(Math.max(initialQty, 0));
+    }
+  }, [inCart, cartItem?.quantity, initialQty]);
+
+  const handleQtyChange = (newQty: number) => {
+    if (newQty < 1 || newQty > MAX_QTY) return;
+    setQty(newQty);
+  };
+
+  useEffect(() => {
+    if (!inCart || !cartItem?.key) return;
+    if (qty === (cartItem.quantity ?? qty)) return;
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+      debounceTimeout.current = null;
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      debounceTimeout.current = null;
+      setUpdatingQty(true);
+
+      updateQuantity(cartItem.key, qty)
+        .then(() => {
+          setUpdatingQty(false);
+        })
+        .catch((e) => {
+          setUpdatingQty(false);
+          setQty(cartItem.quantity ?? 1);
+          toast.error(
+            e instanceof Error && e.message
+              ? e.message
+              : 'Не удалось обновить количество товара в корзине',
+          );
+        });
+    }, DEBOUNCE_MS);
+
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+        debounceTimeout.current = null;
+      }
+    };
+  }, [qty, inCart, cartItem?.key, cartItem?.quantity, updateQuantity]);
+
+  const handleAdd = async (quantity: number) => {
+    if (!productId) return;
+    try {
+      setPendingAction(true);
+      await add(productId, quantity);
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : 'Не удалось добавить товар в корзину';
+      toast.error(message);
+    } finally {
+      setPendingAction(false);
     }
   };
 
+  const handleRemove = async () => {
+    if (!cartItem?.key) return;
+
+    try {
+      setPendingAction(true);
+      await remove(cartItem.key);
+      setQty(0);
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : 'Не удалось удалить товар из корзины';
+      toast.error(message);
+    } finally {
+      setPendingAction(false);
+    }
+  };
+
+  const handleButtonClick = async () => {
+    if (!productId) return;
+
+    if (!inCart) {
+      const nextQty = Math.max(qty, 1);
+      setQty(nextQty);
+      await handleAdd(nextQty);
+      return;
+    }
+
+    await handleRemove();
+  };
+
+  const isDisabled = pendingAction || mutating || updatingQty || !productId;
+  const showQuantitySelector =
+    inCart && (cartItem?.quantity ?? qty) > 0 && !pendingAction;
+  const buttonLabel = showQuantitySelector ? 'Удалить' : 'В корзину';
+
   return (
     <div className="AddToCart">
-      <UIButton handleAdd={handleAdd}>
-        <span className="ButtonBut2-bold">
-          {inCart ? 'Удалить' : 'В корзину'}
-        </span>
+      <UIButton handleAdd={handleButtonClick} disabled={isDisabled}>
+        <span className="ButtonBut2-bold">{buttonLabel}</span>
       </UIButton>
 
-      <div className="AddToCart__item">
-        <QuantitySelector
-          min={0}
-          max={100}
-          value={qty}
-          onChangeAction={setQty}
-        />
-      </div>
+      {showQuantitySelector && (
+        <div className="AddToCart__item">
+          <QuantitySelector
+            min={1}
+            max={MAX_QTY}
+            value={qty}
+            onChangeAction={handleQtyChange}
+            disabled={updatingQty || pendingAction}
+          />
+        </div>
+      )}
     </div>
   );
 }

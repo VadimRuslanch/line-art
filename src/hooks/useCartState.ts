@@ -1,6 +1,7 @@
 'use client';
 
-import { useCart } from '@/entities/cart/model/useCart';
+import { useAppSelector } from '@/shared/model/hooks';
+import { selectCartItemsByProductId } from '@/entities/cart/model/cartSelectors';
 
 interface IdentifiableProduct {
   __typename?: string;
@@ -10,32 +11,24 @@ interface IdentifiableProduct {
 export type WithCartFlag<T extends IdentifiableProduct> = T & {
   inCart: boolean;
   key?: string;
+  quantity: number;
 };
 
 export function useCartState<
   T extends IdentifiableProduct = IdentifiableProduct,
 >(productsItem: readonly T[] = []): WithCartFlag<T>[] {
-  const { simpleProducts } = useCart();
+  const itemsById = useAppSelector(selectCartItemsByProductId);
 
   return productsItem.map<WithCartFlag<T>>((product) => {
-    const cartItem = simpleProducts.find(
-      (ci) =>
-        ci.product?.node &&
-        'databaseId' in ci.product.node &&
-        ci.product.node.databaseId === product.databaseId,
-    );
-
-    const productKey = simpleProducts.find(
-      (ci) =>
-        ci.product?.node &&
-        'databaseId' in ci.product.node &&
-        ci.product.node.databaseId === product.databaseId,
-    )?.key;
+    const productId = product.databaseId;
+    const cartItem =
+      typeof productId === 'number' ? itemsById[productId] : undefined;
 
     return {
       ...product,
       inCart: Boolean(cartItem),
-      key: productKey,
+      key: cartItem?.key,
+      quantity: cartItem?.quantity ?? 0,
     };
   });
 }

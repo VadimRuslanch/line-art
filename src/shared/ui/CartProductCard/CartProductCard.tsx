@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './CartProductCard.module.scss';
 import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
 import IconClose from '@/shared/assets/svg/icon-close.svg';
@@ -10,28 +10,109 @@ import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useCart } from '@/entities/cart/model/useCart';
+import { parseMoney } from '@/features/catalog/catalog-filters/model/utils';
+import { useAppSelector } from '@/shared/model/hooks';
+import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
 export type CartProductCardProps = {
   product: ProductWithCategoriesFragment;
   productKey: string;
   quantity: number;
+  lineTotal?: string | null;
 };
 
 export default function CartProductCard({
   product,
   productKey,
   quantity,
+  lineTotal,
 }: CartProductCardProps) {
-  const { remove } = useCart();
+  const { remove, updateQuantity } = useCart();
+  const productId = product.databaseId;
+  const cartItem = useAppSelector(
+    selectCartItemByProductId(productId ?? undefined),
+  );
+  const resolvedKey = cartItem?.key ?? productKey;
+  const serverQuantity = cartItem?.quantity ?? quantity;
+  const serverLineTotal = cartItem?.total ?? lineTotal;
+  const [qty, setQty] = useState<number>(serverQuantity ?? 1);
+  const [updatingQty, setUpdatingQty] = useState(false);
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [qty, setQty] = useState<number>(quantity);
+  useEffect(() => {
+    setQty(serverQuantity ?? 1);
+    setUpdatingQty(false);
+  }, [serverQuantity]);
 
   const handleQtyChange = (newQty: number) => {
+    if (newQty < 1 || newQty === qty || updatingQty) return;
     setQty(newQty);
   };
 
+  useEffect(() => {
+    if (!resolvedKey) return;
+    if (qty === (serverQuantity ?? qty)) return;
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+      debounceTimeout.current = null;
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      debounceTimeout.current = null;
+      setUpdatingQty(true);
+
+      updateQuantity(resolvedKey, qty)
+        .then(() => {
+          setUpdatingQty(false);
+        })
+        .catch((e) => {
+          setUpdatingQty(false);
+          setQty(serverQuantity ?? 1);
+          toast.error(
+            e?.message?.length
+              ? e.message
+              : 'Не удалось обновить количество товара в корзине',
+          );
+        });
+    }, 400);
+
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+        debounceTimeout.current = null;
+      }
+    };
+  }, [qty, resolvedKey, updateQuantity, serverQuantity]);
+
+  const lineTotalValue = useMemo(() => {
+    if (serverLineTotal) {
+      const parsed = parseMoney(serverLineTotal);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+
+    const unitPrice = product.onSale
+      ? parseMoney(product.salePrice ?? product.regularPrice ?? 0)
+      : parseMoney(product.regularPrice ?? 0);
+
+    const computed = unitPrice * qty;
+    return Number.isFinite(computed) ? computed : 0;
+  }, [
+    serverLineTotal,
+    product.onSale,
+    product.regularPrice,
+    product.salePrice,
+    qty,
+  ]);
+
+  const formattedLineTotal = useMemo(() => {
+    const normalized = Number.isFinite(lineTotalValue) ? lineTotalValue : 0;
+    return new Intl.NumberFormat('ru-RU').format(normalized);
+  }, [lineTotalValue]);
+
   const handleDelete = async () => {
-    remove(productKey)
+    if (!resolvedKey) return;
+    remove(resolvedKey)
       .then(() => {
         toast.success('Товар удалён из корзины');
       })
@@ -83,12 +164,16 @@ export default function CartProductCard({
                 onSale={product.onSale!}
                 data-font-size="big"
               />
+              <p className={`${styles.productTotal} HeadlineH5`} aria-live="polite">
+                <span>Итого:</span> <span>{formattedLineTotal}</span> ₽
+              </p>
             </div>
             <QuantitySelector
               min={1}
               max={100}
               value={qty}
               onChangeAction={handleQtyChange}
+              disabled={updatingQty}
             />
           </div>
         </div>

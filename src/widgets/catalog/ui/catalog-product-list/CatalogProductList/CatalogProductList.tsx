@@ -1,125 +1,142 @@
 'use client';
 
 import './CatalogProductList.scss';
-import { FixedSizeGrid as Grid } from 'react-window';
-import InfiniteLoader from 'react-window-infinite-loader';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import { useCallback, useState, useEffect } from 'react';
-import { useProducts } from '@/features/product/product-list/model/useProducts';
+import { useMemo } from 'react';
 import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
+import { useProducts } from '@/features/product/product-list/model/useProducts';
 
-const GAP = 20;
-const ITEM_HEIGHT = 520;
+type PaginationItem = number | 'ellipsis-start' | 'ellipsis-end';
 
-const getCols = (w: number) => {
-  switch (true) {
-    case w < 768:
-      return 1;
-    case w < 1000:
-      return 2;
-    default:
-      return 3;
+const MAX_VISIBLE_PAGES = 5;
+
+function buildPagination(
+  currentPage: number,
+  totalPages: number,
+): PaginationItem[] {
+  if (totalPages <= 1) return [];
+  if (totalPages <= MAX_VISIBLE_PAGES) {
+    return Array.from({ length: totalPages }, (_, idx) => idx + 1);
   }
-};
+
+  const pages: PaginationItem[] = [];
+  const windowStart = Math.max(1, currentPage - 2);
+  const windowEnd = Math.min(totalPages, currentPage + 2);
+
+  if (windowStart > 1) {
+    pages.push(1);
+    if (windowStart > 2) {
+      pages.push('ellipsis-start');
+    }
+  }
+
+  for (let page = windowStart; page <= windowEnd; page += 1) {
+    pages.push(page);
+  }
+
+  if (windowEnd < totalPages) {
+    if (windowEnd < totalPages - 1) {
+      pages.push('ellipsis-end');
+    }
+    pages.push(totalPages);
+  }
+
+  return pages;
+}
 
 export default function CatalogProductList() {
-  const { products, hasNextPage, loadMore } = useProducts();
-  const [vw, setVw] = useState(0);
+  const {
+    products,
+    allProducts,
+    currentPage,
+    goToPage,
+    canGoPrev,
+    canGoNext,
+    totalPages,
+    isInitialLoading,
+    isPageChanging,
+    isFetchingMore,
+  } = useProducts({ pageSize: 24 });
 
-  useEffect(() => {
-    const update = () => setVw(window.innerWidth);
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  const isItemLoaded = useCallback(
-    (index: number) => index < products.length,
-    [products.length],
+  const paginationItems = useMemo(
+    () => buildPagination(currentPage, totalPages),
+    [currentPage, totalPages],
   );
 
-  const loadMoreItems = useCallback(async () => {
-    if (hasNextPage) await loadMore();
-  }, [hasNextPage, loadMore]);
-
-  const cols = getCols(vw);
-  const itemCount = hasNextPage ? products.length + cols : products.length;
+  const showPagination = paginationItems.length > 0;
+  const isEmptyState =
+    !isInitialLoading && !isPageChanging && allProducts.length === 0;
+  const showLoadingHint = (isPageChanging || isFetchingMore) && !isInitialLoading;
 
   return (
-    <div className="CatalogProductList" style={{ width: '100%' }}>
-      <InfiniteLoader
-        isItemLoaded={isItemLoaded}
-        itemCount={itemCount}
-        loadMoreItems={loadMoreItems}
-        threshold={4}
-      >
-        {({ onItemsRendered, ref }) => (
-          <AutoSizer>
-            {({ height, width }) => {
-              const totalGap = GAP * (cols - 1);
-              const colWidth = Math.floor((width - totalGap) / cols);
-              const rowHeight = ITEM_HEIGHT + GAP;
-              const rowCount = Math.ceil(itemCount / cols);
+    <div className="CatalogProductList">
+      {isInitialLoading ? (
+        <div className="CatalogProductList__loader">Загрузка товаров...</div>
+      ) : isEmptyState ? (
+        <div className="CatalogProductList__empty">
+          По выбранным фильтрам товары не найдены
+        </div>
+      ) : (
+        <div className="CatalogProductList__grid">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
 
-              return (
-                <Grid
-                  ref={ref}
-                  height={height}
-                  width={width}
-                  columnCount={cols}
-                  columnWidth={colWidth}
-                  rowHeight={rowHeight}
-                  rowCount={rowCount}
-                  className="hide-scrollbar"
-                  onItemsRendered={({
-                    visibleRowStartIndex,
-                    visibleRowStopIndex,
-                    visibleColumnStartIndex,
-                    visibleColumnStopIndex,
-                  }) => {
-                    const startIndex =
-                      visibleRowStartIndex * cols + visibleColumnStartIndex;
-                    const stopIndex =
-                      visibleRowStopIndex * cols + visibleColumnStopIndex;
-                    onItemsRendered({
-                      overscanStartIndex: startIndex,
-                      overscanStopIndex: stopIndex,
-                      visibleStartIndex: startIndex,
-                      visibleStopIndex: stopIndex,
-                    });
-                  }}
+      {showPagination && (
+        <div className="CatalogProductList__pagination" aria-label="Пагинация">
+          <button
+            type="button"
+            className="CatalogProductList__pagination-button CatalogProductList__pagination-button--control"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={!canGoPrev || isPageChanging || isInitialLoading}
+          >
+            Назад
+          </button>
+
+          <div className="CatalogProductList__pagination-pages">
+            {paginationItems.map((item) =>
+              typeof item === 'number' ? (
+                <button
+                  key={item}
+                  type="button"
+                  className={`CatalogProductList__pagination-button${
+                    item === currentPage
+                      ? ' CatalogProductList__pagination-button--active'
+                      : ''
+                  }`}
+                  onClick={() => goToPage(item)}
+                  disabled={item === currentPage || isPageChanging || isInitialLoading}
+                  aria-current={item === currentPage ? 'page' : undefined}
                 >
-                  {({ columnIndex, rowIndex, style }) => {
-                    const index = rowIndex * cols + columnIndex;
-                    if (index >= itemCount) return null;
+                  {item}
+                </button>
+              ) : (
+                <span
+                  key={item}
+                  className="CatalogProductList__pagination-ellipsis"
+                  aria-hidden="true"
+                >
+                  ...
+                </span>
+              ),
+            )}
+          </div>
 
-                    // Внутри ячейки рисуем отступы, чтобы получить GAP визуально
-                    const cellStyle: React.CSSProperties = {
-                      ...style,
-                      left: Number(style.left) + columnIndex,
-                      top: style.top,
-                      width: colWidth,
-                      height: ITEM_HEIGHT,
-                      marginRight: GAP,
-                      marginBottom: GAP,
-                    };
+          <button
+            type="button"
+            className="CatalogProductList__pagination-button CatalogProductList__pagination-button--control"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={!canGoNext || isPageChanging || isInitialLoading}
+          >
+            Далее
+          </button>
+        </div>
+      )}
 
-                    if (index >= products.length) {
-                      return <div style={cellStyle} />;
-                    }
-
-                    return (
-                      <div style={cellStyle}>
-                        <ProductCard product={products[index]} />
-                      </div>
-                    );
-                  }}
-                </Grid>
-              );
-            }}
-          </AutoSizer>
-        )}
-      </InfiniteLoader>
+      {showLoadingHint && (
+        <div className="CatalogProductList__loading-hint">Загружаем товары...</div>
+      )}
     </div>
   );
 }

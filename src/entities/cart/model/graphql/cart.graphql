@@ -37,3 +37,11 @@ mutation RemoveFromCart($keys: [ID!]!, $all: Boolean) {
     }
   }
 }
+
+mutation UpdateCartItemQuantities($items: [CartItemQuantityInput!]!) {
+  updateItemQuantities(input: { items: $items }) {
+    cart {
+      ...CartCore
+    }
+  }
+}

@@ -8,6 +8,7 @@ type Props = {
   min?: number;
   max?: number;
   onChangeAction: (value: number) => void;
+  disabled?: boolean;
 };
 
 export default function QuantitySelector({
@@ -15,6 +16,7 @@ export default function QuantitySelector({
   onChangeAction,
   min = 0,
   max = 100,
+  disabled = false,
 }: Props) {
   const qty = value ?? 1;
 
@@ -22,7 +24,10 @@ export default function QuantitySelector({
 
   return (
     <div className="qty">
-      <button onClick={() => update(qty - 1)} disabled={qty <= min}>
+      <button
+        onClick={() => update(qty - 1)}
+        disabled={disabled || qty <= min}
+      >
         <IconMinus className="w-4 h-4" />
       </button>
 
@@ -40,7 +45,10 @@ export default function QuantitySelector({
         {/*/>*/}
       </label>
 
-      <button onClick={() => update(qty + 1)} disabled={qty >= max}>
+      <button
+        onClick={() => update(qty + 1)}
+        disabled={disabled || qty >= max}
+      >
         <IconPlus className="w-4 h-4" />
       </button>
     </div>

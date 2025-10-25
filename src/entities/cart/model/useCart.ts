@@ -11,11 +11,16 @@ import {
   RemoveFromCartMutationVariables,
   ProductWithCategoriesFragment,
   CartCoreFragment,
+  UpdateCartItemQuantitiesMutation,
+  UpdateCartItemQuantitiesMutationVariables,
+  UpdateCartItemQuantitiesDocument,
 } from '@/shared/api/gql/graphql';
 import { ApolloCache } from '@apollo/client';
 import { useQuery, useMutation } from '@apollo/client/react';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 import { ApolloError } from '@apollo/client/v4-migration';
+import { useAppDispatch } from '@/shared/model/hooks';
+import { setSnapshot, CartItemState } from '@/entities/cart/model/cartSlice';
 /* ------------------------ helpers -------------------------------- */
 
 type Cart = CartCoreFragment;
@@ -38,6 +43,7 @@ function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
 /* ------------------------ основной хук --------------------------- */
 
 export function useCart() {
+  const dispatch = useAppDispatch();
   const { data, loading: loadingCart } = useQuery<
     GetCartQuery,
     GetCartQueryVariables
@@ -60,6 +66,42 @@ export function useCart() {
     );
   }, [cart]);
 
+  const hasCart = Boolean(cart);
+  const cartSubtotal = cart?.subtotal ?? null;
+  const cartTotal = cart?.total ?? null;
+
+  useEffect(() => {
+    if (!hasCart) {
+      dispatch(setSnapshot({ items: [], subtotal: null, total: null }));
+      return;
+    }
+
+    const items: CartItemState[] = simpleProducts
+      .map((item) => {
+        const productId = item.product.node.databaseId;
+        const key = item.key;
+        const quantity = item.quantity ?? 0;
+
+        if (typeof productId !== 'number' || !key) return null;
+
+        return {
+          key,
+          productId,
+          quantity,
+          total: item.total ?? null,
+        };
+      })
+      .filter((item): item is CartItemState => Boolean(item));
+
+    dispatch(
+      setSnapshot({
+        items,
+        subtotal: cartSubtotal,
+        total: cartTotal,
+      }),
+    );
+  }, [dispatch, hasCart, simpleProducts, cartSubtotal, cartTotal]);
+
   const [addExec, { loading: adding, error: addErr }] = useMutation<
     AddToCartMutation,
     AddToCartMutationVariables
@@ -75,6 +117,15 @@ export function useCart() {
   >(RemoveFromCartDocument, {
     update(cache, { data }) {
       writeCart(cache, data?.removeItemsFromCart?.cart);
+    },
+  });
+
+  const [updateQtyExec, { loading: updating, error: updateErr }] = useMutation<
+    UpdateCartItemQuantitiesMutation,
+    UpdateCartItemQuantitiesMutationVariables
+  >(UpdateCartItemQuantitiesDocument, {
+    update(cache, { data }) {
+      writeCart(cache, data?.updateItemQuantities?.cart);
     },
   });
 
@@ -96,10 +147,17 @@ export function useCart() {
     await rmExec({ variables: { keys: [], all: true } });
   }, [rmExec]);
 
-  const mutating = adding || removing;
+  const updateQuantity = useCallback(
+    async (key: string, quantity: number) => {
+      await updateQtyExec({ variables: { items: [{ key, quantity }] } });
+    },
+    [updateQtyExec],
+  );
+
+  const mutating = adding || removing || updating;
   const cartLoading = loadingCart;
 
-  const error: ApolloError | undefined = addErr || rmErr;
+  const error: ApolloError | undefined = addErr || rmErr || updateErr;
 
   return useMemo<
     Readonly<{
@@ -111,6 +169,7 @@ export function useCart() {
       add: (id: number, qty?: number) => Promise<void>;
       remove: (key: string) => Promise<void>;
       clear: () => Promise<void>;
+      updateQuantity: (key: string, qty: number) => Promise<void>;
     }>
   >(
     () => ({
@@ -122,7 +181,18 @@ export function useCart() {
       add,
       remove,
       clear,
+      updateQuantity,
     }),
-    [cart, simpleProducts, mutating, cartLoading, error, add, remove, clear],
+    [
+      cart,
+      simpleProducts,
+      mutating,
+      cartLoading,
+      error,
+      add,
+      remove,
+      clear,
+      updateQuantity,
+    ],
   );
 }
