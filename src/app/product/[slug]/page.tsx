@@ -1,6 +1,6 @@
-import ProductDetailsPreview from '@/shared/ui/ProductDetails/ProductDetailsPreview/ProductDetailsPreview';
+import ProductDetailsPreview from '@/widgets/product/ProductDetails/ProductDetailsPreview/ProductDetailsPreview';
 import ProductDetailsInfo from '@/shared/ui/ProductDetailsInfo/ProductDetailsInfo';
-import ProductDetailsAbout from '@/shared/ui/ProductDetails/ProductDetailsAbout/ProductDetailsAbout';
+import ProductDetailsAbout from '@/widgets/product/ProductDetails/ProductDetailsAbout/ProductDetailsAbout';
 
 type Params = Promise<{ slug: string }>;
 

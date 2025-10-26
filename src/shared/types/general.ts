@@ -1,6 +1,5 @@
-import { ImageCoreFragment } from '@/shared/api/gql/graphql';
-
-import { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
+import type { ImageCoreFragment } from '@/shared/api/gql/graphql';
+import type { ProductWithCart } from '@/entities/product/model/types';
 
 export interface CategoryWithProducts {
   databaseId: number;
@@ -9,5 +8,5 @@ export interface CategoryWithProducts {
   slug?: string | null;
   uri?: string | null;
   image?: ImageCoreFragment | null;
-  products: ProductProduct[];
+  products: ProductWithCart[];
 }

@@ -150,6 +150,7 @@ export default function AddToCart({ product, initialQty = 0 }: Props) {
             max={MAX_QTY}
             value={qty}
             onChangeAction={handleQtyChange}
+            onRemoveAction={handleRemove}
             disabled={updatingQty || pendingAction}
           />
         </div>

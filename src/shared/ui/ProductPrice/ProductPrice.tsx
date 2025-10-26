@@ -1,5 +1,5 @@
 import styles from './ProductPrice.module.scss';
-import { parseMoney } from '@/features/catalog/catalog-filters/model/utils';
+import { parseMoney } from '@/shared/lib/money';
 
 interface ProductPriceProps {
   regularPrice?: string | null;

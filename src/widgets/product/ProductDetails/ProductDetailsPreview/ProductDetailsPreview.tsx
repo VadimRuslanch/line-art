@@ -4,8 +4,8 @@ import './ProductDetailsPreview.scss';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import ProductDetailsCharacteristics from '@/shared/ui/ProductDetails/ProductDetailsCharacteristics/ProductDetailsCharacteristics';
-import { useProductDetails } from '@/features/product/product-details/model/useProductDetails';
+import ProductDetailsCharacteristics from '../ProductDetailsCharacteristics/ProductDetailsCharacteristics';
+import { useProductDetails } from '@/entities/product/model/useProductDetails';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import ImagesPreview from '@/shared/ui/ImagesPreview/ImagesPreview';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
@@ -54,7 +54,7 @@ export default function ProductDetailsPreview({ slug }: { slug: string }) {
   const ITEMS_BREADCRUMBS = [
     {
       title: 'Каталог',
-      href: '/catalog',
+      href: '/categories',
     },
     {
       title: name ?? '',

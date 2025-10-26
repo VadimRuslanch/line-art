@@ -9,12 +9,6 @@ import ImageHoverSlider from '@/shared/ui/ImageHoverSlider/ImageHoverSlider';
 import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 // import UIFavorite from '@/shared/ui/UIFavorite/UIFavorite';
 
-export interface ProductProduct extends ProductWithCategoriesFragment {
-  quantity: number;
-  inCart: boolean;
-  key?: string;
-}
-
 export default function ProductCard({
   product,
 }: {

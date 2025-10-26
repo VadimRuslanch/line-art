@@ -1,14 +1,26 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
+import { usePathname } from 'next/navigation';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
-type TDrawerType = 'CART' | 'MENU' | null;
+type TDrawerType = 'CART' | 'MENU' | 'FILTERS' | null;
 
 interface UIContextProps {
   drawerType: TDrawerType;
   toggleCart: () => void;
   toggleMenu: () => void;
+  toggleFilters: () => void;
+  openFilters: () => void;
+  closeFilters: () => void;
   closeAll: () => void;
 }
 
@@ -16,24 +28,58 @@ const UIContext = createContext<UIContextProps | undefined>(undefined);
 
 export const UIProvider = ({ children }: { children: ReactNode }) => {
   const [drawerType, setDrawerType] = useState<TDrawerType>(null);
+  const pathname = usePathname();
 
   useLockBodyScroll(drawerType !== null);
 
-  const toggleCart = () =>
+  const closeAll = useCallback(() => setDrawerType(null), []);
+
+  const toggleCart = useCallback(() => {
     setDrawerType((old) => (old === 'CART' ? null : 'CART'));
+  }, []);
 
-  const toggleMenu = () =>
+  const toggleMenu = useCallback(() => {
     setDrawerType((old) => (old === 'MENU' ? null : 'MENU'));
+  }, []);
 
-  const closeAll = () => setDrawerType(null);
+  const toggleFilters = useCallback(() => {
+    setDrawerType((old) => (old === 'FILTERS' ? null : 'FILTERS'));
+  }, []);
 
-  return (
-    <UIContext.Provider
-      value={{ drawerType, toggleCart, toggleMenu, closeAll }}
-    >
-      {children}
-    </UIContext.Provider>
+  const openFilters = useCallback(() => {
+    setDrawerType('FILTERS');
+  }, []);
+
+  const closeFilters = useCallback(() => {
+    setDrawerType((old) => (old === 'FILTERS' ? null : old));
+  }, []);
+
+  useEffect(() => {
+    setDrawerType(null);
+  }, [pathname]);
+
+  const value = useMemo(
+    () => ({
+      drawerType,
+      toggleCart,
+      toggleMenu,
+      toggleFilters,
+      openFilters,
+      closeFilters,
+      closeAll,
+    }),
+    [
+      drawerType,
+      toggleCart,
+      toggleMenu,
+      toggleFilters,
+      openFilters,
+      closeFilters,
+      closeAll,
+    ],
   );
+
+  return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 };
 
 export const useUI = () => {

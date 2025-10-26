@@ -1,0 +1,28 @@
+query  GetProductCategoryList(
+    $n: Int!,
+    $after: String,
+    $where: ProductCategoryToProductConnectionWhereArgs,
+    $slug: ID!,
+){
+    productCategory(id: $slug, idType: SLUG) {
+        databaseId
+        products(first: $n, after: $after, where: $where) {
+            pageInfo { endCursor hasNextPage }
+            nodes {
+                databaseId
+                id
+                name
+                onSale
+                uri
+                sku
+                title
+                ... on SimpleProduct {
+                    price
+                    regularPrice
+                    salePrice
+                }
+                image { ...ImageCore }
+            }
+        }
+    }
+}

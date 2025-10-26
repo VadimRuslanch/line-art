@@ -3,51 +3,26 @@
 import { useSuspenseQuery } from '@apollo/client/react';
 import {
   GetProductDetailsDocument,
-  type GetProductDetailsQuery,
   ProductIdTypeEnum,
 } from '@/shared/api/gql/graphql';
 import { useCart } from '@/entities/cart/model/useCart';
 import { useMemo } from 'react';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
-
-type SimpleGQL = Extract<
-  NonNullable<GetProductDetailsQuery['product']>,
-  { __typename: 'SimpleProduct' }
->;
-
-export type GlobalProductAttributeUI = {
-  __typename: 'GlobalProductAttribute';
-  id: string;
-  name?: string | null;
-  variation?: boolean | null;
-  visible?: boolean | null;
-  label?: string | null;
-  terms?: {
-    __typename: 'GlobalProductAttributeToTermNodeConnection';
-    nodes: NamedTermNode[];
-  } | null;
-};
-
-export type SimpleProductUI = Omit<SimpleGQL, 'attributes'> & {
-  inCart: boolean;
-  key: string | null;
-  quantity: number;
-  attributes?: { nodes: GlobalProductAttributeUI[] } | null;
-};
+import type {
+  // GlobalProductAttributeUI,
+  NamedTermNode,
+  SimpleProductGQL,
+  SimpleProductUI,
+} from './types';
 
 type AttrNode = NonNullable<
-  NonNullable<SimpleGQL['attributes']>['nodes']
+  NonNullable<SimpleProductGQL['attributes']>['nodes']
 >[number];
 
-type GlobalAttrNode = Extract<
-  AttrNode & { __typename: unknown },
-  { __typename: 'GlobalProductAttribute' }
->;
-
-export type NamedTermNode = Extract<
-  NonNullable<NonNullable<GlobalAttrNode['terms']>['nodes'][number]>,
-  { name?: string | null }
->;
+// type GlobalAttrNode = Extract<
+//   AttrNode & { __typename: unknown },
+//   { __typename: 'GlobalProductAttribute' }
+// >;
 
 function isNonNull<T>(v: T | null | undefined): v is T {
   return v != null;
@@ -74,8 +49,8 @@ export const useProductDetails = (slug: string) => {
 
   const { simpleProducts } = useCart();
 
-  const simple: SimpleGQL | null = isSimpleProduct(data?.product)
-    ? (data!.product as SimpleGQL)
+  const simple: SimpleProductGQL | null = isSimpleProduct(data?.product)
+    ? (data!.product as SimpleProductGQL)
     : null;
 
   const product = useMemo<SimpleProductUI | null>(() => {

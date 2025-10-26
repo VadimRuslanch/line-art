@@ -1,6 +1,5 @@
-import { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
-
-import { CategoryWithProducts } from '@/shared/types/general';
+import type { ProductWithCart } from '@/entities/product/model/types';
+import type { CategoryWithProducts } from '@/shared/types/general';
 // Добавить Картинку заглушку в for
 //
 // const placeholderImage: ImageCoreFragment = {
@@ -14,7 +13,7 @@ import { CategoryWithProducts } from '@/shared/types/general';
 // image: (cat.image ?? placeholderImage)
 
 export function groupProductsByCategory(
-  products: ProductProduct[],
+  products: ProductWithCart[],
 ): CategoryWithProducts[] {
   const map = new Map<string, CategoryWithProducts>();
 

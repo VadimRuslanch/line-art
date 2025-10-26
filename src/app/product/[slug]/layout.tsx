@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import ProductSkeleton from '@/shared/ui/ProductSkeleton/ProductSkeleton';
-import ProductsRecommended from '@/shared/ui/ProductsRecommended/ProductsRecommended';
+import ProductsRecommended from '@/widgets/product/ProductsRecommended/ProductsRecommended';
 import 'swiper/scss';
 import 'swiper/css/navigation';
 

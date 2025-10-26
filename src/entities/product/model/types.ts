@@ -1,0 +1,54 @@
+import type {
+  GetProductDetailsQuery,
+  ProductWithCategoriesFragment,
+} from '@/shared/api/gql/graphql';
+
+/**
+ * Product data enriched with cart state flags.
+ */
+export type ProductWithCart = ProductWithCategoriesFragment & {
+  quantity: number;
+  inCart: boolean;
+  key?: string | null;
+};
+
+export type SimpleProductGQL = Extract<
+  NonNullable<GetProductDetailsQuery['product']>,
+  { __typename: 'SimpleProduct' }
+>;
+
+export type GlobalProductAttributeUI = {
+  __typename: 'GlobalProductAttribute';
+  id: string;
+  name?: string | null;
+  variation?: boolean | null;
+  visible?: boolean | null;
+  label?: string | null;
+  terms?: {
+    __typename: 'GlobalProductAttributeToTermNodeConnection';
+    nodes: NamedTermNode[];
+  } | null;
+};
+
+export type SimpleProductUI = Omit<SimpleProductGQL, 'attributes'> & {
+  inCart: boolean;
+  key: string | null;
+  quantity: number;
+  attributes?: { nodes: GlobalProductAttributeUI[] } | null;
+};
+
+type AttributeNode = NonNullable<
+  NonNullable<SimpleProductGQL['attributes']>['nodes']
+>[number];
+
+type AttributeNodeWithTerms = Extract<
+  AttributeNode,
+  { terms?: { nodes?: unknown[] | null } | null }
+>;
+
+export type NamedTermNode = Extract<
+  NonNullable<
+    NonNullable<NonNullable<AttributeNodeWithTerms['terms']>['nodes']>[number]
+  >,
+  { name?: string | null }
+>;

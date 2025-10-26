@@ -14,7 +14,7 @@ import {
 import { IMaskInput } from 'react-imask';
 import { useCart } from '@/entities/cart/model/useCart';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
-import { useSendForm } from '@/app/features/sendForm/hook/useSendForm';
+import { useSendForm } from '@/features/send-form/model/useSendForm';
 import {
   CartItemInput,
   SendFormMutationVariables,
@@ -168,40 +168,42 @@ const CallbackForm: FC = () => {
                 />
               </div>
             </div>
-
-            {/* Согласие */}
-            <div className="CallbackForm__checkboxBlock">
-              <label className="CallbackForm__checkboxLabel">
-                <Field
-                  type="checkbox"
-                  name="agree"
-                  className="CallbackForm__checkbox"
-                />
-                <span className="CallbackForm__checkboxText">
-                  Я согласен с&nbsp;
-                  <Link href="/policy">политикой конфиденциальности</Link>
-                </span>
-              </label>
-              <ErrorMessage
-                name="agree"
-                component="div"
-                className="CallbackForm__error"
-              />
-            </div>
-
-            {/* Сумма и отправка */}
-            <div className="CallbackForm__submitBlock">
+            <div className="CallbackForm__submit-container">
               <span className="CallbackForm__submitSum">
                 Сумма заказа:&nbsp;
                 <span dangerouslySetInnerHTML={{ __html: cartTotal }}></span>
               </span>
-              <button
-                type="submit"
-                className="CallbackForm__submitButton"
-                disabled={isSubmitting || !isValid || sending}
-              >
-                {sending ? 'Отправляю...' : 'Отправить заказ'}
-              </button>
+
+              {/* Согласие */}
+              <div className="CallbackForm__checkboxBlock">
+                <label className="CallbackForm__checkboxLabel">
+                  <Field
+                    type="checkbox"
+                    name="agree"
+                    className="CallbackForm__checkbox"
+                  />
+                  <span className="CallbackForm__checkboxText">
+                    Я согласен с&nbsp;
+                    <Link href="/policy">политикой конфиденциальности</Link>
+                  </span>
+                </label>
+                <ErrorMessage
+                  name="agree"
+                  component="div"
+                  className="CallbackForm__error"
+                />
+              </div>
+
+              {/* Сумма и отправка */}
+              <div className="CallbackForm__submitBlock">
+                <button
+                  type="submit"
+                  className="CallbackForm__submitButton"
+                  disabled={isSubmitting || !isValid || sending}
+                >
+                  {sending ? 'Отправляю...' : 'Отправить заказ'}
+                </button>
+              </div>
             </div>
           </Form>
         )}

@@ -3,10 +3,10 @@ import IconArrow from '@/shared/assets/svg/arrow-small.svg';
 import React from 'react';
 import { CategoryWithProducts } from '@/shared/types/general';
 export type CategoryWithUriAndName = { uri: string; name: string };
-import { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
+import type { ProductWithCart } from '@/entities/product/model/types';
 
 type CategoryItem = CategoryWithProducts | CategoryWithUriAndName;
-type MenuItem = CategoryItem | ProductProduct;
+type MenuItem = CategoryItem | ProductWithCart;
 // export interface CategoryWithUriAndName {
 //   uri?: string | null;
 //   name?: string | null;
@@ -36,7 +36,7 @@ export default function CatalogMenuItems({
   //   return Array.isArray(nodes) ? nodes.length > 0 : false; // есть children — оставляем только с непустыми nodes
   // });
 
-  const getItemId = (category: CategoryItem | ProductProduct, index: number) =>
+  const getItemId = (category: CategoryItem | ProductWithCart, index: number) =>
     (category.uri ?? category.name ?? String(index)) as string;
 
   // const hasChildren = (category: T) => {

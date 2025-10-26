@@ -21,11 +21,11 @@
 .CatalogProductList__empty {
   text-align: center;
   padding: 40px 0;
-  color: var(--text-secondary, #777);
+  color: var(--primary-primary, #777);
 }
 
 .CatalogProductList__empty {
-  color: var(--text-primary, #1a1a1a);
+  color: var(--primary-primary, #1a1a1a);
 }
 
 .CatalogProductList__load-more {
@@ -37,17 +37,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
-  border-radius: 999px;
-  border: 1px solid var(--text-primary, #1a1a1a);
-  background-color: var(--text-primary, #1a1a1a);
-  color: var(--background-surface-1, #ffffff);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.2;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   min-width: 220px;
+  width: 100%;
+  padding: 12px 0;
+  background-color: var(--brand-brand-primary);
+  border-radius: 333px;
 }
 
 .CatalogProductList__load-more-button:hover:not(:disabled) {

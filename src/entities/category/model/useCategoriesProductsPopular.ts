@@ -9,7 +9,7 @@ import { groupProductsByCategory } from '@/shared/utils/ustils';
 import { useCartState } from '@/hooks/useCartState';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import type { WithCartFlag } from '@/hooks/useCartState';
-import type { ProductProduct } from '@/features/product/ui/ProductCard/ProductCard';
+import type { ProductWithCart } from '@/entities/product/model/types';
 
 type NodeFromQuery = NonNullable<
   GetCategoriesProductsPopularQuery['products']
@@ -31,10 +31,11 @@ export const useCategoriesProductsPopular = () => {
   if (!nodes.length)
     return { categories: [] as ReturnType<typeof groupProductsByCategory> };
 
-  const raw: WithCartFlag<ProductProduct>[] = (
-    withCart as unknown as WithCartFlag<ProductProduct>[]
+  const raw: WithCartFlag<ProductWithCart>[] = (
+    withCart as unknown as WithCartFlag<ProductWithCart>[]
   ).filter(
-    (p): p is WithCartFlag<ProductProduct> => p?.__typename === 'SimpleProduct',
+    (p): p is WithCartFlag<ProductWithCart> =>
+      p?.__typename === 'SimpleProduct',
   );
 
   const categories = groupProductsByCategory(raw);

@@ -18,7 +18,6 @@ export type SelectedFilters = {
   shadowGap?: string[];
   width?: string[];
   price?: [number, number] | undefined;
-  isOpenModal?: boolean;
 };
 
 const ensure = (arr?: string[]) => (Array.isArray(arr) ? arr : []);
@@ -31,7 +30,6 @@ const initialState: SelectedFilters = {
   shadowGap: [],
   width: [],
   price: undefined,
-  isOpenModal: false,
 };
 
 const catalogFiltersSlice = createSlice({
@@ -50,28 +48,13 @@ const catalogFiltersSlice = createSlice({
     setPrice(state, { payload }: PayloadAction<PricePayload>) {
       state.price = payload;
     },
-    clearAll(state) {
-      return {
-        ...initialState,
-        isOpenModal: state.isOpenModal,
-      };
-    },
-    openModal(state) {
-      state.isOpenModal = true;
-    },
-    closeModal(state) {
-      state.isOpenModal = false;
-    },
-    toggleModal(state) {
-      state.isOpenModal = !state.isOpenModal;
+    clearAll() {
+      return initialState;
     },
   },
 });
 
 export const {
-  openModal,
-  closeModal,
-  toggleModal,
   toggleTerm,
   setPrice,
   clearAll,

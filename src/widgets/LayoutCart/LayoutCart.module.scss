@@ -1,57 +1,57 @@
 .layout {
-	position: fixed;
-	z-index: 20;
-	top: 48px;
-	right: 0;
-	width: 100%;
-	height: calc(100vh - 48px);
-	background-color: var(--header-color-background);
-	display: flex;
-	justify-content: flex-end;
-	overflow: hidden;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background-color: #29292d;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
 
-	@media (min-width: 768px) {
-		background-color: #29292DF2;
-		height: calc(100vh - 80px);
-		top: 80px;
-	}
+  @media (min-width: 768px) {
+    background-color: transparent;
+    height: 100%;
+  }
 }
 
 
 .container {
-	padding: 40px 20px 80px;
-	width: 100%;
-	max-width: 802px;
-	height: 100%;
-	overflow: auto;
+  padding: 40px 20px 80px;
+  width: 100%;
+  max-width: 802px;
+  height: 100%;
+  overflow: auto;
 
-	@media (min-width: 768px) {
-		padding: 40px 40px 80px;
-		background-color: #242427;
-	}
+  @media (min-width: 768px) {
+    padding: 40px 40px 80px;
+    background-color: #242427;
+  }
 
-	@media (min-width: 1440px) {
-		padding: 40px 90px 80px 40px;
-	}
+  @media (min-width: 1440px) {
+    padding: 40px 90px 80px 40px;
+  }
 }
 
 
 .containerTop {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 
 .title {
-	font-size: clamp(2rem, 1.118rem + 3.92vw, 3rem);
-	font-weight: 700;
+  font-size: clamp(2rem, 1.118rem + 3.92vw, 3rem);
+  font-weight: 700;
 }
 
 
 .button {
-	padding: 8px;
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	color: #FFFFFF;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #FFFFFF;
 }

@@ -13,6 +13,7 @@ type CategoryOption = {
   databaseId: number;
   name?: string | null;
   slug?: string | null;
+  count?: number | null;
 };
 
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export const CategoriesSelect: React.FC<Props> = ({
-  placeholder = 'Выберите категорию',
+  placeholder = 'Категории',
 }) => {
   const { categories } = useGetCategoriesCatalog();
   const dispatch = useAppDispatch();
@@ -32,8 +33,6 @@ export const CategoriesSelect: React.FC<Props> = ({
 
   const [open, setOpen] = useState(false);
   const [highlight, setHighlight] = useState(0);
-  const [typeahead, setTypeahead] = useState('');
-  const typeTimer = useRef<number | null>(null);
 
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -88,86 +87,6 @@ export const CategoriesSelect: React.FC<Props> = ({
     dispatch(setCategory(opt.slug));
   };
 
-  const move = (delta: number) => {
-    if (!options.length) return;
-    setHighlight((h) => {
-      const next = (h + delta + options.length) % options.length;
-      return next;
-    });
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (!options.length) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!open) setOpen(true);
-      move(1);
-      return;
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (!open) setOpen(true);
-      move(-1);
-      return;
-    }
-    if (e.key === 'Home') {
-      e.preventDefault();
-      setOpen(true);
-      setHighlight(0);
-      return;
-    }
-    if (e.key === 'End') {
-      e.preventDefault();
-      setOpen(true);
-      setHighlight(options.length - 1);
-      return;
-    }
-    if (e.key === 'PageDown') {
-      e.preventDefault();
-      setOpen(true);
-      move(5);
-      return;
-    }
-    if (e.key === 'PageUp') {
-      e.preventDefault();
-      setOpen(true);
-      move(-5);
-      return;
-    }
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (open) commit(highlight);
-      else setOpen(true);
-      return;
-    }
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      setOpen(false);
-      btnRef.current?.focus();
-      return;
-    }
-
-    const isChar = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
-    if (isChar) {
-      const next = (typeahead + e.key).toLowerCase();
-      setTypeahead(next);
-      if (typeTimer.current) window.clearTimeout(typeTimer.current);
-      typeTimer.current = window.setTimeout(() => setTypeahead(''), 500);
-
-      const start = open ? highlight + 1 : 0;
-      const ring = [...options.slice(start), ...options.slice(0, start)];
-      const foundIndexInRing = ring.findIndex((o) =>
-        (o.name ?? '').toLowerCase().startsWith(next),
-      );
-      if (foundIndexInRing >= 0) {
-        const idx = (start + foundIndexInRing) % options.length;
-        setOpen(true);
-        setHighlight(idx);
-      }
-    }
-  };
-
   const selectedLabel = selected?.name ?? placeholder;
 
   return (
@@ -180,7 +99,6 @@ export const CategoriesSelect: React.FC<Props> = ({
         aria-expanded={open}
         aria-label={selected ? `Категория: ${selected.name}` : placeholder}
         onClick={() => setOpen((o) => !o)}
-        onKeyDown={onKeyDown}
       >
         <span className="ButtonBut2-medium cs-button__label">
           {selectedLabel}
@@ -195,31 +113,31 @@ export const CategoriesSelect: React.FC<Props> = ({
           role="listbox"
           className="cs-list"
           tabIndex={-1}
-          onKeyDown={onKeyDown}
         >
           {options.length === 0 && <li className="cs-empty">Нет вариантов</li>}
 
           {options.map((opt, i) => {
             const isSelected = selected?.id === opt.id;
             const isActive = i === highlight;
+
             return (
-              <li
-                key={opt.id}
-                id={`${idBase}-opt-${i}`}
-                data-index={i}
-                role="option"
-                aria-selected={isSelected}
-                className={[
-                  'cs-option',
-                  isActive ? 'is-active' : '',
-                  isSelected ? 'is-selected' : '',
-                ].join(' ')}
-                onMouseEnter={() => setHighlight(i)}
-                onMouseDown={(evt) => evt.preventDefault()}
-                onClick={() => commit(i)}
-              >
-                {opt.name}
-              </li>
+              opt.count && (
+                <li
+                  key={opt.id}
+                  id={`${idBase}-opt-${i}`}
+                  data-index={i}
+                  role="option"
+                  aria-selected={isSelected}
+                  className={[
+                    'cs-option',
+                    isActive ? 'is-active' : '',
+                    isSelected ? 'is-selected' : '',
+                  ].join(' ')}
+                  onClick={() => commit(i)}
+                >
+                  {opt.name}
+                </li>
+              )
             );
           })}
         </ul>

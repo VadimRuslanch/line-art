@@ -10,7 +10,7 @@ import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useCart } from '@/entities/cart/model/useCart';
-import { parseMoney } from '@/features/catalog/catalog-filters/model/utils';
+import { parseMoney } from '@/shared/lib/money';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
@@ -164,18 +164,19 @@ export default function CartProductCard({
                 onSale={product.onSale!}
                 data-font-size="big"
               />
-              <p className={`${styles.productTotal} HeadlineH5`} aria-live="polite">
-                <span>Итого:</span> <span>{formattedLineTotal}</span> ₽
-              </p>
             </div>
             <QuantitySelector
               min={1}
               max={100}
               value={qty}
               onChangeAction={handleQtyChange}
+              onRemoveAction={handleDelete}
               disabled={updatingQty}
             />
           </div>
+          <p className={`${styles.productTotal} HeadlineH5`} aria-live="polite">
+            <span>Итого:</span> <span>{formattedLineTotal}</span> ₽
+          </p>
         </div>
       </div>
     </article>

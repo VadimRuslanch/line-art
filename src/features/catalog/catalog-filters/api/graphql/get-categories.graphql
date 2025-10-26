@@ -11,4 +11,5 @@ fragment CategoryOption on ProductCategory {
     databaseId
     name
     slug
+    count
 }

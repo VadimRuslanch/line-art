@@ -2,7 +2,7 @@ import type React from 'react';
 import './categories.scss';
 import Breadcrumbs from '@/widgets/Breadcrumbs/Breadcrumbs';
 import { CategoriesSelect } from '@/features/catalog/catalog-filters/ui/CategoriesSelect/CategoriesSelect';
-import ButtonFilter from '@/shared/ui/ButtonFilter/ButtonFilter';
+import ButtonFilter from '@/features/catalog/catalog-filters/ui/ButtonFilter/ButtonFilter';
 
 type Props = {
   children: React.ReactNode;

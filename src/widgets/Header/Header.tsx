@@ -7,9 +7,14 @@ import IconLogo from '@/shared/assets/svg/logo.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
 import IconSearch from '@/shared/assets/svg/search.svg';
 import { useUI } from '@/context/UIContext';
+import { useAppSelector } from '@/shared/model/hooks';
+import { selectCartTotalQuantity } from '@/entities/cart/model/cartSelectors';
 
 export default function Header() {
   const { toggleCart } = useUI();
+  const totalQuantity = useAppSelector(selectCartTotalQuantity);
+  const showCartCount = totalQuantity > 0;
+
   return (
     <header className="header">
       <div className="header__left">
@@ -21,30 +26,30 @@ export default function Header() {
           <Link className="subtitleS3" href="tel:+7 (999) 99-99-99">
             +7 (999) 99-99-99
           </Link>
-          <span className="captionC1">Обратный звонок</span>
+          <span className="captionC1">We are online every day</span>
         </span>
       </div>
 
       <div className="header__center">
-        {/*Вынести в компонент*/}
         <label className="header__search-label" htmlFor="search">
           <IconSearch />
           <input
             id="search"
             className="header__search"
             type="search"
-            placeholder="Найти товар"
+            placeholder="Search products"
           />
         </label>
 
         <div className="header__actions">
-          {/*<button className="header__link" onClick={toggleFavorites}>*/}
-          {/*  <IconHeart className="header__link-icon" />*/}
-          {/*  <span className="captionC1">Избранное</span>*/}
-          {/*</button>*/}
           <button className="header__link" onClick={toggleCart}>
             <IconCart className="header__link-icon" />
             <span className="captionC1">Корзина</span>
+            {showCartCount && (
+              <span className="header__link-count" aria-live="polite">
+                {totalQuantity}
+              </span>
+            )}
           </button>
         </div>
       </div>

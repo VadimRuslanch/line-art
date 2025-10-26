@@ -1,9 +1,9 @@
 'use client';
 
 import './ProductDetailsAbout.scss';
-import { useProductDetails } from '@/features/product/product-details/model/useProductDetails';
+import { useProductDetails } from '@/entities/product/model/useProductDetails';
 import React from 'react';
-import ProductDetailsCharacteristics from '@/shared/ui/ProductDetails/ProductDetailsCharacteristics/ProductDetailsCharacteristics';
+import ProductDetailsCharacteristics from '../ProductDetailsCharacteristics/ProductDetailsCharacteristics';
 
 export default function ProductDetailsAbout({ slug }: { slug: string }) {
   const { product } = useProductDetails(slug);

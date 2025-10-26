@@ -1,8 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import IconArrow from '@/shared/assets/svg/arrow-button.svg';
 import type { GetCategoryParentsQuery } from '@/shared/api/gql/graphql';
 import './CategoryCard.scss';
+import { useAppDispatch } from '@/shared/model/hooks';
+import { setCategory } from '@/features/catalog/catalog-filters/model/slice';
 
 type CategoryNode = {
   item: NonNullable<
@@ -11,12 +15,21 @@ type CategoryNode = {
 };
 
 export default function CategoryCard({ item }: CategoryNode) {
-  const { image, name } = item;
+  const { image, name, slug } = item;
+  const dispatch = useAppDispatch();
+  const href =
+    slug && slug.length > 0
+      ? `/categories?category=${encodeURIComponent(slug)}`
+      : '/categories';
+
+  const handleClick = () => {
+    dispatch(setCategory(slug ?? ''));
+  };
 
   return (
-    <Link href={`/categories/`} className={'CategoryCard'}>
+    <Link href={href} className="CategoryCard" onClick={handleClick}>
       <Image
-        className={'CategoryCard__image'}
+        className="CategoryCard__image"
         width={413}
         height={480}
         src={
@@ -26,9 +39,9 @@ export default function CategoryCard({ item }: CategoryNode) {
         }
         alt={image ? image.altText! : 'ALT'}
       />
-      <div className={'CategoryCard__bottom'}>
+      <div className="CategoryCard__bottom">
         <span className="HeadlineH5">{name}</span>
-        <span className={'CategoryCard__link'}>
+        <span className="CategoryCard__link">
           <IconArrow />
         </span>
       </div>
