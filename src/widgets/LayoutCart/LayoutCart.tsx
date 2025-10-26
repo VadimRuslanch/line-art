@@ -36,7 +36,7 @@ export default function LayoutCart() {
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
           >
             <div className={styles.containerTop}>
-              <span className={styles.title}>Cart</span>
+              <span className={styles.title}>Корзина</span>
               <button onClick={closeAll} className={styles.button}>
                 <IconClose />
                 Закрыть
