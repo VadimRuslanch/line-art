@@ -3,11 +3,11 @@
 import './Footer.scss';
 import ButtonLogo from '@/shared/ui/ButtonLogo/ButtonLogo';
 import Link from 'next/link';
-import { useCategoriesParents } from '@/entities/category/model/useCategoriesParents';
 import IconArrow from '@/shared/assets/svg/arrow-left.svg';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
 export default function FooterComponent() {
-  const { categories } = useCategoriesParents();
+  const { categories } = useGetHomeCatalog();
   return (
     <footer className={'footer'}>
       <div className={'footer__logo'}>

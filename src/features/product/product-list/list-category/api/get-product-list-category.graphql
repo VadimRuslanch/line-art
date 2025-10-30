@@ -1,4 +1,4 @@
-query  GetProductCategoryList(
+query  GetProductListCategory(
     $n: Int!,
     $after: String,
     $where: ProductCategoryToProductConnectionWhereArgs,

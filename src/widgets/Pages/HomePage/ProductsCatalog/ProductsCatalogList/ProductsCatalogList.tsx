@@ -1,4 +1,4 @@
-import './PopularProductsCardList.scss';
+import './ProductsCatalogList.scss';
 
 import React, { useEffect, useState } from 'react';
 
@@ -9,7 +9,7 @@ type PopularProductsCardListProps = {
   resetOn?: unknown;
 };
 
-export default function PopularProductsCardList({
+export default function ProductsCatalogList({
   children,
   className,
   pageSize = 8,

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import IconArrow from '@/shared/assets/svg/arrow-small.svg';
 import React from 'react';
-import { CategoryWithProducts } from '@/shared/types/general';
+import type { CategoryWithProducts } from '@/shared/utils/ustils';
 export type CategoryWithUriAndName = { uri: string; name: string };
-import type { ProductWithCart } from '@/entities/product/model/types';
+import type { ProductWithCart } from '@/entities/product/types';
 
 type CategoryItem = CategoryWithProducts | CategoryWithUriAndName;
 type MenuItem = CategoryItem | ProductWithCart;

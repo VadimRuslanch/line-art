@@ -4,7 +4,7 @@ import CatalogMenuItems, {
 import { useAppDispatch } from '@/shared/model/hooks';
 import React, { useCallback } from 'react';
 import { setActiveCategory } from '@/widgets/SideMenuComponent/model/store/slices/slice';
-import { CategoryWithProducts } from '@/shared/types/general';
+import type { CategoryWithProducts } from '@/shared/utils/ustils';
 
 type Props = {
   title: string;

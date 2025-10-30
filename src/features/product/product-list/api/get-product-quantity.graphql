@@ -1,5 +1,5 @@
-query GetProductQuantity($where: RootQueryToProductUnionConnectionWhereArgs) {
-    products(where: $where) {
-        found
-    }
-}
+#query GetProductQuantity($where: RootQueryToProductUnionConnectionWhereArgs) {
+#    products(where: $where) {
+#        found
+#    }
+#}

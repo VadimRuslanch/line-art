@@ -1,4 +1,4 @@
-query GetProductAllList(
+query GetProductListAll(
     $n: Int!
     $after: String
     $where: RootQueryToProductUnionConnectionWhereArgs,

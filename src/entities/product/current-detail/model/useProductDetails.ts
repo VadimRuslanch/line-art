@@ -13,7 +13,7 @@ import type {
   NamedTermNode,
   SimpleProductGQL,
   SimpleProductUI,
-} from './types';
+} from '../../types';
 
 type AttrNode = NonNullable<
   NonNullable<SimpleProductGQL['attributes']>['nodes']

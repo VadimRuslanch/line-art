@@ -10,6 +10,9 @@ export type ProductWithCart = ProductWithCategoriesFragment & {
   quantity: number;
   inCart: boolean;
   key?: string | null;
+  totalSales?: number | null;
+  averageRating?: number | null;
+  reviewCount?: number | null;
 };
 
 export type SimpleProductGQL = Extract<

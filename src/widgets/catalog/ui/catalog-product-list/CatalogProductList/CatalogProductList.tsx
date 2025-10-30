@@ -6,7 +6,7 @@ import {
   useProductAllList,
   useProductCategoryList,
   type UseProdutListResult,
-} from '@/features/product/product-list/model/useProdutList';
+} from '@/features/product/product-list/model/useProductList';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
 

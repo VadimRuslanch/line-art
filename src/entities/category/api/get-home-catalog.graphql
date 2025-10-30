@@ -1,0 +1,74 @@
+#import "@/shared/api/fragments/category-core.fragment.graphql"
+#import "@/shared/api/fragments/product-with-categories.fragment.graphql"
+#import "@/shared/api/fragments/product-core.fragment.graphql"
+#import "@/shared/api/fragments/gallery-images-core.fragment.graphql"
+#import "@/shared/api/fragments/ImageCore.graphql"
+
+query GetHomeCatalog($first: Int = 20, $newAfter: DateInput) {
+    categories: productCategories(
+        first: 100
+        where: { parent: 0, hideEmpty: true, orderby: NAME, order: ASC }
+    ) {
+        nodes {
+            ...CategoryCore
+            children(
+                first: 100
+                where: { hideEmpty: true, orderby: NAME, order: ASC }
+            ) {
+                nodes {
+                    ...CategoryCore
+                }
+            }
+        }
+    }
+
+    popularBySales: products(
+        first: $first
+        where: {
+            orderby: [{ field: POPULARITY, order: DESC }, { field: DATE, order: DESC }]
+            stockStatus: IN_STOCK
+            visibility: CATALOG
+            status: "publish"
+        }
+    ) {
+        nodes {
+            ...ProductCore
+            totalSales
+            averageRating
+            reviewCount
+            productCategories { nodes { ...CategoryCore } }
+        }
+        pageInfo { hasNextPage endCursor }
+    }
+
+    newArrivals: products(
+        first: $first
+        where: {
+            orderby: [{ field: DATE, order: DESC }]
+            status: "publish"
+            visibility: CATALOG
+            dateQuery: { after: $newAfter }
+        }
+    ) {
+        nodes {
+            ...ProductCore
+            productCategories { nodes { ...CategoryCore } }
+        }
+    }
+
+    discounted: products(
+        first: $first
+        where: {
+            onSale: true
+            orderby: [{ field: DATE, order: DESC }]
+            visibility: CATALOG
+            stockStatus: IN_STOCK
+            status: "publish"
+        }
+    ) {
+        nodes {
+            ...ProductCore
+            productCategories { nodes { ...CategoryCore } }
+        }
+    }
+}

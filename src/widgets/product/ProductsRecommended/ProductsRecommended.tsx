@@ -1,7 +1,7 @@
 'use client';
 import './ProductsRecommended.scss';
 
-import { useProductsRecommended } from '@/entities/product/model/useProductsRecommended';
+import { useProductsRecommended } from '@/entities/product/recommended/model/useProductsRecommended';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 

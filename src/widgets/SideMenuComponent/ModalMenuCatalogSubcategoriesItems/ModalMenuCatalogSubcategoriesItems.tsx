@@ -1,25 +1,24 @@
 import CatalogMenuItems, {
   CategoryWithUriAndName,
 } from '@/widgets/SideMenuComponent/CatalogMenuItems';
-import { useCategoriesCatalog } from '@/features/catalog/catalog-category/model/useCategoriesCatalog';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectActiveCategory } from '@/widgets/SideMenuComponent/model/store/slices/selectors';
 import React, { useMemo } from 'react';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
 type Props = {
   onBack?: () => void;
 };
 
 export default function ModalMenuCatalogSubcategoriesItems({ onBack }: Props) {
-  const { categories } = useCategoriesCatalog();
+  const { categories } = useGetHomeCatalog();
   const activeCategoryIndex = useAppSelector(selectActiveCategory);
-
   const activeCategory = categories?.[activeCategoryIndex];
 
   const items: CategoryWithUriAndName[] = useMemo(() => {
     const nodes = activeCategory?.children?.nodes ?? [];
     return nodes
-      .filter((n) => n?.name && n?.uri) // убираем null-ы
+      .filter((n) => n?.name && n?.uri)
       .map((n) => ({
         id: n.id,
         databaseId: n.databaseId,

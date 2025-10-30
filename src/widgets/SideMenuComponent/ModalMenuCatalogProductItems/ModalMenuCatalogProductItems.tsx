@@ -1,7 +1,7 @@
 import CatalogMenuItems from '@/widgets/SideMenuComponent/CatalogMenuItems';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectActiveCategory } from '@/widgets/SideMenuComponent/model/store/slices/selectors';
-import { CategoryWithProducts } from '@/shared/types/general';
+import type { CategoryWithProducts } from '@/shared/utils/ustils';
 
 type Props = {
   categories: CategoryWithProducts[];
@@ -13,13 +13,21 @@ export default function ModalMenuCatalogProductItems({
   onBack,
 }: Props) {
   const activeCategory = useAppSelector(selectActiveCategory);
-  const ActiveCategory = categories[activeCategory];
-  const item = ActiveCategory.products ?? [];
+  const activeWithProducts =
+    categories[activeCategory] && categories[activeCategory].products?.length
+      ? categories[activeCategory]
+      : categories.find((category) => category.products?.length);
+
+  if (!activeWithProducts) {
+    return null;
+  }
+
+  const item = activeWithProducts.products ?? [];
 
   return (
     <>
       <CatalogMenuItems
-        title={ActiveCategory.name ?? ''}
+        title={activeWithProducts.name ?? ''}
         titleNumber={'03'}
         categoriesItems={item}
         onBack={onBack}

@@ -14,7 +14,7 @@ import {
 import { IMaskInput } from 'react-imask';
 import { useCart } from '@/entities/cart/model/useCart';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
-import { useSendForm } from '@/features/send-form/model/useSendForm';
+import { useSendForm } from '@/entities/send-form/model/useSendForm';
 import {
   CartItemInput,
   SendFormMutationVariables,

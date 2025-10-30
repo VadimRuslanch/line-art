@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import ProductDetailsCharacteristics from '../ProductDetailsCharacteristics/ProductDetailsCharacteristics';
-import { useProductDetails } from '@/entities/product/model/useProductDetails';
+import { useProductDetails } from '@/entities/product/current-detail/model/useProductDetails';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import ImagesPreview from '@/shared/ui/ImagesPreview/ImagesPreview';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';

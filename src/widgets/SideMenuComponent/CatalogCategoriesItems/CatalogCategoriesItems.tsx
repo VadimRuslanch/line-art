@@ -1,7 +1,7 @@
 import ModalMenuCatalogCategoriesItems from '@/widgets/SideMenuComponent/ModalMenuCatalogCategoriesItems/ModalMenuCatalogCategoriesItems';
-import { useCategoriesCatalog } from '@/features/catalog/catalog-category/model/useCategoriesCatalog';
 import React, { useMemo } from 'react';
 import type { CategoryWithUriAndName } from '@/widgets/SideMenuComponent/CatalogMenuItems';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
 type Props = {
   title: string;
@@ -14,17 +14,16 @@ export default function CatalogCategoriesItems({
   onSelect,
   onBack,
 }: Props) {
-  const { categories } = useCategoriesCatalog();
+  const { categories } = useGetHomeCatalog();
 
   const normalized: CategoryWithUriAndName[] = useMemo(() => {
     return (categories ?? [])
-      .filter((c) => c?.name && c?.uri) // отсекаем null/undefined
+      .filter((c) => c?.name && c?.uri)
       .map((c) => ({
         id: c.id,
         databaseId: c.databaseId,
         name: c.name as string,
         uri: c.uri as string,
-        // добавь сюда то, что ещё требуется в твоём CategoryWithUriAndName
       }));
   }, [categories]);
 

@@ -1,16 +1,16 @@
 'use client';
 
-import styles from './PopularProducts.module.scss';
+import styles from './ProductsCatalog.module.scss';
 import UIChip from '@/shared/ui/UIElements/UIChip/UIChip';
 import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useCategoryWithProduct } from '@/entities/category/model/useCategoryWithProduct';
-import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
-import PopularProductsCardList from '@/widgets/Pages/HomePage/PopularProducts/PopularProductsCardList/PopularProductsCardList';
+import ProductsCatalogList from '@/widgets/Pages/HomePage/ProductsCatalog/ProductsCatalogList/ProductsCatalogList';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
-export default function PopularProducts() {
-  const { categories } = useCategoryWithProduct();
+export default function ProductsCatalog() {
+  const { popular } = useGetHomeCatalog();
+  const categories = popular.categories;
   const [active, setActive] = useState<number>(0);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -34,6 +34,15 @@ export default function PopularProducts() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (categories.length === 0) {
+      setActive(0);
+      return;
+    }
+
+    setActive((prev) => (prev < categories.length ? prev : 0));
+  }, [categories.length]);
+
   const chips = categories.map((c, i) => (
     <UIChip
       key={c.id}
@@ -46,12 +55,10 @@ export default function PopularProducts() {
   ));
 
   if (!categories || categories.length === 0) return null;
-  const products = categories?.[active]?.contentNodes?.nodes ?? [];
-  const cards = products
-    .filter((product) => isSimpleProduct(product))
-    .map((product) => (
-      <ProductCard key={product.databaseId} product={product} />
-    ));
+  const products = categories?.[active]?.products ?? [];
+  const cards = products.map((product) => (
+    <ProductCard key={product.databaseId} product={product} />
+  ));
 
   return (
     <section className={`${styles.container}`}>
@@ -72,9 +79,13 @@ export default function PopularProducts() {
           {chips}
         </motion.div>
       </div>
-      <PopularProductsCardList className={styles.list} resetOn={active} pageSize={8}>
+      <ProductsCatalogList
+        className={styles.list}
+        resetOn={active}
+        pageSize={8}
+      >
         {cards}
-      </PopularProductsCardList>
+      </ProductsCatalogList>
     </section>
   );
 }

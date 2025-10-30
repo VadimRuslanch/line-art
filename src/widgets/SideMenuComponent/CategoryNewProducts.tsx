@@ -1,5 +1,5 @@
 import ModalMenuCatalogCategoriesItems from '@/widgets/SideMenuComponent/ModalMenuCatalogCategoriesItems/ModalMenuCatalogCategoriesItems';
-import { useCategoriesProductsNew } from '@/entities/category/model/useCategoriesProductsNew';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 import React from 'react';
 
 type Props = {
@@ -13,7 +13,8 @@ export default function CategoryNewProducts({
   onSelect,
   onBack,
 }: Props) {
-  const { categories } = useCategoriesProductsNew();
+  const { newArrivals } = useGetHomeCatalog();
+  const categories = newArrivals.categories;
 
   return (
     <ModalMenuCatalogCategoriesItems

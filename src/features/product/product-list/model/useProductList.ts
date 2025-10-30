@@ -4,12 +4,12 @@ import { useCallback, useMemo, useState } from 'react';
 import { useQuery } from '@apollo/client/react';
 
 import {
-  GetProductAllListDocument,
-  GetProductCategoryListDocument,
-  type GetProductAllListQuery,
-  type GetProductAllListQueryVariables,
-  type GetProductCategoryListQuery,
-  type GetProductCategoryListQueryVariables,
+  GetProductListAllDocument,
+  GetProductListCategoryDocument,
+  type GetProductListAllQuery,
+  type GetProductListAllQueryVariables,
+  type GetProductListCategoryQuery,
+  type GetProductListCategoryQueryVariables,
 } from '@/shared/api/gql/graphql';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
@@ -17,56 +17,19 @@ import {
   buildCategoryWhere,
   buildWhere,
 } from '@/features/catalog/catalog-filters/utils/utils';
-import type { SelectedFilters } from '@/features/catalog/catalog-filters/model/slice';
+import { filtersEqual, mergeProductNodes } from '../utils';
 
-const filtersEqual = (a: SelectedFilters, b: SelectedFilters) =>
-  a.category === b.category &&
-  a.backlights === b.backlights &&
-  a.color === b.color &&
-  a.glubina === b.glubina &&
-  a.shadowGap === b.shadowGap &&
-  a.width === b.width &&
-  a.price === b.price;
-
-type AllEdge = NonNullable<GetProductAllListQuery['products']>['nodes'][number];
+type AllEdge = NonNullable<GetProductListAllQuery['products']>['nodes'][number];
 type CategoryEdge = NonNullable<
   NonNullable<
-    NonNullable<GetProductCategoryListQuery['productCategory']>['products']
+    NonNullable<GetProductListCategoryQuery['productCategory']>['products']
   >['nodes'][number]
 >;
 type ProductNode = AllEdge | CategoryEdge;
 
-const mergeProductNodes = (
-  prevNodes?: (ProductNode | null | undefined)[] | null,
-  nextNodes?: (ProductNode | null | undefined)[] | null,
-) => {
-  if (!prevNodes?.length) return (nextNodes ?? []) as (ProductNode | null)[];
-  if (!nextNodes?.length) return (prevNodes ?? []) as (ProductNode | null)[];
+type UseProductListOptions = { pageSize?: number };
 
-  const merged: (ProductNode | null)[] = [];
-  const seen = new Set<string>();
-  const push = (list?: (ProductNode | null | undefined)[] | null) => {
-    if (!list) return;
-    for (const node of list) {
-      if (!node) {
-        merged.push(node ?? null);
-        continue;
-      }
-      const key = node.id ?? `db-${node.databaseId ?? ''}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      merged.push(node);
-    }
-  };
-
-  push(prevNodes);
-  push(nextNodes);
-  return merged;
-};
-
-type UseProdutListOptions = { pageSize?: number };
-
-type UseProdutListResult = {
+type UseProductListResult = {
   products: (ProductNode | null | undefined)[];
   loadMore: () => Promise<void> | void;
   hasNextPage: boolean;
@@ -81,13 +44,13 @@ type UseProdutListResult = {
 };
 
 export function useProductAllList(
-  options?: UseProdutListOptions,
-): UseProdutListResult {
+  options?: UseProductListOptions,
+): UseProductListResult {
   const { pageSize = 10 } = options ?? {};
   const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
   const where = useMemo(() => buildWhere(selectedFilters), [selectedFilters]);
 
-  const variables = useMemo<GetProductAllListQueryVariables>(
+  const variables = useMemo<GetProductListAllQueryVariables>(
     () => ({
       n: pageSize,
       where,
@@ -96,9 +59,9 @@ export function useProductAllList(
   );
 
   const { data, fetchMore, loading, error, networkStatus } = useQuery<
-    GetProductAllListQuery,
-    GetProductAllListQueryVariables
-  >(GetProductAllListDocument, {
+    GetProductListAllQuery,
+    GetProductListAllQueryVariables
+  >(GetProductListAllDocument, {
     variables,
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
@@ -168,19 +131,19 @@ export function useProductAllList(
   };
 }
 
-type UseProductCategoryListOptions = UseProdutListOptions & { slug: string };
+type UseProductCategoryListOptions = UseProductListOptions & { slug: string };
 
 export function useProductCategoryList({
   slug,
   pageSize = 10,
-}: UseProductCategoryListOptions): UseProdutListResult {
+}: UseProductCategoryListOptions): UseProductListResult {
   const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
   const where = useMemo(
     () => buildCategoryWhere(selectedFilters),
     [selectedFilters],
   );
 
-  const variables = useMemo<GetProductCategoryListQueryVariables>(
+  const variables = useMemo<GetProductListCategoryQueryVariables>(
     () => ({
       n: pageSize,
       slug,
@@ -190,9 +153,9 @@ export function useProductCategoryList({
   );
 
   const { data, fetchMore, loading, error, networkStatus } = useQuery<
-    GetProductCategoryListQuery,
-    GetProductCategoryListQueryVariables
-  >(GetProductCategoryListDocument, {
+    GetProductListCategoryQuery,
+    GetProductListCategoryQueryVariables
+  >(GetProductListCategoryDocument, {
     variables,
     skip: !slug,
     fetchPolicy: 'cache-and-network',
@@ -229,31 +192,31 @@ export function useProductCategoryList({
           slug,
           where,
         },
-          updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult?.productCategory) return prev;
-            if (!prev?.productCategory) return fetchMoreResult;
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult?.productCategory) return prev;
+          if (!prev?.productCategory) return fetchMoreResult;
 
-            const prevProducts = prev.productCategory.products;
-            const nextProducts = fetchMoreResult.productCategory.products;
-            if (!prevProducts || !nextProducts) return prev;
+          const prevProducts = prev.productCategory.products;
+          const nextProducts = fetchMoreResult.productCategory.products;
+          if (!prevProducts || !nextProducts) return prev;
 
-            const mergedNodes = mergeProductNodes(
-              prevProducts.nodes,
-              nextProducts.nodes,
-            ) as typeof prevProducts.nodes;
+          const mergedNodes = mergeProductNodes(
+            prevProducts.nodes,
+            nextProducts.nodes,
+          ) as typeof prevProducts.nodes;
 
-            return {
-              ...prev,
-              productCategory: {
-                ...fetchMoreResult.productCategory,
-                products: {
-                  ...nextProducts,
-                  nodes: mergedNodes,
-                },
+          return {
+            ...prev,
+            productCategory: {
+              ...fetchMoreResult.productCategory,
+              products: {
+                ...nextProducts,
+                nodes: mergedNodes,
               },
-            };
-          },
-        });
+            },
+          };
+        },
+      });
     } finally {
       setIsFetchingMore(false);
     }
@@ -284,5 +247,5 @@ export function useProductCategoryList({
   };
 }
 
-export type { UseProdutListOptions, UseProdutListResult, ProductNode };
-export { useProductAllList as useProdutList };
+export type { UseProductListOptions, UseProductListResult, ProductNode };
+export { useProductAllList as useProductList };

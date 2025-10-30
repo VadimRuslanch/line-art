@@ -1,9 +1,7 @@
 import ModalMenuCatalogSubcategoriesItems from '@/widgets/SideMenuComponent/ModalMenuCatalogSubcategoriesItems/ModalMenuCatalogSubcategoriesItems';
 import ModalMenuCatalogProductItems from '@/widgets/SideMenuComponent/ModalMenuCatalogProductItems/ModalMenuCatalogProductItems';
 import type { TTypeMenu } from '@/widgets/SideMenuComponent/types/types';
-import { useCategoriesProductsPopular } from '@/entities/category/model/useCategoriesProductsPopular';
-import { useCategoriesProductsNew } from '@/entities/category/model/useCategoriesProductsNew';
-import { useCategoriesProductsDiscounted } from '@/entities/category/model/useCategoriesProductsDiscounted';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 import React from 'react';
 
 type Props = {
@@ -15,29 +13,25 @@ export default function ModalMenuSectionThird({
   typeActiveMenu,
   onBack,
 }: Props) {
-  const { categories: categoriesProductsPopular } =
-    useCategoriesProductsPopular();
-  const { categories: categoriesProductsNew } = useCategoriesProductsNew();
-  const { categories: categoriesProductsDiscounted } =
-    useCategoriesProductsDiscounted();
+  const { popular, newArrivals, discounted } = useGetHomeCatalog();
 
   return (
     <>
       {typeActiveMenu === 'POPULAR' && (
         <ModalMenuCatalogProductItems
-          categories={categoriesProductsPopular}
+          categories={popular.categories}
           onBack={onBack}
         />
       )}
       {typeActiveMenu === 'NEW' && (
         <ModalMenuCatalogProductItems
-          categories={categoriesProductsNew}
+          categories={newArrivals.categories}
           onBack={onBack}
         />
       )}
       {typeActiveMenu === 'SALE' && (
         <ModalMenuCatalogProductItems
-          categories={categoriesProductsDiscounted}
+          categories={discounted.categories}
           onBack={onBack}
         />
       )}

@@ -1,16 +1,9 @@
-import type { ProductWithCart } from '@/entities/product/model/types';
-import type { CategoryWithProducts } from '@/shared/types/general';
-// Добавить Картинку заглушку в for
-//
-// const placeholderImage: ImageCoreFragment = {
-//   __typename: 'MediaItem',
-//   databaseId: 0,
-//   id: 'placeholder',
-//   sourceUrl: '/img/placeholder.jpg',
-//   altText: 'placeholder',
-// };
-//
-// image: (cat.image ?? placeholderImage)
+import type { ProductWithCart } from '@/entities/product/types';
+import type { CategoryCoreFragment } from '@/shared/api/gql/graphql';
+
+export type CategoryWithProducts = CategoryCoreFragment & {
+  products: ProductWithCart[];
+};
 
 export function groupProductsByCategory(
   products: ProductWithCart[],
