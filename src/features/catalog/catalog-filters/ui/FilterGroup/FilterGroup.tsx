@@ -9,14 +9,22 @@ import type {
 } from '@/features/catalog/catalog-filters/model/slice';
 import { toggleTerm } from '@/features/catalog/catalog-filters/model/slice';
 
-type AttrKey = (typeof ATTR_KEYS)[number];
-
 type OptionNode = {
   id: string;
   name?: string | null;
   slug?: string | null;
   count?: number | null;
 };
+
+const ATTR_KEYS = [
+  'allPaBacklights',
+  'allPaColor',
+  'allPaGlubina',
+  'allPaShadowGap',
+  'allPaWidth',
+] as const;
+
+type AttrKey = (typeof ATTR_KEYS)[number];
 
 const STORE_KEY_BY_GRAPH: Record<AttrKey, FilterKey> = {
   allPaBacklights: 'backlights',
@@ -26,31 +34,20 @@ const STORE_KEY_BY_GRAPH: Record<AttrKey, FilterKey> = {
   allPaWidth: 'width',
 };
 
-const ATTR_KEYS = [
-  'allPaBacklights',
-  'allPaColor',
-  'allPaGlubina',
-  'allPaShadowGap',
-  'allPaWidth',
-];
-
-type Attributes = Record<AttrKey, { nodes: OptionNode[] } | null | undefined>;
-
 export default function FilterGroup() {
   const dispatch = useAppDispatch();
   const selected = useAppSelector(selectSelectedFilters) as SelectedFilters;
 
-  const attributes = useGetAttributesCatalog() as Attributes | null;
-  if (!attributes) return null;
+  const attributes = useGetAttributesCatalog();
 
-  const gqlKeys: AttrKey[] = ATTR_KEYS;
+  const gqlKeys = ATTR_KEYS;
 
   const labelByKey: Record<AttrKey, string> = {
-    allPaBacklights: 'Подсветка',
-    allPaColor: 'Цвет',
-    allPaGlubina: 'Глубина',
-    allPaShadowGap: 'Ширина тени',
-    allPaWidth: 'Ширина',
+    allPaBacklights: "�?�?�?�?�?��'���",
+    allPaColor: "���?��'",
+    allPaGlubina: '�"�>�?�+��?��',
+    allPaShadowGap: "���?��?�� �'��?��",
+    allPaWidth: '���?��?��',
   };
 
   return (

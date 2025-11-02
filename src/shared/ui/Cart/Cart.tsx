@@ -10,13 +10,13 @@ export default function Cart() {
 
   return (
     <div className={styles.container}>
-      {simpleProducts.map((product) => (
+      {simpleProducts.map(({ product, key, quantity, total }) => (
         <CartProductCard
-          product={product.product!.node!}
-          productKey={product.key}
-          quantity={product.quantity!}
-          lineTotal={product.total}
-          key={product.key}
+          product={product}
+          productKey={key}
+          quantity={quantity}
+          lineTotal={total}
+          key={key}
         />
       ))}
       <CallbackForm />

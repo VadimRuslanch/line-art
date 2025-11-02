@@ -9,12 +9,12 @@ import {
   AddToCartMutationVariables,
   RemoveFromCartMutation,
   RemoveFromCartMutationVariables,
-  ProductWithCategoriesFragment,
   CartCoreFragment,
   UpdateCartItemQuantitiesMutation,
   UpdateCartItemQuantitiesMutationVariables,
   UpdateCartItemQuantitiesDocument,
 } from '@/shared/api/gql/graphql';
+import type { CartSimpleProduct } from '@/entities/product/types';
 import { ApolloCache } from '@apollo/client';
 import { useQuery, useMutation } from '@apollo/client/react';
 import { useMemo, useCallback, useEffect } from 'react';
@@ -25,10 +25,11 @@ import { setSnapshot, CartItemState } from '@/entities/cart/model/cartSlice';
 
 type Cart = CartCoreFragment;
 
-type CartItem = NonNullable<Cart['contents']>['nodes'][number];
-
-type CartItemWithProduct = Omit<CartItem, 'product'> & {
-  product: { node: ProductWithCategoriesFragment };
+type SimpleCartEntry = {
+  key: string;
+  quantity: number;
+  total: string | null;
+  product: CartSimpleProduct;
 };
 
 function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
@@ -36,7 +37,7 @@ function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
 
   cache.writeQuery<GetCartQuery>({
     query: GetCartDocument,
-    data: { cart: newCart },
+    data: { __typename: 'RootQuery', cart: newCart },
   });
 }
 
@@ -55,15 +56,32 @@ export function useCart() {
 
   const cart = data?.cart ?? null;
 
-  const simpleProducts = useMemo(() => {
+  const simpleProducts = useMemo<SimpleCartEntry[]>(() => {
     if (!cart?.contents?.nodes) return [];
 
-    return cart.contents.nodes.filter(
-      (item): item is CartItemWithProduct =>
-        item.product?.node?.__typename === 'SimpleProduct' &&
-        'databaseId' in item.product.node &&
-        'id' in item.product.node,
-    );
+    return cart.contents.nodes.reduce<SimpleCartEntry[]>((acc, item) => {
+      const node = item?.product?.node;
+      if (!node || node.__typename !== 'SimpleProduct') {
+        return acc;
+      }
+
+      const key = item.key ?? undefined;
+      const quantity = item.quantity ?? 0;
+      const total = item.total ?? null;
+
+      if (!key) {
+        return acc;
+      }
+
+      acc.push({
+        key,
+        quantity,
+        total,
+        product: node,
+      });
+
+      return acc;
+    }, []);
   }, [cart]);
 
   const hasCart = Boolean(cart);
@@ -76,22 +94,12 @@ export function useCart() {
       return;
     }
 
-    const items: CartItemState[] = simpleProducts
-      .map((item) => {
-        const productId = item.product.node.databaseId;
-        const key = item.key;
-        const quantity = item.quantity ?? 0;
-
-        if (typeof productId !== 'number' || !key) return null;
-
-        return {
-          key,
-          productId,
-          quantity,
-          total: item.total ?? null,
-        };
-      })
-      .filter((item): item is CartItemState => Boolean(item));
+    const items: CartItemState[] = simpleProducts.map((item) => ({
+      key: item.key,
+      productId: item.product.databaseId,
+      quantity: item.quantity,
+      total: item.total,
+    }));
 
     dispatch(
       setSnapshot({

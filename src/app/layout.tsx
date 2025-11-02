@@ -9,9 +9,9 @@ import { Providers } from '@/app/Providers';
 import LayoutCart from '@/widgets/LayoutCart/LayoutCart';
 import Header from '@/widgets/Header/Header';
 // import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
-import ModalMenu from '@/widgets/SideMenuComponent/ModalMenu';
 import CartInitializer from '@/app/CartInitializer';
 import InitLoad from '@/features/load/InitLoad';
+import ModalMenu from '@/widgets/SideMenuComponent/ModalMenu';
 
 const fontInter = Inter({
   variable: '--font-inter-sans',

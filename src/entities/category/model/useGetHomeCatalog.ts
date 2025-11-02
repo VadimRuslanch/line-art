@@ -5,6 +5,7 @@ import { useSuspenseQuery } from '@apollo/client/react';
 
 import {
   GetHomeCatalogDocument,
+  type GetHomeCatalogQuery,
   type GetHomeCatalogQueryVariables,
 } from '@/shared/api/gql/graphql';
 import { useCartState } from '@/hooks/useCartState';
@@ -18,6 +19,8 @@ import {
   sanitizeCategoryNodes,
 } from './homeCatalog.helpers';
 import type {
+  CatalogCategoryNode,
+  CatalogProductNode,
   SimpleCatalogProductNode,
   UseGetHomeCatalogOptions,
   UseGetHomeCatalogResult,
@@ -31,32 +34,60 @@ export const useGetHomeCatalog = (
     newAfter: options.newAfter ?? createNewAfterDateInput(),
   };
 
-  const { data } = useSuspenseQuery(GetHomeCatalogDocument, {
+  const { data } = useSuspenseQuery<
+    GetHomeCatalogQuery,
+    GetHomeCatalogQueryVariables
+  >(GetHomeCatalogDocument, {
     variables,
     fetchPolicy: 'cache-first',
-    onError: (error) => {
-      console.error(
-        '[useGetHomeCatalog] Failed to fetch home catalog data.',
-        error,
-      );
-    },
   });
 
   const categories = useMemo(
-    () => sanitizeCategoryNodes(data?.categories?.nodes ?? []),
+    () =>
+      sanitizeCategoryNodes(
+        (data?.categories?.nodes ?? []) as (
+          | CatalogCategoryNode
+          | null
+          | undefined
+        )[],
+      ),
     [data?.categories?.nodes],
   );
 
   const popularSource = useMemo(
-    () => extractSimpleProducts(data?.popularBySales?.nodes, 'popularBySales'),
+    () =>
+      extractSimpleProducts(
+        (data?.popularBySales?.nodes ?? []) as (
+          | CatalogProductNode
+          | null
+          | undefined
+        )[],
+        'popularBySales',
+      ),
     [data?.popularBySales?.nodes],
   );
   const newSource = useMemo(
-    () => extractSimpleProducts(data?.newArrivals?.nodes, 'newArrivals'),
+    () =>
+      extractSimpleProducts(
+        (data?.newArrivals?.nodes ?? []) as (
+          | CatalogProductNode
+          | null
+          | undefined
+        )[],
+        'newArrivals',
+      ),
     [data?.newArrivals?.nodes],
   );
   const discountedSource = useMemo(
-    () => extractSimpleProducts(data?.discounted?.nodes, 'discounted'),
+    () =>
+      extractSimpleProducts(
+        (data?.discounted?.nodes ?? []) as (
+          | CatalogProductNode
+          | null
+          | undefined
+        )[],
+        'discounted',
+      ),
     [data?.discounted?.nodes],
   );
 

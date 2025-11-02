@@ -1,6 +1,6 @@
 'use client';
 
-import { Key, ComponentType, useRef } from 'react';
+import { Key, ComponentType, useCallback, useEffect, useRef } from 'react';
 import type { Swiper as SwiperCore } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { SwiperProps } from 'swiper/react';
@@ -29,14 +29,57 @@ export default function SliderContainer<T extends WithDbId>({
 }: SliderContainerProps<T>) {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const swiperRef = useRef<SwiperCore | null>(null);
 
-  function swiperNav(swiper: SwiperCore) {
-    if (typeof swiper.params.navigation !== 'boolean') {
-      const nav = swiper.params.navigation!;
-      nav.prevEl = prevRef.current;
-      nav.nextEl = nextRef.current;
+  const handleBeforeInit = useCallback((swiper: SwiperCore) => {
+    swiperRef.current = swiper;
+    if (!prevRef.current || !nextRef.current) {
+      return;
     }
-  }
+
+    const navParam = swiper.params.navigation;
+    if (navParam === false) {
+      return;
+    }
+
+    const nav =
+      navParam === true || typeof navParam === 'undefined'
+        ? {}
+        : { ...navParam };
+
+    swiper.params.navigation = {
+      ...nav,
+      prevEl: prevRef.current,
+      nextEl: nextRef.current,
+    };
+  }, []);
+
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper || !prevRef.current || !nextRef.current) {
+      return;
+    }
+
+    const navParam = swiper.params.navigation;
+    if (navParam === false) {
+      return;
+    }
+
+    const nav =
+      navParam === true || typeof navParam === 'undefined'
+        ? {}
+        : { ...navParam };
+
+    swiper.params.navigation = {
+      ...nav,
+      prevEl: prevRef.current,
+      nextEl: nextRef.current,
+    };
+
+    swiper.navigation?.destroy();
+    swiper.navigation?.init();
+    swiper.navigation?.update();
+  }, [items.length]);
 
   return (
     <section className={'SliderContainer'}>
@@ -45,11 +88,8 @@ export default function SliderContainer<T extends WithDbId>({
       <SwiperNavButtonNext ref={nextRef} />
       <Swiper
         modules={[Navigation]}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
-        onBeforeInit={(swiper) => swiperNav(swiper)}
+        navigation
+        onBeforeInit={handleBeforeInit}
         {...swiperProps}
       >
         {items.map((item) => (

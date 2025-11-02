@@ -1,7 +1,7 @@
 'use client';
 
 import './ProductCard.scss';
-import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
+import type { SimpleProductLike } from '@/entities/product/types';
 
 import Link from 'next/link';
 import ProductPrice from '@/shared/ui/ProductPrice/ProductPrice';
@@ -12,17 +12,26 @@ import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 export default function ProductCard({
   product,
 }: {
-  product: ProductWithCategoriesFragment;
+  product: SimpleProductLike;
 }) {
+  const galleryNodes =
+    'galleryImages' in product && product.galleryImages?.nodes
+      ? product.galleryImages.nodes
+      : [];
+
   const gallery = [
     product.image
       ? { src: product.image.sourceUrl ?? '', alt: product.image.altText }
       : null,
-    ...(product.galleryImages?.nodes ?? []).map((n) => ({
-      src: n?.sourceUrl ?? '',
-      alt: n?.altText,
-      id: n?.id ?? n?.databaseId,
-    })),
+    ...galleryNodes.map((n) =>
+      n
+        ? {
+            src: n.sourceUrl ?? '',
+            alt: n.altText,
+            id: n.id ?? n.databaseId,
+          }
+        : null,
+    ),
   ]
     .filter(Boolean)
     .filter(

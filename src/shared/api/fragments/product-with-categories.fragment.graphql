@@ -1,11 +1,11 @@
-fragment ProductWithCategories on SimpleProduct {
-    ...ProductCore
-    galleryImages {
-        ...galleryImages
-    }
-    productCategories {
-        nodes {
-            ...CategoryCore
-        }
-    }
-}
+#fragment ProductWithCategories on SimpleProduct {
+#    ...ProductCore
+#    galleryImages {
+#        ...galleryImages
+#    }
+#    productCategories {
+#        nodes {
+#            ...CategoryCore
+#        }
+#    }
+#}

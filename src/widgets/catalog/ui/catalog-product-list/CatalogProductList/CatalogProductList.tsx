@@ -5,7 +5,7 @@ import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 import {
   useProductAllList,
   useProductCategoryList,
-  type UseProdutListResult,
+  type UseProductListResult,
 } from '@/features/product/product-list/model/useProductList';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
@@ -36,7 +36,7 @@ const CatalogProductListCategory = ({ slug }: { slug: string }) => {
 const CatalogProductListView = ({
   hookResult,
 }: {
-  hookResult: UseProdutListResult;
+  hookResult: UseProductListResult;
 }) => {
   const { products, loadMore, hasNextPage, isFetchingMore, isInitialLoading } =
     hookResult;

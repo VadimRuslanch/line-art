@@ -19,7 +19,18 @@ export default function ProductsCatalogList({
   const [visibleCount, setVisibleCount] = useState(pageSize);
 
   useEffect(() => {
-    setVisibleCount(pageSize);
+    const timer =
+      typeof window !== 'undefined'
+        ? window.setTimeout(() => {
+            setVisibleCount(pageSize);
+          }, 0)
+        : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [resetOn, pageSize]);
 
   const showMore = () =>

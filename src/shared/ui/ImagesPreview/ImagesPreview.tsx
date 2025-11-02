@@ -1,7 +1,7 @@
 'use client';
 import './ImagesPreview.scss';
 
-import { ImageCoreFragment, MediaItem } from '@/shared/api/gql/graphql';
+import { ImageCoreFragment } from '@/shared/api/gql/graphql';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useMediaQuery } from 'react-responsive';
 import { Navigation } from 'swiper/modules';
@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 type Props = {
   image?: ImageCoreFragment | null;
-  galleryImages?: MediaItem[];
+  galleryImages?: ImageCoreFragment[];
 };
 
 export default function ImagesPreview({ image, galleryImages }: Props) {

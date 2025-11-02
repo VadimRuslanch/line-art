@@ -4,7 +4,6 @@ fragment ProductCore on SimpleProduct {
     databaseId
     id
     name
-    price
     regularPrice
     salePrice
     onSale
@@ -27,7 +26,6 @@ fragment ProductCore on SimpleProduct {
             }
         }
     }
-    title
     image {
         ...ImageCore
     }

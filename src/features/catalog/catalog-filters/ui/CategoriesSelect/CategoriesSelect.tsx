@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import './CategoriesSelect.scss';
 import { useGetCategoriesCatalog } from '@/features/catalog/catalog-filters/api/useGetCategoriesCatalog';
 import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
@@ -36,10 +36,21 @@ export const CategoriesSelect: React.FC<Props> = ({
 
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
-  const idBase = useRef(`cs-${Math.random().toString(36).slice(2)}`).current;
+  const idBase = useId();
 
   useEffect(() => {
-    setHighlight(0);
+    const timer =
+      typeof window !== 'undefined'
+        ? window.setTimeout(() => {
+            setHighlight(0);
+          }, 0)
+        : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [options.length]);
 
   const selectedSlug = selectedFilters.category?.[0] ?? null;
@@ -49,12 +60,23 @@ export const CategoriesSelect: React.FC<Props> = ({
   }, [options, selectedSlug]);
 
   useEffect(() => {
-    if (!selectedSlug) {
-      setHighlight(0);
-      return;
-    }
-    const idx = options.findIndex((opt) => opt.slug === selectedSlug);
-    if (idx >= 0) setHighlight(idx);
+    const timer =
+      typeof window !== 'undefined'
+        ? window.setTimeout(() => {
+            if (!selectedSlug) {
+              setHighlight(0);
+              return;
+            }
+            const idx = options.findIndex((opt) => opt.slug === selectedSlug);
+            if (idx >= 0) setHighlight(idx);
+          }, 0)
+        : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [options, selectedSlug]);
 
   useEffect(() => {

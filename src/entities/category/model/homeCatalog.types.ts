@@ -31,9 +31,8 @@ export type CatalogSection = {
   pageInfo?: CatalogPageInfo;
 };
 
-export type UseGetHomeCatalogOptions = Pick<
-  GetHomeCatalogQueryVariables,
-  'first' | 'newAfter'
+export type UseGetHomeCatalogOptions = Partial<
+  Pick<GetHomeCatalogQueryVariables, 'first' | 'newAfter'>
 >;
 
 export type UseGetHomeCatalogResult = {

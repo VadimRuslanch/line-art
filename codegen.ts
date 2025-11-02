@@ -25,11 +25,26 @@ const config: CodegenConfig = {
     'src/shared/api/gql/graphql.ts': {
       plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       config: {
+        // общие
         useTypeImports: true,
         preResolveTypes: true,
         dedupeFragments: true,
-        scalars: { DateTime: 'string' },
         namingConvention: { enumValues: 'keep' },
+
+        // типизация операций (кэш/guards дружелюбней)
+        skipTypename: false,
+        nonOptionalTypename: true,
+        avoidOptionals: { field: true, inputValue: false, object: true },
+
+        // скаляры WPGraphQL/Woo
+        scalars: {
+          DateTime: 'string',
+          JSON: 'unknown',
+          Decimal: 'string',
+          Money: '{ amount: string; currencyCode: string }',
+          URI: 'string',
+          Upload: 'File | Blob',
+        },
       },
     },
     './schema.graphql': { plugins: ['schema-ast'] },

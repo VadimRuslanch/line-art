@@ -3,20 +3,25 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import IconArrow from '@/shared/assets/svg/arrow-button.svg';
-import type { GetCategoryParentsQuery } from '@/shared/api/gql/graphql';
+import type { CatalogCategoryNode } from '@/entities/category/model/homeCatalog.types';
 import './CategoryCard.scss';
 import { useAppDispatch } from '@/shared/model/hooks';
 import { setCategory } from '@/features/catalog/catalog-filters/model/slice';
 
 type CategoryNode = {
-  item: NonNullable<
-    GetCategoryParentsQuery['productCategories']
-  >['nodes'][number];
+  item: CatalogCategoryNode;
 };
 
 export default function CategoryCard({ item }: CategoryNode) {
-  const { image, name, slug } = item;
+  const { image, name, uri } = item;
   const dispatch = useAppDispatch();
+  const slug =
+    uri && uri.length > 0
+      ? uri
+          .split('/')
+          .filter(Boolean)
+          .pop() ?? ''
+      : '';
   const href =
     slug && slug.length > 0
       ? `/categories?category=${encodeURIComponent(slug)}`

@@ -14,10 +14,12 @@ export function groupProductsByCategory(
     product.productCategories?.nodes.forEach((cat) => {
       if (!map.has(cat.id)) {
         map.set(cat.id, {
+          __typename: cat.__typename ?? 'ProductCategory',
           databaseId: cat.databaseId,
           id: cat.id,
           name: cat.name,
           uri: cat.uri,
+          count: cat.count ?? null,
           image: cat.image,
           products: [],
         });

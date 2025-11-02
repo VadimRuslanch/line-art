@@ -1,4 +1,4 @@
-import SliderCategoriesPopularCards from '@/widgets/Pages/HomePage/SliderCategoriesPopularCards';
+import CategoriesPopularSlider from '@/widgets/Pages/HomePage/CategoriesPopularSlider';
 import ProductsCatalog from '@/widgets/Pages/HomePage/ProductsCatalog/ProductsCatalog';
 import PreviewHomePage from '@/widgets/Pages/HomePage/PreviewHomePage/PreviewHomePage';
 import SliderArticlesNewsCards from '@/widgets/Pages/HomePage/SliderArticlesNewsCards';
@@ -8,7 +8,7 @@ export default async function HomePage() {
   return (
     <div className="HomePage">
       <PreviewHomePage />
-      <SliderCategoriesPopularCards />
+      <CategoriesPopularSlider />
       <ProductsCatalog />
       <SliderArticlesNewsCards />
       <FAQHomePage />

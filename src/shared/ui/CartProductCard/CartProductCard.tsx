@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './CartProductCard.module.scss';
-import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
+import type { CartSimpleProduct } from '@/entities/product/types';
 import IconClose from '@/shared/assets/svg/icon-close.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
 export type CartProductCardProps = {
-  product: ProductWithCategoriesFragment;
+  product: CartSimpleProduct;
   productKey: string;
   quantity: number;
   lineTotal?: string | null;
@@ -40,8 +40,19 @@ export default function CartProductCard({
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setQty(serverQuantity ?? 1);
-    setUpdatingQty(false);
+    const timer =
+      typeof window !== 'undefined'
+        ? window.setTimeout(() => {
+            setQty(serverQuantity ?? 1);
+            setUpdatingQty(false);
+          }, 0)
+        : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [serverQuantity]);
 
   const handleQtyChange = (newQty: number) => {

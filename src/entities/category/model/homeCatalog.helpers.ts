@@ -36,7 +36,7 @@ export const createNewAfterDateInput = (
 };
 
 export const sanitizeCategoryNodes = (
-  nodes: (CatalogCategoryNode | null)[] | null | undefined,
+  nodes: (CatalogCategoryNode | null | undefined)[] | null | undefined,
 ): CatalogCategoryNode[] =>
   (nodes ?? []).filter(notEmpty).map((category) => ({
     ...category,

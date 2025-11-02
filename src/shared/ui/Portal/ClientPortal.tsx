@@ -12,30 +12,39 @@ export default function ClientPortal({
   children,
   containerId = 'portal-root',
 }: Props) {
-  const [mounted, setMounted] = useState(false);
-  const elRef = useRef<HTMLElement | null>(null);
+  const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
   const createdRef = useRef(false);
 
   useEffect(() => {
+    if (typeof document === 'undefined') {
+      return undefined;
+    }
+
     let container = document.getElementById(containerId) as HTMLElement | null;
 
     if (!container) {
       container = document.createElement('div');
       container.id = containerId;
       document.body.appendChild(container);
-      createdRef.current = true; // сами создали — потом удалим
+      createdRef.current = true;
     }
 
-    elRef.current = container;
-    setMounted(true);
+    containerRef.current = container;
+
+    const timer = window.setTimeout(() => {
+      setPortalNode(container);
+    }, 0);
 
     return () => {
+      window.clearTimeout(timer);
       if (createdRef.current && container?.parentNode) {
         container.parentNode.removeChild(container);
       }
+      containerRef.current = null;
     };
   }, [containerId]);
 
-  if (!mounted || !elRef.current) return null;
-  return createPortal(children, elRef.current);
+  if (!portalNode) return null;
+  return createPortal(children, portalNode);
 }

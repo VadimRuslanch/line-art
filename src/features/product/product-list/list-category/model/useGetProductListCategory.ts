@@ -39,6 +39,7 @@ export function useGetProductListCategory({
   const variables = useMemo<GetProductListCategoryQueryVariables>(
     () => ({
       n: pageSize,
+      after: null,
       slug,
       where,
     }),

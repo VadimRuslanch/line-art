@@ -35,12 +35,23 @@ export default function ProductsCatalog() {
   }, []);
 
   useEffect(() => {
-    if (categories.length === 0) {
-      setActive(0);
-      return;
-    }
+    const update = () => {
+      if (categories.length === 0) {
+        setActive(0);
+        return;
+      }
 
-    setActive((prev) => (prev < categories.length ? prev : 0));
+      setActive((prev) => (prev < categories.length ? prev : 0));
+    };
+
+    const timer =
+      typeof window !== 'undefined' ? window.setTimeout(update, 0) : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [categories.length]);
 
   const chips = categories.map((c, i) => (

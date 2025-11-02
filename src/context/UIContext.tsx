@@ -55,8 +55,18 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setDrawerType(null);
-  }, [pathname]);
+    if (drawerType === null) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setDrawerType(null);
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [drawerType, pathname]);
 
   const value = useMemo(
     () => ({

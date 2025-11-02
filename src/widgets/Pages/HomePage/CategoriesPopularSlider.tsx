@@ -4,7 +4,7 @@ import SliderContainer from '@/shared/ui/Swiper/SliderContainer/SliderContainer'
 import CategoryCard from '@/entities/category/ui/CategoryCard/CategoryCard';
 import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
-export default function SliderCategoriesPopularCards() {
+export default function CategoriesPopularSlider() {
   const { categories } = useGetHomeCatalog();
   if (!categories) return null;
   return (

@@ -1,4 +1,4 @@
-export default {
+const config = {
   semi: true,
   trailingComma: 'all',
   singleQuote: true,
@@ -6,3 +6,5 @@ export default {
   tabWidth: 2,
   endOfLine: 'lf',
 };
+
+export default config;

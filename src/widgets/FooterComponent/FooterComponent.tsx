@@ -41,16 +41,28 @@ export default function FooterComponent() {
         <ul
           className={`footer__navigation-list footer__categories ${categories.length > 7 ? 'footer__categories--2col' : ''}`}
         >
-          {categories.map((category) => (
-            <li
-              className="footer-navigation__list-item"
-              key={category.databaseId}
-            >
-              <Link className="BodyB1" href={category.slug!}>
-                {category.name}
-              </Link>
-            </li>
-          ))}
+          {categories.map((category) => {
+            const slug =
+              category.uri && category.uri.length > 0
+                ? category.uri
+                    .split('/')
+                    .filter(Boolean)
+                    .pop() ?? ''
+                : '';
+            const href = slug
+              ? `/categories?category=${encodeURIComponent(slug)}`
+              : '/categories';
+            return (
+              <li
+                className="footer-navigation__list-item"
+                key={category.databaseId}
+              >
+                <Link className="BodyB1" href={href}>
+                  {category.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <ul className="footer__navigation-list footer__menu">

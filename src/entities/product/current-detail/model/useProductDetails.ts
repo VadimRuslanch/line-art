@@ -38,9 +38,6 @@ function hasName<T>(v: T): v is T & { name?: string | null } {
   return !!v && typeof v === 'object' && 'name' in (v as object);
 }
 
-function getDbId(node: unknown): number | undefined {
-  return (node as { databaseId?: number } | null | undefined)?.databaseId;
-}
 export const useProductDetails = (slug: string) => {
   const { data } = useSuspenseQuery(GetProductDetailsDocument, {
     variables: { id: slug, idType: ProductIdTypeEnum.SLUG },
@@ -57,7 +54,7 @@ export const useProductDetails = (slug: string) => {
     if (!simple) return null;
 
     const cartItem = simpleProducts.find(
-      (ci) => getDbId(ci.product?.node) === simple.databaseId,
+      (ci) => ci.product.databaseId === simple.databaseId,
     );
 
     const rawAttrs = simple.attributes?.nodes ?? [];

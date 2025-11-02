@@ -53,6 +53,7 @@ export function useProductAllList(
   const variables = useMemo<GetProductListAllQueryVariables>(
     () => ({
       n: pageSize,
+      after: null,
       where,
     }),
     [pageSize, where],
@@ -146,6 +147,7 @@ export function useProductCategoryList({
   const variables = useMemo<GetProductListCategoryQueryVariables>(
     () => ({
       n: pageSize,
+      after: null,
       slug,
       where,
     }),

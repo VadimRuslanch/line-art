@@ -26,11 +26,20 @@ export default function PriceRange({ step = 100, id = 'price-range' }: Props) {
   );
 
   useEffect(() => {
-    if (appliedRange) {
-      setPriceValue(appliedRange);
-      return;
-    }
-    setPriceValue(defaultRange);
+    const next = appliedRange ?? defaultRange;
+
+    const timer =
+      typeof window !== 'undefined'
+        ? window.setTimeout(() => {
+            setPriceValue(next);
+          }, 0)
+        : null;
+
+    return () => {
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
+    };
   }, [appliedRange, defaultRange]);
 
   const clamp = (v: number, lo: number, hi: number) =>

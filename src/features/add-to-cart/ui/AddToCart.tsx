@@ -2,14 +2,14 @@ import './AddToCart.scss';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import UIButton from '@/shared/ui/UIElements/UIButton/UIButton';
 import { useCart } from '@/entities/cart/model/useCart';
-import { ProductWithCategoriesFragment } from '@/shared/api/gql/graphql';
+import type { SimpleProductLike } from '@/entities/product/types';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
 type Props = {
-  product: ProductWithCategoriesFragment;
+  product: SimpleProductLike;
   initialQty?: number;
 };
 

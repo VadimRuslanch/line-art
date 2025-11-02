@@ -3,15 +3,15 @@ import {
   OrderEnum,
   ProductAttributeEnum,
   ProductsOrderByEnum,
-  type ProductAttributeFilterInput,
+type ProductAttributeFilterInput,
   type ProductCategoryToProductConnectionWhereArgs,
   type RootQueryToProductUnionConnectionWhereArgs,
 } from '@/shared/api/gql/graphql';
 import type { SelectedFilters } from '@/features/catalog/catalog-filters/model/slice';
 import { ATTR_KEYS, TAXONOMY_BY_KEY } from '@/shared/constants/taxonomy';
 
-type Where = RootQueryToProductUnionConnectionWhereArgs | undefined;
-type CategoryWhere = ProductCategoryToProductConnectionWhereArgs | undefined;
+type Where = RootQueryToProductUnionConnectionWhereArgs | null;
+type CategoryWhere = ProductCategoryToProductConnectionWhereArgs | null;
 
 type TaxFilter = {
   taxonomy: string;
