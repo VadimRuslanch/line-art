@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
 } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
@@ -29,6 +30,7 @@ const UIContext = createContext<UIContextProps | undefined>(undefined);
 export const UIProvider = ({ children }: { children: ReactNode }) => {
   const [drawerType, setDrawerType] = useState<TDrawerType>(null);
   const pathname = usePathname();
+  const lastPathnameRef = useRef(pathname);
 
   useLockBodyScroll(drawerType !== null);
 
@@ -55,18 +57,17 @@ export const UIProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (drawerType === null) {
-      return;
+    if (lastPathnameRef.current !== pathname && drawerType !== null) {
+      const frame = window.requestAnimationFrame(() => {
+        closeAll();
+      });
+      lastPathnameRef.current = pathname;
+      return () => window.cancelAnimationFrame(frame);
     }
 
-    const timer = window.setTimeout(() => {
-      setDrawerType(null);
-    }, 0);
-
-    return () => {
-      window.clearTimeout(timer);
-    };
-  }, [drawerType, pathname]);
+    lastPathnameRef.current = pathname;
+    return undefined;
+  }, [pathname, drawerType, closeAll]);
 
   const value = useMemo(
     () => ({

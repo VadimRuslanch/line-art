@@ -43,11 +43,11 @@ export default function FilterGroup() {
   const gqlKeys = ATTR_KEYS;
 
   const labelByKey: Record<AttrKey, string> = {
-    allPaBacklights: "�?�?�?�?�?��'���",
-    allPaColor: "���?��'",
-    allPaGlubina: '�"�>�?�+��?��',
-    allPaShadowGap: "���?��?�� �'��?��",
-    allPaWidth: '���?��?��',
+    allPaBacklights: "Подсветка",
+    allPaColor: "Цвет",
+    allPaGlubina: 'Глубина',
+    allPaShadowGap: "Теневой зазор",
+    allPaWidth: 'Длина',
   };
 
   return (

@@ -8,7 +8,7 @@ import { Inter } from 'next/font/google';
 import { Providers } from '@/app/Providers';
 import LayoutCart from '@/widgets/LayoutCart/LayoutCart';
 import Header from '@/widgets/Header/Header';
-// import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
+import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
 import CartInitializer from '@/app/CartInitializer';
 import InitLoad from '@/features/load/InitLoad';
 import ModalMenu from '@/widgets/SideMenuComponent/ModalMenu';
@@ -36,7 +36,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main>{children}</main>
-          {/*<FooterComponent />*/}
+          <FooterComponent />
           <ModalMenu />
           <LayoutCart />
           <CartInitializer />

@@ -77,7 +77,7 @@ export default function SliderContainer<T extends WithDbId>({
     };
 
     swiper.navigation?.destroy();
-    swiper.navigation?.init();
+    swiper.navigation?.init();``
     swiper.navigation?.update();
   }, [items.length]);
 
@@ -88,7 +88,6 @@ export default function SliderContainer<T extends WithDbId>({
       <SwiperNavButtonNext ref={nextRef} />
       <Swiper
         modules={[Navigation]}
-        navigation
         onBeforeInit={handleBeforeInit}
         {...swiperProps}
       >
