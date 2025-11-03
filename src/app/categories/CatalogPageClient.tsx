@@ -1,15 +1,29 @@
 'use client';
 
-import CatalogProductList from '@/widgets/catalog/ui/catalog-product-list/CatalogProductList/CatalogProductList';
-import CatalogFiltersSidebar from '@/widgets/catalog/ui/catalog-filters/CatalogFiltersSidebar/CatalogFiltersSidebar';
+import { Suspense, lazy, useEffect, useRef } from 'react';
 import ClientPortal from '@/shared/ui/Portal/ClientPortal';
 import CatalogFiltersModal from '@/widgets/catalog/ui/catalog-filters/CatalogFiltersModal/CatalogFiltersModal';
 import { useUI } from '@/context/UIContext';
 import { useAppDispatch, useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
 import { setCategory } from '@/features/catalog/catalog-filters/model/slice';
-import { useEffect, useRef } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import {
+  CatalogFiltersSkeleton,
+  CatalogProductListSkeleton,
+} from './CatalogSkeleton';
+
+const CatalogFiltersSidebar = lazy(() =>
+  import(
+    '@/widgets/catalog/ui/catalog-filters/CatalogFiltersSidebar/CatalogFiltersSidebar'
+  ),
+);
+
+const CatalogProductList = lazy(() =>
+  import(
+    '@/widgets/catalog/ui/catalog-product-list/CatalogProductList/CatalogProductList'
+  ),
+);
 
 export default function CatalogPageClient() {
   const { drawerType } = useUI();
@@ -67,9 +81,13 @@ export default function CatalogPageClient() {
   return (
     <section className="CatalogShell">
       <div className="CatalogShell__sidebar--decktop">
-        <CatalogFiltersSidebar />
+        <Suspense fallback={<CatalogFiltersSkeleton />}>
+          <CatalogFiltersSidebar />
+        </Suspense>
       </div>
-      <CatalogProductList />
+      <Suspense fallback={<CatalogProductListSkeleton />}>
+        <CatalogProductList />
+      </Suspense>
       {isFiltersOpen && (
         <ClientPortal>
           <CatalogFiltersModal />

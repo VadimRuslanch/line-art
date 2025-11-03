@@ -1,3 +1,5 @@
+@use '../../styles/skeleton';
+
 .categories-top {
   display: flex;
   justify-content: space-between;
@@ -37,4 +39,49 @@
   @media (max-width: 1279px) {
     display: none;
   }
+}
+
+.CatalogShell--skeleton {
+  align-items: flex-start;
+}
+
+.CatalogFiltersSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--background-surface-1);
+  border-radius: 16px;
+  padding: 40px 12px;
+}
+
+.CatalogFiltersSkeleton__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CatalogFiltersSkeleton__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.CatalogFiltersSkeleton__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.CatalogProductList--skeleton .CatalogProductList__grid {
+  opacity: 1;
+}
+
+.ProductCardSkeleton {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: var(--background-surface-1);
+  border-radius: 20px;
+  gap: 4px;
+  min-height: 320px;
 }

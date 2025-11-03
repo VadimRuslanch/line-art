@@ -5,10 +5,10 @@ import Link from 'next/link';
 import UIButtonBurger from '@/shared/ui/UIElements/UIButtonBurger/UIButtonBurger';
 import IconLogo from '@/shared/assets/svg/logo.svg';
 import IconCart from '@/shared/assets/svg/cart.svg';
-import IconSearch from '@/shared/assets/svg/search.svg';
 import { useUI } from '@/context/UIContext';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartTotalQuantity } from '@/entities/cart/model/cartSelectors';
+import { SearchInput } from '@/widgets/Search/SearchInput/SearchInput';
 
 export default function Header() {
   const { toggleCart } = useUI();
@@ -26,20 +26,12 @@ export default function Header() {
           <Link className="subtitleS3" href="tel:+7 (999) 99-99-99">
             +7 (999) 99-99-99
           </Link>
-          <span className="captionC1">We are online every day</span>
+          <span className="captionC1">Обратный звонок</span>
         </span>
       </div>
 
       <div className="header__center">
-        <label className="header__search-label" htmlFor="search">
-          <IconSearch />
-          <input
-            id="search"
-            className="header__search"
-            type="search"
-            placeholder="Search products"
-          />
-        </label>
+        <SearchInput />
 
         <div className="header__actions">
           <button className="header__link" onClick={toggleCart}>

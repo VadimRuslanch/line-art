@@ -1,0 +1,116 @@
+.skeleton {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+                  90deg,
+                  rgba(200, 200, 200, 0.2) 25%,
+                  rgba(200, 200, 200, 0.5) 37%,
+                  rgba(200, 200, 200, 0.2) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton--title {
+  height: 28px;
+  margin-bottom: 24px;
+}
+
+.skeleton--subtitle {
+  height: 20px;
+  margin-bottom: 16px;
+}
+
+.skeleton--label {
+  height: 18px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+.skeleton--line {
+  height: 16px;
+  margin-top: 16px;
+}
+
+.skeleton--line-short {
+  width: 60%;
+}
+
+.skeleton--line-xs {
+  height: 12px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.skeleton--paragraph {
+  height: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+}
+
+.skeleton--button {
+  height: 48px;
+  border-radius: 999px;
+}
+
+.skeleton--chip {
+  height: 28px;
+  border-radius: 999px;
+}
+
+.skeleton--image {
+  height: 220px;
+  border-radius: 16px;
+
+  @media (min-width: 768px) {
+    height: 280px;
+  }
+}
+
+.skeleton--image-lg {
+  display: block;
+  height: 358px;
+  border-radius: 16px;
+
+  @media (min-width: 768px) {
+    height: 570px;
+  }
+}
+
+.skeleton--thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+
+  @media (min-width: 768px) {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.skeleton--price {
+  height: 24px;
+  width: 40%;
+  border-radius: 10px;
+}
+
+.skeleton--list-item {
+  height: 18px;
+  border-radius: 8px;
+}
+
+.skeleton--block {
+  height: 140px;
+  border-radius: 16px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

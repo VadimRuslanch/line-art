@@ -38,7 +38,8 @@ export type SimpleProductLike =
   | ListSimpleProduct
   | CategorySimpleProduct
   | CartSimpleProduct
-  | SimpleProductGQL;
+  | SimpleProductGQL
+  | SimpleProductUI;
 
 export type ProductWithCart = CartSimpleProduct & {
   quantity: number;

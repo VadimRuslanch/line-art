@@ -73,17 +73,8 @@
   border-radius: 333px;
   padding: 16px;
   width: 100%;
-  margin-right: 12px;
   display: flex;
   gap: 16px;
-
-  @media (min-width: 768px) {
-    margin: 0 24px;
-  }
-
-  @media (min-width: 1280px) {
-    margin: 0 40px;
-  }
 }
 
 

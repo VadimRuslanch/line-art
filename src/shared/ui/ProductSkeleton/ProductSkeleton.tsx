@@ -1,3 +1,10 @@
+import { ProductDetailsPreviewSkeleton, ProductDetailsAboutSkeleton } from '@/widgets/product/ProductDetails/ProductDetailsSkeletons/ProductDetailsSkeletons';
+
 export default function ProductSkeleton() {
-  return <div>I am ProductSkeleton</div>;
+  return (
+    <div className="ProductSkeleton">
+      <ProductDetailsPreviewSkeleton />
+      <ProductDetailsAboutSkeleton />
+    </div>
+  );
 }

@@ -1,0 +1,12 @@
+query GetProductListByName($searchTerm: String!) {
+    products(where: { search: $searchTerm }) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+            __typename
+            databaseId
+            slug
+            name
+        }
+        found
+    }
+}

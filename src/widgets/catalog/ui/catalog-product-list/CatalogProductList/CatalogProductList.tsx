@@ -9,6 +9,7 @@ import {
 } from '@/features/product/product-list/model/useProductList';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
+import { CatalogProductListSkeleton } from '@/widgets/catalog/ui/catalog-product-list/CatalogProductListSkeleton/CatalogProductListSkeleton';
 
 export default function CatalogProductList() {
   const selectedFilters = useAppSelector(selectSelectedFilters);
@@ -41,16 +42,18 @@ const CatalogProductListView = ({
   const { products, loadMore, hasNextPage, isFetchingMore, isInitialLoading } =
     hookResult;
 
-  const isEmpty = !isInitialLoading && products.length === 0;
-  const canShowLoadMore = hasNextPage && !isInitialLoading && !isEmpty;
-  console.log(isEmpty)
+  if (isInitialLoading) {
+    return <CatalogProductListSkeleton />;
+  }
+
+  const isEmpty = products.length === 0;
+  const canShowLoadMore = hasNextPage && !isEmpty;
+
   return (
     <div className="CatalogProductList">
-      {isInitialLoading ? (
-        <div className="CatalogProductList__loader">Loading products...</div>
-      ) : isEmpty ? (
+      {isEmpty ? (
         <div className="CatalogProductList__empty">
-          Товаров пока нет, выберите другую категорию
+          Товаров нет, выберите другую категорию
         </div>
       ) : (
         <div className="CatalogProductList__grid">
@@ -81,3 +84,4 @@ const CatalogProductListView = ({
     </div>
   );
 };
+

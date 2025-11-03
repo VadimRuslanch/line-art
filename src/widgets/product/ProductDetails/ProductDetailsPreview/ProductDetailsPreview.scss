@@ -1,3 +1,5 @@
+@use '../../../../styles/skeleton';
+
 .ProductDetailsPreview {
   margin-bottom: 80px;
 }
@@ -70,4 +72,50 @@
   @media (max-width: 549px) {
     order: 3;
   }
+}
+
+.ProductDetailsPreview--skeleton {
+  .ProductDetailsPreview__content {
+    gap: 40px;
+
+    @media (min-width: 768px) {
+      gap: 40px 80px;
+    }
+  }
+}
+
+.ProductDetailsPreview__media-skeleton {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 16px;
+
+  @media (min-width: 1200px) {
+    width: 50%;
+  }
+}
+
+.ProductDetailsPreview__thumbs-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ProductDetailsPreview__info--skeleton {
+  gap: 24px;
+
+  @media (min-width: 1200px) {
+    width: 50%;
+  }
+}
+
+.ProductDetailsPreview__characteristics-row {
+  display: grid;
+  gap: 12px;
+}
+
+.ProductDetailsPreview__characteristics-values {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }

@@ -1,40 +1,42 @@
-'use client';
-
 import './ProductDetailsAbout.scss';
-import { useProductDetails } from '@/entities/product/current-detail/model/useProductDetails';
-import React from 'react';
+
+import { notFound } from 'next/navigation';
 import ProductDetailsCharacteristics from '../ProductDetailsCharacteristics/ProductDetailsCharacteristics';
+import { extractGlobalAttributes } from '@/entities/product/current-detail/lib/normalizeProductAttributes';
+import type { SimpleProductGQL } from '@/entities/product/types';
 
-export default function ProductDetailsAbout({ slug }: { slug: string }) {
-  const { product } = useProductDetails(slug);
+type Props = {
+  productPromise: Promise<SimpleProductGQL | null>;
+};
 
-  if (product === null) return <p>Идет загрузка</p>;
+export default async function ProductDetailsAbout({ productPromise }: Props) {
+  const product = await productPromise;
 
-  const { description, attributes } = product;
-  const html = description?.trim();
+  if (!product) {
+    notFound();
+  }
 
-  const attributesNodes = attributes?.nodes ?? [];
+  const attributes = extractGlobalAttributes(product);
+  const description = product.description?.trim() ?? '';
   const rootClass =
     'ProductDetailsAbout' +
-    (html ? ' ProductDetailsAbout--has-description' : '');
+    (description ? ' ProductDetailsAbout--has-description' : '');
 
   return (
     <div className={rootClass}>
-      <h3
-        id="characteristics"
-        className="ProductDetailsAbout__title HeadlineH2"
-      >
-        О товаре
+      <h3 id="characteristics" className="ProductDetailsAbout__title HeadlineH2">
+        About product
       </h3>
 
-      {html && (
+      {description && (
         <article
           className="ProductDetailsAbout__description SubtitleS2"
-          dangerouslySetInnerHTML={{ __html: html }}
+          dangerouslySetInnerHTML={{ __html: description }}
         />
       )}
+
       <section className="ProductDetailsAbout__characteristics">
-        {attributesNodes.map((attribute) => (
+        {attributes.map((attribute) => (
           <ProductDetailsCharacteristics
             key={attribute.id}
             attribute={attribute}
@@ -44,3 +46,4 @@ export default function ProductDetailsAbout({ slug }: { slug: string }) {
     </div>
   );
 }
+

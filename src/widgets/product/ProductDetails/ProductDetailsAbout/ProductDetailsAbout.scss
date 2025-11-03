@@ -1,3 +1,5 @@
+@use '../../../../styles/skeleton';
+
 .ProductDetailsAbout {
   display: flex;
   flex-direction: column;
@@ -53,4 +55,24 @@
   @media (min-width: 1200px) {
     grid-area: characteristics;
   }
+}
+
+.ProductDetailsAbout--skeleton {
+  gap: 24px;
+}
+
+.ProductDetailsAbout__description--skeleton {
+  display: grid;
+  gap: 12px;
+}
+
+.ProductDetailsAbout__characteristics--skeleton {
+  display: grid;
+  gap: 12px;
+}
+
+.ProductDetailsAbout__characteristics-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }

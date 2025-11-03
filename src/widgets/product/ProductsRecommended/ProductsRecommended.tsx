@@ -1,22 +1,23 @@
 'use client';
 import './ProductsRecommended.scss';
 
-import { useProductsRecommended } from '@/entities/product/recommended/model/useProductsRecommended';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
+import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
 export default function ProductsRecommended() {
-  const { products } = useProductsRecommended();
+  const { popular } = useGetHomeCatalog();
+
   return (
-    <div className={'ProductsRecommended__container'}>
-      <h2 className="HeadlineH2">Вам может понравиться</h2>
+    <div className="ProductsRecommended__container">
+      <h2 className="HeadlineH2">Recommended products</h2>
       <Swiper spaceBetween={20} slidesPerView="auto">
-        {products.map(
+        {popular.products.map(
           (product) =>
             product?.__typename === 'SimpleProduct' && (
               <SwiperSlide
                 key={product.databaseId}
-                className={'ProductsRecommended__slide'}
+                className="ProductsRecommended__slide"
               >
                 <ProductCard product={product} />
               </SwiperSlide>
@@ -26,3 +27,4 @@ export default function ProductsRecommended() {
     </div>
   );
 }
+

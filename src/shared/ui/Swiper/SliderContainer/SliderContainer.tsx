@@ -77,7 +77,7 @@ export default function SliderContainer<T extends WithDbId>({
     };
 
     swiper.navigation?.destroy();
-    swiper.navigation?.init();``
+    swiper.navigation?.init();
     swiper.navigation?.update();
   }, [items.length]);
 
