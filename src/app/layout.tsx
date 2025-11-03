@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   title: 'Lineart alumo',
   description: 'Лучшие дизайнерские решения для вашего дома',
 };
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+} as const;
 
 export default function RootLayout({
   children,
