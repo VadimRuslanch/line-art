@@ -2,7 +2,10 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './CartProductCard.module.scss';
-import type { CartSimpleProduct } from '@/entities/product/types';
+import type {
+  CartSimpleProduct,
+  CartVariableProduct,
+} from '@/entities/product/types';
 import IconClose from '@/shared/assets/svg/icon-close.svg';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,8 +17,10 @@ import { parseMoney } from '@/shared/lib/money';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
 
+type CartProduct = CartSimpleProduct | CartVariableProduct;
+
 export type CartProductCardProps = {
-  product: CartSimpleProduct;
+  product: CartProduct;
   productKey: string;
   quantity: number;
   lineTotal?: string | null;

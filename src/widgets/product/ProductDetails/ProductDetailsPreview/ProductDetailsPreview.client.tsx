@@ -11,6 +11,7 @@ import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 import { extractGlobalAttributes } from '@/entities/product/current-detail/lib/normalizeProductAttributes';
 
 import type { GetProductDetailsQuery } from '@/shared/api/gql/graphql';
+import type { GlobalProductAttributeUI } from '@/entities/product/types';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import { isVariableProduct } from '@/hooks/typeVariableProductGuards';
 import ProductDetailsCharacteristicsSelect from '@/widgets/product/ProductDetails/ProductDetailsCharacteristicsSelect/ProductDetailsCharacteristicsSelect';
@@ -18,6 +19,44 @@ import ProductDetailsCharacteristicsSelect from '@/widgets/product/ProductDetail
 type PDPProduct = NonNullable<GetProductDetailsQuery['product']>;
 
 type Props = { product: PDPProduct };
+
+type AttributeTermLike = { name?: string | null; slug?: string | null };
+
+const PLACEHOLDER_VALUE_PATTERN = /выберите/i;
+
+function normalizeValue(value?: string | null) {
+  return value?.trim().toLowerCase() ?? '';
+}
+
+function isPlaceholderOption(label?: string | null) {
+  const normalized = normalizeValue(label);
+  return normalized.length > 0 && PLACEHOLDER_VALUE_PATTERN.test(normalized);
+}
+
+function findFirstSelectableValue(attribute: GlobalProductAttributeUI) {
+  const nodes = (attribute.terms?.nodes ?? []) as AttributeTermLike[];
+  for (const term of nodes) {
+    const label = term?.name?.trim();
+    if (!label || isPlaceholderOption(label)) continue;
+    const slug = term?.slug?.trim();
+    const value = slug && slug.length > 0 ? slug : label;
+    if (value) return value;
+  }
+  return undefined;
+}
+
+function getAttributeTermLabel(
+  attribute: GlobalProductAttributeUI,
+  slugValue: string,
+) {
+  const nodes = (attribute.terms?.nodes ?? []) as AttributeTermLike[];
+  const normalizedSlug = normalizeValue(slugValue);
+  if (!normalizedSlug) return undefined;
+  const term = nodes.find(
+    (node) => normalizeValue(node?.slug) === normalizedSlug,
+  );
+  return term?.name ?? undefined;
+}
 
 export default function ProductDetailsPreviewClient({ product }: Props) {
   const attributes = useMemo(() => extractGlobalAttributes(product), [product]);
@@ -32,27 +71,6 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
     [title],
   );
 
-  // ---- Собираем attributeId по имени атрибута (из product.attributes.nodes) ----
-  // Пример: attrIdByName['pa_color'] -> number
-  const attrIdByName = useMemo(() => {
-    if (!isVariableProduct(product)) return {} as Record<string, number>;
-    const nodes = (product.attributes?.nodes ?? []) as Array<{
-      name?: string | null;
-      attributeId?: number | null;
-    } | null>;
-
-    const map: Record<string, number> = {};
-    for (const n of nodes) {
-      const name = n?.name ?? undefined;
-      const id = n?.attributeId ?? undefined;
-      if (name && typeof id === 'number') map[name] = id;
-    }
-    return map;
-  }, [product]);
-
-  // если нужно — вот так берёте id для "pa_color"
-  const colorAttributeId = attrIdByName['pa_color'];
-
   // ---- состояние выбора атрибутов (только для вариативных) ----
   // ключ = ИМЯ ИЗ БД (например, "pa_color"), значение = выбранный option (raw)
   const [selected, setSelected] = useState<Record<string, string>>({});
@@ -66,13 +84,7 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
       .filter((a) => a.variation)
       .forEach((a) => {
         const key = a.name ?? '';
-        // Ищем сначала slug/value, если нет — падаем обратно на name
-        const firstTerm: any = a.terms?.nodes?.[0] ?? null;
-        const firstValue =
-          (firstTerm?.slug as string | undefined) ??
-          (firstTerm?.value as string | undefined) ??
-          (firstTerm?.name as string | undefined) ??
-          '';
+        const firstValue = findFirstSelectableValue(a);
         if (key && firstValue) next[key] = firstValue;
       });
 
@@ -104,18 +116,34 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
     return (
       variations.find((v) => {
         const va = v?.attributes?.nodes ?? [];
-        // сравниваем raw value: variationAttr.value === selected[attrName]
         return attributes
           .filter((a) => a.variation)
           .every((a) => {
             const key = a.name ?? '';
-            const expected = selected[key];
-            if (!key || !expected) return false;
+            const slugValue = selected[key];
+            if (!key || !slugValue) return false;
 
-            const inVar = va.find(
-              (an: any) => an?.name === key && an?.value === expected,
+            const normalizedSlug = normalizeValue(slugValue);
+            const normalizedLabel = normalizeValue(
+              getAttributeTermLabel(a, slugValue),
             );
-            return !!inVar;
+            const expectedValues = [normalizedSlug, normalizedLabel].filter(
+              Boolean,
+            );
+            if (expectedValues.length === 0) return false;
+
+            return va.some((an: any) => {
+              if (an?.name !== key) return false;
+              const actualValues = [
+                normalizeValue(an?.value),
+                normalizeValue(an?.label),
+              ].filter(Boolean);
+              if (actualValues.length === 0) return false;
+
+              return actualValues.some((actual) =>
+                expectedValues.some((expected) => actual === expected),
+              );
+            });
           });
       }) ?? null
     );
@@ -123,12 +151,14 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
 
   // То, что уйдёт в AddToCart → variationAttributes (raw имена/значения)
   const variationId =
-    isVariableProduct(product) && typeof colorAttributeId === 'number'
-      ? colorAttributeId
+    isVariableProduct(product) && matchedVariation
+      ? matchedVariation.databaseId ?? undefined
       : undefined;
 
   const variationAttributes =
-    isVariableProduct(product) && selectedComplete ? selected : undefined;
+    isVariableProduct(product) && matchedVariation && selectedComplete
+      ? selected
+      : undefined;
 
   return (
     <div className="ProductDetailsPreview">
@@ -156,11 +186,13 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
                 return (
                   <>
                     <ProductDetailsCharacteristicsSelect
-                      key={attribute.id}
+                      key={`${attribute.id}-select`}
                       attribute={attribute}
+                      value={value}
+                      onChange={(next) => setAttr(key, next)}
                     />
                     <ProductDetailsCharacteristics
-                      key={attribute.id}
+                      key={`${attribute.id}-info`}
                       attribute={attribute}
                     />
                   </>

@@ -34,6 +34,15 @@ export type CartSimpleProduct = Extract<
   { __typename: 'SimpleProduct' }
 >;
 
+export type CartVariableProduct = Extract<
+  NonNullable<
+    NonNullable<
+      NonNullable<CartCoreFragment['contents']>['nodes'][number]
+    >['product']
+  >['node'],
+  { __typename: 'VariableProduct' }
+>;
+
 export type SimpleProductLike =
   | ListSimpleProduct
   | CategorySimpleProduct
@@ -85,5 +94,5 @@ export type NamedTermNode = Extract<
   NonNullable<
     NonNullable<NonNullable<AttributeNodeWithTerms['terms']>['nodes']>[number]
   >,
-  { name?: string | null }
+  { name?: string | null; slug?: string | null; value?: string | null }
 >;

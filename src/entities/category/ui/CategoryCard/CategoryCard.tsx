@@ -32,7 +32,7 @@ export default function CategoryCard({ item }: CategoryNode) {
         className="CategoryCard__image"
         width={413}
         height={480}
-        src={image ? image.sourceUrl! : '/images/img.png'}
+        src={image ? image.sourceUrl! : '/images/preview.jpg'}
         alt={image ? image.altText! : 'ALT'}
       />
       <div className="CategoryCard__bottom">

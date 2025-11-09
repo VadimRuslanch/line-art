@@ -17,7 +17,10 @@ import {
   AddVariableToCartMutationVariables,
   AddVariableToCartDocument,
 } from '@/shared/api/gql/graphql';
-import type { CartSimpleProduct } from '@/entities/product/types';
+import type {
+  CartSimpleProduct,
+  CartVariableProduct,
+} from '@/entities/product/types';
 import { ApolloCache } from '@apollo/client';
 import { useQuery, useMutation } from '@apollo/client/react';
 import { useMemo, useCallback, useEffect } from 'react';
@@ -28,11 +31,13 @@ import { setSnapshot, CartItemState } from '@/entities/cart/model/cartSlice';
 
 type Cart = CartCoreFragment;
 
+type CartProductNode = CartSimpleProduct | CartVariableProduct;
+
 type SimpleCartEntry = {
   key: string;
   quantity: number;
   total: string | null;
-  product: CartSimpleProduct;
+  product: CartProductNode;
 };
 
 function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
@@ -51,10 +56,11 @@ type AttributeLike =
 
 function normalizeAttrName(name: string) {
   return name
-    .replace(/^attribute_pa_/i, '')
+    .trim()
+    .replace(/^attribute_pa_/i, 'pa_')
     .replace(/^attribute_/i, '')
-    .replace(/^pa_/i, '')
-    .trim();
+    .trim()
+    .toLowerCase();
 }
 
 function toProductAttributeInput(attributes: AttributeLike) {
@@ -90,7 +96,11 @@ export function useCart() {
 
     return cart.contents.nodes.reduce<SimpleCartEntry[]>((acc, item) => {
       const node = item?.product?.node;
-      if (!node || node.__typename !== 'SimpleProduct') {
+      if (
+        !node ||
+        (node.__typename !== 'SimpleProduct' &&
+          node.__typename !== 'VariableProduct')
+      ) {
         return acc;
       }
 

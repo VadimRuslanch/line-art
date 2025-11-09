@@ -35290,6 +35290,7 @@ export type GetProductDetailsQuery = {
                 __typename: 'GlobalProductAttribute';
                 name: string | null;
                 id: string;
+                attributeId: number;
                 variation: boolean | null;
                 terms: {
                   __typename: 'GlobalProductAttributeToTermNodeConnection';
@@ -35380,6 +35381,7 @@ export type GetProductDetailsQuery = {
                 name: string | null;
                 options: Array<string | null> | null;
                 id: string;
+                attributeId: number;
                 variation: boolean | null;
               }
           >;
@@ -35410,6 +35412,7 @@ export type GetProductDetailsQuery = {
               __typename: 'ProductVariationToVariationAttributeConnection';
               nodes: Array<{
                 __typename: 'VariationAttribute';
+                attributeId: number | null;
                 name: string | null;
                 label: string | null;
                 value: string | null;
@@ -36482,6 +36485,7 @@ export type ProductVariableCoreFragment = {
           __typename: 'GlobalProductAttribute';
           name: string | null;
           id: string;
+          attributeId: number;
           variation: boolean | null;
           terms: {
             __typename: 'GlobalProductAttributeToTermNodeConnection';
@@ -36572,6 +36576,7 @@ export type ProductVariableCoreFragment = {
           name: string | null;
           options: Array<string | null> | null;
           id: string;
+          attributeId: number;
           variation: boolean | null;
         }
     >;
@@ -36602,6 +36607,7 @@ export type ProductVariableCoreFragment = {
         __typename: 'ProductVariationToVariationAttributeConnection';
         nodes: Array<{
           __typename: 'VariationAttribute';
+          attributeId: number | null;
           name: string | null;
           label: string | null;
           value: string | null;
@@ -37348,6 +37354,10 @@ export const ProductVariableCoreFragmentDoc = {
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'attributeId' },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'variation' },
                       },
                       {
@@ -37522,6 +37532,13 @@ export const ProductVariableCoreFragmentDoc = {
                               selectionSet: {
                                 kind: 'SelectionSet',
                                 selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'attributeId',
+                                    },
+                                  },
                                   {
                                     kind: 'Field',
                                     name: { kind: 'Name', value: 'name' },
@@ -40487,6 +40504,10 @@ export const GetProductDetailsDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'attributeId' },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'variation' },
                       },
                       {
@@ -40661,6 +40682,13 @@ export const GetProductDetailsDocument = {
                               selectionSet: {
                                 kind: 'SelectionSet',
                                 selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'attributeId',
+                                    },
+                                  },
                                   {
                                     kind: 'Field',
                                     name: { kind: 'Name', value: 'name' },

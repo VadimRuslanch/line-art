@@ -8,11 +8,10 @@ fragment ProductVariableCore on VariableProduct {
     stockQuantity
     soldIndividually
 
-    # Атрибуты, задающие вариативность (локальные + глобальные)
     attributes {
         nodes {
             id
-
+            attributeId
             variation
             ... on LocalProductAttribute {
                 name
@@ -30,11 +29,10 @@ fragment ProductVariableCore on VariableProduct {
     # Конкретные вариации товара
     variations(first: $variationsFirst) {
         nodes {
-            id....
+            id
             databaseId
             name
             sku
-
             price
             rawPrice: price(format: RAW)
             regularPrice
@@ -42,12 +40,10 @@ fragment ProductVariableCore on VariableProduct {
             onSale
             stockStatus
             stockQuantity
-
             image { ...ImageCore }
-
-            # Атрибуты выбранной вариации (имя/лейбл/значение)
             attributes {
                 nodes {
+                    attributeId
                     name
                     label
                     value
