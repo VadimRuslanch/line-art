@@ -47,6 +47,13 @@ const config: CodegenConfig = {
         },
       },
     },
+    'src/shared/api/gql/possibleTypes.generated.ts': {
+      plugins: ['fragment-matcher'],
+      config: {
+        apolloClientVersion: 3,
+        deterministic: true,
+      },
+    },
     './schema.graphql': { plugins: ['schema-ast'] },
     './schema.json': {
       plugins: ['introspection'],

@@ -41,6 +41,7 @@ type UseProductListResult = {
     endCursor: string | null;
     hasNextPage: boolean;
   };
+  refetch?: () => void;
 };
 
 export function useProductAllList(
@@ -59,7 +60,7 @@ export function useProductAllList(
     [pageSize, where],
   );
 
-  const { data, fetchMore, loading, error, networkStatus } = useQuery<
+  const { data, fetchMore, loading, error, networkStatus, refetch } = useQuery<
     GetProductListAllQuery,
     GetProductListAllQueryVariables
   >(GetProductListAllDocument, {
@@ -129,6 +130,11 @@ export function useProductAllList(
       endCursor,
       hasNextPage,
     },
+    refetch: () => {
+      try {
+        void refetch?.(variables);
+      } catch {}
+    },
   };
 }
 
@@ -154,7 +160,7 @@ export function useProductCategoryList({
     [pageSize, slug, where],
   );
 
-  const { data, fetchMore, loading, error, networkStatus } = useQuery<
+  const { data, fetchMore, loading, error, networkStatus, refetch } = useQuery<
     GetProductListCategoryQuery,
     GetProductListCategoryQueryVariables
   >(GetProductListCategoryDocument, {
@@ -245,6 +251,11 @@ export function useProductCategoryList({
     cursors: {
       endCursor,
       hasNextPage,
+    },
+    refetch: () => {
+      try {
+        void refetch?.(variables);
+      } catch {}
     },
   };
 }

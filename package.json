@@ -30,6 +30,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^12.9.2",
     "graphql": "^16.11.0",
+    "isomorphic-dompurify": "^2.31.0",
     "next": "16.0.1",
     "normalize-scss": "^8.0.0",
     "react": "19.2.0",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^6.0.1",
+    "@graphql-codegen/fragment-matcher": "^6.0.0",
     "@graphql-codegen/introspection": "^5.0.0",
     "@graphql-codegen/schema-ast": "^5.0.0",
     "@graphql-codegen/typescript": "^5.0.2",

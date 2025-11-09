@@ -35,14 +35,14 @@ export default async function ProductDetailsAbout({ productPromise }: Props) {
         />
       )}
 
-      <section className="ProductDetailsAbout__characteristics">
-        {attributes.map((attribute) => (
-          <ProductDetailsCharacteristics
-            key={attribute.id}
-            attribute={attribute}
-          />
-        ))}
-      </section>
+      {/*<section className="ProductDetailsAbout__characteristics">*/}
+      {/*  {attributes.map((attribute) => (*/}
+      {/*    <ProductDetailsCharacteristics*/}
+      {/*      key={attribute.id}*/}
+      {/*      attribute={attribute}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*</section>*/}
     </div>
   );
 }

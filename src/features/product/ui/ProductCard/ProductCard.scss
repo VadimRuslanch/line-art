@@ -37,6 +37,12 @@
   right: 24px;
 }
 
+.ProductCard__bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 
 .ProductCard__bottom-art {
   display: inline-block;
@@ -91,6 +97,6 @@
 }
 
 
-.productPrice {
-  margin-top: auto;
-}
+//.productPrice {
+//  margin-top: auto;
+//}

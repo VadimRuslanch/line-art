@@ -1,0 +1,62 @@
+fragment ProductVariableCore on VariableProduct {
+    price
+    rawPrice: price(format: RAW)
+    regularPrice
+    salePrice
+    onSale
+    stockStatus
+    stockQuantity
+    soldIndividually
+
+    # Атрибуты, задающие вариативность (локальные + глобальные)
+    attributes {
+        nodes {
+            id
+
+            variation
+            ... on LocalProductAttribute {
+                name
+                options
+            }
+            ... on GlobalProductAttribute {
+                name
+                terms(first: 100) {
+                    nodes { id name slug }
+                }
+            }
+        }
+    }
+
+    # Конкретные вариации товара
+    variations(first: $variationsFirst) {
+        nodes {
+            id....
+            databaseId
+            name
+            sku
+
+            price
+            rawPrice: price(format: RAW)
+            regularPrice
+            salePrice
+            onSale
+            stockStatus
+            stockQuantity
+
+            image { ...ImageCore }
+
+            # Атрибуты выбранной вариации (имя/лейбл/значение)
+            attributes {
+                nodes {
+                    name
+                    label
+                    value
+                }
+            }
+        }
+    }
+
+    # Если в вашей схеме есть размеры/вес — раскомментируйте:
+    # dimensions { width height length }
+    # weight
+}

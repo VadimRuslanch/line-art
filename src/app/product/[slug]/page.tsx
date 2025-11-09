@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import ProductDetailsPreview from '@/widgets/product/ProductDetails/ProductDetailsPreview/ProductDetailsPreview';
 import ProductDetailsInfo from '@/shared/ui/ProductDetailsInfo/ProductDetailsInfo';
 import ProductDetailsAbout from '@/widgets/product/ProductDetails/ProductDetailsAbout/ProductDetailsAbout';
-import { getProductDetails } from '@/entities/product/current-detail/api/getProductDetails';
+import { getProductDetails } from '@/entities/product/current-detail/model/getProductDetails';
 import {
   ProductDetailsAboutSkeleton,
   ProductDetailsPreviewSkeleton,
@@ -29,7 +29,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductDetails(slug);
-
   if (!product) {
     return { title: 'Товар не найден' };
   }

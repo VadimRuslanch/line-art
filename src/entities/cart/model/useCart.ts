@@ -13,6 +13,9 @@ import {
   UpdateCartItemQuantitiesMutation,
   UpdateCartItemQuantitiesMutationVariables,
   UpdateCartItemQuantitiesDocument,
+  AddVariableToCartMutation,
+  AddVariableToCartMutationVariables,
+  AddVariableToCartDocument,
 } from '@/shared/api/gql/graphql';
 import type { CartSimpleProduct } from '@/entities/product/types';
 import { ApolloCache } from '@apollo/client';
@@ -39,6 +42,32 @@ function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
     query: GetCartDocument,
     data: { __typename: 'RootQuery', cart: newCart },
   });
+}
+
+// ---- helpers для вариативных атрибутов ----
+type AttributeLike =
+  | Record<string, string>
+  | Array<{ name: string; value: string }>;
+
+function normalizeAttrName(name: string) {
+  return name
+    .replace(/^attribute_pa_/i, '')
+    .replace(/^attribute_/i, '')
+    .replace(/^pa_/i, '')
+    .trim();
+}
+
+function toProductAttributeInput(attributes: AttributeLike) {
+  if (Array.isArray(attributes)) {
+    return attributes.map((a) => ({
+      attributeName: normalizeAttrName(a.name),
+      attributeValue: a.value,
+    }));
+  }
+  return Object.entries(attributes).map(([name, value]) => ({
+    attributeName: normalizeAttrName(name),
+    attributeValue: value,
+  }));
 }
 
 /* ------------------------ основной хук --------------------------- */
@@ -119,6 +148,15 @@ export function useCart() {
     },
   });
 
+  const [addVarExec, { loading: addingVar, error: addVarErr }] = useMutation<
+    AddVariableToCartMutation,
+    AddVariableToCartMutationVariables
+  >(AddVariableToCartDocument, {
+    update(cache, { data }) {
+      writeCart(cache, data?.addToCart?.cart);
+    },
+  });
+
   const [rmExec, { loading: removing, error: rmErr }] = useMutation<
     RemoveFromCartMutation,
     RemoveFromCartMutationVariables
@@ -144,6 +182,25 @@ export function useCart() {
     [addExec],
   );
 
+  const addVariable = useCallback(
+    async (
+      productId: number,
+      variationId: number,
+      attributes: AttributeLike,
+      quantity = 1,
+    ) => {
+      await addVarExec({
+        variables: {
+          productId,
+          variationId,
+          quantity,
+          attributes: toProductAttributeInput(attributes),
+        },
+      });
+    },
+    [addVarExec],
+  );
+
   const remove = useCallback(
     async (key: string) => {
       await rmExec({ variables: { keys: [key], all: false } });
@@ -167,19 +224,7 @@ export function useCart() {
 
   const error: ApolloError | undefined = addErr || rmErr || updateErr;
 
-  return useMemo<
-    Readonly<{
-      cart: Cart | null;
-      simpleProducts: typeof simpleProducts;
-      mutating: boolean;
-      cartLoading: boolean;
-      error: ApolloError | undefined;
-      add: (id: number, qty?: number) => Promise<void>;
-      remove: (key: string) => Promise<void>;
-      clear: () => Promise<void>;
-      updateQuantity: (key: string, qty: number) => Promise<void>;
-    }>
-  >(
+  return useMemo(
     () => ({
       cart,
       simpleProducts,
@@ -187,6 +232,7 @@ export function useCart() {
       cartLoading,
       error,
       add,
+      addVariable,
       remove,
       clear,
       updateQuantity,
@@ -198,9 +244,26 @@ export function useCart() {
       cartLoading,
       error,
       add,
+      addVariable,
       remove,
       clear,
       updateQuantity,
     ],
-  );
+  ) as Readonly<{
+    cart: Cart | null;
+    simpleProducts: typeof simpleProducts;
+    mutating: boolean;
+    cartLoading: boolean;
+    error: ApolloError | undefined;
+    add: (id: number, qty?: number) => Promise<void>;
+    addVariable: (
+      productId: number,
+      variationId: number,
+      attributes: AttributeLike,
+      qty?: number,
+    ) => Promise<void>;
+    remove: (key: string) => Promise<void>;
+    clear: () => Promise<void>;
+    updateQuantity: (key: string, qty: number) => Promise<void>;
+  }>;
 }

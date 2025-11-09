@@ -16,37 +16,39 @@ export default function Header() {
   const showCartCount = totalQuantity > 0;
 
   return (
-    <header className="header">
-      <div className="header__left">
-        <Link href="/">
-          <IconLogo className="headerLogo" />
-        </Link>
-
-        <span className="header__tel">
-          <Link className="subtitleS3" href="tel:+7 (999) 99-99-99">
-            +7 (999) 99-99-99
+    <header className="header__container">
+      <div className="header">
+        <div className="header__left">
+          <Link href="/">
+            <IconLogo className="headerLogo" />
           </Link>
-          <span className="captionC1">Обратный звонок</span>
-        </span>
-      </div>
 
-      <div className="header__center">
-        <SearchInput />
-
-        <div className="header__actions">
-          <button className="header__link" onClick={toggleCart}>
-            <IconCart className="header__link-icon" />
-            <span className="captionC1">Корзина</span>
-            {showCartCount && (
-              <span className="header__link-count" aria-live="polite">
-                {totalQuantity}
-              </span>
-            )}
-          </button>
+          <span className="header__tel">
+            <Link className="subtitleS3" href="tel:+7 (999) 99-99-99">
+              +7 (999) 99-99-99
+            </Link>
+            <span className="captionC1">Обратный звонок</span>
+          </span>
         </div>
-      </div>
 
-      <UIButtonBurger />
+        <div className="header__center">
+          <SearchInput />
+
+          <div className="header__actions">
+            <button className="header__link" onClick={toggleCart}>
+              <IconCart className="header__link-icon" />
+              <span className="captionC1">Корзина</span>
+              {showCartCount && (
+                <span className="header__link-count" aria-live="polite">
+                  {totalQuantity}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        <UIButtonBurger />
+      </div>
     </header>
   );
 }

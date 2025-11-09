@@ -1,3 +1,6 @@
+#import "@/shared/api/fragments/product-core.fragment.graphql"
+#import "@/shared/api/fragments/product-simple-core.fragment.graphql"
+
 query  GetProductListCategory(
     $n: Int!,
     $after: String,
@@ -9,19 +12,29 @@ query  GetProductListCategory(
         products(first: $n, after: $after, where: $where) {
             pageInfo { endCursor hasNextPage }
             nodes {
-                databaseId
+                __typename
                 id
+                databaseId
                 name
-                onSale
                 uri
                 sku
                 title
+                image { ...ImageCore }
+                galleryImages {
+                    nodes {
+                        ...ImageCore
+                    }
+                }
                 ... on SimpleProduct {
                     price
                     regularPrice
                     salePrice
                 }
-                image { ...ImageCore }
+                ... on VariableProduct {
+                    price
+                    regularPrice
+                    salePrice
+                }
             }
         }
     }

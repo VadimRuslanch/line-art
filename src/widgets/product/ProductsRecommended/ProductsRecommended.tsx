@@ -7,7 +7,6 @@ import { useGetHomeCatalog } from '@/entities/category/model/useGetHomeCatalog';
 
 export default function ProductsRecommended() {
   const { popular } = useGetHomeCatalog();
-
   return (
     <div className="ProductsRecommended__container">
       <h2 className="HeadlineH2">Recommended products</h2>

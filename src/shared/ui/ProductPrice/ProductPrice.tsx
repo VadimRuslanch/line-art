@@ -13,13 +13,14 @@ export default function ProductPrice({
   onSale,
   ...props
 }: ProductPriceProps) {
+  console.log(regularPrice, salePrice, onSale);
   if (!regularPrice) return null;
   return (
     <div className="containerPrice" {...props}>
       {onSale ? (
         <div className={styles.productPriceSale}>
           {salePrice && (
-            <p className='HeadlineH5'>
+            <p className="HeadlineH5">
               <span>{parseMoney(salePrice)}</span> ₽ / <span>метр</span>
             </p>
           )}
@@ -29,7 +30,7 @@ export default function ProductPrice({
         </div>
       ) : (
         <div>
-          <p className='HeadlineH5'>
+          <p className="HeadlineH5">
             <span>{parseMoney(regularPrice)}</span> ₽ / <span>метр</span>
           </p>
         </div>

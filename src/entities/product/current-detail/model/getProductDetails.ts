@@ -22,12 +22,15 @@ export const getProductDetails = cache(async function getProductDetails(
     fetchPolicy: 'no-cache',
   });
 
-  const product = data?.product as QueryResult;
+  const product = data?.product;
+  if (!product) return null;
 
-  if (!isSimpleProduct(product)) {
-    return null;
+  if (
+    product.__typename === 'SimpleProduct' ||
+    product.__typename === 'VariableProduct'
+  ) {
+    return product;
   }
 
   return product;
 });
-

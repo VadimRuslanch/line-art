@@ -18,7 +18,7 @@ import type {
   ProductNode,
 } from '../../model/useProductList';
 
-type UseProductCategoryListOptions = UseProductListOptions & { slug: string };
+type UseProductCategoryListOptions = UseProductListOptions & { slug: string; skip?: boolean };
 
 type CategoryNode = NonNullable<
   NonNullable<
@@ -26,11 +26,9 @@ type CategoryNode = NonNullable<
   >['nodes'][number]
 >;
 
-export function useGetProductListCategory({
-  slug,
-  pageSize = 10,
-}: UseProductCategoryListOptions): UseProductListResult {
+export function useGetProductListCategory({ slug, pageSize = 10, skip }: UseProductCategoryListOptions): UseProductListResult {
   const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
+
   const where = useMemo(
     () => buildCategoryWhere(selectedFilters),
     [selectedFilters],
@@ -46,12 +44,12 @@ export function useGetProductListCategory({
     [pageSize, slug, where],
   );
 
-  const { data, fetchMore, loading, error, networkStatus } = useQuery<
+  const { data, fetchMore, loading, error, networkStatus, refetch } = useQuery<
     GetProductListCategoryQuery,
     GetProductListCategoryQueryVariables
   >(GetProductListCategoryDocument, {
     variables,
-    skip: !slug,
+    skip: skip ?? !slug,
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
     returnPartialData: true,
@@ -137,6 +135,11 @@ export function useGetProductListCategory({
     cursors: {
       endCursor,
       hasNextPage,
+    },
+    refetch: () => {
+      try {
+        void refetch?.(variables);
+      } catch {}
     },
   };
 }

@@ -1,32 +1,29 @@
 #import "./ImageCore.graphql"
+#import "./category-core.fragment.graphql"
 
-fragment ProductCore on SimpleProduct {
-    databaseId
+fragment ProductCore on Product {
+    __typename
     id
+    databaseId
     name
-    regularPrice
-    salePrice
-    onSale
     uri
+    slug
     description
     sku
-    attributes {
-        nodes {
-            ... on GlobalProductAttribute {
-                id
-                name
-                variation
-                visible
-                label
-                terms {
-                    nodes {
-                        name
-                    }
-                }
-            }
-        }
-    }
+
     image {
         ...ImageCore
+    }
+
+    galleryImages {
+        nodes {
+            ...ImageCore
+        }
+    }
+
+    productCategories {
+        nodes {
+            ...CategoryCore
+        }
     }
 }

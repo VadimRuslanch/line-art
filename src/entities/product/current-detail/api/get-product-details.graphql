@@ -1,19 +1,15 @@
-query GetProductDetails($id: ID!, $idType: ProductIdTypeEnum!) {
+query GetProductDetails(
+    $id: ID!
+    $idType: ProductIdTypeEnum!
+    $variationsFirst: Int = 100
+) {
     product(id: $id, idType: $idType) {
+        ...ProductCore
         ... on SimpleProduct {
-            ...ProductCore
-            sku
-            __typename
-            description
-
-            galleryImages {
-                ...galleryImages
-            }
-            productCategories {
-                nodes {
-                    ...CategoryCore
-                }
-            }
+            ...ProductSimpleCore
+        }
+        ... on VariableProduct {
+            ...ProductVariableCore
         }
     }
 }

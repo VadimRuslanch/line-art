@@ -37,13 +37,11 @@ export default function ProductCard({
     .filter(
       (img, idx, arr) => arr.findIndex((x) => x?.src === img?.src) === idx,
     ) as { src: string; alt?: string | null; id?: string | number }[];
-
   return (
     <article className="ProductCard">
       {/*<div className="ProductCard__actions" role="toolbar">*/}
       {/*  <UIFavorite />*/}
       {/*</div>*/}
-
       <Link href={product.uri!} className="ProductCard__link-image">
         <ImageHoverSlider
           images={gallery}

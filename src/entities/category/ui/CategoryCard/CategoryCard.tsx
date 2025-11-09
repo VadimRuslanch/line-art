@@ -16,12 +16,7 @@ export default function CategoryCard({ item }: CategoryNode) {
   const { image, name, uri } = item;
   const dispatch = useAppDispatch();
   const slug =
-    uri && uri.length > 0
-      ? uri
-          .split('/')
-          .filter(Boolean)
-          .pop() ?? ''
-      : '';
+    uri && uri.length > 0 ? (uri.split('/').filter(Boolean).pop() ?? '') : '';
   const href =
     slug && slug.length > 0
       ? `/categories?category=${encodeURIComponent(slug)}`
@@ -37,11 +32,7 @@ export default function CategoryCard({ item }: CategoryNode) {
         className="CategoryCard__image"
         width={413}
         height={480}
-        src={
-          image
-            ? image.sourceUrl!
-            : 'https://foni.papik.pro/uploads/posts/2024-10/thumbs/foni-papik-pro-9p7y-p-kartinki-serii-kotik-na-prozrachnom-fone-1.png'
-        }
+        src={image ? image.sourceUrl! : '/images/img.png'}
         alt={image ? image.altText! : 'ALT'}
       />
       <div className="CategoryCard__bottom">

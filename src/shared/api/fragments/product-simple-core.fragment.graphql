@@ -1,0 +1,33 @@
+fragment ProductSimpleCore on SimpleProduct {
+    price
+    rawPrice: price(format: RAW)
+    regularPrice
+    salePrice
+    onSale
+    stockStatus
+    stockQuantity
+    soldIndividually
+    uri
+    # Атрибуты простого товара (локальные + глобальные)
+    attributes {
+        nodes {
+            id
+            attributeId
+            variation
+            ... on LocalProductAttribute {
+                name
+                options
+            }
+            ... on GlobalProductAttribute {
+                name
+                terms(first: 100) {
+                    nodes { id name slug }
+                }
+            }
+        }
+    }
+
+    # Если в вашей схеме есть размеры/вес — раскомментируйте:
+    # dimensions { width height length }
+    # weight
+}

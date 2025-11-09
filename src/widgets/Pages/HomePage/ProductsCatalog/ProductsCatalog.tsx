@@ -7,31 +7,40 @@ import ProductsCatalogList from '@/widgets/Pages/HomePage/ProductsCatalog/Produc
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGetCategoriesCatalog } from '@/features/catalog/catalog-filters/api/useGetCategoriesCatalog';
-import {
-  GetProductListCategoryDocument,
-  type GetProductListCategoryQuery,
-  type GetProductListCategoryQueryVariables,
-} from '@/shared/api/gql/graphql';
-import { useQuery } from '@apollo/client/react';
-import type { CategorySimpleProduct } from '@/entities/product/types';
+import { useGetProductListCategory } from '@/features/product/product-list/list-category/model/useGetProductListCategory';
+import { useGetProductListAll } from '@/features/product/product-list/list-all/model/useGetProductListAll';
+import Link from 'next/link';
 
 const PRODUCTS_PER_CATEGORY = 12;
 
+type WithSlug = { slug?: string | null };
+
+function filterBySlugs<T extends WithSlug>(
+  items: T[],
+  slugs: string | string[],
+): T[] {
+  const wanted = (Array.isArray(slugs) ? slugs : [slugs])
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+
+  const set = new Set(wanted);
+  return items.filter(
+    (it) => !!it?.slug && set.has(String(it.slug).toLowerCase()),
+  );
+}
+
 export default function ProductsCatalog() {
   const { categories: fetchedCategories } = useGetCategoriesCatalog();
+  const slugs = ['dlya-potolka', 'dlya-steny'];
+
   const categories = useMemo(
-    () => fetchedCategories.filter((category) => Boolean(category.slug)),
+    () => filterBySlugs(fetchedCategories, slugs),
     [fetchedCategories],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isCategoryLoading, setIsCategoryLoading] = useState(true);
-  const [currentProducts, setCurrentProducts] = useState<
-    CategorySimpleProduct[]
-  >([]);
-
-  const activeCategory = categories[activeIndex] ?? null;
-  const activeSlug = activeCategory?.slug ?? null;
+  const activeCategory = categories[activeIndex - 1] ?? null;
+  const activeSlug = activeCategory?.slug ?? '';
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -54,100 +63,56 @@ export default function ProductsCatalog() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      if (!categories.length) {
-        setActiveIndex(0);
-        return;
-      }
-
-      setActiveIndex((prev) => (prev < categories.length ? prev : 0));
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [categories.length]);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      if (!activeSlug) {
-        setCurrentProducts([]);
-        setIsCategoryLoading(false);
-        return;
-      }
-
-      setIsCategoryLoading(true);
-      setCurrentProducts([]);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [activeSlug]);
-
-  const {
-    data,
-    loading,
-    error: categoryError,
-  } = useQuery<
-    GetProductListCategoryQuery,
-    GetProductListCategoryQueryVariables
-  >(GetProductListCategoryDocument, {
-    variables: {
-      n: PRODUCTS_PER_CATEGORY,
-      after: null,
-      slug: activeSlug ?? '',
-      where: null,
-    },
-    fetchPolicy: 'cache-first',
-    nextFetchPolicy: 'cache-first',
-    skip: !activeSlug,
-    notifyOnNetworkStatusChange: true,
+  const allHook = useGetProductListAll({ pageSize: PRODUCTS_PER_CATEGORY });
+  const categoryHook = useGetProductListCategory({
+    slug: activeSlug,
+    pageSize: PRODUCTS_PER_CATEGORY,
   });
 
-  useEffect(() => {
-    if (loading || !activeSlug) return;
+  const activeHook = activeIndex === 0 ? allHook : categoryHook;
 
-    const frame = window.requestAnimationFrame(() => {
-      const nodes = (data?.productCategory?.products?.nodes ??
-        []) as (CategorySimpleProduct | null | undefined)[];
+  const products = useMemo(() => {
+    return activeHook.products;
+  }, [activeHook.products]);
 
-      const simpleProducts = nodes.filter(
-        (node): node is CategorySimpleProduct =>
-          !!node && node.__typename === 'SimpleProduct',
-      );
-
-      setCurrentProducts(simpleProducts);
-      setIsCategoryLoading(false);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [loading, data, activeSlug]);
+  const isLoading = activeHook.isInitialLoading;
+  const error = activeHook.error;
 
   useEffect(() => {
-    if (!categoryError) return;
+    if (activeIndex !== 0 && activeSlug) {
+      categoryHook.refetch?.();
+    }
+  }, [activeIndex, activeSlug]);
 
-    const frame = window.requestAnimationFrame(() => {
-      setIsCategoryLoading(false);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [categoryError]);
-
-  const chips = categories.map((category, index) => (
+  const chips = [
     <UIChip
-      key={category.id}
-      onClick={() => setActiveIndex(index)}
-      data-active={index === activeIndex ? 'active' : ''}
+      key="all"
+      onClick={() => setActiveIndex(0)}
+      data-active={activeIndex === 0 ? 'active' : ''}
       data-type="default"
     >
-      {category.name}
-    </UIChip>
-  ));
+      Все товары
+    </UIChip>,
+    ...categories.map((category, index) => (
+      <UIChip
+        key={category.id}
+        onClick={() => setActiveIndex(index + 1)}
+        data-active={index + 1 === activeIndex ? 'active' : ''}
+        data-type="default"
+      >
+        {category.name}
+      </UIChip>
+    )),
+  ];
 
-  const cards = currentProducts.map((product, index) => (
-    <ProductCard
-      key={product.id ?? `db-${product.databaseId ?? index}`}
-      product={product}
-    />
-  ));
+  const cards = products.map((product, index) => {
+    return (
+      <ProductCard
+        key={product?.id ?? `db-${product?.databaseId ?? index}`}
+        product={product}
+      />
+    );
+  });
 
   if (!categories.length) {
     return null;
@@ -156,7 +121,9 @@ export default function ProductsCatalog() {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        <h3 className="HeadlineH2">Каталог товаров</h3>
+        <h3 className="HeadlineH2">
+          {'\u041a\u0430\u0442\u0430\u043b\u043e\u0433'}
+        </h3>
       </header>
 
       <div className={styles.chipsCarousel} ref={carouselRef}>
@@ -171,22 +138,27 @@ export default function ProductsCatalog() {
         >
           {chips}
         </motion.div>
+        <Link
+          className={`ButtonBut2-medium ${styles.chipsCarouselLink}`}
+          href="/categories"
+        >
+          Перейти в каталог
+        </Link>
       </div>
 
-      {isCategoryLoading ? (
+      {isLoading ? (
         <div className={styles.list}>
-          <p className="BodyB2">Загружаем товары…</p>
+          <p className="BodyB2">Loading...</p>
         </div>
-      ) : categoryError ? (
+      ) : error ? (
         <div className={styles.list}>
-          <p className="BodyB2">
-            Не удалось загрузить товары. Попробуйте позже.
-          </p>
+          <p className="BodyB2">Failed to load. Try later.</p>
         </div>
       ) : (
         <ProductsCatalogList
+          key={activeIndex === 0 ? 'ALL' : activeSlug}
           className={styles.list}
-          resetOn={activeSlug}
+          resetOn={activeIndex === 0 ? 'ALL' : activeSlug}
           pageSize={8}
         >
           {cards}

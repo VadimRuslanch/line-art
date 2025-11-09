@@ -6,9 +6,11 @@ import {
   buildWooErrorLink,
   buildHttpLink,
 } from '@/shared/api/Apollo/ApolloWrapper.links';
+import generated from '@/shared/api/gql/possibleTypes.generated';
 
 function makeCache() {
   return new InMemoryCache({
+    possibleTypes: generated.possibleTypes,
     typePolicies: {
       MediaItem: { keyFields: ['databaseId'] },
       ProductCategory: { keyFields: ['databaseId'] },

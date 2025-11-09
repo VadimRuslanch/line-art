@@ -7,16 +7,30 @@ import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
+import type { GetProductDetailsQuery } from '@/shared/api/gql/graphql';
+import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
+import { isVariableProduct } from '@/hooks/typeVariableProductGuards';
+
+type AttributeLike =
+  | Record<string, string>
+  | Array<{ name: string; value: string }>;
 
 type Props = {
-  product: SimpleProductLike;
+  product: NonNullable<GetProductDetailsQuery['product']>;
   initialQty?: number;
+  variationId?: number;
+  variationAttributes?: AttributeLike;
 };
 
 const MAX_QTY = 100;
-const DEBOUNCE_MS = 400;
+const DEBOUNCE_MS = 600;
 
-export default function AddToCart({ product, initialQty = 0 }: Props) {
+export default function AddToCart({
+  product,
+  initialQty = 0,
+  variationId,
+  variationAttributes,
+}: Props) {
   const productId = product.databaseId;
   const selector = useMemo(
     () => selectCartItemByProductId(productId),
@@ -24,7 +38,7 @@ export default function AddToCart({ product, initialQty = 0 }: Props) {
   );
   const cartItem = useAppSelector(selector);
 
-  const { add, updateQuantity, remove, mutating } = useCart();
+  const { add, addVariable, updateQuantity, remove, mutating } = useCart();
 
   const inCart = Boolean(cartItem);
   const [qty, setQty] = useState<number>(
@@ -72,7 +86,7 @@ export default function AddToCart({ product, initialQty = 0 }: Props) {
           toast.error(
             e instanceof Error && e.message
               ? e.message
-              : 'Не удалось обновить количество товара в корзине',
+              : 'Не удалось обновить количество',
           );
         });
     }, DEBOUNCE_MS);
@@ -87,9 +101,29 @@ export default function AddToCart({ product, initialQty = 0 }: Props) {
 
   const handleAdd = async (quantity: number) => {
     if (!productId) return;
+
     try {
       setPendingAction(true);
-      await add(productId, quantity);
+
+      if (isSimpleProduct(product)) {
+        await add(productId, quantity);
+      } else if (isVariableProduct(product)) {
+
+        if (!variationId || !variationAttributes) {
+          console.log(variationId, variationAttributes);
+          toast.error('Выберите вариант товара');
+          return;
+        }
+
+        await addVariable(
+          productId,
+          variationId,
+          variationAttributes,
+          quantity,
+        );
+      } else {
+        toast.error('Неизвестный тип товара');
+      }
     } catch (error) {
       const message =
         error instanceof Error && error.message
@@ -135,7 +169,7 @@ export default function AddToCart({ product, initialQty = 0 }: Props) {
   const isDisabled = pendingAction || mutating || updatingQty || !productId;
   const showQuantitySelector =
     inCart && (cartItem?.quantity ?? qty) > 0 && !pendingAction;
-  const buttonLabel = showQuantitySelector ? 'Удалить' : 'В корзину';
+  const buttonLabel = showQuantitySelector ? 'Убрать' : 'В корзину';
 
   return (
     <div className="AddToCart">

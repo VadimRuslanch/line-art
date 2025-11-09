@@ -6,9 +6,7 @@ type Props = {
   productPromise: Promise<SimpleProductGQL | null>;
 };
 
-export default async function ProductDetailsPreview({
-  productPromise,
-}: Props) {
+export default async function ProductDetailsPreview({ productPromise }: Props) {
   const product = await productPromise;
 
   if (!product) {
@@ -17,4 +15,3 @@ export default async function ProductDetailsPreview({
 
   return <ProductDetailsPreviewClient product={product} />;
 }
-

@@ -5598,6 +5598,10 @@ enum CountriesEnum {
 
   """
   """
+  XK
+
+  """
+  """
   YE
 
   """
@@ -11623,39 +11627,6 @@ interface DownloadableProduct implements ContentNode & DatabaseIdentifier & Menu
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -12079,16 +12050,6 @@ interface DownloadableProduct implements ContentNode & DatabaseIdentifier & Menu
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -13002,39 +12963,6 @@ type ExternalProduct implements ContentNode & DatabaseIdentifier & MenuItemLinka
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -13503,16 +13431,6 @@ type ExternalProduct implements ContentNode & DatabaseIdentifier & MenuItemLinka
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -14695,39 +14613,6 @@ type GroupProduct implements ContentNode & DatabaseIdentifier & MenuItemLinkable
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -15186,16 +15071,6 @@ type GroupProduct implements ContentNode & DatabaseIdentifier & MenuItemLinkable
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -16814,39 +16689,6 @@ interface InventoriedProduct implements ContentNode & DatabaseIdentifier & MenuI
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -17270,16 +17112,6 @@ interface InventoriedProduct implements ContentNode & DatabaseIdentifier & MenuI
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -19629,7 +19461,7 @@ enum MenuItemNodeIdTypeEnum {
 }
 
 """
-Deprecated in favor of MenuItemLinkeable Interface
+Deprecated in favor of MenuItemLinkable Interface
 """
 union MenuItemObjectUnion =
   | Category
@@ -27538,7 +27370,7 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   password: String
 
   """
-  Connection between the Page type and the page type
+  Connection between the page type and the page type
   """
   preview: PageToPreviewConnectionEdge
 
@@ -27934,7 +27766,7 @@ input PageToCommentConnectionWhereArgs {
 }
 
 """
-Connection between the Page type and the page type
+Connection between the page type and the page type
 """
 type PageToPreviewConnectionEdge implements Edge & OneToOneConnection & PageConnectionEdge {
   """
@@ -28850,7 +28682,7 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
     @deprecated(reason: "Deprecated in favor of the databaseId field")
 
   """
-  Connection between the Post type and the post type
+  Connection between the post type and the post type
   """
   preview: PostToPreviewConnectionEdge
 
@@ -30471,7 +30303,7 @@ input PostToCommentConnectionWhereArgs {
 }
 
 """
-Connection between the Post type and the post type
+Connection between the post type and the post type
 """
 type PostToParentConnectionEdge implements Edge & OneToOneConnection & PostConnectionEdge {
   """
@@ -30489,7 +30321,7 @@ type PostToParentConnectionEdge implements Edge & OneToOneConnection & PostConne
 }
 
 """
-Connection between the Post type and the post type
+Connection between the post type and the post type
 """
 type PostToPostConnection implements Connection & PostConnection {
   """
@@ -30720,7 +30552,7 @@ input PostToPostFormatConnectionWhereArgs {
 }
 
 """
-Connection between the Post type and the post type
+Connection between the post type and the post type
 """
 type PostToPreviewConnectionEdge implements Edge & OneToOneConnection & PostConnectionEdge {
   """
@@ -31685,39 +31517,6 @@ interface Product implements ContentNode & DatabaseIdentifier & MenuItemLinkable
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -32121,16 +31920,6 @@ interface Product implements ContentNode & DatabaseIdentifier & MenuItemLinkable
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -34038,7 +33827,7 @@ A paginated collection of Product Nodes, Supports cursor-based pagination and fi
 """
 interface ProductConnection implements Connection {
   """
-  A list of edges (relational context) between Product and connected Product Nodes
+  A list of edges (relational context) between ProductType and connected Product Nodes
   """
   edges: [ProductConnectionEdge!]!
 
@@ -36679,216 +36468,6 @@ input ProductToPaWidthConnectionWhereArgs {
 }
 
 """
-Connection between the Product type and the Product type
-"""
-type ProductToPreviewConnectionEdge implements Edge & OneToOneConnection & ProductConnectionEdge {
-  """
-  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
-  """
-  cursor: String
-
-  """
-  The node of the connection, without the edges
-  """
-  node: Product!
-}
-
-"""
-Arguments for filtering the ProductToPreviewConnection connection
-"""
-input ProductToPreviewConnectionWhereArgs {
-  """
-  Limit result set to products with selected global attribute queries.
-  """
-  attributes: ProductAttributeQueryInput
-
-  """
-  Limit result set to products assigned a specific category name.
-  """
-  category: String
-
-  """
-  Limit result set to products assigned a specific category name.
-  """
-  categoryId: Int
-
-  """
-  Limit result set to products assigned to a specific group of category IDs.
-  """
-  categoryIdIn: [Int]
-
-  """
-  Limit result set to products not assigned to a specific group of category IDs.
-  """
-  categoryIdNotIn: [Int]
-
-  """
-  Limit result set to products assigned to a group of specific categories by name.
-  """
-  categoryIn: [String]
-
-  """
-  Limit result set to products not assigned to a group of specific categories by name.
-  """
-  categoryNotIn: [String]
-
-  """
-  Filter the connection based on dates.
-  """
-  dateQuery: DateQueryInput
-
-  """
-  Ensure result set excludes specific IDs.
-  """
-  exclude: [Int]
-
-  """
-  Limit result set to featured products.
-  """
-  featured: Boolean
-
-  """
-  Limit result set to specific ids.
-  """
-  include: [Int]
-
-  """
-  Include variations in the result set.
-  """
-  includeVariations: Boolean
-
-  """
-  Limit result set to products based on a maximum price.
-  """
-  maxPrice: Float
-
-  """
-  Limit result set to products based on a minimum price.
-  """
-  minPrice: Float
-
-  """
-  Limit result set to products on sale.
-  """
-  onSale: Boolean
-
-  """
-  What paramater to use to order the objects by.
-  """
-  orderby: [ProductsOrderbyInput]
-
-  """
-  Use ID to return only children. Use 0 to return only top-level items.
-  """
-  parent: Int
-
-  """
-  Specify objects whose parent is in an array.
-  """
-  parentIn: [Int]
-
-  """
-  Specify objects whose parent is not in an array.
-  """
-  parentNotIn: [Int]
-
-  """
-  Limit result set to products with a specific average rating. Must be between 1 and 5
-  """
-  rating: [Int]
-
-  """
-  Limit result set to products based on a keyword search.
-  """
-  search: String
-
-  """
-  Limit result set to products assigned a specific shipping class ID.
-  """
-  shippingClassId: Int
-
-  """
-  Limit result set to products with specific SKU(s). Use commas to separate.
-  """
-  sku: String
-
-  """
-  Limit result set to products with specific slugs.
-  """
-  slugIn: [String]
-
-  """
-  Limit result set to products assigned a specific status.
-  """
-  status: String
-
-  """
-  Limit result set to products in stock or out of stock.
-  """
-  stockStatus: [StockStatusEnum]
-
-  """
-  Limit result types to types supported by WooGraphQL.
-  """
-  supportedTypesOnly: Boolean
-
-  """
-  Limit result set to products assigned a specific tag name.
-  """
-  tag: String
-
-  """
-  Limit result set to products assigned a specific tag ID.
-  """
-  tagId: Int
-
-  """
-  Limit result set to products assigned to a specific group of tag IDs.
-  """
-  tagIdIn: [Int]
-
-  """
-  Limit result set to products not assigned to a specific group of tag IDs.
-  """
-  tagIdNotIn: [Int]
-
-  """
-  Limit result set to products assigned to a specific group of tags by name.
-  """
-  tagIn: [String]
-
-  """
-  Limit result set to products not assigned to a specific group of tags by name.
-  """
-  tagNotIn: [String]
-
-  """
-  Limit result set with complex set of taxonomy filters.
-  """
-  taxonomyFilter: ProductTaxonomyInput
-
-  """
-  Limit result set to products assigned a specific type.
-  """
-  type: ProductTypesEnum
-
-  """
-  Limit result set to products assigned to a group of specific types.
-  """
-  typeIn: [ProductTypesEnum]
-
-  """
-  Limit result set to products not assigned to a group of specific types.
-  """
-  typeNotIn: [ProductTypesEnum]
-
-  """
-  Limit result set to products with a specific visibility level.
-  """
-  visibility: CatalogVisibilityEnum
-}
-
-"""
 Connection between the Product type and the productCategory type
 """
 type ProductToProductCategoryConnection implements Connection & ProductCategoryConnection {
@@ -37056,26 +36635,6 @@ input ProductToProductCategoryConnectionWhereArgs {
 """
 Connection between the Product type and the Product type
 """
-type ProductToProductConnection implements Connection & ProductConnection {
-  """
-  Edges for the ProductToProductConnection connection
-  """
-  edges: [ProductToProductConnectionEdge!]!
-
-  """
-  The nodes of the connection, without the edges
-  """
-  nodes: [Product!]!
-
-  """
-  Information about pagination in a connection.
-  """
-  pageInfo: ProductToProductConnectionPageInfo!
-}
-
-"""
-Connection between the Product type and the Product type
-"""
 type ProductToProductConnectionEdge implements Edge & OneToOneConnection & ProductConnectionEdge {
   """
   Opaque reference to the nodes position in the connection. Value can be used with pagination args.
@@ -37086,31 +36645,6 @@ type ProductToProductConnectionEdge implements Edge & OneToOneConnection & Produ
   The node of the connection, without the edges
   """
   node: Product!
-}
-
-"""
-Pagination metadata specific to &quot;ProductToProductConnection&quot; collections. Provides cursors and flags for navigating through sets of ProductToProductConnection Nodes.
-"""
-type ProductToProductConnectionPageInfo implements PageInfo & ProductConnectionPageInfo & WPPageInfo {
-  """
-  When paginating forwards, the cursor to continue.
-  """
-  endCursor: String
-
-  """
-  When paginating forwards, are there more items?
-  """
-  hasNextPage: Boolean!
-
-  """
-  When paginating backwards, are there more items?
-  """
-  hasPreviousPage: Boolean!
-
-  """
-  When paginating backwards, the cursor to continue.
-  """
-  startCursor: String
 }
 
 """
@@ -39578,39 +39112,6 @@ interface ProductUnion implements ContentNode & DatabaseIdentifier & MenuItemLin
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -40014,16 +39515,6 @@ interface ProductUnion implements ContentNode & DatabaseIdentifier & MenuItemLin
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -40607,39 +40098,6 @@ interface ProductVariation implements ContentNode & DatabaseIdentifier & Downloa
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductVariation type and the VariationAttribute type
   """
   attributes(
@@ -41123,16 +40581,6 @@ interface ProductVariation implements ContentNode & DatabaseIdentifier & Downloa
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -41916,39 +41364,6 @@ interface ProductWithAttributes implements ContentNode & DatabaseIdentifier & Me
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -42407,16 +41822,6 @@ interface ProductWithAttributes implements ContentNode & DatabaseIdentifier & Me
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -43070,39 +42475,6 @@ interface ProductWithDimensions implements ContentNode & DatabaseIdentifier & Me
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -43516,16 +42888,6 @@ interface ProductWithDimensions implements ContentNode & DatabaseIdentifier & Me
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -44074,39 +43436,6 @@ interface ProductWithPricing implements ContentNode & DatabaseIdentifier & MenuI
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Product average count
   """
   averageRating: Float
@@ -44510,16 +43839,6 @@ interface ProductWithPricing implements ContentNode & DatabaseIdentifier & MenuI
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -45083,39 +44402,6 @@ interface ProductWithVariations implements ContentNode & DatabaseIdentifier & Me
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -45574,16 +44860,6 @@ interface ProductWithVariations implements ContentNode & DatabaseIdentifier & Me
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -57073,39 +56349,6 @@ type SimpleProduct implements ContentNode & DatabaseIdentifier & DownloadablePro
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -57644,16 +56887,6 @@ type SimpleProduct implements ContentNode & DatabaseIdentifier & DownloadablePro
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -58517,39 +57750,6 @@ type SimpleProductVariation implements ContentNode & DatabaseIdentifier & Downlo
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductVariation type and the VariationAttribute type
   """
   attributes(
@@ -59033,16 +58233,6 @@ type SimpleProductVariation implements ContentNode & DatabaseIdentifier & Downlo
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -61845,39 +61035,6 @@ type UnsupportedProduct implements ContentNode & DatabaseIdentifier & Downloadab
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -62386,16 +61543,6 @@ type UnsupportedProduct implements ContentNode & DatabaseIdentifier & Downloadab
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
@@ -66993,39 +66140,6 @@ type VariableProduct implements ContentNode & DatabaseIdentifier & InventoriedPr
   ): ProductToPaWidthConnection
 
   """
-  The ancestors of the content node.
-  """
-  ancestors(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """
-    The number of items to return after the referenced "after" cursor
-    """
-    first: Int
-
-    """
-    The number of items to return before the referenced "before" cursor
-    """
-    last: Int
-
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToProductConnectionWhereArgs
-  ): ProductToProductConnection
-    @deprecated(
-      reason: "This content type is not hierarchical and typically will not have ancestors"
-    )
-
-  """
   Connection between the ProductWithAttributes type and the ProductAttribute type
   """
   attributes(
@@ -67544,16 +66658,6 @@ type VariableProduct implements ContentNode & DatabaseIdentifier & InventoriedPr
   The password for the product object.
   """
   password: String
-
-  """
-  Connection between the Product type and the Product type
-  """
-  preview(
-    """
-    Arguments for filtering the connection
-    """
-    where: ProductToPreviewConnectionWhereArgs
-  ): ProductToPreviewConnectionEdge
 
   """
   The database id of the preview node
