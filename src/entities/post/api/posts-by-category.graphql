@@ -1,0 +1,9 @@
+query PostsByCategory($slug: String! = "FAQ") {
+    posts(where: {categoryName: $slug}) {
+        nodes {
+            id
+            title
+            content(format: RENDERED)
+        }
+    }
+}
