@@ -18,7 +18,10 @@ import type {
   ProductNode,
 } from '../../model/useProductList';
 
-type UseProductCategoryListOptions = UseProductListOptions & { slug: string; skip?: boolean };
+type UseProductCategoryListOptions = UseProductListOptions & {
+  slug: string;
+  skip?: boolean;
+};
 
 type CategoryNode = NonNullable<
   NonNullable<
@@ -26,7 +29,11 @@ type CategoryNode = NonNullable<
   >['nodes'][number]
 >;
 
-export function useGetProductListCategory({ slug, pageSize = 10, skip }: UseProductCategoryListOptions): UseProductListResult {
+export function useGetProductListCategory({
+  slug,
+  pageSize = 12,
+  skip,
+}: UseProductCategoryListOptions): UseProductListResult {
   const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
 
   const where = useMemo(

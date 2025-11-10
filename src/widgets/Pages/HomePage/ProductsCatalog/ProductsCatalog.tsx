@@ -9,11 +9,19 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGetCategoriesCatalog } from '@/features/catalog/catalog-filters/api/useGetCategoriesCatalog';
 import { useGetProductListCategory } from '@/features/product/product-list/list-category/model/useGetProductListCategory';
 import { useGetProductListAll } from '@/features/product/product-list/list-all/model/useGetProductListAll';
+import type { ProductNode } from '@/features/product/product-list/model/useProductList';
 import Link from 'next/link';
 
 const PRODUCTS_PER_CATEGORY = 12;
+const PRIMARY_CATEGORY_SLUGS: string[] = ['dlya-potolka', 'dlya-steny'];
 
 type WithSlug = { slug?: string | null };
+
+const isSimpleProductNode = (
+  product: ProductNode | null | undefined,
+): product is Extract<ProductNode, { __typename: 'SimpleProduct' }> => {
+  return product?.__typename === 'SimpleProduct';
+};
 
 function filterBySlugs<T extends WithSlug>(
   items: T[],
@@ -31,10 +39,9 @@ function filterBySlugs<T extends WithSlug>(
 
 export default function ProductsCatalog() {
   const { categories: fetchedCategories } = useGetCategoriesCatalog();
-  const slugs = ['dlya-potolka', 'dlya-steny'];
 
   const categories = useMemo(
-    () => filterBySlugs(fetchedCategories, slugs),
+    () => filterBySlugs(fetchedCategories, PRIMARY_CATEGORY_SLUGS),
     [fetchedCategories],
   );
 
@@ -71,18 +78,21 @@ export default function ProductsCatalog() {
 
   const activeHook = activeIndex === 0 ? allHook : categoryHook;
 
-  const products = useMemo(() => {
-    return activeHook.products;
-  }, [activeHook.products]);
+  const products = useMemo(
+    () => activeHook.products.filter(isSimpleProductNode),
+    [activeHook.products],
+  );
 
   const isLoading = activeHook.isInitialLoading;
   const error = activeHook.error;
 
+  const refetchCategory = categoryHook.refetch;
+
   useEffect(() => {
     if (activeIndex !== 0 && activeSlug) {
-      categoryHook.refetch?.();
+      refetchCategory?.();
     }
-  }, [activeIndex, activeSlug]);
+  }, [activeIndex, activeSlug, refetchCategory]);
 
   const chips = [
     <UIChip

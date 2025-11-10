@@ -10,34 +10,27 @@ fragment CartCore on Cart {
             product {
                 node {
                     ...ProductCore
-                }
-            }
-            variation {
-                node {
-                    id
-                    databaseId
-                    name
-                    sku
-                    price
-                    attributes {
-                        nodes {
-                            name
-                            value
-                        }
+                    ...on SimpleProduct {
+                        ...ProductSimpleCore
+                    }
+                    ...on VariableProduct {
+                        ...ProductVariableCore
+
                     }
                 }
             }
+
         }
     }
 }
 
-query GetCart {
+query GetCart($variationsFirst: Int = 25) {
     cart {
         ...CartCore
     }
 }
 
-mutation AddToCart($productId: Int!, $quantity: Int!) {
+mutation AddToCart($productId: Int!, $quantity: Int!, $variationsFirst: Int = 25) {
     addToCart(input: { productId: $productId, quantity: $quantity }) {
         cart {
             ...CartCore
@@ -45,9 +38,10 @@ mutation AddToCart($productId: Int!, $quantity: Int!) {
     }
 }
 
-mutation AddVariableToCart(
+mutation AddVariableToCart (
+    $variationsFirst: Int = 25
     $productId: Int!
-    $variationId: Int!
+    $variationId: Int
     $quantity: Int! = 1
     $attributes: [ProductAttributeInput!]!
 ) {
@@ -65,7 +59,7 @@ mutation AddVariableToCart(
     }
 }
 
-mutation RemoveFromCart($keys: [ID!]!, $all: Boolean) {
+mutation RemoveFromCart($keys: [ID!]!, $all: Boolean, $variationsFirst: Int = 25) {
     removeItemsFromCart(input: { keys: $keys, all: $all }) {
         cart {
             ...CartCore
@@ -73,7 +67,7 @@ mutation RemoveFromCart($keys: [ID!]!, $all: Boolean) {
     }
 }
 
-mutation UpdateCartItemQuantities($items: [CartItemQuantityInput!]!) {
+mutation UpdateCartItemQuantities($variationsFirst: Int = 25,$items: [CartItemQuantityInput!]!) {
     updateItemQuantities(input: { items: $items }) {
         cart {
             ...CartCore

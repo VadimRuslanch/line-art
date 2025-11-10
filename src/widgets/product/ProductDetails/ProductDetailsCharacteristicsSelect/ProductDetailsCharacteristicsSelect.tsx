@@ -1,14 +1,13 @@
 'use client';
 
+import Arrow from './icon/arrow.svg';
 import type { GlobalProductAttributeUI } from '@/entities/product/types';
+import { useState } from 'react';
 
 type Props = {
   attribute: GlobalProductAttributeUI;
   value?: string;
   onChange?: (value: string) => void;
-  /** Если нужно связать label htmlFor с select — можно прокинуть готовый id */
-  id?: string;
-  /** Кастомный класс для стилизации (по умолчанию как в исходном компоненте) */
   className?: string;
 };
 
@@ -16,19 +15,7 @@ type TermLike = { name?: string | null; slug?: string | null };
 
 type SelectOption = { label: string; value: string };
 
-const PLACEHOLDER_PATTERN = /выберите/i;
-
-function getControlId(attribute: GlobalProductAttributeUI): string {
-  const candidates = [attribute.id, attribute.name, attribute.label, 'color'];
-
-  for (const raw of candidates) {
-    const cleaned = (raw ?? '').replace(/[^a-zA-Z0-9_-]/g, '');
-    if (cleaned) {
-      return `attribute-${cleaned}`.toLowerCase();
-    }
-  }
-  return 'attribute-color';
-}
+const PLACEHOLDER_PATTERN = /�?�<�+��?��'��/i;
 
 function isPlaceholderLabel(label?: string | null) {
   if (!label) return false;
@@ -55,38 +42,56 @@ export default function ProductDetailsCharacteristicsSelect({
   attribute,
   value,
   onChange,
-  id,
   className,
 }: Props) {
-  const controlId = id || getControlId(attribute);
   const options = extractValues(attribute);
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState(
+    () => value ?? options[0]?.value ?? '',
+  );
 
-  if (options.length === 0) return null;
+  if (options.length === 0) {
+    return null;
+  }
 
-  const label = attribute.label ?? attribute.name ?? '';
-  const resolvedValue = value ?? options[0]?.value ?? '';
+  const selectedValue = options.some((option) => option.value === current)
+    ? current
+    : options[0].value;
+  const selected = options.find((o) => o.value === selectedValue) ?? options[0];
+
+  const pick = (v: string) => {
+    setCurrent(v);
+    setOpen(false);
+    onChange?.(v);
+  };
 
   return (
-    <div className="product-attribute">
-      <span className="attribute-label BodyB2">{label}:</span>
+    <div className={['attr-select', className].filter(Boolean).join(' ')}>
+      <span className="attribute-label BodyB2">Цвет</span>
 
-      <div className="attribute-values">
-        <select
-          id={controlId}
-          className={className ?? 'attribute-select BodyB2'}
-          value={resolvedValue}
-          onChange={(e) => onChange?.(e.target.value)}
-        >
-          {options.map((option) => (
-            <option
-              key={`${attribute.id ?? attribute.name}-${option.value}`}
-              value={option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div className="attr-select__control" onClick={() => setOpen(!open)}>
+        <span className={`attribute-label-color ${selected.value}`} />
+        <span className="attr-select__value">{selected.label}</span>
+        <Arrow className={`attr-select__icon ${open ? 'open' : ''}`} />
       </div>
+
+      {open && (
+        <div className="attr-select__menu" onClick={(e) => e.stopPropagation()}>
+          {options.map((o) => (
+            <div
+              key={`${attribute.id ?? attribute.name}-${o.value}`}
+              className={
+                'attr-select__option' +
+                (o.value === current ? ' is-selected' : '')
+              }
+              onClick={() => pick(o.value)}
+            >
+              <span className={`attribute-label-color ${o.value}`} />
+              {o.label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -9,6 +9,33 @@ import ImageHoverSlider from '@/shared/ui/ImageHoverSlider/ImageHoverSlider';
 import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 // import UIFavorite from '@/shared/ui/UIFavorite/UIFavorite';
 
+type PriceInfo = {
+  regularPrice: string | null;
+  salePrice: string | null;
+  onSale: boolean;
+};
+
+function getPriceInfo(product: SimpleProductLike): PriceInfo {
+  const regularPrice =
+    'regularPrice' in product ? product.regularPrice ?? null : null;
+  const salePrice = 'salePrice' in product ? product.salePrice ?? null : null;
+  const onSaleField =
+    'onSale' in product && typeof product.onSale === 'boolean'
+      ? product.onSale
+      : Boolean(
+          salePrice &&
+            regularPrice &&
+            salePrice.length > 0 &&
+            salePrice !== regularPrice,
+        );
+
+  return {
+    regularPrice,
+    salePrice,
+    onSale: Boolean(onSaleField),
+  };
+}
+
 export default function ProductCard({
   product,
 }: {
@@ -37,6 +64,9 @@ export default function ProductCard({
     .filter(
       (img, idx, arr) => arr.findIndex((x) => x?.src === img?.src) === idx,
     ) as { src: string; alt?: string | null; id?: string | number }[];
+
+  const { regularPrice, salePrice, onSale } = getPriceInfo(product);
+
   return (
     <article className="ProductCard">
       {/*<div className="ProductCard__actions" role="toolbar">*/}
@@ -61,9 +91,9 @@ export default function ProductCard({
 
         <div className="productPrice">
           <ProductPrice
-            regularPrice={product.regularPrice!}
-            salePrice={product.salePrice}
-            onSale={product.onSale!}
+            regularPrice={regularPrice ?? undefined}
+            salePrice={salePrice ?? undefined}
+            onSale={onSale}
           />
         </div>
 

@@ -229,10 +229,11 @@ export function useCart() {
     [updateQtyExec],
   );
 
-  const mutating = adding || removing || updating;
+  const mutating = adding || removing || updating || addingVar;
   const cartLoading = loadingCart;
 
-  const error: ApolloError | undefined = addErr || rmErr || updateErr;
+  const error: ApolloError | undefined =
+    addErr || rmErr || updateErr || addVarErr;
 
   return useMemo(
     () => ({

@@ -7,7 +7,9 @@ import { GetPostsByCategory } from '@/entities/post/model/useGetPostsByCategory'
 export default function FAQHomePage() {
   const posts = GetPostsByCategory('faq');
 
-  if (posts && posts.length === 0) null;
+  if (posts && posts.length === 0) {
+    return null;
+  }
 
   return (
     <div>

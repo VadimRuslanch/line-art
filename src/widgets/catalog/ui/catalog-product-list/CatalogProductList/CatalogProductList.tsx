@@ -3,13 +3,14 @@
 import './CatalogProductList.scss';
 import ProductCard from '@/features/product/ui/ProductCard/ProductCard';
 import {
-  useProductAllList,
-  useProductCategoryList,
+  type ProductNode,
   type UseProductListResult,
 } from '@/features/product/product-list/model/useProductList';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
 import { CatalogProductListSkeleton } from '@/widgets/catalog/ui/catalog-product-list/CatalogProductListSkeleton/CatalogProductListSkeleton';
+import { useGetProductListCategory } from '@/features/product/product-list/list-category/model/useGetProductListCategory';
+import { useGetProductListAll } from '@/features/product/product-list/list-all/model/useGetProductListAll';
 
 export default function CatalogProductList() {
   const selectedFilters = useAppSelector(selectSelectedFilters);
@@ -25,13 +26,19 @@ export default function CatalogProductList() {
 }
 
 const CatalogProductListAll = () => {
-  const hookResult = useProductAllList();
+  const hookResult = useGetProductListAll();
   return <CatalogProductListView hookResult={hookResult} />;
 };
 
 const CatalogProductListCategory = ({ slug }: { slug: string }) => {
-  const hookResult = useProductCategoryList({ slug });
+  const hookResult = useGetProductListCategory({ slug });
   return <CatalogProductListView hookResult={hookResult} />;
+};
+
+const isSimpleProductNode = (
+  product: ProductNode | null | undefined,
+): product is Extract<ProductNode, { __typename: 'SimpleProduct' }> => {
+  return product?.__typename === 'SimpleProduct';
 };
 
 const CatalogProductListView = ({
@@ -46,7 +53,8 @@ const CatalogProductListView = ({
     return <CatalogProductListSkeleton />;
   }
 
-  const isEmpty = products.length === 0;
+  const normalizedProducts = products.filter(isSimpleProductNode);
+  const isEmpty = normalizedProducts.length === 0;
   const canShowLoadMore = hasNextPage && !isEmpty;
 
   return (
@@ -57,15 +65,12 @@ const CatalogProductListView = ({
         </div>
       ) : (
         <div className="CatalogProductList__grid">
-          {products.map((product, index) => {
-            if (!product || product.__typename !== 'SimpleProduct') return null;
-            return (
-              <ProductCard
-                key={product.id ?? `db-${product.databaseId ?? index}`}
-                product={product}
-              />
-            );
-          })}
+          {normalizedProducts.map((product, index) => (
+            <ProductCard
+              key={product.id ?? `db-${product.databaseId ?? index}`}
+              product={product}
+            />
+          ))}
         </div>
       )}
 
@@ -84,4 +89,3 @@ const CatalogProductListView = ({
     </div>
   );
 };
-

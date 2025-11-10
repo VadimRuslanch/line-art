@@ -28,6 +28,13 @@ query GetProductListAll(
                 price
                 regularPrice
                 salePrice
+                defaultAttributes(first: 20) {
+                    nodes {
+                        name
+                        value
+                        attributeId
+                    }
+                }
             }
         }
     }

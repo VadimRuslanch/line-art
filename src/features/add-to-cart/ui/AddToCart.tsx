@@ -2,12 +2,11 @@ import './AddToCart.scss';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import UIButton from '@/shared/ui/UIElements/UIButton/UIButton';
 import { useCart } from '@/entities/cart/model/useCart';
-import type { SimpleProductLike } from '@/entities/product/types';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
-import type { GetProductDetailsQuery } from '@/shared/api/gql/graphql';
+import type { SimpleProductLike } from '@/entities/product/types';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import { isVariableProduct } from '@/hooks/typeVariableProductGuards';
 
@@ -16,7 +15,7 @@ type AttributeLike =
   | Array<{ name: string; value: string }>;
 
 type Props = {
-  product: NonNullable<GetProductDetailsQuery['product']>;
+  product: SimpleProductLike;
   initialQty?: number;
   variationId?: number;
   variationAttributes?: AttributeLike;
@@ -110,7 +109,6 @@ export default function AddToCart({
       } else if (isVariableProduct(product)) {
 
         if (!variationId || !variationAttributes) {
-          console.log(variationId, variationAttributes);
           toast.error('Выберите вариант товара');
           return;
         }

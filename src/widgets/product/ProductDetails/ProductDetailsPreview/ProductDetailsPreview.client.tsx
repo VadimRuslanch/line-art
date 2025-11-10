@@ -1,7 +1,7 @@
 'use client';
 
 import './ProductDetailsPreview.scss';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import ProductDetailsCharacteristics from '../ProductDetailsCharacteristics/ProductDetailsCharacteristics';
 import ImagesPreview from '@/shared/ui/ImagesPreview/ImagesPreview';
@@ -10,34 +10,38 @@ import Breadcrumbs from '@/widgets/Breadcrumbs/Breadcrumbs';
 import AddToCart from '@/features/add-to-cart/ui/AddToCart';
 import { extractGlobalAttributes } from '@/entities/product/current-detail/lib/normalizeProductAttributes';
 
-import type { GetProductDetailsQuery } from '@/shared/api/gql/graphql';
-import type { GlobalProductAttributeUI } from '@/entities/product/types';
+import type {
+  GlobalProductAttributeUI,
+  SimpleProductGQL,
+} from '@/entities/product/types';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import { isVariableProduct } from '@/hooks/typeVariableProductGuards';
 import ProductDetailsCharacteristicsSelect from '@/widgets/product/ProductDetails/ProductDetailsCharacteristicsSelect/ProductDetailsCharacteristicsSelect';
 
-type PDPProduct = NonNullable<GetProductDetailsQuery['product']>;
+type PDPProduct = SimpleProductGQL;
+type VariableProductNode = Extract<
+  PDPProduct,
+  { __typename: 'VariableProduct' }
+>;
+type VariationNode = NonNullable<
+  NonNullable<NonNullable<VariableProductNode['variations']>['nodes']>[number]
+>;
+type VariationAttributeNode = NonNullable<
+  NonNullable<NonNullable<VariationNode['attributes']>['nodes']>[number]
+>;
 
 type Props = { product: PDPProduct };
 
 type AttributeTermLike = { name?: string | null; slug?: string | null };
 
-const PLACEHOLDER_VALUE_PATTERN = /выберите/i;
-
 function normalizeValue(value?: string | null) {
   return value?.trim().toLowerCase() ?? '';
-}
-
-function isPlaceholderOption(label?: string | null) {
-  const normalized = normalizeValue(label);
-  return normalized.length > 0 && PLACEHOLDER_VALUE_PATTERN.test(normalized);
 }
 
 function findFirstSelectableValue(attribute: GlobalProductAttributeUI) {
   const nodes = (attribute.terms?.nodes ?? []) as AttributeTermLike[];
   for (const term of nodes) {
     const label = term?.name?.trim();
-    if (!label || isPlaceholderOption(label)) continue;
     const slug = term?.slug?.trim();
     const value = slug && slug.length > 0 ? slug : label;
     if (value) return value;
@@ -60,45 +64,72 @@ function getAttributeTermLabel(
 
 export default function ProductDetailsPreviewClient({ product }: Props) {
   const attributes = useMemo(() => extractGlobalAttributes(product), [product]);
+  console.log(product);
+  const [selected, setSelected] = useState<Record<string, string>>(() => {
+    if (!isVariableProduct(product)) return {};
 
-  // Картинки/ценники
-  const { name, sku, image, galleryImages, regularPrice, salePrice, onSale } =
-    product as any;
+    const defaults: Record<string, string> = {};
+    attributes
+      .filter((attribute) => attribute.variation)
+      .forEach((attribute) => {
+        const key = attribute.name ?? '';
+        const firstValue = findFirstSelectableValue(attribute);
+        if (key && firstValue) {
+          defaults[key] = firstValue;
+        }
+      });
+
+    return defaults;
+  });
+
+  function pickDisplayPrice(
+    product: PDPProduct,
+    variation: VariationNode | null,
+  ) {
+    const baseRegular = product.regularPrice ?? product.price ?? undefined;
+    const baseSale = product.salePrice ?? undefined;
+    const baseOnSale = Boolean(product.onSale);
+
+    if (!variation) {
+      return {
+        regularPrice: baseRegular,
+        salePrice: baseSale,
+        onSale: baseOnSale,
+      };
+    }
+
+    const vOnSale = Boolean(variation.onSale);
+    const vRegular = variation.regularPrice ?? baseRegular;
+    const vSale =
+      variation.salePrice ??
+      (vOnSale ? variation.price : undefined) ??
+      baseSale;
+
+    return {
+      regularPrice: vRegular,
+      salePrice: vSale,
+      onSale: vOnSale,
+    };
+  }
+
+  const { name, sku, image, galleryImages } = product;
   const title = name?.trim() ?? 'Untitled product';
 
   const breadcrumbItems = useMemo(
-    () => [{ title: 'Каталог', href: '/categories' }, { title }],
+    () => [{ title: 'Категории', href: '/categories' }, { title }],
     [title],
   );
-
-  // ---- состояние выбора атрибутов (только для вариативных) ----
-  // ключ = ИМЯ ИЗ БД (например, "pa_color"), значение = выбранный option (raw)
-  const [selected, setSelected] = useState<Record<string, string>>({});
-
-  // Инициализация: ставим первый доступный вариант для каждого variation-атрибута
-  useEffect(() => {
-    if (!isVariableProduct(product)) return;
-
-    const next: Record<string, string> = {};
-    attributes
-      .filter((a) => a.variation)
-      .forEach((a) => {
-        const key = a.name ?? '';
-        const firstValue = findFirstSelectableValue(a);
-        if (key && firstValue) next[key] = firstValue;
-      });
-
-    setSelected((prev) => ({ ...next, ...prev }));
-  }, [product, attributes]);
 
   const setAttr = (attrName: string, value: string) => {
     setSelected((prev) => ({ ...prev, [attrName]: value }));
   };
 
-  // ---- поиск подходящей вариации по выбранным атрибутам (raw сравнение) ----
-  const variations = isVariableProduct(product)
-    ? (product.variations?.nodes ?? [])
-    : [];
+  const variations = useMemo<VariationNode[]>(() => {
+    if (!isVariableProduct(product)) return [];
+    return (product.variations?.nodes ?? []).filter(
+      (node): node is VariationNode => Boolean(node),
+    );
+  }, [product]);
 
   const selectedComplete = useMemo(() => {
     if (!isVariableProduct(product)) return false;
@@ -114,29 +145,31 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
     if (!isVariableProduct(product) || !selectedComplete) return null;
 
     return (
-      variations.find((v) => {
-        const va = v?.attributes?.nodes ?? [];
+      variations.find((variation) => {
+        const variationAttributesNodes = (
+          variation.attributes?.nodes ?? []
+        ).filter((node): node is VariationAttributeNode => Boolean(node));
         return attributes
-          .filter((a) => a.variation)
-          .every((a) => {
-            const key = a.name ?? '';
-            const slugValue = selected[key];
+          .filter((attribute) => attribute.variation)
+          .every((attribute) => {
+            const key = attribute.name ?? '';
+            const slugValue = key ? selected[key] : undefined;
             if (!key || !slugValue) return false;
 
             const normalizedSlug = normalizeValue(slugValue);
             const normalizedLabel = normalizeValue(
-              getAttributeTermLabel(a, slugValue),
+              getAttributeTermLabel(attribute, slugValue),
             );
             const expectedValues = [normalizedSlug, normalizedLabel].filter(
               Boolean,
             );
             if (expectedValues.length === 0) return false;
 
-            return va.some((an: any) => {
-              if (an?.name !== key) return false;
+            return variationAttributesNodes.some((variationAttribute) => {
+              if (variationAttribute.name !== key) return false;
               const actualValues = [
-                normalizeValue(an?.value),
-                normalizeValue(an?.label),
+                normalizeValue(variationAttribute.value),
+                normalizeValue(variationAttribute.label),
               ].filter(Boolean);
               if (actualValues.length === 0) return false;
 
@@ -149,10 +182,13 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
     );
   }, [product, attributes, variations, selected, selectedComplete]);
 
-  // То, что уйдёт в AddToCart → variationAttributes (raw имена/значения)
+  const displayPrice = useMemo(() => {
+    return pickDisplayPrice(product, matchedVariation);
+  }, [product, matchedVariation]);
+
   const variationId =
     isVariableProduct(product) && matchedVariation
-      ? matchedVariation.databaseId ?? undefined
+      ? (matchedVariation.databaseId ?? undefined)
       : undefined;
 
   const variationAttributes =
@@ -166,14 +202,16 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
 
       <div className="ProductDetailsPreview__content">
         <ImagesPreview
-          image={image}
+          image={matchedVariation?.image ?? image}
           galleryImages={galleryImages?.nodes ?? []}
           fallbackAlt={title}
         />
 
         <div className="ProductDetailsPreview__info">
           <section>
-            <p className="ProductDetailsPreview__sku BodyB2">{sku}</p>
+            <p className="ProductDetailsPreview__sku BodyB2">
+              {matchedVariation?.sku?.trim() || sku}{' '}
+            </p>
             <h1 className="HeadlineH3">{title}</h1>
           </section>
 
@@ -184,7 +222,7 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
 
               if (attribute.variation && key) {
                 return (
-                  <>
+                  <div key={key}>
                     <ProductDetailsCharacteristicsSelect
                       key={`${attribute.id}-select`}
                       attribute={attribute}
@@ -194,8 +232,9 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
                     <ProductDetailsCharacteristics
                       key={`${attribute.id}-info`}
                       attribute={attribute}
+                      type={true}
                     />
-                  </>
+                  </div>
                 );
               }
 
@@ -215,9 +254,9 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
           <div className="ProductDetailsPreview__actionsCard">
             <div className="price">
               <ProductPrice
-                regularPrice={regularPrice}
-                salePrice={salePrice}
-                onSale={(onSale as any) ?? false}
+                regularPrice={displayPrice.regularPrice}
+                salePrice={displayPrice.salePrice}
+                onSale={displayPrice.onSale}
               />
             </div>
 
@@ -231,12 +270,9 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
               />
             ) : null}
 
-            {/* пример доступа к attributeId по имени */}
-            {/* <pre>{JSON.stringify({ colorAttrId }, null, 2)}</pre> */}
-
             {isVariableProduct(product) && !variationId && (
               <p className="BodyB2" style={{ opacity: 0.8, marginTop: 8 }}>
-                Пожалуйста, выберите все опции товара
+                Выберите вариант, чтобы увидеть цену
               </p>
             )}
           </div>

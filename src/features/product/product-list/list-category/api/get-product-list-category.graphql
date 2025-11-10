@@ -30,12 +30,19 @@ query  GetProductListCategory(
                     regularPrice
                     salePrice
                 }
-                ... on VariableProduct {
-                    price
-                    regularPrice
-                    salePrice
+            ... on VariableProduct {
+                price
+                regularPrice
+                salePrice
+                defaultAttributes(first: 20) {
+                    nodes {
+                        name
+                        value
+                        attributeId
+                    }
                 }
             }
         }
     }
+}
 }

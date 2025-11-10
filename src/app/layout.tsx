@@ -12,6 +12,7 @@ import FooterComponent from '@/widgets/FooterComponent/FooterComponent';
 import CartInitializer from '@/app/CartInitializer';
 import InitLoad from '@/features/load/InitLoad';
 import ModalMenu from '@/widgets/SideMenuComponent/ModalMenu';
+import { GlobalErrorBoundary } from '@/shared/ui/GlobalErrorBoundary/GlobalErrorBoundary';
 
 const fontInter = Inter({
   variable: '--font-inter-sans',
@@ -38,13 +39,15 @@ export default function RootLayout({
     <html lang="ru">
       <body className={`${fontInter.variable}`}>
         <Providers>
-          <Header />
-          <main>{children}</main>
-          <FooterComponent />
-          <ModalMenu />
-          <LayoutCart />
-          <CartInitializer />
-          <InitLoad />
+          <GlobalErrorBoundary>
+            <Header />
+            <main>{children}</main>
+            <FooterComponent />
+            <ModalMenu />
+            <LayoutCart />
+            <CartInitializer />
+            <InitLoad />
+          </GlobalErrorBoundary>
         </Providers>
       </body>
     </html>

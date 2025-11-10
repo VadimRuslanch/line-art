@@ -13,6 +13,11 @@ type GlobalAttributeNode = Extract<
   { __typename: 'GlobalProductAttribute' }
 >;
 
+type AttributeMetaFields = {
+  label?: string | null;
+  visible?: boolean | null;
+};
+
 function isNonNull<T>(value: T | null | undefined): value is T {
   return value != null;
 }
@@ -37,21 +42,24 @@ export function extractGlobalAttributes(
   return rawNodes
     .filter(isNonNull)
     .filter(isGlobalAttribute)
-    .map<GlobalProductAttributeUI>((attribute) => ({
-      __typename: 'GlobalProductAttribute',
-      id: attribute.id,
-      name: attribute.name,
-      variation: attribute.variation,
-      visible: attribute.visible,
-      label: attribute.label,
-      terms: attribute.terms
-        ? {
-            __typename: 'GlobalProductAttributeToTermNodeConnection',
-            nodes: (attribute.terms.nodes ?? [])
-              .filter(isNonNull)
-              .filter(hasName) as NamedTermNode[],
-          }
-        : null,
-    }));
-}
+    .map<GlobalProductAttributeUI>((attribute) => {
+      const attributeMeta = attribute as GlobalAttributeNode & AttributeMetaFields;
 
+      return {
+        __typename: 'GlobalProductAttribute',
+        id: attribute.id,
+        name: attribute.name,
+        variation: attribute.variation,
+        visible: attributeMeta.visible ?? null,
+        label: attributeMeta.label ?? null,
+        terms: attribute.terms
+          ? {
+              __typename: 'GlobalProductAttributeToTermNodeConnection',
+              nodes: (attribute.terms.nodes ?? [])
+                .filter(isNonNull)
+                .filter(hasName) as NamedTermNode[],
+            }
+          : null,
+      };
+    });
+}

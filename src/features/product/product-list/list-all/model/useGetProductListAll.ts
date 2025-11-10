@@ -26,7 +26,7 @@ type AllProductNode = NonNullable<
 export function useGetProductListAll(
   options?: UseProductListOptions,
 ): UseProductListResult {
-  const { pageSize = 10 } = options ?? {};
+  const { pageSize = 12 } = options ?? {};
   const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
   const where = useMemo(() => buildWhere(selectedFilters), [selectedFilters]);
 
@@ -67,6 +67,7 @@ export function useGetProductListAll(
 
     setIsFetchingMore(true);
     try {
+      console.log(pageSize);
       await fetchMore({
         variables: {
           n: pageSize,

@@ -13,5 +13,5 @@ export default async function ProductDetailsPreview({ productPromise }: Props) {
     notFound();
   }
 
-  return <ProductDetailsPreviewClient product={product} />;
+  return <ProductDetailsPreviewClient key={product.id} product={product} />;
 }

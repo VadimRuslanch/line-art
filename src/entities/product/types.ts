@@ -10,7 +10,7 @@ import type {
  */
 export type SimpleProductGQL = Extract<
   NonNullable<GetProductDetailsQuery['product']>,
-  { __typename: 'SimpleProduct' | 'VariableProduct' | 'ExternalProduct' }
+  { __typename: 'SimpleProduct' | 'VariableProduct' }
 >;
 
 export type ListSimpleProduct = Extract<

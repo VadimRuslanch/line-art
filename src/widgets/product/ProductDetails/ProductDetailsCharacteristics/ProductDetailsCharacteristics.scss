@@ -16,6 +16,23 @@
   }
 }
 
+.attribute-select {
+  background-color: var(--background-surface-2);
+  padding: 12px 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.attribute-label-color {
+  content: "";
+  min-width: 16px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-radius: 50%;
+  background-color: #000000;
+}
+
 .attribute-label {
   color: var(--secondary-secondary);
 }
@@ -30,17 +47,92 @@
   flex-wrap: wrap;
 }
 
-.attribute-select {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 24px;
-  border: 1px solid var(--border-outline);
-  background-color: var(--background-surface-1);
-  color: var(--background-on-surface-1);
-  appearance: none;
+.zoloto:before {
+
 }
+
+//.attribute-select {
+//  width: 100%;
+//  padding: 12px 16px;
+//  border-radius: 24px;
+//  border: 1px solid var(--border-outline);
+//  background-color: var(--background-surface-1);
+//  color: var(--background-on-surface-1);
+//  appearance: none;
+//}
 
 .attribute-select:focus {
   outline: none;
   border-color: var(--brand-brand-secondary);
+}
+
+.attr-select {
+  width: 150px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.attr-select__control {
+  width: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--background-surface-2);
+}
+
+.attr-select__menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  background: var(--background-surface-2);
+  max-height: 220px;
+  overflow: auto;
+  z-index: 20;
+}
+
+.attr-select__option {
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.attr-select__option:hover {
+  background: #764B30;
+}
+
+.attr-select__caret {
+  margin-left: 6px;
+}
+
+.attr-select__icon {
+  transition: transform .3s ease;
+}
+
+.attr-select__icon.true {
+  transform: rotateZ(180deg);
+}
+
+
+.attribute-label-color {
+  &.zoloto {
+    background-color: #D4AF37;
+  }
+
+  &.serebro {
+    background-color: #C0C0C0;
+  }
+
+  &.chernyj {
+    background-color: #000000;
+  }
 }
