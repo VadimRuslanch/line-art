@@ -95,6 +95,19 @@ a {
   position: fixed;
 }
 
+.ProductsCatalog-link-header {
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
+
+.ProductsCatalog-link-carousel {
+  display: none;
+  @media (max-width: 1200px) {
+    display: block;
+  }
+}
+
 
 .HeadlineH1 {
   font-family: 'Gilroy', sans-serif;

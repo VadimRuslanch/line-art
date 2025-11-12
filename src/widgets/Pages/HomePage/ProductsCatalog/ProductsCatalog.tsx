@@ -131,9 +131,13 @@ export default function ProductsCatalog() {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        <h3 className="HeadlineH2">
-          {'\u041a\u0430\u0442\u0430\u043b\u043e\u0433'}
-        </h3>
+        <h3 className="HeadlineH2">Каталог</h3>
+        <Link
+          className={`ButtonBut2-medium ProductsCatalog-link-header ${styles.chipsCarouselLink}`}
+          href="/categories"
+        >
+          Перейти в каталог
+        </Link>
       </header>
 
       <div className={styles.chipsCarousel} ref={carouselRef}>
@@ -149,7 +153,7 @@ export default function ProductsCatalog() {
           {chips}
         </motion.div>
         <Link
-          className={`ButtonBut2-medium ${styles.chipsCarouselLink}`}
+          className={`ButtonBut2-medium ProductsCatalog-link-carousel ${styles.chipsCarouselLink}`}
           href="/categories"
         >
           Перейти в каталог
