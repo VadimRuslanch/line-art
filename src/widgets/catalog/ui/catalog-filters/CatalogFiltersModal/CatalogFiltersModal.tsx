@@ -16,7 +16,7 @@ export default function CatalogFiltersModal() {
         onClick={closeFilters}
       >
         <ArrowIcon />
-        <span className="HeadlineH3">Filters</span>
+        <span className="HeadlineH3">Фильтры</span>
       </button>
       <CatalogFiltersSidebar />
     </div>

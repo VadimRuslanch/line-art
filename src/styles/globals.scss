@@ -96,14 +96,15 @@ a {
 }
 
 .ProductsCatalog-link-header {
-  @media (min-width: 1200px) {
-    display: none;
+  display: none;
+  @media (max-width: 1200px) {
+    display: block;
   }
 }
 
 .ProductsCatalog-link-carousel {
   display: none;
-  @media (max-width: 1200px) {
+  @media (min-width: 1200px) {
     display: block;
   }
 }

@@ -9,7 +9,7 @@ export default function ButtonFilter() {
 
   return (
     <button type="button" className="ButtonFilter" onClick={openFilters}>
-      Filters
+      Фильтры
       <Icon />
     </button>
   );

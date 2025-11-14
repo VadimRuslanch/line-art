@@ -37295,6 +37295,7 @@ export type GetProductListCategoryQuery = {
   productCategory: {
     __typename: 'ProductCategory';
     databaseId: number;
+    count: number | null;
     products: {
       __typename: 'ProductCategoryToProductConnection';
       pageInfo: {
@@ -45411,6 +45412,7 @@ export const GetProductListCategoryDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'databaseId' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'count' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'products' },

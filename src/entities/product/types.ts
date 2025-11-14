@@ -18,11 +18,23 @@ export type ListSimpleProduct = Extract<
   { __typename: 'SimpleProduct' }
 >;
 
+export type ListVariableProduct = Extract<
+  NonNullable<GetProductListAllQuery['products']>['nodes'][number],
+  { __typename: 'VariableProduct' }
+>;
+
 export type CategorySimpleProduct = Extract<
   NonNullable<
     NonNullable<GetProductListCategoryQuery['productCategory']>['products']
   >['nodes'][number],
   { __typename: 'SimpleProduct' }
+>;
+
+export type CategoryVariableProduct = Extract<
+  NonNullable<
+    NonNullable<GetProductListCategoryQuery['productCategory']>['products']
+  >['nodes'][number],
+  { __typename: 'VariableProduct' }
 >;
 
 export type CartSimpleProduct = Extract<
@@ -47,6 +59,9 @@ export type SimpleProductLike =
   | ListSimpleProduct
   | CategorySimpleProduct
   | CartSimpleProduct
+  | ListVariableProduct
+  | CategoryVariableProduct
+  | CartVariableProduct
   | SimpleProductGQL
   | SimpleProductUI;
 

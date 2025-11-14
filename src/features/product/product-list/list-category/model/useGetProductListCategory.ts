@@ -10,6 +10,7 @@ import {
 } from '@/shared/api/gql/graphql';
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
+import type { SelectedFilters } from '@/features/catalog/catalog-filters/model/slice';
 import { buildCategoryWhere } from '@/features/catalog/catalog-filters/utils/utils';
 import { filtersEqual, mergeProductNodes } from '../../utils';
 import type {
@@ -21,6 +22,7 @@ import type {
 type UseProductCategoryListOptions = UseProductListOptions & {
   slug: string;
   skip?: boolean;
+  selectedFilters?: SelectedFilters;
 };
 
 type CategoryNode = NonNullable<
@@ -33,8 +35,13 @@ export function useGetProductListCategory({
   slug,
   pageSize = 12,
   skip,
+  selectedFilters: providedFilters,
 }: UseProductCategoryListOptions): UseProductListResult {
-  const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
+  const selectedFiltersFromStore = useAppSelector(
+    selectSelectedFilters,
+    filtersEqual,
+  );
+  const selectedFilters = providedFilters ?? selectedFiltersFromStore;
 
   const where = useMemo(
     () => buildCategoryWhere(selectedFilters),

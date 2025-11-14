@@ -11,6 +11,7 @@ import {
 
 import { useAppSelector } from '@/shared/model/hooks';
 import { selectSelectedFilters } from '@/features/catalog/catalog-filters';
+import type { SelectedFilters } from '@/features/catalog/catalog-filters/model/slice';
 import { buildWhere } from '@/features/catalog/catalog-filters/utils/utils';
 import { filtersEqual, mergeProductNodes } from '../../utils';
 import type {
@@ -23,11 +24,19 @@ type AllProductNode = NonNullable<
   GetProductListAllQuery['products']
 >['nodes'][number];
 
+type UseGetProductListAllOptions = UseProductListOptions & {
+  selectedFilters?: SelectedFilters;
+};
+
 export function useGetProductListAll(
-  options?: UseProductListOptions,
+  options?: UseGetProductListAllOptions,
 ): UseProductListResult {
-  const { pageSize = 12 } = options ?? {};
-  const selectedFilters = useAppSelector(selectSelectedFilters, filtersEqual);
+  const { pageSize = 12, selectedFilters: providedFilters } = options ?? {};
+  const selectedFiltersFromStore = useAppSelector(
+    selectSelectedFilters,
+    filtersEqual,
+  );
+  const selectedFilters = providedFilters ?? selectedFiltersFromStore;
   const where = useMemo(() => buildWhere(selectedFilters), [selectedFilters]);
 
   const variables = useMemo<GetProductListAllQueryVariables>(

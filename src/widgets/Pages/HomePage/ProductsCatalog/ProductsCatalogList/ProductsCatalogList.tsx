@@ -1,53 +1,45 @@
 import './ProductsCatalogList.scss';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 type PopularProductsCardListProps = {
   children: React.ReactNode;
   className?: string;
-  pageSize?: number;
-  resetOn?: unknown;
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  onLoadMore?: () => void | Promise<void>;
 };
 
 export default function ProductsCatalogList({
   children,
   className,
-  pageSize = 8,
-  resetOn,
+  hasMore,
+  isLoadingMore,
+  onLoadMore,
 }: PopularProductsCardListProps) {
   const items = React.Children.toArray(children).filter(Boolean);
-  const [visibleCount, setVisibleCount] = useState(pageSize);
+  const canLoadMore = Boolean(hasMore && onLoadMore);
 
-  useEffect(() => {
-    const timer =
-      typeof window !== 'undefined'
-        ? window.setTimeout(() => {
-            setVisibleCount(pageSize);
-          }, 0)
-        : null;
-
-    return () => {
-      if (timer !== null) {
-        window.clearTimeout(timer);
-      }
-    };
-  }, [resetOn, pageSize]);
-
-  const showMore = () =>
-    setVisibleCount((prev) => Math.min(prev + pageSize, items.length));
-  const hasMore = visibleCount < items.length;
+  const handleLoadMore = () => {
+    if (!isLoadingMore) {
+      onLoadMore?.();
+    }
+  };
 
   return (
     <div className={className}>
-      {items.slice(0, visibleCount)}
-      {hasMore && (
+      {items}
+      {canLoadMore && (
         <button
           type="button"
-          className={'PopularProductsCardList__button'}
-          onClick={showMore}
-          aria-label="Показать ещё товары"
+          className="PopularProductsCardList__button"
+          onClick={handleLoadMore}
+          disabled={isLoadingMore}
+          aria-label="Загрузить ещё товары"
         >
-          <span className={'SubtitleS1'}>Показать ещё</span>
+          <span className="SubtitleS1">
+            {isLoadingMore ? 'Загрузка...' : 'Загрузить ещё'}
+          </span>
         </button>
       )}
     </div>

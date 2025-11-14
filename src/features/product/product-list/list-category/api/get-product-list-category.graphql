@@ -9,6 +9,7 @@ query  GetProductListCategory(
 ){
     productCategory(id: $slug, idType: SLUG) {
         databaseId
+        count
         products(first: $n, after: $after, where: $where) {
             pageInfo { endCursor hasNextPage }
             nodes {
@@ -30,19 +31,19 @@ query  GetProductListCategory(
                     regularPrice
                     salePrice
                 }
-            ... on VariableProduct {
-                price
-                regularPrice
-                salePrice
-                defaultAttributes(first: 20) {
-                    nodes {
-                        name
-                        value
-                        attributeId
+                ... on VariableProduct {
+                    price
+                    regularPrice
+                    salePrice
+                    defaultAttributes(first: 20) {
+                        nodes {
+                            name
+                            value
+                            attributeId
+                        }
                     }
                 }
             }
         }
     }
-}
 }

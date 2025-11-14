@@ -66,6 +66,7 @@ export default function ProductCard({
     ) as { src: string; alt?: string | null; id?: string | number }[];
 
   const { regularPrice, salePrice, onSale } = getPriceInfo(product);
+  const isSimple = product.__typename === 'SimpleProduct';
 
   return (
     <article className="ProductCard">
@@ -97,7 +98,13 @@ export default function ProductCard({
           />
         </div>
 
-        <AddToCart product={product} />
+        {isSimple ? (
+          <AddToCart product={product} />
+        ) : (
+          <Link href={product.uri ?? '#'} className="ProductCard__view-link">
+            <span className="ButtonBut2-bold">Перейти к товару</span>
+          </Link>
+        )}
       </div>
     </article>
   );

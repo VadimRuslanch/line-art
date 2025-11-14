@@ -28,6 +28,11 @@
   color: var(--primary-primary, #1a1a1a);
 }
 
+.CatalogProductList__pagination {
+  display: flex;
+  justify-content: center;
+}
+
 .CatalogProductList__load-more {
   display: flex;
   justify-content: center;
@@ -37,24 +42,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 1.2;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   min-width: 220px;
   width: 100%;
-  padding: 12px 0;
-  background-color: var(--brand-brand-primary);
-  border-radius: 333px;
-}
+  padding: 18px 0;
+  background-color: var(--background-surface-1);
+  border-radius: 16px;
 
-.CatalogProductList__load-more-button:hover:not(:disabled) {
-  background-color: var(--text-primary-hover, #2a2a2a);
-  border-color: var(--text-primary-hover, #2a2a2a);
-}
-
-.CatalogProductList__load-more-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  &:hover:not(:disabled) {
+    background-color: var(--brand-brand-primary);
+  }
 }
