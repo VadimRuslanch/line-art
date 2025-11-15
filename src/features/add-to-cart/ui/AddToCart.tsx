@@ -5,7 +5,7 @@ import { useCart } from '@/entities/cart/model/useCart';
 import QuantitySelector from '@/shared/ui/QuantitySelector/QuantitySelector';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '@/shared/model/hooks';
-import { selectCartItemByProductId } from '@/entities/cart/model/cartSelectors';
+import { makeSelectCartItemsByProductId } from '@/entities/cart/model/cartSelectors';
 import type { SimpleProductLike } from '@/entities/product/types';
 import { isSimpleProduct } from '@/hooks/typeSimpleProductGuards';
 import { isVariableProduct } from '@/hooks/typeVariableProductGuards';
@@ -19,6 +19,7 @@ type Props = {
   initialQty?: number;
   variationId?: number;
   variationAttributes?: AttributeLike;
+  variationPrice?: number | string | null;
 };
 
 const MAX_QTY = 100;
@@ -29,13 +30,31 @@ export default function AddToCart({
   initialQty = 0,
   variationId,
   variationAttributes,
+  variationPrice,
 }: Props) {
   const productId = product.databaseId;
   const selector = useMemo(
-    () => selectCartItemByProductId(productId),
+    () => makeSelectCartItemsByProductId(productId),
     [productId],
   );
-  const cartItem = useAppSelector(selector);
+  const productCartItems = useAppSelector(selector);
+  const cartItem = useMemo(() => {
+    if (!productCartItems.length) {
+      return undefined;
+    }
+
+    if (isVariableProduct(product)) {
+      if (!variationId) {
+        return undefined;
+      }
+
+      return productCartItems.find(
+        (item) => item.variationId === variationId,
+      );
+    }
+
+    return productCartItems[0];
+  }, [productCartItems, product, variationId]);
 
   const { add, addVariable, updateQuantity, remove, mutating } = useCart();
 
@@ -107,9 +126,8 @@ export default function AddToCart({
       if (isSimpleProduct(product)) {
         await add(productId, quantity);
       } else if (isVariableProduct(product)) {
-
         if (!variationId || !variationAttributes) {
-          toast.error('Выберите вариант товара');
+          toast.error('������ ������� ����� ����������');
           return;
         }
 
@@ -118,15 +136,16 @@ export default function AddToCart({
           variationId,
           variationAttributes,
           quantity,
+          variationPrice,
         );
       } else {
-        toast.error('Неизвестный тип товара');
+        toast.error('�������� ��� ������');
       }
     } catch (error) {
       const message =
         error instanceof Error && error.message
           ? error.message
-          : 'Не удалось добавить товар в корзину';
+          : '������� ������� �� ��� ��������� ������';
       toast.error(message);
     } finally {
       setPendingAction(false);
@@ -144,13 +163,12 @@ export default function AddToCart({
       const message =
         error instanceof Error && error.message
           ? error.message
-          : 'Не удалось удалить товар из корзины';
+          : '�� ������� �������� ����� � ������';
       toast.error(message);
     } finally {
       setPendingAction(false);
     }
   };
-
   const handleButtonClick = async () => {
     if (!productId) return;
 

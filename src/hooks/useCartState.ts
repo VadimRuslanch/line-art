@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppSelector } from '@/shared/model/hooks';
-import { selectCartItemsByProductId } from '@/entities/cart/model/cartSelectors';
+import { selectCartItemsByProductIdMap } from '@/entities/cart/model/cartSelectors';
 
 interface IdentifiableProduct {
   __typename?: string;
@@ -17,18 +17,23 @@ export type WithCartFlag<T extends IdentifiableProduct> = T & {
 export function useCartState<
   T extends IdentifiableProduct = IdentifiableProduct,
 >(productsItem: readonly T[] = []): WithCartFlag<T>[] {
-  const itemsById = useAppSelector(selectCartItemsByProductId);
+  const itemsById = useAppSelector(selectCartItemsByProductIdMap);
 
   return productsItem.map<WithCartFlag<T>>((product) => {
     const productId = product.databaseId;
-    const cartItem =
-      typeof productId === 'number' ? itemsById[productId] : undefined;
+    const cartItems =
+      typeof productId === 'number' ? itemsById[productId] ?? [] : [];
+    const [firstItem] = cartItems;
+    const totalQuantity = cartItems.reduce(
+      (sum, item) => sum + (item.quantity ?? 0),
+      0,
+    );
 
     return {
       ...product,
-      inCart: Boolean(cartItem),
-      key: cartItem?.key,
-      quantity: cartItem?.quantity ?? 0,
+      inCart: cartItems.length > 0,
+      key: firstItem?.key,
+      quantity: totalQuantity,
     };
   });
 }

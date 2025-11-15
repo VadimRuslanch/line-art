@@ -7,6 +7,26 @@ fragment CartCore on Cart {
             key
             quantity
             total
+            extraData {
+                key
+                value
+            }
+            variation {
+                attributes {
+                    name
+                    value
+                    label
+                }
+                node {
+                    databaseId
+                    name
+                    sku
+                    price
+                    regularPrice
+                    salePrice
+                    onSale
+                }
+            }
             product {
                 node {
                     ...ProductCore
@@ -44,6 +64,7 @@ mutation AddVariableToCart (
     $variationId: Int
     $quantity: Int! = 1
     $attributes: [ProductAttributeInput!]!
+    $extraData: String
 ) {
     addToCart(
         input: {
@@ -51,6 +72,7 @@ mutation AddVariableToCart (
             quantity: $quantity
             variationId: $variationId
             variation: $attributes
+            extraData: $extraData
         }
     ) {
         cart {

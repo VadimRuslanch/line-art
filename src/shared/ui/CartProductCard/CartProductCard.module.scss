@@ -84,6 +84,17 @@
   line-height: 1.5;
 }
 
+.productVariant {
+  margin-bottom: 24px;
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0.9;
+
+  span:last-child {
+    font-weight: 600;
+  }
+}
+
 
 .productPrice {
   display: flex;

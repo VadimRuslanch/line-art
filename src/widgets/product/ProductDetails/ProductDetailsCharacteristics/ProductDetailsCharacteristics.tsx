@@ -36,12 +36,9 @@ export default function ProductDetailsCharacteristics({
   type,
 }: Props) {
   const attrName = (attribute.name ?? '').trim().toLowerCase();
-  console.log('attrName', attrName === 'pa_color', 'type', type);
   if (attrName === 'pa_color' && type) return null;
-
   const values = extractValues(attribute);
   const label = prettifyAttributeName(attrName);
-
   if (!label || values.length === 0) return null;
 
   return (

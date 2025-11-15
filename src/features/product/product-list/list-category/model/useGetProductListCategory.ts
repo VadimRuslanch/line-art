@@ -25,6 +25,8 @@ type UseProductCategoryListOptions = UseProductListOptions & {
   selectedFilters?: SelectedFilters;
 };
 
+const VARIATIONS_PREVIEW_LIMIT = 50;
+
 type CategoryNode = NonNullable<
   NonNullable<
     NonNullable<GetProductListCategoryQuery['productCategory']>['products']
@@ -54,6 +56,7 @@ export function useGetProductListCategory({
       after: null,
       slug,
       where,
+      variationsFirst: VARIATIONS_PREVIEW_LIMIT,
     }),
     [pageSize, slug, where],
   );
@@ -97,6 +100,7 @@ export function useGetProductListCategory({
           after: endCursor,
           slug,
           where,
+          variationsFirst: VARIATIONS_PREVIEW_LIMIT,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult?.productCategory) return prev;

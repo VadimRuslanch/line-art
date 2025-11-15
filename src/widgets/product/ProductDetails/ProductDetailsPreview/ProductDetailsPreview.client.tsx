@@ -64,7 +64,6 @@ function getAttributeTermLabel(
 
 export default function ProductDetailsPreviewClient({ product }: Props) {
   const attributes = useMemo(() => extractGlobalAttributes(product), [product]);
-  console.log(product);
   const [selected, setSelected] = useState<Record<string, string>>(() => {
     if (!isVariableProduct(product)) return {};
 
@@ -186,6 +185,9 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
     return pickDisplayPrice(product, matchedVariation);
   }, [product, matchedVariation]);
 
+  const variationPriceValue =
+    displayPrice.salePrice ?? displayPrice.regularPrice ?? null;
+
   const variationId =
     isVariableProduct(product) && matchedVariation
       ? (matchedVariation.databaseId ?? undefined)
@@ -267,6 +269,7 @@ export default function ProductDetailsPreviewClient({ product }: Props) {
                 product={product}
                 variationId={variationId}
                 variationAttributes={variationAttributes}
+                variationPrice={variationPriceValue}
               />
             ) : null}
 

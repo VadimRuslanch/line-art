@@ -26,18 +26,40 @@ import { useQuery, useMutation } from '@apollo/client/react';
 import { useMemo, useCallback, useEffect } from 'react';
 import { ApolloError } from '@apollo/client/v4-migration';
 import { useAppDispatch } from '@/shared/model/hooks';
-import { setSnapshot, CartItemState } from '@/entities/cart/model/cartSlice';
+import {
+  setSnapshot,
+  CartItemState,
+  CartVariationAttributes,
+} from '@/entities/cart/model/cartSlice';
+import { parseMoney } from '@/shared/lib/money';
 /* ------------------------ helpers -------------------------------- */
 
 type Cart = CartCoreFragment;
 
 type CartProductNode = CartSimpleProduct | CartVariableProduct;
 
+type VariationPricing = {
+  price?: string | null;
+  regularPrice?: string | null;
+  salePrice?: string | null;
+  onSale?: boolean | null;
+};
+
+export type CartVariationDisplayAttribute = {
+  key: string;
+  label: string | null;
+  value: string | null;
+};
+
 type SimpleCartEntry = {
   key: string;
   quantity: number;
   total: string | null;
   product: CartProductNode;
+  variationId?: number;
+  variationAttributes?: CartVariationAttributes | null;
+  variationPricing?: VariationPricing | null;
+  variationDisplayAttributes?: CartVariationDisplayAttribute[] | null;
 };
 
 function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
@@ -53,6 +75,15 @@ function writeCart(cache: ApolloCache, newCart: Cart | null | undefined) {
 type AttributeLike =
   | Record<string, string>
   | Array<{ name: string; value: string }>;
+
+type VariationAttributeLike =
+  | {
+      name?: string | null;
+      label?: string | null;
+      value?: string | null;
+    }
+  | null
+  | undefined;
 
 function normalizeAttrName(name: string) {
   return name
@@ -74,6 +105,48 @@ function toProductAttributeInput(attributes: AttributeLike) {
     attributeName: normalizeAttrName(name),
     attributeValue: value,
   }));
+}
+
+function buildVariationExtraData(
+  price?: number | string | null,
+): string | null {
+  if (price === null || typeof price === 'undefined') return null;
+  const normalized =
+    typeof price === 'number' && Number.isFinite(price)
+      ? price
+      : typeof price === 'string'
+        ? (() => {
+            const parsed = parseMoney(price);
+            return Number.isFinite(parsed) ? parsed : null;
+          })()
+        : null;
+  if (normalized === null) return null;
+  return JSON.stringify({ variationPrice: normalized });
+}
+
+function normalizeAttrValue(value?: string | null) {
+  return value?.trim() ?? '';
+}
+
+function extractVariationAttributes(
+  attributes:
+    | ReadonlyArray<VariationAttributeLike | null | undefined>
+    | null
+    | undefined,
+): CartVariationAttributes | undefined {
+  if (!attributes || attributes.length === 0) return undefined;
+
+  const normalized: CartVariationAttributes = {};
+
+  for (const attribute of attributes) {
+    if (!attribute) continue;
+    const key = normalizeAttrName(attribute.name ?? attribute.label ?? '');
+    const value = normalizeAttrValue(attribute.value);
+    if (!key || !value) continue;
+    normalized[key] = value;
+  }
+
+  return Object.keys(normalized).length > 0 ? normalized : undefined;
 }
 
 /* ------------------------ основной хук --------------------------- */
@@ -107,6 +180,40 @@ export function useCart() {
       const key = item.key ?? undefined;
       const quantity = item.quantity ?? 0;
       const total = item.total ?? null;
+      const variationEdge = item.variation ?? null;
+      const variationId = variationEdge?.node?.databaseId ?? undefined;
+      const variationAttributes = extractVariationAttributes(
+        variationEdge?.attributes ?? null,
+      );
+      const variationDisplayAttributesRaw =
+        variationEdge?.attributes
+          ?.map((attribute) => {
+            if (!attribute) return null;
+            const key = normalizeAttrName(
+              attribute.name ?? attribute.label ?? '',
+            );
+            if (!key) return null;
+            return {
+              key,
+              label: attribute.label ?? attribute.name ?? null,
+              value: attribute.value ?? null,
+            } satisfies CartVariationDisplayAttribute;
+          })
+          .filter((attribute): attribute is CartVariationDisplayAttribute =>
+            Boolean(attribute),
+          ) ?? [];
+      const variationDisplayAttributes =
+        variationDisplayAttributesRaw.length > 0
+          ? variationDisplayAttributesRaw
+          : null;
+      const variationPricing = variationEdge?.node
+        ? {
+            price: variationEdge.node.price ?? null,
+            regularPrice: variationEdge.node.regularPrice ?? null,
+            salePrice: variationEdge.node.salePrice ?? null,
+            onSale: variationEdge.node.onSale ?? null,
+          }
+        : null;
 
       if (!key) {
         return acc;
@@ -117,6 +224,10 @@ export function useCart() {
         quantity,
         total,
         product: node,
+        variationId,
+        variationAttributes,
+        variationPricing,
+        variationDisplayAttributes,
       });
 
       return acc;
@@ -133,12 +244,26 @@ export function useCart() {
       return;
     }
 
-    const items: CartItemState[] = simpleProducts.map((item) => ({
-      key: item.key,
-      productId: item.product.databaseId,
-      quantity: item.quantity,
-      total: item.total,
-    }));
+    const items: CartItemState[] = simpleProducts.reduce<CartItemState[]>(
+      (acc, item) => {
+        const productId = item.product.databaseId;
+        if (typeof productId !== 'number') {
+          return acc;
+        }
+
+        acc.push({
+          key: item.key,
+          productId,
+          quantity: item.quantity,
+          total: item.total,
+          variationId: item.variationId ?? null,
+          variationAttributes: item.variationAttributes ?? null,
+        });
+
+        return acc;
+      },
+      [],
+    );
 
     dispatch(
       setSnapshot({
@@ -198,6 +323,7 @@ export function useCart() {
       variationId: number,
       attributes: AttributeLike,
       quantity = 1,
+      price?: number | string | null,
     ) => {
       await addVarExec({
         variables: {
@@ -205,6 +331,7 @@ export function useCart() {
           variationId,
           quantity,
           attributes: toProductAttributeInput(attributes),
+          extraData: buildVariationExtraData(price),
         },
       });
     },
@@ -272,6 +399,7 @@ export function useCart() {
       variationId: number,
       attributes: AttributeLike,
       qty?: number,
+      price?: number | string | null,
     ) => Promise<void>;
     remove: (key: string) => Promise<void>;
     clear: () => Promise<void>;

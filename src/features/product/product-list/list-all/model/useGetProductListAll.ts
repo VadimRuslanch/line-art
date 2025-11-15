@@ -24,6 +24,8 @@ type AllProductNode = NonNullable<
   GetProductListAllQuery['products']
 >['nodes'][number];
 
+const VARIATIONS_PREVIEW_LIMIT = 50;
+
 type UseGetProductListAllOptions = UseProductListOptions & {
   selectedFilters?: SelectedFilters;
 };
@@ -44,6 +46,7 @@ export function useGetProductListAll(
       n: pageSize,
       after: null,
       where,
+      variationsFirst: VARIATIONS_PREVIEW_LIMIT,
     }),
     [pageSize, where],
   );
@@ -82,6 +85,7 @@ export function useGetProductListAll(
           n: pageSize,
           after: endCursor,
           where,
+          variationsFirst: VARIATIONS_PREVIEW_LIMIT,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult?.products) return prev;

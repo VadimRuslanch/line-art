@@ -12,7 +12,6 @@ import { useGetProductListCategory } from '@/features/product/product-list/list-
 import { useGetProductListAll } from '@/features/product/product-list/list-all/model/useGetProductListAll';
 import type { ProductNode } from '@/features/product/product-list/model/useProductList';
 import Link from 'next/link';
-import Pagination from '@/shared/ui/Pagination/Pagination';
 
 const PRODUCTS_PER_CATEGORY = 12;
 const PRIMARY_CATEGORY_SLUGS: string[] = [
@@ -224,11 +223,6 @@ export default function ProductsCatalog() {
     await loadMore();
   };
 
-  const handlePageChange = (page: number) => {
-    setDisplayMode('page');
-    setCurrentPage(page);
-  };
-
   if (!categories.length) {
     return null;
   }
@@ -279,20 +273,20 @@ export default function ProductsCatalog() {
         </div>
       ) : (
         <>
-        <ProductsCatalogList
-          key={activeIndex === 0 ? 'ALL' : activeSlug}
-          className={styles.list}
-          hasMore={hasNextPage}
-          isLoadingMore={isFetchingMore}
-          onLoadMore={handleLoadMore}
-        >
-          {cards}
-        </ProductsCatalogList>
-        {/*<Pagination*/}
-        {/*  pageCount={pageCount}*/}
-        {/*  page={effectivePage}*/}
-        {/*  onPageChange={handlePageChange}*/}
-        {/*/>*/}
+          <ProductsCatalogList
+            key={activeIndex === 0 ? 'ALL' : activeSlug}
+            className={styles.list}
+            hasMore={hasNextPage}
+            isLoadingMore={isFetchingMore}
+            onLoadMore={handleLoadMore}
+          >
+            {cards}
+          </ProductsCatalogList>
+          {/*<Pagination*/}
+          {/*  pageCount={pageCount}*/}
+          {/*  page={effectivePage}*/}
+          {/*  onPageChange={handlePageChange}*/}
+          {/*/>*/}
         </>
       )}
     </section>

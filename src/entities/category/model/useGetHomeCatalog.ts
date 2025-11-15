@@ -91,8 +91,7 @@ export const useGetHomeCatalog = (
     [data?.discounted?.nodes],
   );
 
-  const popularWithCart =
-    useCartState<SimpleCatalogProductNode>(popularSource);
+  const popularWithCart = useCartState<SimpleCatalogProductNode>(popularSource);
   const newWithCart = useCartState<SimpleCatalogProductNode>(newSource);
   const discountedWithCart =
     useCartState<SimpleCatalogProductNode>(discountedSource);

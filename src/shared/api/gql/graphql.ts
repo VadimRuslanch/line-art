@@ -32119,6 +32119,30 @@ export type CartCoreFragment = {
       key: string;
       quantity: number | null;
       total: string | null;
+      extraData: Array<{
+        __typename: 'MetaData';
+        key: string;
+        value: string | null;
+      } | null> | null;
+      variation: {
+        __typename: 'CartItemToProductVariationConnectionEdge';
+        attributes: Array<{
+          __typename: 'VariationAttribute';
+          name: string | null;
+          value: string | null;
+          label: string | null;
+        } | null> | null;
+        node: {
+          __typename: 'SimpleProductVariation';
+          databaseId: number;
+          name: string | null;
+          sku: string | null;
+          price: string | null;
+          regularPrice: string | null;
+          salePrice: string | null;
+          onSale: boolean | null;
+        };
+      } | null;
       product: {
         __typename: 'CartItemToProductConnectionEdge';
         node:
@@ -32671,6 +32695,30 @@ export type GetCartQuery = {
         key: string;
         quantity: number | null;
         total: string | null;
+        extraData: Array<{
+          __typename: 'MetaData';
+          key: string;
+          value: string | null;
+        } | null> | null;
+        variation: {
+          __typename: 'CartItemToProductVariationConnectionEdge';
+          attributes: Array<{
+            __typename: 'VariationAttribute';
+            name: string | null;
+            value: string | null;
+            label: string | null;
+          } | null> | null;
+          node: {
+            __typename: 'SimpleProductVariation';
+            databaseId: number;
+            name: string | null;
+            sku: string | null;
+            price: string | null;
+            regularPrice: string | null;
+            salePrice: string | null;
+            onSale: boolean | null;
+          };
+        } | null;
         product: {
           __typename: 'CartItemToProductConnectionEdge';
           node:
@@ -33228,6 +33276,30 @@ export type AddToCartMutation = {
           key: string;
           quantity: number | null;
           total: string | null;
+          extraData: Array<{
+            __typename: 'MetaData';
+            key: string;
+            value: string | null;
+          } | null> | null;
+          variation: {
+            __typename: 'CartItemToProductVariationConnectionEdge';
+            attributes: Array<{
+              __typename: 'VariationAttribute';
+              name: string | null;
+              value: string | null;
+              label: string | null;
+            } | null> | null;
+            node: {
+              __typename: 'SimpleProductVariation';
+              databaseId: number;
+              name: string | null;
+              sku: string | null;
+              price: string | null;
+              regularPrice: string | null;
+              salePrice: string | null;
+              onSale: boolean | null;
+            };
+          } | null;
           product: {
             __typename: 'CartItemToProductConnectionEdge';
             node:
@@ -33770,6 +33842,7 @@ export type AddVariableToCartMutationVariables = Exact<{
   variationId: InputMaybe<Scalars['Int']['input']>;
   quantity?: Scalars['Int']['input'];
   attributes: Array<ProductAttributeInput> | ProductAttributeInput;
+  extraData: InputMaybe<Scalars['String']['input']>;
 }>;
 
 export type AddVariableToCartMutation = {
@@ -33788,6 +33861,30 @@ export type AddVariableToCartMutation = {
           key: string;
           quantity: number | null;
           total: string | null;
+          extraData: Array<{
+            __typename: 'MetaData';
+            key: string;
+            value: string | null;
+          } | null> | null;
+          variation: {
+            __typename: 'CartItemToProductVariationConnectionEdge';
+            attributes: Array<{
+              __typename: 'VariationAttribute';
+              name: string | null;
+              value: string | null;
+              label: string | null;
+            } | null> | null;
+            node: {
+              __typename: 'SimpleProductVariation';
+              databaseId: number;
+              name: string | null;
+              sku: string | null;
+              price: string | null;
+              regularPrice: string | null;
+              salePrice: string | null;
+              onSale: boolean | null;
+            };
+          } | null;
           product: {
             __typename: 'CartItemToProductConnectionEdge';
             node:
@@ -34346,6 +34443,30 @@ export type RemoveFromCartMutation = {
           key: string;
           quantity: number | null;
           total: string | null;
+          extraData: Array<{
+            __typename: 'MetaData';
+            key: string;
+            value: string | null;
+          } | null> | null;
+          variation: {
+            __typename: 'CartItemToProductVariationConnectionEdge';
+            attributes: Array<{
+              __typename: 'VariationAttribute';
+              name: string | null;
+              value: string | null;
+              label: string | null;
+            } | null> | null;
+            node: {
+              __typename: 'SimpleProductVariation';
+              databaseId: number;
+              name: string | null;
+              sku: string | null;
+              price: string | null;
+              regularPrice: string | null;
+              salePrice: string | null;
+              onSale: boolean | null;
+            };
+          } | null;
           product: {
             __typename: 'CartItemToProductConnectionEdge';
             node:
@@ -34903,6 +35024,30 @@ export type UpdateCartItemQuantitiesMutation = {
           key: string;
           quantity: number | null;
           total: string | null;
+          extraData: Array<{
+            __typename: 'MetaData';
+            key: string;
+            value: string | null;
+          } | null> | null;
+          variation: {
+            __typename: 'CartItemToProductVariationConnectionEdge';
+            attributes: Array<{
+              __typename: 'VariationAttribute';
+              name: string | null;
+              value: string | null;
+              label: string | null;
+            } | null> | null;
+            node: {
+              __typename: 'SimpleProductVariation';
+              databaseId: number;
+              name: string | null;
+              sku: string | null;
+              price: string | null;
+              regularPrice: string | null;
+              salePrice: string | null;
+              onSale: boolean | null;
+            };
+          } | null;
           product: {
             __typename: 'CartItemToProductConnectionEdge';
             node:
@@ -37041,6 +37186,7 @@ export type GetProductListAllQueryVariables = Exact<{
   n: Scalars['Int']['input'];
   after: InputMaybe<Scalars['String']['input']>;
   where: InputMaybe<RootQueryToProductUnionConnectionWhereArgs>;
+  variationsFirst?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 export type GetProductListAllQuery = {
@@ -37197,6 +37343,17 @@ export type GetProductListAllQuery = {
           uri: string | null;
           sku: string | null;
           title: string | null;
+          variations: {
+            __typename: 'ProductWithVariationsToProductVariationConnection';
+            nodes: Array<{
+              __typename: 'SimpleProductVariation';
+              databaseId: number;
+              price: string | null;
+              regularPrice: string | null;
+              salePrice: string | null;
+              onSale: boolean | null;
+            }>;
+          } | null;
           defaultAttributes: {
             __typename: 'ProductWithAttributesToVariationAttributeConnection';
             nodes: Array<{
@@ -37288,6 +37445,7 @@ export type GetProductListCategoryQueryVariables = Exact<{
   after: InputMaybe<Scalars['String']['input']>;
   where: InputMaybe<ProductCategoryToProductConnectionWhereArgs>;
   slug: Scalars['ID']['input'];
+  variationsFirst?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 export type GetProductListCategoryQuery = {
@@ -37448,6 +37606,17 @@ export type GetProductListCategoryQuery = {
             uri: string | null;
             sku: string | null;
             title: string | null;
+            variations: {
+              __typename: 'ProductWithVariationsToProductVariationConnection';
+              nodes: Array<{
+                __typename: 'SimpleProductVariation';
+                databaseId: number;
+                price: string | null;
+                regularPrice: string | null;
+                salePrice: string | null;
+                onSale: boolean | null;
+              }>;
+            } | null;
             defaultAttributes: {
               __typename: 'ProductWithAttributesToVariationAttributeConnection';
               nodes: Array<{
@@ -38728,6 +38897,93 @@ export const CartCoreFragmentDoc = {
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -39989,6 +40245,93 @@ export const GetCartDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -40716,6 +41059,93 @@ export const AddToCartDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -40862,6 +41292,14 @@ export const AddVariableToCartDocument = {
             },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'extraData' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -40906,6 +41344,14 @@ export const AddVariableToCartDocument = {
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'attributes' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'extraData' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'extraData' },
                       },
                     },
                   ],
@@ -41486,6 +41932,93 @@ export const AddVariableToCartDocument = {
                         name: { kind: 'Name', value: 'quantity' },
                       },
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
@@ -42218,6 +42751,93 @@ export const RemoveFromCartDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
                       {
                         kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
                         selectionSet: {
                           kind: 'SelectionSet',
@@ -42936,6 +43556,93 @@ export const UpdateCartItemQuantitiesDocument = {
                         name: { kind: 'Name', value: 'quantity' },
                       },
                       { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'extraData' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'key' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'variation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'label' },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'node' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'databaseId' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'sku' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'price' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'regularPrice',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'onSale' },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'product' },
@@ -45012,6 +45719,15 @@ export const GetProductListAllDocument = {
             },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'variationsFirst' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          defaultValue: { kind: 'IntValue', value: '50' },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -45160,6 +45876,72 @@ export const GetProductListAllDocument = {
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'salePrice' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'variations' },
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: { kind: 'Name', value: 'first' },
+                                  value: {
+                                    kind: 'Variable',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'variationsFirst',
+                                    },
+                                  },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'nodes' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'databaseId',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'price',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'regularPrice',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'salePrice',
+                                          },
+                                        },
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'onSale',
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
                             },
                             {
                               kind: 'Field',
@@ -45386,6 +46168,15 @@ export const GetProductListCategoryDocument = {
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'variationsFirst' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          defaultValue: { kind: 'IntValue', value: '50' },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -45587,6 +46378,75 @@ export const GetProductListCategoryDocument = {
                                   {
                                     kind: 'Field',
                                     name: { kind: 'Name', value: 'salePrice' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'variations' },
+                                    arguments: [
+                                      {
+                                        kind: 'Argument',
+                                        name: { kind: 'Name', value: 'first' },
+                                        value: {
+                                          kind: 'Variable',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'variationsFirst',
+                                          },
+                                        },
+                                      },
+                                    ],
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'nodes',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'databaseId',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'price',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'regularPrice',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'salePrice',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'onSale',
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
                                   },
                                   {
                                     kind: 'Field',

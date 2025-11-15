@@ -6,6 +6,7 @@ query  GetProductListCategory(
     $after: String,
     $where: ProductCategoryToProductConnectionWhereArgs,
     $slug: ID!,
+    $variationsFirst: Int = 50,
 ){
     productCategory(id: $slug, idType: SLUG) {
         databaseId
@@ -35,6 +36,15 @@ query  GetProductListCategory(
                     price
                     regularPrice
                     salePrice
+                    variations(first: $variationsFirst) {
+                        nodes {
+                            databaseId
+                            price
+                            regularPrice
+                            salePrice
+                            onSale
+                        }
+                    }
                     defaultAttributes(first: 20) {
                         nodes {
                             name

@@ -2,6 +2,7 @@ query GetProductListAll(
     $n: Int!
     $after: String
     $where: RootQueryToProductUnionConnectionWhereArgs,
+    $variationsFirst: Int = 50,
 ) {
     products(first: $n, after: $after, where: $where) {
         pageInfo { endCursor hasNextPage }
@@ -28,6 +29,15 @@ query GetProductListAll(
                 price
                 regularPrice
                 salePrice
+                variations(first: $variationsFirst) {
+                    nodes {
+                        databaseId
+                        price
+                        regularPrice
+                        salePrice
+                        onSale
+                    }
+                }
                 defaultAttributes(first: 20) {
                     nodes {
                         name

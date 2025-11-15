@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type CartVariationAttributes = Record<string, string>;
+
 export type CartItemState = {
   key: string;
   productId: number;
   quantity: number;
   total: string | null;
+  variationId?: number | null;
+  variationAttributes?: CartVariationAttributes | null;
 };
 
 type CartSnapshot = {
@@ -14,7 +18,7 @@ type CartSnapshot = {
 };
 
 export interface CartState {
-  itemsByProductId: Record<number, CartItemState>;
+  itemsByProductId: Record<number, CartItemState[]>;
   itemsByKey: Record<string, CartItemState>;
   itemKeys: string[];
   subtotal: string | null;
@@ -43,7 +47,10 @@ const cartSlice = createSlice({
       state.totalQuantity = 0;
 
       for (const item of items) {
-        state.itemsByProductId[item.productId] = item;
+        if (!state.itemsByProductId[item.productId]) {
+          state.itemsByProductId[item.productId] = [];
+        }
+        state.itemsByProductId[item.productId].push(item);
         state.itemsByKey[item.key] = item;
         state.itemKeys.push(item.key);
         state.totalQuantity += item.quantity;
@@ -65,4 +72,3 @@ const cartSlice = createSlice({
 
 export const { setSnapshot, clear } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
-
