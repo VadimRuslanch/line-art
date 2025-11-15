@@ -80,24 +80,24 @@ export default function ProductPrice({
         <div className={styles.productPriceSale}>
           <div>
             <p className="HeadlineH5">
-              <span>{saleDisplay}</span> руб / <span>м²</span>
+              <span>{saleDisplay}</span> руб / <span>пог. метр</span>
             </p>
             {minSaleDisplay && (
               <p className={styles.saleMeta}>
                 <span className="BodyB2">
-                  от <span>{minSaleDisplay}</span> руб / <span>м²</span>
+                  от <span>{minSaleDisplay}</span> руб / <span>пог. метр</span>
                 </span>
               </p>
             )}
           </div>
           <p className={styles.productPrice}>
-            <span>{regularDisplay}</span> руб / <span>м²</span>
+            <span>{regularDisplay}</span> руб / <span>пог. метр</span>
           </p>
         </div>
       ) : (
         <div>
           <p className="HeadlineH5">
-            <span>{regularDisplay}</span> руб / <span>м²</span>
+            <span>{regularDisplay}</span> руб / <span>пог. метр</span>
           </p>
         </div>
       )}

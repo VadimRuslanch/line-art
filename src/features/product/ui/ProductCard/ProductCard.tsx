@@ -21,7 +21,10 @@ type PriceInfo = {
 
 type VariableProductNode = Extract<
   SimpleProductLike,
-  { __typename: 'VariableProduct'; variations?: { nodes?: unknown[] | null } | null }
+  {
+    __typename: 'VariableProduct';
+    variations?: { nodes?: unknown[] | null } | null;
+  }
 >;
 type VariationNode = NonNullable<
   NonNullable<NonNullable<VariableProductNode['variations']>['nodes']>[number]
@@ -71,7 +74,9 @@ function isVariableProductNode(
   return product.__typename === 'VariableProduct';
 }
 
-function hasPrice(product: SimpleProductLike): product is SimpleProductLike & WithPrice {
+function hasPrice(
+  product: SimpleProductLike,
+): product is SimpleProductLike & WithPrice {
   return 'price' in product;
 }
 
@@ -94,11 +99,11 @@ function getVariationNodes(product: SimpleProductLike): VariationNode[] {
 }
 
 function getPriceInfo(product: SimpleProductLike): PriceInfo {
-  const fallbackPrice = hasPrice(product) ? product.price ?? null : null;
+  const fallbackPrice = hasPrice(product) ? (product.price ?? null) : null;
   const baseRegular = hasRegularPrice(product)
-    ? product.regularPrice ?? fallbackPrice
+    ? (product.regularPrice ?? fallbackPrice)
     : fallbackPrice;
-  const baseSale = hasSalePrice(product) ? product.salePrice ?? null : null;
+  const baseSale = hasSalePrice(product) ? (product.salePrice ?? null) : null;
   const baseRegularNumber = toNumeric(baseRegular);
   const baseSaleNumber = toNumeric(baseSale);
 
@@ -154,8 +159,7 @@ function getPriceInfo(product: SimpleProductLike): PriceInfo {
   const regularRange = buildRange(regularSources);
   const saleRange = buildRange(saleSources);
 
-  const regularPriceValue =
-    regularRange?.range ?? baseRegular ?? fallbackPrice;
+  const regularPriceValue = regularRange?.range ?? baseRegular ?? fallbackPrice;
   const salePriceValue =
     saleRange?.range ?? (hasVariationSale ? null : baseSale);
 
@@ -233,9 +237,11 @@ export default function ProductCard(props: ProductCardProps) {
 
       <div className="ProductCard__bottom">
         <span className="ProductCard__bottom-art BodyB2">{product.sku}</span>
-        <h3 className="ProductCard__bottom-subtitle SubtitleS3">
-          {product.name}
-        </h3>
+        <Link href={product.uri!}>
+          <h3 className="ProductCard__bottom-subtitle SubtitleS3">
+            {product.name}
+          </h3>
+        </Link>
 
         <div className="productPrice">
           <ProductPrice
